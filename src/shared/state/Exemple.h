@@ -2,16 +2,19 @@
 #ifndef STATE__EXEMPLE__H
 #define STATE__EXEMPLE__H
 
+
 namespace state {
 
   /// class Exemple - 
   class Exemple {
     // Attributes
   public:
-    int x;
+    int x     = 0;
+    int y     = 0;
     // Operations
   public:
     void setX (int x);
+    // Setters and Getters
   };
 
 };
