@@ -16,10 +16,14 @@ using namespace state;
 
 int main(int argc,char* argv[]) 
 {
-    Exemple exemple;
-    exemple.setX(53);
 
-    cout << "Bonjour le monde!" << endl;
-
+    if (string(argv[1]) == "hello") {
+        cout << "Bonjour le monde!" << endl;
+    } else {
+        cout << "Commande inconnue" << endl;
+        cout << "Liste des commandes : " << endl;
+        cout << "hello : Affiche un message de bienvenue" << endl; 
+    }
+    
     return 0;
 }
