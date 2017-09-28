@@ -19,6 +19,10 @@ int main(int argc,char* argv[])
     if( argc > 1) {
         if (string(argv[1]) == "hello") {
             cout << "Bonjour le monde!" << endl;
+            
+        } else if (string(argv[1]) == "state"){
+            cout << "Lancement des tests d'état" << endl;
+            
         } else {
             cout << "Commande inconnue" << endl;
             cout << "Liste des commandes : " << endl;
