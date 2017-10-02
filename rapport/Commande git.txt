@@ -1,0 +1,12 @@
+Update dia:
+git add rapport/state.png
+git add src/state.dia
+git commit -m "Update dia"
+git pull origin master
+git push origin master
+
+Update rapport:
+git add rapport/Rapport.odt
+git commit -m "Update rapport 2.1"
+git pull origin master
+git push origin master
