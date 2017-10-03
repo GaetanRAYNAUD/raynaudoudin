@@ -4,3 +4,4 @@ bin
 nbproject
 plt-aide.pdf
 *.h
+/.metadata/
