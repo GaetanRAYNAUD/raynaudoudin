@@ -36,8 +36,6 @@ namespace state {
     }
 
     Terrain* Board::findTerrainOnPosition(int positionX, int positionY) const {
-       std::map<int, std::unique_ptr<Terrain>>::iterator it;
-        
         for (auto const& it : terrains) {
             if (it.second->getPositionX() == positionX) {
                 if (it.second->getPositionY() == positionY) {
@@ -56,7 +54,13 @@ namespace state {
     }
 
     Unit* Board::findUnitOnPosition(int positionX, int positionY) const {
-
+        for (auto const& it : units) {
+            if (it.second->getPositionX() == positionX) {
+                if (it.second->getPositionY() == positionY) {
+                    return it.second.get();
+                }
+            }
+        }
     }
 
     int Board::getHeight() const {
