@@ -43,6 +43,8 @@ namespace state {
         for(auto& u : other.units) {
             units.insert(std::make_pair(u.first, std::unique_ptr<Unit>(u.second->clone())));
         }
+        
+        return *this;
     }
 
     void Board::addTeam(Team* team) {
@@ -82,7 +84,7 @@ namespace state {
     }
 
     std::vector<Unit*> Board::findUnitAround(int positionX, int positionY) {
-
+        return {};
     }
 
     Unit* Board::findUnitOnPosition(int positionX, int positionY) const {
