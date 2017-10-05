@@ -1,7 +1,5 @@
 #include "state.hpp"
 
-#include <iostream>
-
 namespace state {
     
     State* state;

@@ -2,6 +2,7 @@
 #define STATE_HPP
 
 #include "../shared/state.h"
+#include <iostream>
 
 namespace state {
     
