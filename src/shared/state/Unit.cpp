@@ -9,6 +9,10 @@ namespace state {
     Unit::Unit(const Unit& unit) {
 
     }
+    
+    Unit& Unit::operator=(const Unit& unit) {
+
+    }
 
     int Unit::getId() const {
 
@@ -47,10 +51,6 @@ namespace state {
     }
 
     bool Unit::isDead() const {
-
-    }
-
-    Unit& Unit::operator=(const Unit& unit) {
 
     }
 

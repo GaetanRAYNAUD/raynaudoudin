@@ -2,8 +2,11 @@
 
 namespace state {
 
-    Castle::Castle(int positionX, int positionY) {
-
+    Castle::Castle(int id, int positionX, int positionY) {
+        this->id = id;
+        this->positionX = positionX;
+        this->positionY = positionY;
+        this->typeId = TerrainTypeId::CASTLE;
     }
 
     Terrain* Castle::clone() const {

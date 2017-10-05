@@ -15,6 +15,13 @@ namespace state {
             teams.insert(std::make_pair(t.first, std::unique_ptr<Team>(t.second->clone())));
         }
         
+        for(auto& t : other.terrains) {
+            terrains.insert(std::make_pair(t.first, std::unique_ptr<Terrain>(t.second->clone())));
+        }
+        
+        for(auto& u : other.units) {
+            units.insert(std::make_pair(u.first, std::unique_ptr<Unit>(u.second->clone())));
+        }
     }
             
     Board& Board::operator=(const Board& other) {
@@ -24,6 +31,18 @@ namespace state {
         
         height = other.height;
         width = other.width;
+        
+        for(auto& t : other.teams) {
+            teams.insert(std::make_pair(t.first, std::unique_ptr<Team>(t.second->clone())));
+        }
+        
+        for(auto& t : other.terrains) {
+            terrains.insert(std::make_pair(t.first, std::unique_ptr<Terrain>(t.second->clone())));
+        }
+        
+        for(auto& u : other.units) {
+            units.insert(std::make_pair(u.first, std::unique_ptr<Unit>(u.second->clone())));
+        }
     }
 
     void Board::addTeam(Team* team) {
@@ -54,6 +73,8 @@ namespace state {
                 }
             }
         }
+        
+        return NULL;
     }
 
     Unit* Board::findUnit(int id) const {
@@ -72,6 +93,8 @@ namespace state {
                 }
             }
         }
+        
+        return NULL;
     }
 
     const int Board::getHeight() const {
