@@ -15,4 +15,5 @@ namespace state {
         weapons.insert(std::make_pair(0, std::unique_ptr<Bow>(new Bow(10))));
 
     }
+    
 }

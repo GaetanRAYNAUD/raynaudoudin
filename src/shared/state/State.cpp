@@ -10,7 +10,4 @@ namespace state {
         return board;
     }
 
-
-
-
 }

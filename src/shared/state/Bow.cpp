@@ -5,5 +5,9 @@ namespace state {
     Bow::Bow(int damage) {
         this->damage = damage;
     }
+        
+    Bow::~Bow() {
+
+    }
     
 }

@@ -1,1 +1,9 @@
-#include <state/Leader.h>
+#include "Leader.h"
+
+namespace state {
+
+    Leader::Leader(int team, int positionX, int positionY) {
+
+    }
+    
+}
