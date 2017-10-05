@@ -1,5 +1,6 @@
 #include "Bowman.h"
 #include "Bow.h"
+#include "Sword.h"
 
 namespace state {
 
@@ -11,13 +12,12 @@ namespace state {
         id = 0;
         life = 40;
         typeId = UnitTypeId::BOWMAN;
-        
-        weapons.insert(std::make_pair(0, std::unique_ptr<Bow>(new Bow(10))));
 
-    }
-
-    Unit* Bowman::clone() const {
-
+        weapons.insert(std::make_pair(WeaponTypeId::SWORD, std::unique_ptr<Sword>(new Sword(5))));
+        weapons.insert(std::make_pair(WeaponTypeId::BOW, std::unique_ptr<Bow>(new Bow(10))));
     }
     
+     Unit* Bowman::clone() const {
+         return new Bowman(*this);
+    }
 }

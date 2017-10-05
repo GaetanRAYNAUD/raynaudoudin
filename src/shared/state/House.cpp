@@ -11,7 +11,7 @@ namespace state {
     }
 
     Terrain* House::clone() const {
-
+        return new House(*this);
     }
     
 }

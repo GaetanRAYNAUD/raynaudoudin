@@ -7,7 +7,7 @@ namespace state {
     }
 
     Terrain* Castle::clone() const {
-
+        return new Castle(*this);
     }
 
     

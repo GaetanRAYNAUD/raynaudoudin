@@ -7,7 +7,7 @@ namespace state {
     }
         
     Terrain* Default::clone() const {
-
+        return new Default(*this);
     }
 
     

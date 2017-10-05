@@ -15,7 +15,7 @@ namespace state {
     }
 
     Terrain* Wall::clone() const {
-
+        return new Wall(*this);
     }
 
     
