@@ -9,7 +9,7 @@ namespace state {
     Unit::Unit(const Unit& unit) {
         id = unit.id;
         life = unit.life;
-        speed unit.speed;
+        speed = unit.speed;
         positionX = unit.positionX;
         positionY = unit.positionY;
         team = unit.team;
@@ -25,7 +25,7 @@ namespace state {
         
         id = unit.id;
         life = unit.life;
-        speed unit.speed;
+        speed = unit.speed;
         positionX = unit.positionX;
         positionY = unit.positionY;
         team = unit.team;
@@ -33,7 +33,7 @@ namespace state {
         
         for(auto& w : unit.weapons) {
             weapons.insert(std::make_pair(w.first, std::unique_ptr<Weapon>(w.second->clone())));
-        }     
+        }
     }
 
     int Unit::getId() const {
@@ -126,7 +126,7 @@ namespace state {
     }
 
     void Unit::setWeapons(const std::map<int, std::unique_ptr<Weapon> >& weapons) {
-        weapons.clear();
+        this->weapons.clear();
         
         this->weapons = weapons;
     }
