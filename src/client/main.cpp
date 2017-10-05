@@ -27,7 +27,8 @@ int main(int argc,char* argv[])
         } else {
             cout << "Commande inconnue" << endl;
             cout << "Liste des commandes : " << endl;
-            cout << "hello : Affiche un message de bienvenue" << endl; 
+            cout << "hello : Affiche un message de bienvenue" << endl;
+            cout << "state : Effectue une série de tests pour vérifier le fonctionnement d'un état" << endl;
         }
     }
     return 0;
