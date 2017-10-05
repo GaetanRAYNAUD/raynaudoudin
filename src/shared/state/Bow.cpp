@@ -11,7 +11,6 @@ namespace state {
     }
     
     const bool Bow::isCloseCombat() {
-
+        return false;
     }
-    
 }

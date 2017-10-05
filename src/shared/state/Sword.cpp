@@ -3,15 +3,14 @@
 namespace state {
 
     Sword::Sword(int damage) {
-
-    }
-
-    const bool Sword::isCloseCombat() {
-
+        this->damage = damage;
     }
 
     Sword::~Sword() {
-
+        
     }
     
+    const bool Sword::isCloseCombat() {
+        return true;
+    }
 }

@@ -1,5 +1,6 @@
 #include "Bowman.h"
 #include "Bow.h"
+#include "Sword.h"
 
 namespace state {
 
@@ -12,8 +13,7 @@ namespace state {
         life = 40;
         typeId = UnitTypeId::BOWMAN;
         
-        weapons.insert(std::make_pair(0, std::unique_ptr<Bow>(new Bow(10))));
-
-    }
-    
+        weapons.insert(std::make_pair(WeaponTypeId::SWORD, std::unique_ptr<Sword>(new Sword(5))));
+        weapons.insert(std::make_pair(WeaponTypeId::BOW, std::unique_ptr<Bow>(new Bow(10))));
+    } 
 }
