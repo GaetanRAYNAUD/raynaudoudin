@@ -7,11 +7,11 @@ namespace state {
         this->height = height;
     }
         
-    Board::Board(const Board& board) {
+    Board::Board(const Board& other) {
 
     }
             
-    Board& Board::operator=(const Board& board) {
+    Board& Board::operator=(const Board& other) {
 
     }
 
