@@ -33,5 +33,10 @@ namespace state {
     void Weapon::setTypeId(WeaponTypeId typeId) {
         this->typeId = typeId;
     }
+
+    const bool Weapon::isCloseCombat() {
+        return false;
+    }
+
     
 }

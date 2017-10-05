@@ -44,7 +44,7 @@ namespace state {
             return false;
         }
         
-        TerrainTypeId terrainType = state->getBoard().getTerrains()[0]->getTypeId();
+        TerrainTypeId terrainType = state->getBoard().getTerrains().at(1)->getTypeId();
         if(terrainType == TerrainTypeId::HOUSE) {
             std::cout << "  Le terrain ajouté est bien de type HOUSE" << std::endl;
         } else {
@@ -63,7 +63,7 @@ namespace state {
             return false;
         }
         
-        terrainType = state->getBoard().getTerrains()[1]->getTypeId();
+        terrainType = state->getBoard().getTerrains().at(2)->getTypeId();
         if(terrainType == TerrainTypeId::CASTLE) {
             std::cout << "  Le terrain ajouté est bien de type CASTLE" << std::endl;
             return true;

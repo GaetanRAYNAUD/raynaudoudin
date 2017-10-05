@@ -107,34 +107,16 @@ namespace state {
         return width;
     }
 
-    const std::vector<Team*> Board::getTeams() const {
-        std::vector<Team*> tmp;
-        
-        for (auto& it : teams) {
-            tmp.push_back(it.second.get());
-        }
-        
-        return tmp;
+    const std::map<int, std::unique_ptr<Team> >& Board::getTeams() const {      
+        return teams;
     }
 
-    const std::vector<Terrain*> Board::getTerrains() const {
-        std::vector<Terrain*> tmp;
-        
-        for (auto& it : terrains) {
-            tmp.push_back(it.second.get());
-        }
-        
-        return tmp;
+    const std::map<int, std::unique_ptr<Terrain> >& Board::getTerrains() const {
+        return terrains;
     }
 
-    const std::vector<Unit*> Board::getUnits() const {
-        std::vector<Unit*> tmp;
-        
-        for (auto& it : units) {
-            tmp.push_back(it.second.get());
-        }
-        
-        return tmp;
+    const std::map<int, std::unique_ptr<Unit> >& Board::getUnits() const {
+        return units;
     }
 
     Board::~Board() {

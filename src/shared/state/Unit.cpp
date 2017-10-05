@@ -34,6 +34,8 @@ namespace state {
         for(auto& w : unit.weapons) {
             weapons.insert(std::make_pair(w.first, std::unique_ptr<Weapon>(w.second->clone())));
         }
+        
+        return *this;
     }
 
     int Unit::getId() const {
@@ -126,9 +128,7 @@ namespace state {
     }
 
     void Unit::setWeapons(const std::map<int, std::unique_ptr<Weapon> >& weapons) {
-        this->weapons.clear();
         
-        this->weapons = weapons;
     }
 
     Unit::~Unit() {
