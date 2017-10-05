@@ -13,5 +13,10 @@ namespace state {
     void Wall::setOrientation(int orientation) {
 
     }
+
+    Terrain* Wall::clone() const {
+
+    }
+
     
 }

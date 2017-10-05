@@ -5,5 +5,10 @@ namespace state {
     Swordman::Swordman(int team, int positionX, int positionY) {
 
     }
+
+    Unit* Swordman::clone() const {
+
+    }
+
     
 }

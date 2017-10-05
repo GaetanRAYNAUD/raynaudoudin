@@ -32,5 +32,10 @@ namespace state {
     int Team::getId() const {
         return id;
     }
+        
+    Team* Team::clone() const {
+        return new Team(*this);
+    }
+
 
 }

@@ -8,11 +8,22 @@ namespace state {
     }
         
     Board::Board(const Board& other) {
-
+        height = other.height;
+        width = other.width;
+        
+        for(auto& t : other.teams) {
+            teams.insert(std::make_pair(t.first, std::unique_ptr<Team>(t.second->clone())));
+        }
+        
     }
             
     Board& Board::operator=(const Board& other) {
-
+        teams.clear();
+        terrains.clear();
+        units.clear();
+        
+        height = other.height;
+        width = other.width;
     }
 
     void Board::addTeam(Team* team) {
@@ -36,7 +47,7 @@ namespace state {
     }
 
     Terrain* Board::findTerrainOnPosition(int positionX, int positionY) const {
-        for (auto const& it : terrains) {
+        for (auto& it : terrains) {
             if (it.second->getPositionX() == positionX) {
                 if (it.second->getPositionY() == positionY) {
                     return it.second.get();
@@ -54,7 +65,7 @@ namespace state {
     }
 
     Unit* Board::findUnitOnPosition(int positionX, int positionY) const {
-        for (auto const& it : units) {
+        for (auto& it : units) {
             if (it.second->getPositionX() == positionX) {
                 if (it.second->getPositionY() == positionY) {
                     return it.second.get();
@@ -63,16 +74,48 @@ namespace state {
         }
     }
 
-    int Board::getHeight() const {
+    const int Board::getHeight() const {
         return height;
     }
 
-    int Board::getWidth() const {
+    const int Board::getWidth() const {
         return width;
     }
 
+    const std::vector<Team*> Board::getTeams() const {
+        std::vector<Team*> tmp;
+        
+        for (auto& it : teams) {
+            tmp.push_back(it.second.get());
+        }
+        
+        return tmp;
+    }
+
+    const std::vector<Terrain*> Board::getTerrains() const {
+        std::vector<Terrain*> tmp;
+        
+        for (auto& it : terrains) {
+            tmp.push_back(it.second.get());
+        }
+        
+        return tmp;
+    }
+
+    const std::vector<Unit*> Board::getUnits() const {
+        std::vector<Unit*> tmp;
+        
+        for (auto& it : units) {
+            tmp.push_back(it.second.get());
+        }
+        
+        return tmp;
+    }
+
     Board::~Board() {
-        //Erase all maps
+        teams.clear();
+        terrains.clear();
+        units.clear();
     }
 
 }

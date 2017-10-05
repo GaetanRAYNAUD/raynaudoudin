@@ -6,4 +6,8 @@ namespace state {
 
     }
     
+    Unit* Leader::clone() const {
+
+    }
+
 }
