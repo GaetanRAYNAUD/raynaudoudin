@@ -5,6 +5,8 @@ namespace state {
     Sword::Sword(int id, int damage) {
         this->id = id;
         this->damage = damage;
+        
+        typeId = WeaponTypeId::SWORD;
     }
 
     Sword::~Sword() {

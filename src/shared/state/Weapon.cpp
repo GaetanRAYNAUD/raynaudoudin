@@ -38,5 +38,4 @@ namespace state {
         return false;
     }
 
-    
 }
