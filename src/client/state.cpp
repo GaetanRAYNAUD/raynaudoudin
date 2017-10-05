@@ -81,7 +81,7 @@ namespace state {
     }
 
     void unitTest() {    
-        std::cout << "Création du état" << std::endl;
+        std::cout << "Tentative de création d'un état" << std::endl;
 
         if(unitTest_shouldCreatState()) {
             std::cout << "Etat créé" << std::endl;
@@ -89,11 +89,15 @@ namespace state {
             std::cout << "ERREUR : Etat non créé !" << std::endl;
         }
         
+        std::cout << "Tentative d'ajout d'une équipe au jeu" << std::endl;
+        
         if(unitTest_shouldAddTeamToBoard()) {
             std::cout << "Equipe correctement ajoutée au jeu" << std::endl;
         } else {
             std::cout << "ERREUR : Equipe non ajoutée au jeu !" << std::endl;
         }
+
+        std::cout << "Tentative d'ajout d'un terrain au jeu" << std::endl;
         
         if(unitTest_shouldAddTerrainToBoard()) {
             std::cout << "Terrains correctement ajouté au jeu" << std::endl;
