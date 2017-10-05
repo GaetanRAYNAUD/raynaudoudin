@@ -1,6 +1,4 @@
-#include "state.hpp"
-#include "state/State.h"
-#include "state/Leader.h"
+#include "../shared/state.h"
 
 #include <iostream>
 
