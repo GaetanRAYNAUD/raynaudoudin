@@ -22,7 +22,7 @@ int main(int argc,char* argv[])
             
         } else if (string(argv[1]) == "state"){
             cout << "Lancement des tests d'état" << endl;
-            unitTest();
+            state::unitTest();
             
         } else {
             cout << "Commande inconnue" << endl;
