@@ -3,39 +3,35 @@
 namespace state {
 
     Weapon::Weapon() {
+        
+    }
+    
+    Weapon::~Weapon() {
 
     }
 
     int Weapon::getDamage() const {
-
+        return damage;
     }
 
     int Weapon::getId() const {
-
+        return id;
     }
 
     WeaponTypeId Weapon::getTypeId() const {
-
-    }
-
-    const bool Weapon::isCloseCombat() {
-
+        return typeId;
     }
 
     void Weapon::setDamage(int damage) {
-
+        this->damage = damage;
     }
 
     void Weapon::setId(int id) {
-
+        this->id = id;
     }
 
     void Weapon::setTypeId(WeaponTypeId typeId) {
-
-    }
-
-    Weapon::~Weapon() {
-
+        this->typeId = typeId;
     }
     
 }

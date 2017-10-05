@@ -4,20 +4,21 @@
 
 namespace state {
 
-    Leader::Leader(int team, int positionX, int positionY) {
+    Leader::Leader(int id, int team, int positionX, int positionY) {
+        this->id = id;
         this->team = team;
         this->positionX = positionX;
         this->positionY = positionY;
         
-        id = 0;
         life = 100;
         typeId = UnitTypeId::LEADER;
         
-        weapons.insert(std::make_pair(WeaponTypeId::SWORD, std::unique_ptr<Sword>(new Sword(20))));
-        weapons.insert(std::make_pair(WeaponTypeId::SWORD, std::unique_ptr<Sword>(new Sword(10))));
+        weapons.insert(std::make_pair(WeaponTypeId::SWORD, std::unique_ptr<Sword>(new Sword(WeaponTypeId::SWORD, 20))));
+        weapons.insert(std::make_pair(WeaponTypeId::BOW, std::unique_ptr<Bow>(new Bow(WeaponTypeId::BOW, 10))));
     }    
 
     Unit* Leader::clone() const {
         return new Leader(*this);
     }
+    
 }
