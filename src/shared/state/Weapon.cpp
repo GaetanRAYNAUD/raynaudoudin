@@ -18,7 +18,7 @@ namespace state {
         return id;
     }
 
-    WeaponTypeId Weapon::getTypeId() const {
+    const WeaponTypeId& Weapon::getTypeId() const {
         return typeId;
     }
 

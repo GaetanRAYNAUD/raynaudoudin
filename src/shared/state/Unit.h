@@ -39,9 +39,10 @@ namespace state {
     int getPositionY () const;
     int getLife () const;
     int getSpeed () const;
-    UnitTypeId getTypeId () const;
+    const UnitTypeId& getTypeId () const;
     static int getPrice (UnitTypeId typeId);
     int getId () const;
+    int getTeam () const;
     void setSpeed (int speed);
     virtual Unit* clone () const = 0;
     // Setters and Getters
@@ -49,7 +50,6 @@ namespace state {
     void setLife(int life);
     void setPositionX(int positionX);
     void setPositionY(int positionY);
-    int getTeam() const;
     void setTeam(int team);
     const std::map<int, std::unique_ptr<Weapon>>& getWeapons() const;
     void setWeapons(const std::map<int, std::unique_ptr<Weapon>>& weapons);

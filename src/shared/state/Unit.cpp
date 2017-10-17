@@ -82,7 +82,7 @@ namespace state {
         return team;
     }
 
-    UnitTypeId Unit::getTypeId() const {
+    const UnitTypeId& Unit::getTypeId() const {
         return typeId;
     }
 

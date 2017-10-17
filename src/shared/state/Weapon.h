@@ -25,7 +25,7 @@ namespace state {
     virtual ~Weapon ();
     virtual bool const isCloseCombat ();
     int getDamage () const;
-    WeaponTypeId getTypeId () const;
+    const WeaponTypeId& getTypeId () const;
     int getId () const;
     virtual Weapon* clone () const = 0;
     // Setters and Getters

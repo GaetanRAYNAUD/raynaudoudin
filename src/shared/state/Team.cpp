@@ -6,11 +6,11 @@ namespace state {
         this->id = id;
     }
 
-    const int Team::getGold() {
+    int Team::getGold() const {
         return gold;
     }
 
-    const bool Team::verifyGold(int unitPrice) {
+    bool Team::verifyGold(int unitPrice) const{
         if(gold > unitPrice) {
             return true;
         } else {

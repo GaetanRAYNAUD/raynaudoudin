@@ -22,7 +22,7 @@ namespace state {
         return positionY;
     }
 
-    TerrainTypeId Terrain::getTypeId() const {
+    const TerrainTypeId& Terrain::getTypeId() const {
         return typeId;
     }
 
