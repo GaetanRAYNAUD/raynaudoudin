@@ -35,13 +35,14 @@ namespace state {
     Unit& operator= (const Unit& other);
     virtual ~Unit ();
     bool isDead () const;
-    int getPositionX () const;
-    int getPositionY () const;
-    int getLife () const;
-    int getSpeed () const;
-    UnitTypeId getTypeId () const;
-    static int getPrice (UnitTypeId typeId);
-    int getId () const;
+    const int& getPositionX () const;
+    const int& getPositionY () const;
+    const int& getLife () const;
+    const int& getSpeed () const;
+    const UnitTypeId& getTypeId () const;
+    static const int getPrice (UnitTypeId typeId);
+    const int& getId () const;
+    const int& getTeam () const;
     void setSpeed (int speed);
     virtual Unit* clone () const = 0;
     // Setters and Getters
@@ -49,7 +50,6 @@ namespace state {
     void setLife(int life);
     void setPositionX(int positionX);
     void setPositionY(int positionY);
-    int getTeam() const;
     void setTeam(int team);
     const std::map<int, std::unique_ptr<Weapon>>& getWeapons() const;
     void setWeapons(const std::map<int, std::unique_ptr<Weapon>>& weapons);

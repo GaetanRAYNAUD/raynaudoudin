@@ -10,15 +10,15 @@ namespace state {
 
     }
 
-    int Weapon::getDamage() const {
+    const int& Weapon::getDamage() const {
         return damage;
     }
 
-    int Weapon::getId() const {
+    const int& Weapon::getId() const {
         return id;
     }
 
-    WeaponTypeId Weapon::getTypeId() const {
+    const WeaponTypeId& Weapon::getTypeId() const {
         return typeId;
     }
 

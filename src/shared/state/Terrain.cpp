@@ -6,23 +6,23 @@ namespace state {
 
     }
 
-    int Terrain::getId() const {
+    const int& Terrain::getId() const {
         return id;
     }
 
-    int Terrain::getMovementCost() const {
+    const int& Terrain::getMovementCost() const {
         return movementCost;
     }
 
-    int Terrain::getPositionX() const {
+    const int& Terrain::getPositionX() const {
         return positionX;
     }
 
-    int Terrain::getPositionY() const {
+    const int& Terrain::getPositionY() const {
         return positionY;
     }
 
-    TerrainTypeId Terrain::getTypeId() const {
+    const TerrainTypeId& Terrain::getTypeId() const {
         return typeId;
     }
 

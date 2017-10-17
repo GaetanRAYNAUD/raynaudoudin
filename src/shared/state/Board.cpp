@@ -99,11 +99,11 @@ namespace state {
         return NULL;
     }
 
-    const int Board::getHeight() const {
+    const int& Board::getHeight() const {
         return height;
     }
 
-    const int Board::getWidth() const {
+    const int& Board::getWidth() const {
         return width;
     }
 

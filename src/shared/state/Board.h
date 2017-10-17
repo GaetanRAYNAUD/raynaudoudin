@@ -27,6 +27,7 @@ namespace state {
     /// 	
     int width;
     int height;
+    int turn     = 0;
     std::map<int, std::unique_ptr<Team>> teams;
     std::map<int, std::unique_ptr<Terrain>> terrains;
     std::map<int, std::unique_ptr<Unit>> units;
@@ -51,8 +52,8 @@ namespace state {
     std::vector<Unit*> findUnitAround (int positionX, int positionY);
     Unit* findUnitOnPosition (int positionX, int positionY) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
-    const int getHeight () const;
-    const int getWidth () const;
+    const int& getHeight () const;
+    const int& getWidth () const;
     const std::map<int, std::unique_ptr<Team> >& getTeams () const;
     const std::map<int, std::unique_ptr<Terrain> >& getTerrains () const;
     const std::map<int, std::unique_ptr<Unit> >& getUnits () const;

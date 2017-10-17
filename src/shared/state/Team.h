@@ -23,12 +23,12 @@ namespace state {
     // Operations
   public:
     Team (int id);
-    int const getGold ();
-    bool const verifyGold (int unitPrice);
+    const int& getId () const;
+    const int& getGold () const;
+    bool verifyGold (int unitPrice) const;
     void generateGold ();
     void addHouse ();
     void removeHouse ();
-    int getId () const;
     Team* clone () const;
     // Setters and Getters
   };

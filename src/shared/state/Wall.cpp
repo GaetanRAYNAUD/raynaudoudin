@@ -9,7 +9,7 @@ namespace state {
         this->typeId = TerrainTypeId::WALL;
     }
 
-    Orientation Wall::getOrientation() const {
+    const Orientation& Wall::getOrientation() const {
         return orientation;
     }
 

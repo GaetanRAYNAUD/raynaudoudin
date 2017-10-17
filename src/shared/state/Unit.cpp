@@ -38,23 +38,23 @@ namespace state {
         return *this;
     }
 
-    int Unit::getId() const {
+    const int& Unit::getId() const {
         return id;
     }
 
-    int Unit::getLife() const {
+    const int& Unit::getLife() const {
         return life;
     }
 
-    int Unit::getPositionX() const {
+    const int& Unit::getPositionX() const {
         return positionX;
     }
 
-    int Unit::getPositionY() const {
+    const int& Unit::getPositionY() const {
         return positionY;
     }
 
-    int Unit::getPrice(UnitTypeId typeId) {
+    const int Unit::getPrice(UnitTypeId typeId) {
         int price;
         
         switch (typeId) {
@@ -74,15 +74,15 @@ namespace state {
         return price;
     }
 
-    int Unit::getSpeed() const {
+    const int& Unit::getSpeed() const {
         return speed;
     }
 
-    int Unit::getTeam() const {
+    const int& Unit::getTeam() const {
         return team;
     }
 
-    UnitTypeId Unit::getTypeId() const {
+    const UnitTypeId& Unit::getTypeId() const {
         return typeId;
     }
 

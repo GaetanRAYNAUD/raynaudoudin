@@ -23,7 +23,7 @@ namespace state {
   public:
     Wall (int id, int positionX = 0, int positionY = 0);
     void setOrientation (Orientation orientation);
-    Orientation getOrientation () const;
+    const Orientation& getOrientation () const;
     Terrain* clone () const;
     // Setters and Getters
   };
