@@ -23,8 +23,8 @@ namespace state {
     // Operations
   public:
     Team (int id);
-    const int& getId () const;
-    const int& getGold () const;
+    int getId () const;
+    int getGold () const;
     bool verifyGold (int unitPrice) const;
     void generateGold ();
     void addHouse ();

@@ -6,7 +6,7 @@ namespace state {
         this->id = id;
     }
 
-    const int& Team::getGold() const {
+    int Team::getGold() const {
         return gold;
     }
 
@@ -30,7 +30,7 @@ namespace state {
         nbHouses--;
     }
 
-    const int& Team::getId() const {
+    int Team::getId() const {
         return id;
     }
         

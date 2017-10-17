@@ -26,10 +26,10 @@ namespace state {
     Terrain ();
     virtual ~Terrain ();
     const TerrainTypeId& getTypeId () const;
-    const  int& getId () const;
-    const int& getMovementCost () const;
-    const int& getPositionX () const;
-    const int& getPositionY () const;
+    int getId () const;
+    int getMovementCost () const;
+    int getPositionX () const;
+    int getPositionY () const;
     virtual Terrain* clone () const = 0;
     // Setters and Getters
     void setId(int id);

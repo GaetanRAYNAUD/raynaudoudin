@@ -17,11 +17,15 @@ namespace state {
     // Attributes
   private:
     Board board;
+  protected:
+    int turn;
     // Operations
   public:
     State ();
     Board& getBoard ();
     // Setters and Getters
+    int getTurn() const;
+    void setTurn(int turn);
   };
 
 };

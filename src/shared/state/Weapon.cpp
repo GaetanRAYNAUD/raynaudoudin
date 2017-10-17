@@ -10,11 +10,11 @@ namespace state {
 
     }
 
-    const int& Weapon::getDamage() const {
+    int Weapon::getDamage() const {
         return damage;
     }
 
-    const int& Weapon::getId() const {
+    int Weapon::getId() const {
         return id;
     }
 

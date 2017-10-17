@@ -188,7 +188,7 @@ namespace state {
             std::cout << "ERREUR : L'ajout d'unité au jeu à planté !" << std::endl;
         }
         std::cout << "***************************************************" << std::endl;
-        
+        std::cout << "Tests terminés avec succès !!" << std::endl;
     }
 
 }

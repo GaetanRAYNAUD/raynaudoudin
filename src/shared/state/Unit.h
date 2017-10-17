@@ -35,14 +35,14 @@ namespace state {
     Unit& operator= (const Unit& other);
     virtual ~Unit ();
     bool isDead () const;
-    const int& getPositionX () const;
-    const int& getPositionY () const;
-    const int& getLife () const;
-    const int& getSpeed () const;
+    int getPositionX () const;
+    int getPositionY () const;
+    int getLife () const;
+    int getSpeed () const;
     const UnitTypeId& getTypeId () const;
-    static const int getPrice (UnitTypeId typeId);
-    const int& getId () const;
-    const int& getTeam () const;
+    static int getPrice (UnitTypeId typeId);
+    int getId () const;
+    int getTeam () const;
     void setSpeed (int speed);
     virtual Unit* clone () const = 0;
     // Setters and Getters
