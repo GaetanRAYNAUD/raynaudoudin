@@ -59,14 +59,23 @@ bool render::load(const std::string& tilepath, sf::Vector2u tileSize, const int*
                 quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
                 quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
         }
-    
-    sf::RectangleShape rectangle(sf::Vector2f(120, 1152));
-
 
     return true;
 }
 
 void render::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    std::vector<sf::RectangleShape> menus;
+    
+    sf::RectangleShape leftMenu(sf::Vector2f(58, 576));
+    leftMenu.setFillColor(sf::Color::Black);
+    menus.push_back(leftMenu);
+    
+    sf::RectangleShape topMenu(sf::Vector2f(1152, 36));
+    topMenu.setFillColor(sf::Color::Black);
+    menus.push_back(topMenu);
+    
+    
+        
     // on applique la transformation
     states.transform *= getTransform();
 
@@ -75,6 +84,9 @@ void render::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
     // et on dessine enfin le tableau de vertex
     target.draw(m_vertices, states);
+    for(auto m : menus) {
+        target.draw(m, states);
+    }
 }
 
 render::render(const render& orig) {
