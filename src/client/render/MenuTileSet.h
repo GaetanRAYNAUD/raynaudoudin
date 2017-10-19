@@ -2,6 +2,7 @@
 #ifndef RENDER__MENUTILESET__H
 #define RENDER__MENUTILESET__H
 
+#include <vector>
 #include <string>
 
 namespace render {
@@ -9,12 +10,16 @@ namespace render {
   class TileSet;
 }
 
+#include "Tile.h"
 #include "TileSet.h"
 
 namespace render {
 
   /// class MenuTileSet - 
   class MenuTileSet : public render::TileSet {
+    // Attributes
+  private:
+    std::vector<Tile> menu;
     // Operations
   public:
     int getCellWidth () const;

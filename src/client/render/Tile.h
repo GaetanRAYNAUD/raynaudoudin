@@ -3,6 +3,14 @@
 #define RENDER__TILE__H
 
 
+namespace state {
+  class Terrain;
+  class Unit;
+}
+
+#include "state/Terrain.h"
+#include "state/Unit.h"
+
 namespace render {
 
   /// class Tile - 

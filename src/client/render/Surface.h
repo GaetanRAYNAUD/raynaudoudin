@@ -5,23 +5,32 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
+namespace sf {
+  class Texture;
+  class VertexArray;
+};
 namespace render {
   class Tile;
+};
+namespace sf {
+  class Drawable;
+  class Transformable;
 }
+
 
 namespace render {
 
   /// class Surface - 
-  class Surface {
+  class Surface : public sf::Drawable, public sf::Transformable {
     // Attributes
-  public:
+  private:
     sf::Texture texture;
     sf::VertexArray quads;
     // Operations
   public:
     void loadTexture (const std::string& image_file);
     void initQuads (int count);
-    setSpriteLocation (int i, int x, int y);
+    void setSpriteLocation (int i, int x, int y);
     void setSpriteTexture (int i, const Tile& texture);
     /// 											
     /// @param target		(???) 

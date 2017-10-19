@@ -2,19 +2,30 @@
 #ifndef RENDER__UNITTILESET__H
 #define RENDER__UNITTILESET__H
 
+#include <vector>
 #include <string>
 
 namespace render {
   class Tile;
+};
+namespace state {
+  class Unit;
+};
+namespace render {
   class TileSet;
 }
 
+#include "Tile.h"
 #include "TileSet.h"
 
 namespace render {
 
   /// class UnitTileSet - 
   class UnitTileSet : public render::TileSet {
+    // Attributes
+  private:
+    std::vector<Tile> human;
+    std::vector<Tile> orc;
     // Operations
   public:
     int getCellWidth () const;

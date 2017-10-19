@@ -9,4 +9,6 @@
 #include "render/MenuTileSet.h"
 #include "render/TerrainTileSide.h"
 #include "render/UnitTileSet.h"
+#include "render/StateLayer.h"
+#include "render/BoardLayer.h"
 #endif

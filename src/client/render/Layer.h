@@ -21,14 +21,13 @@ namespace render {
   private:
     std::unique_ptr<Surface> surface;
     std::shared_ptr<TileSet> tileset;
-    const state::Board& board;
     // Operations
   public:
     Layer ();
-    Layer (const state::Board& board);
+    virtual ~Layer ();
     const Surface* getSurface () const;
     void setSurface (Surface* surface);
-    void initSurface ();
+    virtual void initSurface () = 0;
     // Setters and Getters
   };
 

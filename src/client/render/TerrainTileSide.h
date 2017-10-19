@@ -2,19 +2,29 @@
 #ifndef RENDER__TERRAINTILESIDE__H
 #define RENDER__TERRAINTILESIDE__H
 
+#include <vector>
 #include <string>
 
 namespace render {
   class Tile;
+};
+namespace state {
+  class Terrain;
+};
+namespace render {
   class TileSet;
 }
 
+#include "Tile.h"
 #include "TileSet.h"
 
 namespace render {
 
   /// class TerrainTileSide - 
   class TerrainTileSide : public render::TileSet {
+    // Attributes
+  private:
+    std::vector<Tile> terrain;
     // Operations
   public:
     /// 			
