@@ -59,6 +59,9 @@ bool render::load(const std::string& tilepath, sf::Vector2u tileSize, const int*
                 quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
                 quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
         }
+    
+    sf::RectangleShape rectangle(sf::Vector2f(120, 1152));
+
 
     return true;
 }

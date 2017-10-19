@@ -17,11 +17,10 @@ namespace state {
     // Associations
     // Attributes
   private:
-    /// 					
-    Orientation orientation     = Orientation::LEFT;
+    Orientation orientation     = Orientation::RIGHT;
     // Operations
   public:
-    Wall (int id, int positionX = 0, int positionY = 0);
+    Wall (int id, Orientation orientation, int positionX = 0, int positionY = 0);
     void setOrientation (Orientation orientation);
     const Orientation& getOrientation () const;
     Terrain* clone () const;

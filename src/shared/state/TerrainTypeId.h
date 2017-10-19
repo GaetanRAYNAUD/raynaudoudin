@@ -11,7 +11,9 @@ namespace state {
     WATER     = 3,
     HOUSE     = 4,
     CASTLE     = 5,
-    WALL     = 6
+    WALL_LEFT     = 6,
+    WALL_TOP     = 7,
+    WALL_RIGHT     = 8
   };
 
 };

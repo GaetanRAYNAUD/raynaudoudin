@@ -6,9 +6,9 @@
 namespace state {
 
   enum Orientation {
-    LEFT     = 1,
+    RIGHT     = 1,
     TOP     = 2,
-    RIGHT     = 3
+    LEFT     = 3
   };
 
 };

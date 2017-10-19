@@ -2,11 +2,32 @@
 
 namespace state {
 
-    Wall::Wall(int id, int positionX, int positionY) {
+    Wall::Wall(int id,  Orientation orientation, int positionX, int positionY) {
         this->id = id;
         this->positionX = positionX;
         this->positionY = positionY;
-        this->typeId = TerrainTypeId::WALL;
+        
+        switch(orientation) {
+            case Orientation::RIGHT :
+                this->orientation = Orientation::RIGHT;
+                this->typeId = TerrainTypeId::WALL_RIGHT;
+                break;
+            
+            case Orientation::LEFT :
+                this->orientation = Orientation::LEFT;
+                this->typeId = TerrainTypeId::WALL_LEFT;
+                break;
+                        
+            case Orientation::TOP :
+                this->orientation = Orientation::TOP;
+                this->typeId = TerrainTypeId::WALL_TOP;
+                break;
+            
+            default :
+                this->orientation = Orientation::RIGHT;
+                this->typeId = TerrainTypeId::WALL_RIGHT;
+                break;                
+        }
     }
 
     const Orientation& Wall::getOrientation() const {
@@ -14,7 +35,27 @@ namespace state {
     }
 
     void Wall::setOrientation(Orientation orientation) {
-        this->orientation = orientation;
+        switch(orientation) {
+            case Orientation::RIGHT :
+                this->orientation = Orientation::RIGHT;
+                this->typeId = TerrainTypeId::WALL_RIGHT;
+                break;
+            
+            case Orientation::LEFT :
+                this->orientation = Orientation::LEFT;
+                this->typeId = TerrainTypeId::WALL_LEFT;
+                break;
+                        
+            case Orientation::TOP :
+                this->orientation = Orientation::TOP;
+                this->typeId = TerrainTypeId::WALL_TOP;
+                break;
+            
+            default :
+                this->orientation = Orientation::RIGHT;
+                this->typeId = TerrainTypeId::WALL_RIGHT;
+                break;                
+        }
     }
 
     Terrain* Wall::clone() const {
