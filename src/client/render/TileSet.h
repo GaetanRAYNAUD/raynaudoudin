@@ -6,8 +6,14 @@
 
 namespace render {
   class Tile;
+};
+namespace state {
+  class Terrain;
+  class Unit;
 }
 
+#include "state/Terrain.h"
+#include "state/Unit.h"
 #include "Tile.h"
 
 namespace render {
@@ -21,6 +27,9 @@ namespace render {
     virtual int getCellWidth () const = 0;
     virtual int getCellHeight () const = 0;
     virtual const std::string getImageFile () const = 0;
+    virtual const Tile& getTile (char menu) const;
+    virtual const Tile& getTile (const state::Terrain& terrain) const;
+    virtual const Tile& getTile (const state::Unit& unit) const;
     // Setters and Getters
   };
 
