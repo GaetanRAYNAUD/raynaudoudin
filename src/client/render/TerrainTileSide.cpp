@@ -11,7 +11,7 @@ namespace render {
     }
 
     const std::string TerrainTileSide::getImageFile() const {
-        return "res/terrain/terrain.png";
+        return "res/terrains/terrain.png";
     }
 
     const Tile& TerrainTileSide::getTile(const state::Terrain& terrain) const {

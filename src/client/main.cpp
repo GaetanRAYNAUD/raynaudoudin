@@ -46,7 +46,7 @@ int main(int argc,char* argv[])
 
             // on crée la tilemap avec le niveau précédemment défini
             render map;
-            if (!map.load("res/terrain/terrain.png", sf::Vector2u(72, 72), level, 22, 8))
+            if (!map.load("res/terrains/terrain.png", sf::Vector2u(72, 72), level, 22, 8))
                 return -1;
 
             // on fait tourner la boucle principale
