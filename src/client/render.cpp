@@ -17,14 +17,14 @@ render::render() {
     
 }
 
-bool render::load(const std::string& tilepath, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height) {
+bool render::loadTerrain(const std::string& tilepath, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height) {
     // on charge la texture du tileset
-    if (!m_tileset.loadFromFile(tilepath))
+    if (!textureTerrain.loadFromFile(tilepath))
         return false;
 
     // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
-    m_vertices.setPrimitiveType(sf::Quads);
-    m_vertices.resize(width * height * 4);
+    vertexTerrain.setPrimitiveType(sf::Quads);
+    vertexTerrain.resize(width * height * 4);
 
     // on remplit le tableau de vertex, avec un quad par tuile
     for (unsigned int i = 0; i < width; ++i)
@@ -34,59 +34,84 @@ bool render::load(const std::string& tilepath, sf::Vector2u tileSize, const int*
             int tileNumber = tiles[i + j * width];
 
             // on en déduit sa position dans la texture du tileset
-            int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
-            int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
+            int tu = tileNumber % (textureTerrain.getSize().x / tileSize.x);
+            int tv = tileNumber / (textureTerrain.getSize().x / tileSize.x);
 
             // on récupère un pointeur vers le quad à définir dans le tableau de vertex
-            sf::Vertex* quad = &m_vertices[(i + j * width) * 4];
+            sf::Vertex* quadTerrain = &vertexTerrain[(i + j * width) * 4];
 
             // on définit ses quatre coins
             if (i % 2) {
-                quad[0].position = sf::Vector2f(i * tileSize.x - i * tileSize.x / 4, j * tileSize.y);
-                quad[1].position = sf::Vector2f((i + 1) * tileSize.x - i * tileSize.x / 4, j * tileSize.y);
-                quad[2].position = sf::Vector2f((i + 1) * tileSize.x - i * tileSize.x / 4, (j + 1) * tileSize.y);
-                quad[3].position = sf::Vector2f(i * tileSize.x - i * tileSize.x / 4, (j + 1) * tileSize.y);
+                quadTerrain[0].position = sf::Vector2f(i * tileSize.x - i * tileSize.x / 4, j * tileSize.y);
+                quadTerrain[1].position = sf::Vector2f((i + 1) * tileSize.x - i * tileSize.x / 4, j * tileSize.y);
+                quadTerrain[2].position = sf::Vector2f((i + 1) * tileSize.x - i * tileSize.x / 4, (j + 1) * tileSize.y);
+                quadTerrain[3].position = sf::Vector2f(i * tileSize.x - i * tileSize.x / 4, (j + 1) * tileSize.y);
             }
             else {
-                quad[0].position = sf::Vector2f(i * tileSize.x - i * tileSize.x / 4, j * tileSize.y + tileSize.y / 2);
-                quad[1].position = sf::Vector2f((i + 1) * tileSize.x - i * tileSize.x / 4, j * tileSize.y + tileSize.y / 2);
-                quad[2].position = sf::Vector2f((i + 1) * tileSize.x - i * tileSize.x / 4, (j + 1) * tileSize.y + tileSize.y / 2);
-                quad[3].position = sf::Vector2f(i * tileSize.x - i * tileSize.x / 4, (j + 1) * tileSize.y + tileSize.y / 2);
+                quadTerrain[0].position = sf::Vector2f(i * tileSize.x - i * tileSize.x / 4, j * tileSize.y + tileSize.y / 2);
+                quadTerrain[1].position = sf::Vector2f((i + 1) * tileSize.x - i * tileSize.x / 4, j * tileSize.y + tileSize.y / 2);
+                quadTerrain[2].position = sf::Vector2f((i + 1) * tileSize.x - i * tileSize.x / 4, (j + 1) * tileSize.y + tileSize.y / 2);
+                quadTerrain[3].position = sf::Vector2f(i * tileSize.x - i * tileSize.x / 4, (j + 1) * tileSize.y + tileSize.y / 2);
             }
                 // on définit ses quatre coordonnées de texture
-                quad[0].texCoords = sf::Vector2f(tu * tileSize.x , tv * tileSize.y);
-                quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
-                quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
-                quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
+                quadTerrain[0].texCoords = sf::Vector2f(tu * tileSize.x , tv * tileSize.y);
+                quadTerrain[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
+                quadTerrain[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
+                quadTerrain[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
         }
-
+    
     return true;
 }
 
-void render::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    std::vector<sf::RectangleShape> menus;
+bool render::loadMenu(const std::string& menuTilepath, int  windowWidth, int windowHeight) {
+    if (!textureMenu.loadFromFile(menuTilepath))
+        return false;
+
+    sf::Vector2u topMenuSize = sf::Vector2u(833, 36);
+    sf::Vector2u leftMenuSize = sf::Vector2u(58, 700);
+    vertexMenu.setPrimitiveType(sf::Quads);
+    vertexMenu.resize(2 * 4);
     
-    sf::RectangleShape leftMenu(sf::Vector2f(58, 576));
-    leftMenu.setFillColor(sf::Color::Black);
-    menus.push_back(leftMenu);
+    //init menuTop
+    sf::Vertex* quadMenu = &vertexMenu[0];
+    quadMenu[0].position = sf::Vector2f(0, 0);
+    quadMenu[1].position = sf::Vector2f(windowWidth, 0);
+    quadMenu[2].position = sf::Vector2f(windowWidth, topMenuSize.y);
+    quadMenu[3].position = sf::Vector2f(0, topMenuSize.y);
     
-    sf::RectangleShape topMenu(sf::Vector2f(1152, 36));
-    topMenu.setFillColor(sf::Color::Black);
-    menus.push_back(topMenu);
+    quadMenu[0].texCoords = sf::Vector2f(0, 0);
+    quadMenu[1].texCoords = sf::Vector2f(topMenuSize.x, 0);
+    quadMenu[2].texCoords = sf::Vector2f(topMenuSize.x, topMenuSize.y);
+    quadMenu[3].texCoords = sf::Vector2f(0, topMenuSize.y);
     
+    //init menuLeft
+    quadMenu = &vertexMenu[4];
+    quadMenu[0].position = sf::Vector2f(0, topMenuSize.y);
+    quadMenu[1].position = sf::Vector2f(leftMenuSize.x, topMenuSize.y);
+    quadMenu[2].position = sf::Vector2f(leftMenuSize.x, windowHeight);
+    quadMenu[3].position = sf::Vector2f(0, windowHeight);
     
-        
+    quadMenu[0].texCoords = sf::Vector2f(0, topMenuSize.y + 1);
+    quadMenu[1].texCoords = sf::Vector2f(leftMenuSize.x, topMenuSize.y + 1);
+    quadMenu[2].texCoords = sf::Vector2f(leftMenuSize.x, topMenuSize.y + leftMenuSize.y);
+    quadMenu[3].texCoords = sf::Vector2f(0, topMenuSize.y + leftMenuSize.y);
+    
+    return true;
+}
+
+void render::draw(sf::RenderTarget& target, sf::RenderStates states) const {        
     // on applique la transformation
     states.transform *= getTransform();
 
     // on applique la texture du tileset
-    states.texture = &m_tileset;
+    states.texture = &textureTerrain;
 
     // et on dessine enfin le tableau de vertex
-    target.draw(m_vertices, states);
-    for(auto m : menus) {
-        target.draw(m, states);
-    }
+    target.draw(vertexTerrain, states);
+    
+    states.texture = &textureMenu;
+    target.draw(vertexMenu, states);
+
 }
 
 render::render(const render& orig) {

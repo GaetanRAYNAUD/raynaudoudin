@@ -27,8 +27,10 @@ int main(int argc,char* argv[])
             
         } else if (string(argv[1]) == "render"){
             cout << "Lancement du rendu d'un état" << endl;
-            sf::RenderWindow window(sf::VideoMode(1152, 576), "BfW");
-
+            
+            int windowWidth = 1152;
+            int windowHeight = 576;
+            sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
             // on définit le niveau à l'aide de numéro de tuiles
             const int level[] =
             {
@@ -46,7 +48,10 @@ int main(int argc,char* argv[])
 
             // on crée la tilemap avec le niveau précédemment défini
             render map;
-            if (!map.load("res/terrains/terrain.png", sf::Vector2u(72, 72), level, 22, 8))
+            if (!map.loadTerrain("res/terrains/terrain.png", sf::Vector2u(72, 72), level, 22, 8))
+                return -1;
+            
+            if (!map.loadMenu("res/menus/menu.png", windowWidth, windowHeight))
                 return -1;
 
             // on fait tourner la boucle principale

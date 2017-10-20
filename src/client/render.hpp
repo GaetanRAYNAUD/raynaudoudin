@@ -19,13 +19,16 @@
 class render : public sf::Drawable, public sf::Transformable {
 public:
     render();
-    bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height);
+    bool loadTerrain(const std::string& terrainTilepath, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height);
+    bool loadMenu(const std::string& menuTilepath, int  windowWidth, int windowHeight);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     render(const render& orig);
     virtual ~render();
 private:
-    sf::VertexArray m_vertices;
-    sf::Texture m_tileset;
+    sf::VertexArray vertexTerrain;
+    sf::Texture textureTerrain;
+    sf::VertexArray vertexMenu;
+    sf::Texture textureMenu;
 };
 
 #endif /* RENDER_HPP */
