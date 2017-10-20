@@ -7,7 +7,7 @@
 #include "render/TileSet.h"
 #include "render/Layer.h"
 #include "render/MenuTileSet.h"
-#include "render/TerrainTileSide.h"
+#include "render/TerrainTileSet.h"
 #include "render/UnitTileSet.h"
 #include "render/StateLayer.h"
 #include "render/BoardLayer.h"
