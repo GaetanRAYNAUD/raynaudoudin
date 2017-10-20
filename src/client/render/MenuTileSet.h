@@ -22,6 +22,7 @@ namespace render {
     std::vector<Tile> menu;
     // Operations
   public:
+    MenuTileSet ();
     int getCellWidth () const;
     int getCellHeight () const;
     const std::string getImageFile () const;

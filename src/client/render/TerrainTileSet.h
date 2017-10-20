@@ -27,6 +27,7 @@ namespace render {
     std::vector<Tile> terrain;
     // Operations
   public:
+    TerrainTileSet ();
     /// 			
     int getCellWidth () const;
     int getCellHeight () const;
