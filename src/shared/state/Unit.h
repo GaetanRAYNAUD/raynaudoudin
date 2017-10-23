@@ -11,6 +11,7 @@ namespace state {
 }
 
 #include "UnitTypeId.h"
+#include "RaceTypeId.h"
 #include "Weapon.h"
 
 namespace state {
@@ -28,6 +29,7 @@ namespace state {
     int team;
     std::map<int, std::unique_ptr<Weapon>> weapons;
     UnitTypeId typeId     = UnitTypeId::INVALIDUNIT;
+    RaceTypeId race     = RaceTypeId::HUMAN;
     // Operations
   public:
     Unit ();
@@ -43,6 +45,7 @@ namespace state {
     static int getPrice (UnitTypeId typeId);
     int getId () const;
     int getTeam () const;
+    const RaceTypeId& getRace () const;
     void setSpeed (int speed);
     virtual Unit* clone () const = 0;
     // Setters and Getters
@@ -54,6 +57,7 @@ namespace state {
     const std::map<int, std::unique_ptr<Weapon>>& getWeapons() const;
     void setWeapons(const std::map<int, std::unique_ptr<Weapon>>& weapons);
     void setTypeId(UnitTypeId typeId);
+    void setRace(RaceTypeId race);
   };
 
 };

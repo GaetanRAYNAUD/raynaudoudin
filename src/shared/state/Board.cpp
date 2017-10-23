@@ -1,3 +1,5 @@
+#include <fstream>
+
 #include "Board.h"
 
 namespace state {
@@ -124,5 +126,26 @@ namespace state {
         terrains.clear();
         units.clear();
     }
+
+    void Board::loadTerrainsFromFile(std::string path) const {
+        std::vector<int> terrainsTmp;
+        std::ifstream file;
+        file.open(path, std::ios::in);    
+        std::string line;
+            
+        while(!file.eof()){
+            std::getline(file, line);
+                
+            for(auto l : line) {
+                terrainsTmp.push_back(l - '0');
+            }
+        }
+        
+        file.close();
+        
+        for(auto t : terrainsTmp) {
+        }
+    }
+
 
 }
