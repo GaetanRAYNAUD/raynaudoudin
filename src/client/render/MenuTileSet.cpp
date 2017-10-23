@@ -3,7 +3,8 @@
 namespace render {
     
     MenuTileSet::MenuTileSet() {
-        
+        menus.insert(std::make_pair(MenuType::MENU_TOP, Tile(0, 0, 833, 36)));
+        menus.insert(std::make_pair(MenuType::MENU_LEFT, Tile(0, 37, 58, 736)));
     }
 
     int MenuTileSet::getCellHeight() const {
