@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
@@ -31,18 +33,36 @@ int main(int argc,char* argv[])
             int windowWidth = 1152;
             int windowHeight = 576;
             sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
+            
             // on définit le niveau à l'aide de numéro de tuiles
-            const int level[] =
-            {
-                0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0,
-                0, 0, 5, 6, 7, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 1, 1, 1, 3, 1, 1, 1,
-                0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1,
-                0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                1, 0, 1, 0, 0, 0, 0, 0, 2, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 6, 0, 0, 0,
-                0, 1, 0, 3, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 0, 0, 5, 4, 7, 0, 0,
-                0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
-            };
+//            const int level[] =
+//            {
+//                0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0,
+//                0, 0, 5, 6, 7, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 1, 1, 1, 3, 1, 1, 1,
+//                0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1,
+//                0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//                1, 0, 1, 0, 0, 0, 0, 0, 2, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//                1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0, 1, 0, 0, 0, 0, 0, 6, 0, 0, 0,
+//                0, 1, 0, 3, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 0, 0, 5, 4, 7, 0, 0,
+//                0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+//            };
+            
+            std::vector<int> level;
+            std::ifstream file;
+            file.open("res/map.txt", std::ios::in);
+            
+            std::string line;
+
+            std::cout << "Carte :" << std::endl;
+            
+            while(!file.eof()){
+                std::getline(file, line);
+                std::cout << line << std::endl;
+                
+                for(auto l : line) {
+                    level.push_back(l - '0');
+                }
+            }
             
             /*0 = herbe, 1 = foret, 2 = eau, 3 = maison, 4 = chateau, 5 = mur droite, 6 = mur bas, 7 = mur gauche*/
 

@@ -19,7 +19,7 @@
 class render : public sf::Drawable, public sf::Transformable {
 public:
     render();
-    bool loadTerrain(const std::string& terrainTilepath, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height);
+    bool loadTerrain(const std::string& terrainTilepath, sf::Vector2u tileSize, std::vector<int> tiles, int width, int height);
     bool loadMenu(const std::string& menuTilepath, int  windowWidth, int windowHeight);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     render(const render& orig);

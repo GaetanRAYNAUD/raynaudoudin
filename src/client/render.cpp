@@ -1,23 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   render.cpp
- * Author: gaetan
- * 
- * Created on 17 octobre 2017, 09:12
- */
-
 #include "render.hpp"
+#include <iostream>
 
 render::render() {
     
 }
 
-bool render::loadTerrain(const std::string& tilepath, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height) {
+bool render::loadTerrain(const std::string& tilepath, sf::Vector2u tileSize, std::vector<int> tiles, int width, int height) {
     // on charge la texture du tileset
     if (!textureTerrain.loadFromFile(tilepath))
         return false;
@@ -27,8 +15,8 @@ bool render::loadTerrain(const std::string& tilepath, sf::Vector2u tileSize, con
     vertexTerrain.resize(width * height * 4);
 
     // on remplit le tableau de vertex, avec un quad par tuile
-    for (unsigned int i = 0; i < width; ++i)
-        for (unsigned int j = 0; j < height; ++j)
+    for (int i = 0; i < width; ++i)
+        for (int j = 0; j < height; ++j)
         {
             // on récupère le numéro de tuile courant
             int tileNumber = tiles[i + j * width];
