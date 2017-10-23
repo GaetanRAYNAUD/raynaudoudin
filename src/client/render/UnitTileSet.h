@@ -16,17 +16,16 @@ namespace render {
 }
 
 #include "TileSet.h"
-#include "UnitType.h"
+#include "state/UnitTypeId.h"
 
 namespace render {
 
   /// class UnitTileSet - 
   class UnitTileSet : public render::TileSet {
-    // Associations
     // Attributes
   private:
-    std::map<UnitType,Tile> humans;
-    std::map<UnitType,Tile> orcs;
+    std::map<state::UnitTypeId,Tile> humans;
+    std::map<state::UnitTypeId,Tile> orcs;
     // Operations
   public:
     UnitTileSet ();

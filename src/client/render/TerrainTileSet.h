@@ -16,16 +16,15 @@ namespace render {
 }
 
 #include "TileSet.h"
-#include "TerrainType.h"
+#include "state/TerrainTypeId.h"
 
 namespace render {
 
   /// class TerrainTileSet - 
   class TerrainTileSet : public render::TileSet {
-    // Associations
     // Attributes
   private:
-    std::map<TerrainType,Tile> terrains;
+    std::map<state::TerrainTypeId,Tile> terrains;
     // Operations
   public:
     TerrainTileSet ();
