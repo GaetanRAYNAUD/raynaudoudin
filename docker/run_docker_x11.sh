@@ -7,9 +7,9 @@ if [ -z "$1" ]; then
 fi
 IMAGE=$1
 
-docker run -it \
+docker exec -it \
     --user=$USER \
-    --env="DISPLAY" \
+#    --env="$DISPLAY" \
     --volume="/etc/group:/etc/group:ro" \
     --volume="/etc/passwd:/etc/passwd:ro" \
     --volume="/etc/shadow:/etc/shadow:ro" \
