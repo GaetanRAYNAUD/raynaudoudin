@@ -2,7 +2,7 @@
 #ifndef RENDER__UNITTILESET__H
 #define RENDER__UNITTILESET__H
 
-#include <vector>
+#include <map>
 #include <string>
 
 namespace render {
@@ -15,17 +15,18 @@ namespace render {
   class TileSet;
 }
 
-#include "Tile.h"
 #include "TileSet.h"
+#include "UnitType.h"
 
 namespace render {
 
   /// class UnitTileSet - 
   class UnitTileSet : public render::TileSet {
+    // Associations
     // Attributes
   private:
-    std::vector<Tile> human;
-    std::vector<Tile> orc;
+    std::map<UnitType,Tile> humans;
+    std::map<UnitType,Tile> orcs;
     // Operations
   public:
     UnitTileSet ();

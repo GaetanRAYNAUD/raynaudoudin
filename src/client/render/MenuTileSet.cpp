@@ -7,19 +7,19 @@ namespace render {
     }
 
     int MenuTileSet::getCellHeight() const {
-        return menu[0].getHeight();
+        return menus.at(MenuType::MENU_LEFT).getHeight(); // A refaire 
     }
     
     int MenuTileSet::getCellWidth() const {
-        return menu[0].getWidth();        
+        return menus.at(MenuType::MENU_LEFT).getWidth(); // A refaire    
     }
     
     const std::string MenuTileSet::getImageFile() const {
         return "res/menus/menu.png";
     }
     
-    const Tile& MenuTileSet::getTile(char menu) const {
-        return this->menu[0];
+    const Tile& MenuTileSet::getTile(std::string menu) const {
+        return menus.at(MenuType::MENU_LEFT);
     }
 
 

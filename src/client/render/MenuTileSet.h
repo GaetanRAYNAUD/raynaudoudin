@@ -2,7 +2,7 @@
 #ifndef RENDER__MENUTILESET__H
 #define RENDER__MENUTILESET__H
 
-#include <vector>
+#include <map>
 #include <string>
 
 namespace render {
@@ -10,23 +10,24 @@ namespace render {
   class TileSet;
 }
 
-#include "Tile.h"
 #include "TileSet.h"
+#include "MenuType.h"
 
 namespace render {
 
   /// class MenuTileSet - 
   class MenuTileSet : public render::TileSet {
+    // Associations
     // Attributes
   private:
-    std::vector<Tile> menu;
+    std::map<MenuType, Tile> menus;
     // Operations
   public:
     MenuTileSet ();
     int getCellWidth () const;
     int getCellHeight () const;
     const std::string getImageFile () const;
-    const Tile& getTile (char menu) const;
+    const Tile& getTile (std::string menu) const;
     // Setters and Getters
   };
 

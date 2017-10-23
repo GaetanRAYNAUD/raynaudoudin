@@ -2,7 +2,7 @@
 #ifndef RENDER__TERRAINTILESET__H
 #define RENDER__TERRAINTILESET__H
 
-#include <vector>
+#include <map>
 #include <string>
 
 namespace render {
@@ -15,16 +15,17 @@ namespace render {
   class TileSet;
 }
 
-#include "Tile.h"
 #include "TileSet.h"
+#include "TerrainType.h"
 
 namespace render {
 
   /// class TerrainTileSet - 
   class TerrainTileSet : public render::TileSet {
+    // Associations
     // Attributes
   private:
-    std::vector<Tile> terrain;
+    std::map<TerrainType,Tile> terrains;
     // Operations
   public:
     TerrainTileSet ();
