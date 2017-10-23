@@ -7,6 +7,11 @@
 
 namespace render {
   class Tile;
+};
+namespace state {
+  class Terrain;
+};
+namespace render {
   class TileSet;
 }
 
@@ -22,10 +27,12 @@ namespace render {
     std::vector<Tile> terrain;
     // Operations
   public:
+    TerrainTileSet ();
     /// 			
     int getCellWidth () const;
     int getCellHeight () const;
     const std::string getImageFile () const;
+    const Tile& getTile (const state::Terrain& terrain) const;
     // Setters and Getters
   };
 

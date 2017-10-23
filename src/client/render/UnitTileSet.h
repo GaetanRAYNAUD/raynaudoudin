@@ -28,6 +28,7 @@ namespace render {
     std::vector<Tile> orc;
     // Operations
   public:
+    UnitTileSet ();
     int getCellWidth () const;
     int getCellHeight () const;
     const std::string getImageFile () const;
