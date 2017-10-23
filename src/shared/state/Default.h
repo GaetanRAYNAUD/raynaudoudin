@@ -7,6 +7,7 @@ namespace state {
   class Terrain;
 }
 
+#include "TerrainTypeId.h"
 #include "Terrain.h"
 
 namespace state {
@@ -15,7 +16,7 @@ namespace state {
   class Default : public state::Terrain {
     // Operations
   public:
-    Default (int id, int positionX = 10, int positionY = 10);
+    Default (int id, TerrainTypeId typeId, int movementCost, int positionX = 10, int positionY = 10);
     Terrain* clone () const;
     // Setters and Getters
   };

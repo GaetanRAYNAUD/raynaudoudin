@@ -1,6 +1,12 @@
 #include <fstream>
+#include <iostream>
 
 #include "Board.h"
+#include "Default.h"
+#include "House.h"
+#include "Castle.h"
+#include "Orientation.h"
+#include "Wall.h"
 
 namespace state {
     
@@ -97,7 +103,6 @@ namespace state {
                 }
             }
         }
-        
         return NULL;
     }
 
@@ -127,7 +132,7 @@ namespace state {
         units.clear();
     }
 
-    void Board::loadTerrainsFromFile(std::string path) const {
+    void Board::loadTerrainsFromFile(std::string path) {
         std::vector<int> terrainsTmp;
         std::ifstream file;
         file.open(path, std::ios::in);    
@@ -143,7 +148,35 @@ namespace state {
         
         file.close();
         
-        for(auto t : terrainsTmp) {
+        for(int i = 0; i < (int)terrainsTmp.size(); i++) {
+            switch (terrainsTmp.at(i)) {
+                case 0 :  //Grass
+                    terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new Default(i, TerrainTypeId::GRASS, 1, i % width, i / width))));
+                    break;
+                case 1 :  //Forest
+                    terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new Default(i, TerrainTypeId::FOREST, 2, i % width, i / width))));
+                    break;
+                case 2 :  //Water
+                    terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new Default(i, TerrainTypeId::WATER, 5, i % width, i / width))));
+                    break;
+                case 3 :  //House
+                    terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new House(i, i % width, i / width))));
+                    break;
+                case 4 :  //Castle
+                    terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new Castle(i, i % width, i / width))));
+                    break;
+                case 5 :  //Wall left
+                    terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new Wall(i, Orientation::LEFT, i % width, i / width))));
+                    break;
+                case 6 :  //Wall top
+                    terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new Wall(i, Orientation::TOP, i % width, i / width))));
+                    break;
+                case 7 :  //Wall right
+                    terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new Wall(i, Orientation::RIGHT, i % width, i / width))));
+                    break;
+                default :
+                    std::cerr << "Type de terrain inconnu" << std::endl;
+            }
         }
     }
 

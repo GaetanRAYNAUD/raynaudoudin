@@ -2,11 +2,12 @@
 
 namespace state {
 
-    Default::Default(int id, int positionX, int positionY) {
+    Default::Default(int id, TerrainTypeId typeId, int movementCost, int positionX, int positionY) {
         this->id = id;
         this->positionX = positionX;
         this->positionY = positionY;
-        this->typeId = TerrainTypeId::GRASS;
+        this->typeId = typeId;
+        this->movementCost = movementCost;
     }
         
     Terrain* Default::clone() const {

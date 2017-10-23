@@ -7,6 +7,7 @@ namespace state {
         this->positionX = positionX;
         this->positionY = positionY;
         this->typeId = TerrainTypeId::HOUSE;
+        this->movementCost = 1;
     }
         
     void House::claim(int teamId) {

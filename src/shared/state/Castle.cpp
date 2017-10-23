@@ -7,6 +7,7 @@ namespace state {
         this->positionX = positionX;
         this->positionY = positionY;
         this->typeId = TerrainTypeId::CASTLE;
+        this->movementCost = 1;
     }
 
     Terrain* Castle::clone() const {
