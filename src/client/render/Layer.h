@@ -18,7 +18,7 @@ namespace render {
   class Layer {
     // Associations
     // Attributes
-  private:
+  protected:
     std::unique_ptr<Surface> surface;
     std::shared_ptr<TileSet> tileset;
     // Operations
@@ -29,6 +29,8 @@ namespace render {
     void setSurface (Surface* surface);
     virtual void initSurface () = 0;
     // Setters and Getters
+    const std::shared_ptr<TileSet>& getTileset() const;
+    void setTileset(const std::shared_ptr<TileSet>& tileset);
   };
 
 };
