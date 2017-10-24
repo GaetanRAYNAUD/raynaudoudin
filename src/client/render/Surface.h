@@ -30,7 +30,7 @@ namespace render {
   public:
     void loadTexture (const std::string& image_file);
     void initQuads (int count);
-    void setSpriteLocation (int i, int x, int y);
+    void setSpriteLocation (int i, int x, int y, int width, int height);
     void setSpriteTexture (int i, const Tile& texture);
     /// 											
     /// @param target		(???) 

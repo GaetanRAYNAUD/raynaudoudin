@@ -23,7 +23,26 @@ namespace render {
                 posY = board.getTerrains().at(i).get()->getPositionY() * tileTerrain.getHeight() + tileTerrain.getHeight() / 2;
             }
             
-            surfaceTerrain->setSpriteLocation(i, posX, posY);
+            surfaceTerrain->setSpriteLocation(i, posX, posY, tileTerrain.getWidth(), tileTerrain.getHeight());
+        }
+        
+        Surface* surfaceUnit = new Surface();
+        
+        int numberOfUnit = board.getUnits().size();
+        surfaceUnit->initQuads(numberOfUnit);
+
+        for(int i = 0; i < numberOfUnit; i++) {
+            Tile tileUnit = tileset->getTile(*board.getUnits().at(i));
+            surfaceUnit->setSpriteTexture(i, tileUnit);
+            
+            posX = board.getUnits().at(i).get()->getPositionX() * tileUnit.getWidth() - board.getUnits().at(i).get()->getPositionX() * tileUnit.getWidth() / 4;
+            if (board.getUnits().at(i).get()->getPositionX() % 2) {
+                posY = board.getUnits().at(i).get()->getPositionY() * tileUnit.getHeight();      
+            } else {
+                posY = board.getUnits().at(i).get()->getPositionY() * tileUnit.getHeight() + tileUnit.getHeight() / 2;
+            }
+            
+            surfaceUnit->setSpriteLocation(i, posX, posY, tileUnit.getWidth(), tileUnit.getHeight());
         }
     }
 
