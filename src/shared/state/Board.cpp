@@ -148,7 +148,7 @@ namespace state {
         
         file.close();
         
-        for(int i = 0; i < (int)terrainsTmp.size(); i++) {
+        for(int i = 0; i < width * height; i++) {
             switch (terrainsTmp.at(i)) {
                 case 0 :  //Grass
                     terrains.insert(std::make_pair(i, std::unique_ptr<Terrain>(new Default(i, TerrainTypeId::GRASS, 1, i % width, i / width))));
