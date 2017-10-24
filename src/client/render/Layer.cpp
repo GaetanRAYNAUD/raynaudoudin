@@ -2,8 +2,8 @@
 
 namespace render {
 
-    Layer::Layer() {
-
+    Layer::Layer() : surface(new Surface()) {
+        
     }
     
     const Surface* Layer::getSurface() const {
