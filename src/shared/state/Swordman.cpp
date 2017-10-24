@@ -3,11 +3,12 @@
 
 namespace state {
 
-    Swordman::Swordman(int id, int team, int positionX, int positionY) {
+    Swordman::Swordman(int id, int team, int positionX, int positionY, RaceTypeId race) {
         this->id = id;
         this->team = team;
         this->positionX = positionX;
         this->positionY = positionY;
+        this->race = race;
         
         life = 60;
         typeId = UnitTypeId::SWORDMAN;

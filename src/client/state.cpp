@@ -1,4 +1,5 @@
 #include "state.hpp"
+#include "state/RaceTypeId.h"
 
 namespace state {
     
@@ -78,7 +79,7 @@ namespace state {
         
         std::cout << "  Ajout d'une unité de type SWORDMAN au jeu" << std::endl;
         
-        Unit* unit = new Swordman(1, 1, 1);
+        Unit* unit = new Swordman(1, 1, 1, 1, RaceTypeId::HUMAN);
         state->getBoard().addUnit(unit);
         
         unitSize = state->getBoard().getUnits().size();
@@ -111,7 +112,7 @@ namespace state {
         
         std::cout << "  Ajout d'une unité de type LEADER au jeu" << std::endl;
         
-        unit = new Leader(2, 1, 1);
+        unit = new Leader(2, 1, 1, 1, RaceTypeId::HUMAN);
         state->getBoard().addUnit(unit);
         
         unitSize = state->getBoard().getUnits().size();

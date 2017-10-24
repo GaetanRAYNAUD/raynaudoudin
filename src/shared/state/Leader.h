@@ -7,6 +7,7 @@ namespace state {
   class Unit;
 }
 
+#include "RaceTypeId.h"
 #include "Unit.h"
 
 namespace state {
@@ -15,7 +16,7 @@ namespace state {
   class Leader : public state::Unit {
     // Operations
   public:
-    Leader (int id, int team, int positionX = 0, int positionY = 0);
+    Leader (int id, int team, int positionX = 0, int positionY = 0, RaceTypeId race = RaceTypeId::HUMAN);
     Unit* clone () const;
     // Setters and Getters
   };

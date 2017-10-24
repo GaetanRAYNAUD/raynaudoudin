@@ -4,11 +4,12 @@
 
 namespace state {
 
-    Leader::Leader(int id, int team, int positionX, int positionY) {
+    Leader::Leader(int id, int team, int positionX, int positionY, RaceTypeId race) {
         this->id = id;
         this->team = team;
         this->positionX = positionX;
         this->positionY = positionY;
+        this->race = race;
         
         life = 100;
         typeId = UnitTypeId::LEADER;

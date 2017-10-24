@@ -1,7 +1,7 @@
 #include "Unit.h"
 
 namespace state {
-
+    
     Unit::Unit() {
 
     }
@@ -13,7 +13,8 @@ namespace state {
         positionX = unit.positionX;
         positionY = unit.positionY;
         team = unit.team;
-        typeId = unit.typeId;      
+        typeId = unit.typeId;    
+        race = unit.race;
         
         for(auto& w : unit.weapons) {
             weapons.insert(std::make_pair(w.first, std::unique_ptr<Weapon>(w.second->clone())));
@@ -29,7 +30,8 @@ namespace state {
         positionX = unit.positionX;
         positionY = unit.positionY;
         team = unit.team;
-        typeId = unit.typeId;      
+        typeId = unit.typeId;
+        race = unit.race;
         
         for(auto& w : unit.weapons) {
             weapons.insert(std::make_pair(w.first, std::unique_ptr<Weapon>(w.second->clone())));
@@ -130,6 +132,15 @@ namespace state {
     void Unit::setWeapons(const std::map<int, std::unique_ptr<Weapon> >& weapons) {
         
     }
+    
+    const RaceTypeId& Unit::getRace() const {
+        return race;
+    }
+
+    void Unit::setRace(RaceTypeId race) {
+        this->race = race;
+    }
+
 
     Unit::~Unit() {
         weapons.clear();

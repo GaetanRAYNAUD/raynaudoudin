@@ -4,11 +4,12 @@
 
 namespace state {
 
-    Bowman::Bowman(int id, int team, int positionX, int positionY) {
+    Bowman::Bowman(int id, int team, int positionX, int positionY, RaceTypeId race) {
         this->id = id;
         this->team = team;
         this->positionX = positionX;
         this->positionY = positionY;
+        this->race = race;
         
         life = 40;
         typeId = UnitTypeId::BOWMAN;
