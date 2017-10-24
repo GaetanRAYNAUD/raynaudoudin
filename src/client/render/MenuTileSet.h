@@ -10,24 +10,23 @@ namespace render {
   class TileSet;
 }
 
+#include "MenuTypeId.h"
 #include "TileSet.h"
-#include "MenuType.h"
 
 namespace render {
 
   /// class MenuTileSet - 
   class MenuTileSet : public render::TileSet {
-    // Associations
     // Attributes
   private:
-    std::map<MenuType, Tile> menus;
+    std::map<MenuTypeId, Tile> menus;
     // Operations
   public:
     MenuTileSet ();
     int getCellWidth () const;
     int getCellHeight () const;
     const std::string getImageFile () const;
-    const Tile& getTile (std::string menu) const;
+    const Tile& getTile (MenuTypeId menu) const;
     // Setters and Getters
   };
 

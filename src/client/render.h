@@ -3,10 +3,10 @@
 #define __RENDER__H
 
 #include "render/Surface.h"
+#include "render/MenuTypeId.h"
 #include "render/Tile.h"
 #include "render/TileSet.h"
 #include "render/Layer.h"
-#include "render/MenuType.h"
 #include "render/MenuTileSet.h"
 #include "render/TerrainTileSet.h"
 #include "render/UnitTileSet.h"

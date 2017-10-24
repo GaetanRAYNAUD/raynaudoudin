@@ -12,6 +12,7 @@ namespace state {
   class Unit;
 }
 
+#include "MenuTypeId.h"
 #include "state/Terrain.h"
 #include "state/Unit.h"
 #include "Tile.h"
@@ -27,7 +28,7 @@ namespace render {
     virtual int getCellWidth () const = 0;
     virtual int getCellHeight () const = 0;
     virtual const std::string getImageFile () const = 0;
-    virtual const Tile& getTile (std::string menu) const = 0;
+    virtual const Tile& getTile (MenuTypeId menu) const = 0;
     virtual const Tile& getTile (const state::Terrain& terrain) const = 0;
     virtual const Tile& getTile (const state::Unit& unit) const = 0;
     // Setters and Getters
