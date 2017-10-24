@@ -30,26 +30,24 @@ namespace render {
     const Tile& TerrainTileSet::getTile(const state::Terrain& terrain) const {
         switch (terrain.getTypeId()) {
             case TerrainTypeId::GRASS :  //Grass
-                return this->terrains.at(TerrainTypeId::GRASS);
+                return terrains.at(TerrainTypeId::GRASS);
             case TerrainTypeId::FOREST :  //Forest
-                break;
+                return terrains.at(TerrainTypeId::FOREST);
             case TerrainTypeId::WATER :  //Water
-                break;
+                return terrains.at(TerrainTypeId::WATER);
             case TerrainTypeId::HOUSE :  //House
-                break;
+                return terrains.at(TerrainTypeId::HOUSE);
             case TerrainTypeId::CASTLE :  //Castle
-                break;
+                return terrains.at(TerrainTypeId::CASTLE);
             case TerrainTypeId::WALL_LEFT :  //Wall left
-                break;
+                return terrains.at(TerrainTypeId::WALL_LEFT);
             case TerrainTypeId::WALL_TOP :  //Wall top
-                break;
+                return terrains.at(TerrainTypeId::WALL_TOP);
             case TerrainTypeId::WALL_RIGHT :  //Wall right
-                break;
+                return terrains.at(TerrainTypeId::WALL_RIGHT);
             default :
-                return this->terrains.at(TerrainTypeId::GRASS);
+                return terrains.at(TerrainTypeId::GRASS);
         }
-        
-        return this->terrains.at(TerrainTypeId::GRASS);
     }
 
 }

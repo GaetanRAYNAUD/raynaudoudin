@@ -16,6 +16,7 @@ namespace render {
 }
 
 #include "TileSet.h"
+#include "state/RaceTypeId.h"
 #include "state/UnitTypeId.h"
 
 namespace render {

@@ -26,7 +26,33 @@ namespace render {
     }
     
     const Tile& UnitTileSet::getTile(const state::Unit& unit) const {
-        return humans.at(UnitTypeId::LEADER);
+        switch (unit.getRace()) {
+            case RaceTypeId::HUMAN : //Human
+                switch (unit.getTypeId()) {
+                    case UnitTypeId::LEADER :  //Leader
+                        return humans.at(UnitTypeId::LEADER);
+                    case UnitTypeId::SWORDMAN :  //Swordman
+                        return humans.at(UnitTypeId::SWORDMAN);
+                    case UnitTypeId::BOWMAN :  //Bowman
+                        return humans.at(UnitTypeId::BOWMAN);
+                    default :
+                        return humans.at(UnitTypeId::SWORDMAN);
+                }              
+            case RaceTypeId::ORC : //Orc
+                switch (unit.getTypeId()) {
+                    case UnitTypeId::LEADER :  //Leader
+                        return orcs.at(UnitTypeId::LEADER);
+                    case UnitTypeId::SWORDMAN :  //Swordman
+                        return orcs.at(UnitTypeId::SWORDMAN);
+                    case UnitTypeId::BOWMAN :  //Bowman
+                        return orcs.at(UnitTypeId::BOWMAN);
+                    default :
+                        return orcs.at(UnitTypeId::SWORDMAN);
+                }               
+            default :
+                return humans.at(UnitTypeId::SWORDMAN);
+        }
+
     }
 
 }
