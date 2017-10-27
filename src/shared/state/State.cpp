@@ -3,7 +3,7 @@
 namespace state {
 
     State::State() {
-        board = Board();
+        board = Board(22, 8);
     }
     
     Board& State::getBoard() {

@@ -4,7 +4,7 @@
 namespace render {
 
     StateLayer::StateLayer(const state::State& state): state(state) {
-        std::dynamic_pointer_cast<MenuTileSet> (tileset);
+        tileset = std::make_shared<MenuTileSet>();
     }
 
     void StateLayer::initSurface() {
