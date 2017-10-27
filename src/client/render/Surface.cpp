@@ -5,13 +5,14 @@
 namespace render {
 
     void Surface::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-        states.transform *= getTransform();
+//        states.transform *= getTransform();
         states.texture = &texture;
         target.draw(quads, states);
     }
 
     void Surface::initQuads(int count) {
-        quads.resize(count);
+        quads.setPrimitiveType(sf::Quads);
+        quads.resize(count * 4);
     }
 
     void Surface::loadTexture(const std::string& image_file) {
@@ -21,7 +22,7 @@ namespace render {
 
     void Surface::setSpriteLocation(int i, int x, int y, int width, int height) {
         quads[i * 4].position = sf::Vector2f(x, y);
-        quads[i * 4 + 1].position = sf::Vector2f(x, y);
+        quads[i * 4 + 1].position = sf::Vector2f(x + width, y);
         quads[i * 4 + 2].position = sf::Vector2f(x + width, y + height);
         quads[i * 4 + 3].position = sf::Vector2f(x, y + height);
     }
