@@ -12,11 +12,12 @@ void testSFML() {
 // Fin test SFML
 
 #include "state.hpp"
-#include "render.hpp"
-#include "state/Board.h"
+#include "state.h"
+#include "render.h"
 
 using namespace std;
 using namespace state;
+using namespace render;
 
 int main(int argc,char* argv[]) 
 {
@@ -37,32 +38,12 @@ int main(int argc,char* argv[])
             
             Board board(22, 8);
             board.loadTerrainsFromFile("res/map.txt");
-            
-            std::vector<int> level;
-            std::ifstream file;
-            file.open("res/map.txt", std::ios::in);
-            std::string line;
-            
-            while(!file.eof()){
-                std::getline(file, line);
-                
-                for(auto l : line) {
-                    level.push_back(l - '0');
-                }
-            }
 
-            // on crée la tilemap avec le niveau précédemment défini
-            render map;
-            if (!map.loadTerrain("res/terrains/terrain.png", sf::Vector2u(72, 72), level, 22, 8))
-                return -1;
-            
-            if (!map.loadMenu("res/menus/menu.png", windowWidth, windowHeight))
-                return -1;
+            TerrainLayer* terLayer = new TerrainLayer(board);
+            terLayer->initSurface();
 
-            // on fait tourner la boucle principale
             while (window.isOpen())
             {
-                // on gère les évènements
                 sf::Event event;
                 while (window.pollEvent(event))
                 {
@@ -70,9 +51,8 @@ int main(int argc,char* argv[])
                         window.close();
                 }
 
-                // on dessine le niveau
                 window.clear();
-                window.draw(map);
+                window.draw(*(terLayer->getSurface()));
                 window.display();
             }
             

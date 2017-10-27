@@ -1,9 +1,9 @@
 #include "Layer.h"
+#include "TerrainTileSet.h"
 
 namespace render {
 
     Layer::Layer() : surface(new Surface()) {
-        
     }
     
     const Surface* Layer::getSurface() const {

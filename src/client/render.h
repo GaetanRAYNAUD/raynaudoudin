@@ -11,5 +11,6 @@
 #include "render/TerrainTileSet.h"
 #include "render/UnitTileSet.h"
 #include "render/StateLayer.h"
-#include "render/BoardLayer.h"
+#include "render/UnitLayer.h"
+#include "render/TerrainLayer.h"
 #endif
