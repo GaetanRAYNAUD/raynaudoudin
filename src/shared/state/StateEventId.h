@@ -7,8 +7,7 @@ namespace state {
 
   enum StateEventId {
     ALL_CHANGED     = 0,
-    LEVEL_CHANGED     = 1,
-    TURN_CHANGED     = 2
+    TURN_CHANGED     = 1
   };
 
 };

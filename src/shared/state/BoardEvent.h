@@ -20,7 +20,7 @@ namespace state {
     int y;
     // Operations
   public:
-    BoardEvent ();
+    BoardEvent (int x, int y);
     EventTypeId getEventType () const;
     // Setters and Getters
   };
