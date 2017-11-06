@@ -12,8 +12,10 @@ namespace state {
   class Unit;
   class Team;
   class Terrain;
+  class Observable;
 }
 
+#include "Observable.h"
 #include "Unit.h"
 #include "Team.h"
 #include "Terrain.h"
@@ -21,7 +23,7 @@ namespace state {
 namespace state {
 
   /// class Board - 
-  class Board {
+  class Board : public state::Observable {
     // Associations
     // Attributes
   private:
