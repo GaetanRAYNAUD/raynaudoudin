@@ -1,13 +1,15 @@
 #include "HandleAttackCommand.h"
 
+
 namespace engine {
 
-    std::vector<int> HandleAttackCommand::listUnitCanBeAttacked(state::State& state, int idUnit) {
-
-    }
-
-    void HandleAttackCommand::attackUnit(state::State& state, int idUnitAttacker, int idUnitDefender) {
-        /*Vérifier qu'il reste des mouvements à l'attaquant, que les unités sont */
+    void HandleAttackCommand::attackUnit(state::State& state, int idUnitAttacker, int idUnitDefender, state::WeaponTypeId weaponTypeId) {
+        if (state.getBoard().isUnitAround(idUnitAttacker, idUnitDefender)) {
+            state.getBoard().findUnit(idUnitDefender)->takeDamage(state.getBoard().findUnit(idUnitAttacker)->getWeapons().at(weaponTypeId)->getDamage());
+            if (state.getBoard().findUnit(idUnitDefender)->isDead()) {
+                killUnit(state, idUnitDefender);
+            }
+        }
     }
 
     void HandleAttackCommand::execute(state::State& state) {

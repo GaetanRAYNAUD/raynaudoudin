@@ -2,7 +2,7 @@
 
 namespace engine {
 
-    MoveCommand::MoveCommand(int c) {
+    MoveCommand::MoveCommand() {
 
     }
 

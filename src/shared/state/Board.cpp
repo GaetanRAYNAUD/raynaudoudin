@@ -66,6 +66,22 @@ namespace state {
     void Board::addUnit(Unit* unit) {
         units.insert(std::make_pair(unit->getId(), std::unique_ptr<Unit> (unit)));
     }
+    
+    bool Board::isUnitAround(int idAttacker, int idDefender) {
+        std::vector<int> listIdUnitArround = findUnitAround(idAttacker);      
+
+        for (int unitId : listIdUnitArround) {
+            if (unitId == idDefender) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    Unit* Board::findUnit(int id) const {
+        return units.find(id)->second.get();
+    }
 
     Team* Board::findTeam(int id) const {
         return teams.find(id)->second.get();
@@ -84,16 +100,42 @@ namespace state {
             }
         }
         
-        return NULL;
+        return nullptr;
     }
 
-    Unit* Board::findUnit(int id) const {
-        return units.find(id)->second.get();
+    std::vector<int> Board::findUnitAround(int id) {
+        std::vector<int> listIdUnitArround;
+        Unit* unit = findUnit(id);
+        Unit* unitAround = nullptr;
+        
+        unitAround = findUnitOnPosition(unit->getPositionX() - 1, unit->getPositionY() - 1);
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX() - 1, unit->getPositionY());
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
+        }     
+        unitAround = findUnitOnPosition(unit->getPositionX(), unit->getPositionY() - 1);
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX(), unit->getPositionY() + 1);
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX() + 1, unit->getPositionY() - 1);
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX() + 1, unit->getPositionY());
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
+        }
+        
+        return listIdUnitArround;
     }
 
-    std::vector<Unit*> Board::findUnitAround(int positionX, int positionY) {
-        return {};
-    }
 
     Unit* Board::findUnitOnPosition(int positionX, int positionY) const {
         for (auto& it : units) {
@@ -103,7 +145,7 @@ namespace state {
                 }
             }
         }
-        return NULL;
+        return nullptr;
     }
 
     int Board::getHeight() const {

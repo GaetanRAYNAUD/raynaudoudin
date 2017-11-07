@@ -91,6 +91,10 @@ namespace state {
     const std::map<int, std::unique_ptr<Weapon> >& Unit::getWeapons() const {
         return weapons;
     }
+    
+    void Unit::takeDamage(int damage) {
+        life = life - damage;
+    }
 
     bool Unit::isDead() const {
         if (life <= 0) {

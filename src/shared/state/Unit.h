@@ -36,6 +36,7 @@ namespace state {
     Unit (const Unit& other);
     Unit& operator= (const Unit& other);
     virtual ~Unit ();
+    void takeDamage (int damage);
     bool isDead () const;
     int getPositionX () const;
     int getPositionY () const;

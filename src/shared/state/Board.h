@@ -46,12 +46,13 @@ namespace state {
     /// 		
     /// @param terrain		(???) 
     void addTerrain (Terrain* terrain);
+    bool isUnitAround (int idAttacker, int idDefender);
     Unit* findUnit (int id) const;
     Team* findTeam (int id) const;
     /// 		
     /// @param id		(???) 
     Terrain* findTerrain (int id) const;
-    std::vector<Unit*> findUnitAround (int positionX, int positionY);
+    std::vector<int> findUnitAround (int id);
     Unit* findUnitOnPosition (int positionX, int positionY) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
     int getHeight () const;
