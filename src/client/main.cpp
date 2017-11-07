@@ -32,12 +32,16 @@ int main(int argc,char* argv[])
             cout << "Lancement du rendu d'un état" << endl;
             renderTest();
             
+        } else if (string(argv[1]) == "engine"){
+            cout << "Lancement du moteur du jeu" << endl;
+            
         }else {
             cout << "Commande inconnue" << endl;
             cout << "Liste des commandes : " << endl;
             cout << "hello : Affiche un message de bienvenue" << endl;
             cout << "state : Effectue une série de tests pour vérifier le fonctionnement d'un état" << endl;
             cout << "render : Lance le rendu d'un état" << endl;
+            cout << "engine : Lance le moteur du jeu" << endl;
         }
     }
     return 0;
