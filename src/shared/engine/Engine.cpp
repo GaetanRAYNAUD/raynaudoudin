@@ -3,11 +3,11 @@
 namespace engine {
 
     Engine::Engine() {
-
+        currentState = state::State();
     }
 
     void Engine::addCommand(int priority, Command* cmd) {
-
+        currentCommands.insert(std::make_pair(priority, std::unique_ptr<Command>(cmd)));
     }
 
     void Engine::addPassiveCommands() {

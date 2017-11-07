@@ -2,6 +2,7 @@
 #ifndef ENGINE__HANDLEATTACKCOMMAND__H
 #define ENGINE__HANDLEATTACKCOMMAND__H
 
+#include <vector>
 
 namespace state {
   class State;
@@ -19,6 +20,7 @@ namespace engine {
   class HandleAttackCommand : public engine::Command {
     // Operations
   public:
+    std::vector<int> listUnitCanBeAttacked (state::State& state, int idUnit);
     /// 		
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
