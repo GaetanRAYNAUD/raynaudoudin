@@ -18,13 +18,8 @@ namespace render {
         
         unit = new Leader(1, 2, 18, 6, RaceTypeId::ORC);
         state->getBoard().addUnit(unit);
-            
-
-        TerrainLayer* terrainLayer = new TerrainLayer(state->getBoard());
-        UnitLayer* unitLayer = new UnitLayer(state->getBoard());
-        StateLayer* stateLayer = new StateLayer(*state);
         
-        terrainLayer->initSurface();
+        Scene* scene = new Scene(*state);
 
         while (window.isOpen()) {
             sf::Event event;
@@ -32,13 +27,9 @@ namespace render {
                 if(event.type == sf::Event::Closed)
                     window.close();
             }
-
-            unitLayer->initSurface();       
-            stateLayer->initSurface();
-            window.clear();
-            window.draw(*(terrainLayer->getSurface()));
-            window.draw(*(unitLayer->getSurface()));
-            window.draw(*(stateLayer->getSurface()));
+            
+            //scene->stateChanged(event);
+            scene->draw(window);
             window.display();
         }
     }

@@ -8,9 +8,13 @@ namespace state {
 };
 namespace render {
   class Layer;
+};
+namespace state {
+  class Observer;
 }
 
 #include "Layer.h"
+#include "state/Observer.h"
 #include "state/Board.h"
 
 namespace render {
@@ -25,6 +29,8 @@ namespace render {
   public:
     UnitLayer (const state::Board& board);
     void initSurface ();
+    void stateChanged (const state::Event& event);
+    void updateUnit (int i, int j);
     // Setters and Getters
   };
 

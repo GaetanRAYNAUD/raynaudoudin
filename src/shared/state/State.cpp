@@ -9,5 +9,9 @@ namespace state {
     Board& State::getBoard() {
         return board;
     }
+    
+    const Board& State::getBoard() const {
+        return board;
+    }    
 
 }
