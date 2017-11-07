@@ -10,7 +10,8 @@
 #include "render/MenuTileSet.h"
 #include "render/TerrainTileSet.h"
 #include "render/UnitTileSet.h"
-#include "render/StateLayer.h"
-#include "render/UnitLayer.h"
 #include "render/TerrainLayer.h"
+#include "render/UnitLayer.h"
+#include "render/Scene.h"
+#include "render/StateLayer.h"
 #endif
