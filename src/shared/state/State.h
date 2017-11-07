@@ -25,6 +25,7 @@ namespace state {
   public:
     State ();
     Board& getBoard ();
+    const Board& getBoard () const;
     // Setters and Getters
     int getTurn() const;
     void setTurn(int turn);
