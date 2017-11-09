@@ -8,8 +8,8 @@ namespace engine {
   enum CommandTypeId {
     LOAD     = 1,
     MOVE     = 2,
-    HANDLE_ATTACK     = 3,
-    HANDLE_SPAWN     = 4
+    ATTACK     = 3,
+    SPAWN     = 4
   };
 
 };

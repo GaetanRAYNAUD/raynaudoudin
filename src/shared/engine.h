@@ -7,6 +7,6 @@
 #include "engine/Engine.h"
 #include "engine/MoveCommand.h"
 #include "engine/LoadCommand.h"
-#include "engine/HandleAttackCommand.h"
-#include "engine/HandleSpawnCommand.h"
+#include "engine/AttackCommand.h"
+#include "engine/SpawnCommand.h"
 #endif

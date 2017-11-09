@@ -17,12 +17,23 @@ namespace engine {
 
   /// class MoveCommand - 
   class MoveCommand : public engine::Command {
+    // Attributes
+  protected:
+    int idUnit;
+    int x;
+    int y;
     // Operations
   public:
     MoveCommand (state::State& state, int idUnit, int x, int y);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
+    int getIdUnit() const;
+    void setIdUnit(int idUnit);
+    int getX() const;
+    void setX(int x);
+    int getY() const;
+    void setY(int y);
   };
 
 };
