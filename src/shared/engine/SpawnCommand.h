@@ -27,6 +27,7 @@ namespace engine {
     state::UnitTypeId unitTypeId;
     // Operations
   public:
+    SpawnCommand (int x, int y, state::UnitTypeId unitTypeId);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
   private:

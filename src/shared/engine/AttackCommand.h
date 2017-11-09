@@ -26,6 +26,7 @@ namespace engine {
     state::WeaponTypeId weaponTypeId;
     // Operations
   public:
+    AttackCommand (int idUnitAttacker, int idUnitDefender, state::WeaponTypeId weaponTypeId);
     /// 		
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
