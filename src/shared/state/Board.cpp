@@ -214,7 +214,7 @@ namespace state {
     }
         
     int Board::calculeDistance(int xOrigine, int yOrigine, int xDest, int yDest) {
-
+        return 0;
     }
 
 
