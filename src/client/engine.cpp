@@ -80,17 +80,36 @@ namespace engine {
         }
         
         std::cout << "***************************************************" << std::endl;
-//        
-//        command = new AttackCommand(0, 1, WeaponTypeId::SWORD);
-//        
-//        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
-//        engine->addCommand(4, command);
-//        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
-//        engine->addCommand(5, command);
-//        
-//        std::cout << "Éxécution de la liste des commandes" << std::endl;
-//        engine->update();
-//        
+        
+        command = new AttackCommand(0, 1, WeaponTypeId::SWORD);
+        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        engine->addCommand(4, command);
+        
+        command = new AttackCommand(0, 1, WeaponTypeId::SWORD);
+        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        engine->addCommand(5, command);
+        
+        command = new AttackCommand(0, 1, WeaponTypeId::SWORD);
+        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        engine->addCommand(6, command);
+        
+        command = new AttackCommand(0, 1, WeaponTypeId::SWORD);
+        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        engine->addCommand(7, command);
+        
+        command = new AttackCommand(0, 1, WeaponTypeId::SWORD);
+        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        engine->addCommand(8, command);
+        
+        std::cout << "Éxécution de la  liste des commandes" << std::endl;
+        engine->update();
+        
+        if (engine->getState().getBoard().getUnits().size() == 1) {
+            std::cout << "Le personnage est mort après plusieurs attaques" << std::endl;
+        } else {
+            std::cout << "ERREUR : Le personnage n'est pas mort après plusieurs attaques" << std::endl;
+        }
+        
         std::cout << "***************************************************" << std::endl;
   
         scene = new Scene(engine->getState());
