@@ -22,7 +22,7 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
   private:
-    void spawnUnit (state::UnitTypeId unitTypeId);
+    void spawnUnit (state::State& state, state::UnitTypeId unitTypeId);
     // Setters and Getters
   };
 
