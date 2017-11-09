@@ -79,7 +79,7 @@ namespace state {
         }
     }
     
-    void Board::addUnit(UnitTypeId unit, RaceTypeId race) {
+    void Board::addUnit(UnitTypeId unit, RaceTypeId race, int x, int y) {
 
     }
 
@@ -101,6 +101,14 @@ namespace state {
         return false;
     }
     
+    bool Board::isUnitOnPosition(int x, int y) const {
+        if (findUnitOnPosition(x, y) == nullptr) {   
+            return false;
+        } else {
+            return true;
+        }    
+    }
+
     Unit* Board::findUnit(int id) const {
         return units.find(id)->second.get();
     }

@@ -42,7 +42,7 @@ namespace state {
     Board& operator= (const Board& other);
     ~Board ();
     void addUnit (Unit* unit);
-    void addUnit (UnitTypeId unit, RaceTypeId race);
+    void addUnit (UnitTypeId unit, RaceTypeId race, int x, int y);
     /// 	
     /// @param team		(???) 
     void addTeam (Team* team);
@@ -51,6 +51,7 @@ namespace state {
     void addTerrain (Terrain* terrain);
     void deleteUnit (int id);
     bool isUnitAround (int idAttacker, int idDefender);
+    bool isUnitOnPosition (int x, int y) const;
     Unit* findUnit (int id) const;
     Team* findTeam (int id) const;
     /// 		
