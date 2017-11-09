@@ -42,5 +42,9 @@ namespace state {
         return new Team(*this);
     }
 
+    void Team::setId(int id) {
+        this->id = id;
+    }
+
 
 }

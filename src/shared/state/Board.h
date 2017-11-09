@@ -16,8 +16,8 @@ namespace state {
 }
 
 #include "UnitTypeId.h"
-#include "RaceTypeId.h"
 #include "Observable.h"
+#include "RaceTypeId.h"
 #include "Unit.h"
 #include "Team.h"
 #include "Terrain.h"
@@ -35,6 +35,9 @@ namespace state {
     std::map<int, std::unique_ptr<Team>> teams;
     std::map<int, std::unique_ptr<Terrain>> terrains;
     std::map<int, std::unique_ptr<Unit>> units;
+    static int idTeam;
+    static int idTerrain;
+    static int idUnit;
     // Operations
   public:
     Board (int width = 10, int height = 10);
@@ -42,7 +45,7 @@ namespace state {
     Board& operator= (const Board& other);
     ~Board ();
     void addUnit (Unit* unit);
-    void addUnit (UnitTypeId unit, RaceTypeId race, int x, int y);
+    void createNewUnit (UnitTypeId unitTypeId, int team, int x, int y);
     /// 	
     /// @param team		(???) 
     void addTeam (Team* team);

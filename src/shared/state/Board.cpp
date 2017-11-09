@@ -10,10 +10,19 @@
 #include "Wall.h"
 #include "Leader.h"
 #include "Swordman.h"
+#include "Bowman.h"
+#include "Sword.h"
 
 namespace state {
+    int Board::idTeam = 0;
+    int Board::idTerrain = 0;
+    int Board::idUnit = 0;
     
     Board::Board(int width, int height) {
+        idTeam = 0;
+        idTerrain = 0;
+        idUnit = 0;
+        
         this->width = width;
         this->height = height;
         
@@ -45,7 +54,7 @@ namespace state {
         teams.clear();
         terrains.clear();
         units.clear();
-        
+
         height = other.height;
         width = other.width;
         
@@ -65,29 +74,51 @@ namespace state {
     }
 
     void Board::addTeam(Team* team) {
+        team->setId(idTeam);
         teams.insert(std::make_pair(team->getId(), std::unique_ptr<Team>(team)));
+        
+        idTeam++;
     }
 
     void Board::addTerrain(Terrain* terrain) {
-        terrains.insert(std::make_pair(terrain->getId(), std::unique_ptr<Terrain>(terrain)));
+        terrain->setId(idTerrain);
+        if(findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY()) == nullptr) {
+            terrains.insert(std::make_pair(terrain->getId(), std::unique_ptr<Terrain>(terrain)));
+        }
+        
+        idTerrain++;
     }
 
     void Board::addUnit(Unit* unit) {
+        unit->setId(idUnit);
         if(findUnitOnPosition(unit->getPositionX(), unit->getPositionY()) == nullptr) {
             units.insert(std::make_pair(unit->getId(), std::unique_ptr<Unit> (unit)));
         }
+        
+        idUnit++;
     }
     
-    void Board::addUnit(UnitTypeId unit, RaceTypeId race, int x, int y) {
-//        Unit* newUnit = createNewUnit(unit);
-//        
-//        units.insert(std::make_pair(unit->getId(), std::unique_ptr<Unit> (newUnit)));
+    void Board::createNewUnit(UnitTypeId unitTypeId, int team, int x, int y) {
+        Unit* newUnit;
+        
+        switch(unitTypeId) {
+            case UnitTypeId::BOWMAN:
+                newUnit = new Bowman(0, team, x, y);
+                addUnit(newUnit);
+                break;
+                
+            case UnitTypeId::SWORDMAN:
+                newUnit = new Swordman(0, team, x, y);
+                addUnit(newUnit);
+                break;
+                
+            default:
+                break;                
+        }
     }
 
-    void Board::deleteUnit(int id) {
-        auto it = units.find(id);
-        
-        units.erase(it);
+    void Board::deleteUnit(int id) {       
+        units.erase(units.find(id));
     }
 
     bool Board::isUnitAround(int idAttacker, int idDefender) {
