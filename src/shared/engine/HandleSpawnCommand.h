@@ -11,6 +11,7 @@ namespace engine {
 }
 
 #include "CommandTypeId.h"
+#include "state/UnitTypeId.h"
 #include "Command.h"
 
 namespace engine {
@@ -22,7 +23,7 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
   private:
-    void spawnUnit (state::State& state, state::UnitTypeId unitTypeId);
+    void spawnUnit (state::State& state, int x, int y, state::UnitTypeId unitTypeId);
     // Setters and Getters
   };
 

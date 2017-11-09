@@ -2,8 +2,10 @@
 
 namespace engine {
 
-    void HandleSpawnCommand::spawnUnit(state::State& state, state::UnitTypeId unitTypeId) {
-
+    void HandleSpawnCommand::spawnUnit(state::State& state, int x, int y, state::UnitTypeId unitTypeId) {
+//        if (state.getBoard().findTerrainOnPosition(x, y)->getTypeId() == TerrainTypeId::CASTLE && state.getBoard().findUnitOnPosition(x, y)->getTypeId() == UnitTypeId::LEADER) {
+//            
+//        }
     }
 
     void HandleSpawnCommand::execute(state::State& state) {
