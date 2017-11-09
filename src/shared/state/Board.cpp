@@ -8,12 +8,19 @@
 #include "Castle.h"
 #include "Orientation.h"
 #include "Wall.h"
+#include "Leader.h"
 
 namespace state {
     
     Board::Board(int width, int height) {
         this->width = width;
         this->height = height;
+        
+        Unit* unit = new Leader(0, 1, 3, 2, RaceTypeId::HUMAN);
+        addUnit(unit);
+        
+        unit = new Leader(1, 2, 18, 6, RaceTypeId::ORC);
+        addUnit(unit);
     }
         
     Board::Board(const Board& other) {
