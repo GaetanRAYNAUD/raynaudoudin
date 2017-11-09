@@ -67,6 +67,14 @@ namespace state {
         units.insert(std::make_pair(unit->getId(), std::unique_ptr<Unit> (unit)));
     }
     
+    void Board::addUnit(UnitTypeId unit, RaceTypeId race) {
+
+    }
+
+    void Board::deleteUnit(int id) {
+
+    }
+
     bool Board::isUnitAround(int idAttacker, int idDefender) {
         std::vector<int> listIdUnitArround = findUnitAround(idAttacker);      
 

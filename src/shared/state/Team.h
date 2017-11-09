@@ -13,7 +13,6 @@ namespace state {
 
   /// class Team - 
   class Team {
-    // Associations
     // Attributes
   private:
     int id     = 0;

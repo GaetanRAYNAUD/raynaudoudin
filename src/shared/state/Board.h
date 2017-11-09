@@ -15,6 +15,8 @@ namespace state {
   class Observable;
 }
 
+#include "UnitTypeId.h"
+#include "RaceTypeId.h"
 #include "Observable.h"
 #include "Unit.h"
 #include "Team.h"
@@ -40,12 +42,14 @@ namespace state {
     Board& operator= (const Board& other);
     ~Board ();
     void addUnit (Unit* unit);
+    void addUnit (UnitTypeId unit, RaceTypeId race);
     /// 	
     /// @param team		(???) 
     void addTeam (Team* team);
     /// 		
     /// @param terrain		(???) 
     void addTerrain (Terrain* terrain);
+    void deleteUnit (int id);
     bool isUnitAround (int idAttacker, int idDefender);
     Unit* findUnit (int id) const;
     Team* findTeam (int id) const;

@@ -1,6 +1,5 @@
 #include "HandleAttackCommand.h"
 
-
 namespace engine {
 
     void HandleAttackCommand::attackUnit(state::State& state, int idUnitAttacker, int idUnitDefender, state::WeaponTypeId weaponTypeId) {
@@ -12,15 +11,15 @@ namespace engine {
         }
     }
 
+    void HandleAttackCommand::killUnit(state::State& state, int idUnit) {
+//        state.getBoard()->findUnit(idUnit);             
+    }
+    
     void HandleAttackCommand::execute(state::State& state) {
 
     }
 
     CommandTypeId HandleAttackCommand::getTypeId() const {
-
-    }
-
-    void HandleAttackCommand::killUnit(state::State& state, int idUnit) {
 
     }
 
