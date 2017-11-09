@@ -58,7 +58,9 @@ namespace state {
     Terrain* findTerrain (int id) const;
     std::vector<int> findUnitAround (int id);
     Unit* findUnitOnPosition (int positionX, int positionY) const;
+    std::vector<int> findTerrainAround (int id);
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
+    int calculeDistance (int xOrigine, int yOrigine, int xDest, int yDest);
     int getHeight () const;
     int getWidth () const;
     const std::map<int, std::unique_ptr<Team> >& getTeams () const;

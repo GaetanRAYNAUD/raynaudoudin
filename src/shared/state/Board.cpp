@@ -113,6 +113,40 @@ namespace state {
         
         return nullptr;
     }
+        
+    std::vector<int> Board::findTerrainAround(int id) {
+        std::vector<int> listIdTerrainArround;
+        Terrain* terrain = findTerrain(id);
+        Terrain* terrainAround = nullptr;
+        
+        terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() - 1);
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
+        }
+        terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY());
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
+        }     
+        terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() - 1);
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
+        }
+        terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() + 1);
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
+        }
+        terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() - 1);
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
+        }
+        terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY());
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
+        }
+        
+        return listIdTerrainArround;
+    }
+
 
     std::vector<int> Board::findUnitAround(int id) {
         std::vector<int> listIdUnitArround;
@@ -158,6 +192,11 @@ namespace state {
         }
         return nullptr;
     }
+        
+    int Board::calculeDistance(int xOrigine, int yOrigine, int xDest, int yDest) {
+        return 0;
+    }
+
 
     int Board::getHeight() const {
         return height;
