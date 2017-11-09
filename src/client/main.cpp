@@ -13,10 +13,12 @@ void testSFML() {
 
 #include "state.hpp"
 #include "render.hpp"
+#include "engine.hpp"
 
 using namespace std;
 using namespace state;
 using namespace render;
+using namespace engine;
 
 int main(int argc,char* argv[]) 
 {
@@ -34,6 +36,7 @@ int main(int argc,char* argv[])
             
         } else if (string(argv[1]) == "engine"){
             cout << "Lancement du moteur du jeu" << endl;
+            engineTest();
             
         }else {
             cout << "Commande inconnue" << endl;

@@ -12,12 +12,6 @@ namespace render {
             
         State* state = new State();
         state->getBoard().loadTerrainsFromFile("res/map.txt");
-            
-        Unit* unit = new Leader(0, 1, 3, 2, RaceTypeId::HUMAN);
-        state->getBoard().addUnit(unit);
-        
-        unit = new Leader(1, 2, 18, 6, RaceTypeId::ORC);
-        state->getBoard().addUnit(unit);
         
         Scene* scene = new Scene(*state);
 
