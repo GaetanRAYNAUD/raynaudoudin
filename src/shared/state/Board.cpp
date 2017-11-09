@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 #include "Board.h"
 #include "Default.h"
@@ -72,7 +73,9 @@ namespace state {
     }
 
     void Board::deleteUnit(int id) {
-
+        auto it = units.find(id);
+        
+        units.erase(it);
     }
 
     bool Board::isUnitAround(int idAttacker, int idDefender) {
