@@ -12,15 +12,15 @@ namespace engine {
     }
 
     void HandleAttackCommand::killUnit(state::State& state, int idUnit) {
-//        state.getBoard()->findUnit(idUnit);             
+        state.getBoard().deleteUnit(idUnit);          
     }
     
     void HandleAttackCommand::execute(state::State& state) {
-
+        
     }
 
     CommandTypeId HandleAttackCommand::getTypeId() const {
-
+        return CommandTypeId::HANDLE_ATTACK;
     }
 
 }
