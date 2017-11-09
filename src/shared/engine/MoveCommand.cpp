@@ -6,7 +6,6 @@ namespace engine {
         
     }
 
-
     void MoveCommand::execute(state::State& state) {
         state.getBoard().findUnit(idUnit)->Move(x, y);
     }
