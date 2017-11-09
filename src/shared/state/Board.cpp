@@ -65,7 +65,9 @@ namespace state {
     }
 
     void Board::addUnit(Unit* unit) {
-        units.insert(std::make_pair(unit->getId(), std::unique_ptr<Unit> (unit)));
+        if(findUnitOnPosition(unit->getPositionX(), unit->getPositionY()) == nullptr) {
+            units.insert(std::make_pair(unit->getId(), std::unique_ptr<Unit> (unit)));
+        }
     }
     
     void Board::addUnit(UnitTypeId unit, RaceTypeId race) {
