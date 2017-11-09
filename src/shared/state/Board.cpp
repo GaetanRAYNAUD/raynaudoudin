@@ -9,6 +9,7 @@
 #include "Orientation.h"
 #include "Wall.h"
 #include "Leader.h"
+#include "Swordman.h"
 
 namespace state {
     
@@ -78,7 +79,9 @@ namespace state {
     }
     
     void Board::addUnit(UnitTypeId unit, RaceTypeId race, int x, int y) {
-
+//        Unit* newUnit = createNewUnit(unit);
+//        
+//        units.insert(std::make_pair(unit->getId(), std::unique_ptr<Unit> (newUnit)));
     }
 
     void Board::deleteUnit(int id) {
