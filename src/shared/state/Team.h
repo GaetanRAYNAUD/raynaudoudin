@@ -24,6 +24,7 @@ namespace state {
     Team (int id);
     int getId () const;
     int getGold () const;
+    const RaceTypeId& getRace () const;
     bool verifyGold (int unitPrice) const;
     void generateGold ();
     void addHouse ();

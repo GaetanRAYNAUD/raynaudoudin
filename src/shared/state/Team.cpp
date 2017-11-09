@@ -10,6 +10,14 @@ namespace state {
         return gold;
     }
 
+    int Team::getId() const {
+        return id;
+    }
+
+    const RaceTypeId& Team::getRace() const {
+        return race;
+    }
+   
     bool Team::verifyGold(int unitPrice) const{
         if(gold > unitPrice) {
             return true;
@@ -28,10 +36,6 @@ namespace state {
 
     void Team::removeHouse() {
         nbHouses--;
-    }
-
-    int Team::getId() const {
-        return id;
     }
         
     Team* Team::clone() const {
