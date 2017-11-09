@@ -1,7 +1,7 @@
-#include <climits>
-
 #include "engine.hpp"
 #include "state/Board.h"
+#include "render/Scene.h"
+#include "engine/Engine.h"
 
 using namespace state;
 using namespace render;
@@ -11,6 +11,12 @@ namespace engine {
     void engineTest() {
         Engine* engine = new Engine();
         Command* command;
+        Scene* scene;
+        
+        int windowWidth = 1152;
+        int windowHeight = 576;
+        sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
+        window.setFramerateLimit(30);
         
         command = new LoadCommand("res/map.txt");
         
@@ -26,6 +32,9 @@ namespace engine {
         } else {
             std::cout << "Le jeu n'a pas pu être créé" << std::endl;
         }
+        
+        scene = new Scene(engine->getState());
+        
         std::cout << "***************************************************" << std::endl;
         
         command = new MoveCommand(0, 8, 4);
@@ -62,6 +71,19 @@ namespace engine {
         }
         
         std::cout << "***************************************************" << std::endl;
+        
+        scene = new Scene(engine->getState());
+                
+        while (window.isOpen()) {
+            sf::Event event;
+            while (window.pollEvent(event)) {
+                if(event.type == sf::Event::Closed)
+                    window.close();
+            }
+
+            scene->draw(window);
+            window.display();
+        }
     }
 }
 
