@@ -5,14 +5,16 @@
 
 namespace state {
   class Board;
+  class Observable;
 }
 
 #include "Board.h"
+#include "Observable.h"
 
 namespace state {
 
   /// class State - 
-  class State {
+  class State : public state::Observable {
     // Associations
     // Attributes
   private:
@@ -24,6 +26,7 @@ namespace state {
     State ();
     Board& getBoard ();
     const Board& getBoard () const;
+    void nextTurn ();
     // Setters and Getters
     int getTurn() const;
     void setTurn(int turn);
