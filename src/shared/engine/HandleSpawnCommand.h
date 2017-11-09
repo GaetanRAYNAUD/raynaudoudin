@@ -13,11 +13,13 @@ namespace engine {
 #include "CommandTypeId.h"
 #include "state/UnitTypeId.h"
 #include "Command.h"
+#include "state/TerrainTypeId.h"
 
 namespace engine {
 
   /// class HandleSpawnCommand - 
   class HandleSpawnCommand : public engine::Command {
+    // Associations
     // Operations
   public:
     CommandTypeId getTypeId () const;

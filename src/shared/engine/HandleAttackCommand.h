@@ -18,6 +18,7 @@ namespace engine {
 
   /// class HandleAttackCommand - 
   class HandleAttackCommand : public engine::Command {
+    // Associations
     // Operations
   public:
     /// 		
