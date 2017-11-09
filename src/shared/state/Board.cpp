@@ -1,8 +1,6 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
-#include <climits>
-#include <queue>
 
 #include "Board.h"
 #include "Default.h"
