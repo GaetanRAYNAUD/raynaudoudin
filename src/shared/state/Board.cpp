@@ -1,6 +1,8 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <climits>
+#include <queue>
 
 #include "Board.h"
 #include "Default.h"
@@ -112,15 +114,19 @@ namespace state {
     }
 
     Terrain* Board::findTerrainOnPosition(int positionX, int positionY) const {
-        for (auto& it : terrains) {
-            if (it.second->getPositionX() == positionX) {
-                if (it.second->getPositionY() == positionY) {
-                    return it.second.get();
+        if(positionX < 0 || positionY < 0 || positionX > width || positionY > height) {
+            return nullptr;
+        } else {
+            for (auto& it : terrains) {
+                if (it.second->getPositionX() == positionX) {
+                    if (it.second->getPositionY() == positionY) {
+                        return it.second.get();
+                    }
                 }
             }
+            
+            return nullptr;
         }
-        
-        return nullptr;
     }
         
     std::vector<int> Board::findTerrainAround(int id) {
@@ -192,18 +198,23 @@ namespace state {
 
 
     Unit* Board::findUnitOnPosition(int positionX, int positionY) const {
-        for (auto& it : units) {
-            if (it.second->getPositionX() == positionX) {
-                if (it.second->getPositionY() == positionY) {
-                    return it.second.get();
+        if(positionX < 0 || positionY < 0 || positionX > width || positionY > height) {
+            return nullptr;
+        } else {
+            for (auto& it : units) {
+                if (it.second->getPositionX() == positionX) {
+                    if (it.second->getPositionY() == positionY) {
+                        return it.second.get();
+                    }
                 }
             }
+            
+            return nullptr;
         }
-        return nullptr;
     }
         
     int Board::calculeDistance(int xOrigine, int yOrigine, int xDest, int yDest) {
-        return 0;
+
     }
 
 

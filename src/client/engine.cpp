@@ -1,3 +1,5 @@
+#include <climits>
+
 #include "engine.hpp"
 
 using namespace state;
