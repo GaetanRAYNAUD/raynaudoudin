@@ -19,7 +19,7 @@ namespace engine {
   class MoveCommand : public engine::Command {
     // Operations
   public:
-    MoveCommand ();
+    MoveCommand (state::State& state, int idUnit, int x, int y);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters

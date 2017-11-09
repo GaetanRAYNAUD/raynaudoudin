@@ -95,6 +95,11 @@ namespace state {
     void Unit::takeDamage(int damage) {
         life = life - damage;
     }
+        
+    void Unit::Move(int x, int y) {
+
+    }
+
 
     bool Unit::isDead() const {
         if (life <= 0) {

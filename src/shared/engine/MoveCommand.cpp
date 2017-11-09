@@ -2,9 +2,10 @@
 
 namespace engine {
 
-    MoveCommand::MoveCommand() {
+    MoveCommand::MoveCommand(state::State& state, int idUnit, int x, int y) {
 
     }
+
 
     void MoveCommand::execute(state::State& state) {
 
