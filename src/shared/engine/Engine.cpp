@@ -10,10 +10,6 @@ namespace engine {
         currentCommands.insert(std::make_pair(priority, std::unique_ptr<Command>(cmd)));
     }
 
-    void Engine::addPassiveCommands() {
-
-    }
-
     const state::State& Engine::getState() const {
         return currentState;
     }
@@ -22,6 +18,8 @@ namespace engine {
         for(auto& c : currentCommands) {
             c.second.get()->execute(currentState);
         }
+        
+        currentCommands.clear();
     }
 
     Engine::~Engine() {

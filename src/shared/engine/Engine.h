@@ -29,7 +29,6 @@ namespace engine {
     Engine ();
     virtual ~Engine ();
     const state::State& getState () const;
-    void addPassiveCommands ();
     void addCommand (int priority, Command* cmd);
     void update ();
     // Setters and Getters

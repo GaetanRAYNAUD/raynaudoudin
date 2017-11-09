@@ -24,7 +24,7 @@ namespace engine {
     int y;
     // Operations
   public:
-    MoveCommand (state::State& state, int idUnit, int x, int y);
+    MoveCommand (int idUnit, int x, int y);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
