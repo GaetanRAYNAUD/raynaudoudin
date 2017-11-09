@@ -15,11 +15,13 @@ namespace engine {
     }
 
     const state::State& Engine::getState() const {
-
+        return currentState;
     }
 
     void Engine::update() {
-
+        for(auto& c : currentCommands) {
+            c.second.get()->execute(currentState);
+        }
     }
 
     Engine::~Engine() {
