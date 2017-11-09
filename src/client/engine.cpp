@@ -35,10 +35,10 @@ namespace engine {
         
         std::cout << "***************************************************" << std::endl;
         
-        command = new SpawnCommand(engine->getState().getBoard().findUnit(1)->getPositionX(), 
-                engine->getState().getBoard().findUnit(1)->getPositionY(), UnitTypeId::SWORDMAN);
+        command = new SpawnCommand(engine->getState().getBoard().findUnit(0)->getPositionX(), 
+                engine->getState().getBoard().findUnit(0)->getPositionY(), UnitTypeId::SWORDMAN);
         
-        std::cout << "Ajout d'une commande de spawn d'une unité à partir de la case (8,4)" << std::endl;
+        std::cout << "Ajout d'une commande de recrutement d'une unité à partir du château en (8,4)" << std::endl;
         engine->addCommand(1, command);
         
         std::cout << "Éxécution de la liste des commandes" << std::endl;
