@@ -97,9 +97,11 @@ namespace state {
     }
         
     void Unit::Move(int x, int y) {
-
+        if(x >= 0 && y >= 0) {
+            positionX = x;
+            positionY = y;
+        }
     }
-
 
     bool Unit::isDead() const {
         if (life <= 0) {
