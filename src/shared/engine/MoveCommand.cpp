@@ -12,7 +12,7 @@ namespace engine {
     }
 
     CommandTypeId MoveCommand::getTypeId() const {
-
+        return CommandTypeId::MOVE;
     }
 
 }
