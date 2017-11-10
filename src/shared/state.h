@@ -3,8 +3,8 @@
 #define __STATE__H
 
 #include "state/RaceTypeId.h"
-#include "state/Team.h"
 #include "state/UnitTypeId.h"
+#include "state/Team.h"
 #include "state/WeaponTypeId.h"
 #include "state/Weapon.h"
 #include "state/Unit.h"

@@ -3,6 +3,7 @@
 namespace state {
 
     Team::Team() {
+        gold = 50;
     }
 
     int Team::getGold() const {
@@ -17,8 +18,24 @@ namespace state {
         return race;
     }
    
-    bool Team::verifyGold(int unitPrice) const{
-        if(gold > unitPrice) {
+    bool Team::verifyGold(UnitTypeId unitTypeId) const{
+        int price;
+        
+        switch (unitTypeId) {
+            case UnitTypeId::BOWMAN:
+                price = 10;
+                break;
+            case UnitTypeId::SWORDMAN:
+                price = 15;
+                break;
+            case UnitTypeId::LEADER:
+                price = -1;
+                break;
+            default:
+                price = -2;
+        }
+        
+        if(gold >= price) {
             return true;
         } else {
             return false;

@@ -22,15 +22,22 @@ namespace state {
         idTeam = 0;
         idTerrain = 0;
         idUnit = 0;
-        
         this->width = width;
         this->height = height;
+        Unit* unit = nullptr;
+        Team* team = nullptr;
         
-        Unit* unit = new Leader(1, 3, 2, RaceTypeId::HUMAN);
+        unit = new Leader(1, 3, 2, RaceTypeId::HUMAN);
         addUnit(unit);
         
         unit = new Leader(2, 18, 6, RaceTypeId::ORC);
         addUnit(unit);
+        
+        team = new Team();
+        addTeam(team);
+        
+        team = new Team();
+        addTeam(team);
     }
         
     Board::Board(const Board& other) {

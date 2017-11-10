@@ -56,26 +56,6 @@ namespace state {
         return positionY;
     }
 
-    int Unit::getPrice(UnitTypeId typeId) {
-        int price;
-        
-        switch (typeId) {
-            case UnitTypeId::BOWMAN:
-                price = 10;
-                break;
-            case UnitTypeId::SWORDMAN:
-                price = 15;
-                break;
-            case UnitTypeId::LEADER:
-                price = -1;
-                break;
-            default:
-                price = -2;
-        }
-        
-        return price;
-    }
-
     int Unit::getSpeed() const {
         return speed;
     }

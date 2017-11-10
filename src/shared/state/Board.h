@@ -17,10 +17,10 @@ namespace state {
 
 #include "UnitTypeId.h"
 #include "Observable.h"
-#include "RaceTypeId.h"
-#include "Unit.h"
 #include "Team.h"
 #include "Terrain.h"
+#include "RaceTypeId.h"
+#include "Unit.h"
 
 namespace state {
 

@@ -44,7 +44,6 @@ namespace state {
     int getLife () const;
     int getSpeed () const;
     const UnitTypeId& getTypeId () const;
-    static int getPrice (UnitTypeId typeId);
     int getId () const;
     int getTeam () const;
     const RaceTypeId& getRace () const;

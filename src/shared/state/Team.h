@@ -8,6 +8,7 @@ namespace state {
 }
 
 #include "RaceTypeId.h"
+#include "UnitTypeId.h"
 
 namespace state {
 
@@ -26,7 +27,7 @@ namespace state {
     int getGold () const;
     const RaceTypeId& getRace () const;
     void setId (int id);
-    bool verifyGold (int unitPrice) const;
+    bool verifyGold (UnitTypeId unitTypeId) const;
     void generateGold ();
     void addHouse ();
     void removeHouse ();
