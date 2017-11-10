@@ -43,7 +43,7 @@ namespace state {
             return false;
         }
         
-        TerrainTypeId terrainType = state->getBoard().getTerrains().at(1)->getTypeId();
+        TerrainTypeId terrainType = state->getBoard().getTerrains().at(0)->getTypeId();
         if(terrainType == TerrainTypeId::HOUSE) {
             std::cout << "  Le terrain ajouté est bien de type HOUSE" << std::endl;
         } else {
@@ -62,7 +62,7 @@ namespace state {
             return false;
         }
         
-        terrainType = state->getBoard().getTerrains().at(2)->getTypeId();
+        terrainType = state->getBoard().getTerrains().at(1)->getTypeId();
         if(terrainType == TerrainTypeId::CASTLE) {
             std::cout << "  Le terrain ajouté est bien de type CASTLE" << std::endl;
             return true;
@@ -85,25 +85,25 @@ namespace state {
         unitSize = state->getBoard().getUnits().size();
         std::cout << "  Il y a maintenant " << unitSize << " unité(s) dans le jeu" << std::endl;
         
-        if(unitSize != 1) {
+        if(unitSize != 3) {
             return false;
         }
         
-        UnitTypeId unitType = state->getBoard().getUnits().at(1)->getTypeId();
+        UnitTypeId unitType = state->getBoard().getUnits().at(2)->getTypeId();
         if(unitType == UnitTypeId::SWORDMAN) {
             std::cout << "  L'unité ajouté est bien de type SWORDMAN" << std::endl;
         } else {
             return false;
         }
         
-        int weaponSize = state->getBoard().getUnits().at(1)->getWeapons().size();
+        int weaponSize = state->getBoard().getUnits().at(2)->getWeapons().size();
         std::cout << "  L'unité possède " << weaponSize << " arme(s)" << std::endl;
         
         if(weaponSize != 1) {
             return false;
         }        
         
-        WeaponTypeId weaponType = state->getBoard().getUnits().at(1)->getWeapons().find(WeaponTypeId::SWORD)->second->getTypeId();
+        WeaponTypeId weaponType = state->getBoard().getUnits().at(2)->getWeapons().find(WeaponTypeId::SWORD)->second->getTypeId();
         if(weaponType == WeaponTypeId::SWORD) {
             std::cout << "  L'unité possède bien une arme de type SWORD" << std::endl;
         } else {
@@ -118,32 +118,32 @@ namespace state {
         unitSize = state->getBoard().getUnits().size();
         std::cout << "  Il y a maintenant " << unitSize << " unité(s) dans le jeu" << std::endl;
                 
-        if(unitSize != 2) {
+        if(unitSize != 4) {
             return false;
         }
         
-        unitType = state->getBoard().getUnits().at(2)->getTypeId();
+        unitType = state->getBoard().getUnits().at(3)->getTypeId();
         if(unitType == UnitTypeId::LEADER) {
             std::cout << "  L'unité ajouté est bien de type LEADER" << std::endl;
         } else {
             return false;
         }
         
-        weaponSize = state->getBoard().getUnits().at(2)->getWeapons().size();
+        weaponSize = state->getBoard().getUnits().at(3)->getWeapons().size();
         std::cout << "  L'unité possède " << weaponSize << " arme(s)" << std::endl;
         
         if(weaponSize != 2) {
             return false;
         }     
         
-        weaponType = state->getBoard().getUnits().at(2)->getWeapons().find(WeaponTypeId::SWORD)->second->getTypeId();
+        weaponType = state->getBoard().getUnits().at(3)->getWeapons().find(WeaponTypeId::SWORD)->second->getTypeId();
         if(weaponType == WeaponTypeId::SWORD) {
             std::cout << "  L'unité possède bien une arme de type SWORD" << std::endl;
         } else {
             return false;
         }
         
-        weaponType = state->getBoard().getUnits().at(2)->getWeapons().find(WeaponTypeId::BOW)->second->getTypeId();
+        weaponType = state->getBoard().getUnits().at(3)->getWeapons().find(WeaponTypeId::BOW)->second->getTypeId();
         if(weaponType == WeaponTypeId::BOW) {
             std::cout << "  L'unité possède bien une arme de type BOW" << std::endl;
             return true;
