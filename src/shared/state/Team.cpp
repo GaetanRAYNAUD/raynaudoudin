@@ -2,8 +2,7 @@
 
 namespace state {
 
-    Team::Team(int id) {
-        this->id = id;
+    Team::Team() {
     }
 
     int Team::getGold() const {

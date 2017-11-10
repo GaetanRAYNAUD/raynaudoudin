@@ -2,7 +2,7 @@
 
 namespace state {
 
-    Default::Default(int id, TerrainTypeId typeId, int movementCost, int positionX, int positionY) {
+    Default::Default(TerrainTypeId typeId, int movementCost, int positionX, int positionY) {
         this->id = id;
         this->positionX = positionX;
         this->positionY = positionY;

@@ -16,7 +16,7 @@ namespace state {
   class Default : public state::Terrain {
     // Operations
   public:
-    Default (int id, TerrainTypeId typeId, int movementCost, int positionX = 10, int positionY = 10);
+    Default (TerrainTypeId typeId, int movementCost, int positionX = 10, int positionY = 10);
     Terrain* clone () const;
     // Setters and Getters
   };

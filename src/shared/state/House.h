@@ -18,7 +18,7 @@ namespace state {
     int teamId;
     // Operations
   public:
-    House (int id, int positionX = 0, int positionY = 0);
+    House (int positionX = 0, int positionY = 0);
     void claim (int teamId);
     Terrain* clone () const;
     // Setters and Getters

@@ -2,7 +2,7 @@
 
 namespace state {
 
-    Castle::Castle(int id, int positionX, int positionY) {
+    Castle::Castle(int positionX, int positionY) {
         this->id = id;
         this->positionX = positionX;
         this->positionY = positionY;

@@ -15,7 +15,7 @@ namespace state {
   class Castle : public state::Terrain {
     // Operations
   public:
-    Castle (int id, int positionX = 0, int positionY = 0);
+    Castle (int positionX = 0, int positionY = 0);
     Terrain* clone () const;
     // Setters and Getters
   };

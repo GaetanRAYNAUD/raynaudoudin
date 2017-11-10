@@ -2,7 +2,7 @@
 
 namespace state {
 
-    Wall::Wall(int id,  Orientation orientation, int positionX, int positionY) {
+    Wall::Wall(Orientation orientation, int positionX, int positionY) {
         this->id = id;
         this->positionX = positionX;
         this->positionY = positionY;

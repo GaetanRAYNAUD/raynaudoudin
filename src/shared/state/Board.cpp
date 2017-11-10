@@ -26,10 +26,10 @@ namespace state {
         this->width = width;
         this->height = height;
         
-        Unit* unit = new Leader(0, 1, 3, 2, RaceTypeId::HUMAN);
+        Unit* unit = new Leader(1, 3, 2, RaceTypeId::HUMAN);
         addUnit(unit);
         
-        unit = new Leader(1, 2, 18, 6, RaceTypeId::ORC);
+        unit = new Leader(2, 18, 6, RaceTypeId::ORC);
         addUnit(unit);
     }
         
@@ -103,12 +103,12 @@ namespace state {
         
         switch(unitTypeId) {
             case UnitTypeId::BOWMAN:
-                newUnit = new Bowman(0, team, x, y);
+                newUnit = new Bowman(team, x, y);
                 addUnit(newUnit);
                 break;
                 
             case UnitTypeId::SWORDMAN:
-                newUnit = new Swordman(0, team, x, y);
+                newUnit = new Swordman(team, x, y);
                 addUnit(newUnit);
                 break;
                 
@@ -304,35 +304,35 @@ namespace state {
         for(int i = 0; i < width * height; i++) {
             switch (terrainsTmp.at(i)) {
                 case '0' :  //Grass
-                    terrainToAdd = new Default(i, TerrainTypeId::GRASS, 1, i % width, i / width);
+                    terrainToAdd = new Default(TerrainTypeId::GRASS, 1, i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 case '1' :  //Forest
-                    terrainToAdd = new Default(i, TerrainTypeId::FOREST, 2, i % width, i / width);
+                    terrainToAdd = new Default(TerrainTypeId::FOREST, 2, i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 case '2' :  //Water
-                    terrainToAdd = new Default(i, TerrainTypeId::WATER, 5, i % width, i / width);
+                    terrainToAdd = new Default(TerrainTypeId::WATER, 5, i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 case '3' :  //House
-                    terrainToAdd = new House(i, i % width, i / width);
+                    terrainToAdd = new House(i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 case '4' :  //Castle
-                    terrainToAdd = new Castle(i, i % width, i / width);
+                    terrainToAdd = new Castle(i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 case '5' :  //Wall left
-                    terrainToAdd = new Wall(i, Orientation::LEFT, i % width, i / width);
+                    terrainToAdd = new Wall(Orientation::LEFT, i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 case '6' :  //Wall top
-                    terrainToAdd = new Wall(i, Orientation::TOP, i % width, i / width);
+                    terrainToAdd = new Wall(Orientation::TOP, i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 case '7' :  //Wall right
-                    terrainToAdd = new Wall(i, Orientation::RIGHT, i % width, i / width);
+                    terrainToAdd = new Wall(Orientation::RIGHT, i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 default :

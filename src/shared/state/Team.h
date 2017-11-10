@@ -21,7 +21,7 @@ namespace state {
     RaceTypeId race     = RaceTypeId::HUMAN;
     // Operations
   public:
-    Team (int id);
+    Team ();
     int getId () const;
     int getGold () const;
     const RaceTypeId& getRace () const;

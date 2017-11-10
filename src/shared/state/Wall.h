@@ -20,7 +20,7 @@ namespace state {
     Orientation orientation     = Orientation::RIGHT;
     // Operations
   public:
-    Wall (int id, Orientation orientation, int positionX = 0, int positionY = 0);
+    Wall (Orientation orientation, int positionX = 0, int positionY = 0);
     void setOrientation (Orientation orientation);
     const Orientation& getOrientation () const;
     Terrain* clone () const;

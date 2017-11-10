@@ -16,7 +16,7 @@ namespace state {
         
         std::cout << "  Ajout d'une équipe au jeu" << std::endl;
         
-        Team* team = new Team(1);
+        Team* team = new Team();
         state->getBoard().addTeam(team);
         
         int teamsResize = state->getBoard().getTeams().size();
@@ -33,7 +33,7 @@ namespace state {
         
         std::cout << "  Ajout d'un terrain de type HOUSE au jeu" << std::endl;
         
-        Terrain* terrain = new House(1, 1, 1);
+        Terrain* terrain = new House(1, 1);
         state->getBoard().addTerrain(terrain);
         
         terrainSize = state->getBoard().getTerrains().size();
@@ -52,7 +52,7 @@ namespace state {
         
         std::cout << "  Ajout d'un terrain de type CASTLE au jeu" << std::endl;
         
-        terrain = new Castle(2, 1, 1);
+        terrain = new Castle(1, 2);
         state->getBoard().addTerrain(terrain);
         
         terrainSize = state->getBoard().getTerrains().size();
@@ -79,7 +79,7 @@ namespace state {
         
         std::cout << "  Ajout d'une unité de type SWORDMAN au jeu" << std::endl;
         
-        Unit* unit = new Swordman(1, 1, 1, 1, RaceTypeId::HUMAN);
+        Unit* unit = new Swordman(1, 1, 1, RaceTypeId::HUMAN);
         state->getBoard().addUnit(unit);
         
         unitSize = state->getBoard().getUnits().size();
@@ -112,7 +112,7 @@ namespace state {
         
         std::cout << "  Ajout d'une unité de type LEADER au jeu" << std::endl;
         
-        unit = new Leader(2, 1, 1, 1, RaceTypeId::HUMAN);
+        unit = new Leader(1, 1, 2, RaceTypeId::HUMAN);
         state->getBoard().addUnit(unit);
         
         unitSize = state->getBoard().getUnits().size();
@@ -189,7 +189,7 @@ namespace state {
             std::cout << "ERREUR : L'ajout d'unité au jeu à planté !" << std::endl;
         }
         std::cout << "***************************************************" << std::endl;
-        std::cout << "Tests terminés avec succès !!" << std::endl;
+        std::cout << "Tests terminés!!" << std::endl;
     }
 
 }

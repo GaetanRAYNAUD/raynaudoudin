@@ -2,7 +2,7 @@
 
 namespace state {
 
-    House::House(int id, int positionX, int positionY) {
+    House::House(int positionX, int positionY) {
         this->id = id;
         this->positionX = positionX;
         this->positionY = positionY;
