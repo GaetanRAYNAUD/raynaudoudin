@@ -6,6 +6,9 @@
 #include "../shared/state.h"
 #include "render.h"
 #include "../shared/engine.h"
+#include "state/Board.h"
+#include "render/Scene.h"
+#include "engine/Engine.h"
 
 namespace engine {
     void engineTest();

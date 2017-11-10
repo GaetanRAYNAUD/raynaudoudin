@@ -1,7 +1,4 @@
 #include "engine.hpp"
-#include "state/Board.h"
-#include "render/Scene.h"
-#include "engine/Engine.h"
 
 using namespace state;
 using namespace render;
@@ -18,9 +15,8 @@ namespace engine {
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         window.setFramerateLimit(30);
         
-        command = new LoadCommand("res/map.txt");
-        
         std::cout << "***************************************************" << std::endl;
+        command = new LoadCommand("res/map.txt");        
         std::cout << "Ajout d'une commande de création du jeu" << std::endl;        
         engine->addCommand(1, command);
         
@@ -37,7 +33,6 @@ namespace engine {
         
         command = new SpawnCommand(engine->getState().getBoard().findUnit(0)->getPositionX(), 
                 engine->getState().getBoard().findUnit(0)->getPositionY(), UnitTypeId::SWORDMAN);
-        
         std::cout << "Ajout d'une commande de recrutement d'une unité à partir du château en (3,1)" << std::endl;
         engine->addCommand(1, command);
         
@@ -53,12 +48,10 @@ namespace engine {
         std::cout << "***************************************************" << std::endl;
         
         command = new MoveCommand(1, 8, 4);
-        
         std::cout << "Ajout d'une commande de déplacement de l'unité 1 en (8,4)" << std::endl;
         engine->addCommand(2, command);
         
         command = new MoveCommand(2, 8, 3);
-        
         std::cout << "Ajout d'une commande de déplacement de l'unité 2 en (8,3)" << std::endl;
         engine->addCommand(3, command);
         

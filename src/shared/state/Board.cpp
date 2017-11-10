@@ -1,6 +1,6 @@
 #include <fstream>
 #include <iostream>
-#include <algorithm>
+//#include <algorithm>
 
 #include "Board.h"
 #include "Default.h"
@@ -336,7 +336,7 @@ namespace state {
                     addTerrain(terrainToAdd);
                     break;
                 default :
-                    std::cerr << "Type de terrain inconnu" << std::endl;
+                    std::cerr << "Le type du terrain en (" << i % width << "," << i / width << ") n'est pas reconnu" << std::endl;
             }
         }
     }
