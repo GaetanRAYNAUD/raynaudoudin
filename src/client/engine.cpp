@@ -5,17 +5,11 @@ using namespace render;
 
 namespace engine {
     
-    void engineTest() {
-        Engine* engine = new Engine();
+    void test_createBoard(Engine* engine) {
         Command* command;
-        Scene* scene;
-        
-        int windowWidth = 1152;
-        int windowHeight = 576;
-        sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
-        window.setFramerateLimit(30);
         
         std::cout << "***************************************************" << std::endl;
+        
         command = new LoadCommand("res/map.txt");        
         std::cout << "Ajout d'une commande de création du jeu" << std::endl;        
         engine->addCommand(1, command);
@@ -28,6 +22,10 @@ namespace engine {
         } else {
             std::cout << "Le jeu n'a pas pu être créé" << std::endl;
         }
+    }
+    
+    void test_spawnUnit(Engine* engine) {
+        Command* command;
         
         std::cout << "***************************************************" << std::endl;
         
@@ -43,7 +41,11 @@ namespace engine {
             std::cout << "Unité correctement ajoutée au jeu" << std::endl;
         } else {
             std::cout << "L'unité n'a pas pu être ajoutée au jeu" << std::endl;
-        }
+        }       
+    }
+    
+    void test_moveUnit(Engine* engine) {
+        Command* command;
         
         std::cout << "***************************************************" << std::endl;
         
@@ -76,7 +78,11 @@ namespace engine {
             }
         } else {
             std::cout << "ERREUR : Il n'y a pas d'unité en (8,3)" << std::endl;              
-        }
+        }      
+    }
+    
+    void test_attackUnit(Engine* engine) {
+        Command* command;
         
         std::cout << "***************************************************" << std::endl;
         
@@ -107,21 +113,62 @@ namespace engine {
             std::cout << "Le personnage est mort après plusieurs attaques" << std::endl;
         } else {
             std::cout << "ERREUR : Le personnage n'est pas mort après plusieurs attaques" << std::endl;
-        }
+        }      
+    }
+    
+    void engineTest() {
+        Engine* engine = new Engine();
+        Scene* scene;
+        int caseTest = 0;
         
-        std::cout << "***************************************************" << std::endl;
-  
+        int windowWidth = 1152;
+        int windowHeight = 576;
+        
+        sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
+        window.setFramerateLimit(30);
+        
+        test_createBoard(engine);
         scene = new Scene(engine->getState());
-                
+                                
+        std::cout << "Appuyer sur espace pour lancer les tests" << std::endl;
         while (window.isOpen()) {
             sf::Event event;
+            
             while (window.pollEvent(event)) {
-                if(event.type == sf::Event::Closed)
+                    if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
+                        switch (caseTest) {           
+                            case 0:
+                                test_spawnUnit(engine);
+                                scene = new Scene(engine->getState());
+                                caseTest++; 
+                                break;
+                            case 1:
+                                test_moveUnit(engine);
+                                scene = new Scene(engine->getState());
+                                caseTest++; 
+                                break;
+                            case 2:
+                                test_attackUnit(engine);
+                                scene = new Scene(engine->getState());
+                                caseTest++;
+                                break;
+                            default:
+                                window.close();
+                        }
+                        
+                        std::cout << "Appuyer sur espace pour continuer" << std::endl;
+                    }
+                    
+                if (event.type == sf::Event::Closed) {
                     window.close();
+                } 
             }
 
             scene->draw(window);
             window.display();
         }
+        
+        delete scene;
+        delete engine;
     }
 }
