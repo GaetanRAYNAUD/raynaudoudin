@@ -260,10 +260,18 @@ namespace state {
         }
     }
         
-    int Board::calculeDistance(int xOrigine, int yOrigine, int xDest, int yDest) {
-        return 0;
+    void Board::moveUnit(int id, Direction direction) {
+        
     }
-
+        
+    std::vector<Direction> Board::directionAvailable(int unitId) {
+        std::vector<Direction> directionAvailable;
+        std::vector<int> terrainsAround = findTerrainAround(findTerrainOnPosition(findUnit(unitId)->getPositionX(), findUnit(unitId)->getPositionY()));
+        
+        if(findUnit(unitId)->getSpeed() > terrainsAround.at(0)) {
+            directionAvailable.push_back();
+        }            
+    } 
 
     int Board::getHeight() const {
         return height;

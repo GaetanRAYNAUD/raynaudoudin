@@ -16,6 +16,7 @@ namespace state {
 }
 
 #include "UnitTypeId.h"
+#include "Direction.h"
 #include "Observable.h"
 #include "Team.h"
 #include "Terrain.h"
@@ -64,7 +65,8 @@ namespace state {
     Unit* findUnitOnPosition (int positionX, int positionY) const;
     std::vector<int> findTerrainAround (int id);
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
-    int calculeDistance (int xOrigine, int yOrigine, int xDest, int yDest);
+    std::vector<Direction> directionAvailable (int unitId);
+    void moveUnit (int id, Direction direction);
     int getHeight () const;
     int getWidth () const;
     const std::map<int, std::unique_ptr<Team> >& getTeams () const;
