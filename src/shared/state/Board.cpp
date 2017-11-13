@@ -266,11 +266,11 @@ namespace state {
         
     std::vector<Direction> Board::directionAvailable(int unitId) {
         std::vector<Direction> directionAvailable;
-        std::vector<int> terrainsAround = findTerrainAround(findTerrainOnPosition(findUnit(unitId)->getPositionX(), findUnit(unitId)->getPositionY()));
+        std::vector<int> terrainsAround = findTerrainAround(findTerrainOnPosition(findUnit(unitId)->getPositionX(), findUnit(unitId)->getPositionY())->getId());
         
         if(findUnit(unitId)->getSpeed() > terrainsAround.at(0)) {
             //directionAvailable.push_back();
-        }            
+        }         
     } 
 
     int Board::getHeight() const {
