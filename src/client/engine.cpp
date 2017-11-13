@@ -48,13 +48,13 @@ namespace engine {
         Command* command;
         
         std::cout << "***************************************************" << std::endl;
-        
-        //command = new MoveCommand(1, 8, 4);
+       
         std::cout << "Ajout d'une commande de déplacement de l'unité 1 en (8,4)" << std::endl;
+        command = new MoveCommand(1, state::Direction::TOP);
         engine->addCommand(2, command);
         
-        //command = new MoveCommand(2, 8, 3);
         std::cout << "Ajout d'une commande de déplacement de l'unité 2 en (8,3)" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT);
         engine->addCommand(3, command);
         
         std::cout << "Éxécution de la liste des commandes" << std::endl;
