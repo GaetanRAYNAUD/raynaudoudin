@@ -76,10 +76,44 @@ namespace state {
         life = life - damage;
     }
         
-    void Unit::Move(int x, int y) {
-        if(x >= 0 && y >= 0) {
-            positionX = x;
-            positionY = y;
+    void Unit::Move(Direction direction) {
+        switch(direction) {
+            case Direction::TOP :
+                positionY = positionY - 1;
+                break;
+            case Direction::TOP_RIGHT :
+                if(positionX % 2) {
+                    positionX = positionX + 1;
+                    positionY = positionY - 1;
+                } else {
+                    positionX = positionX + 1;
+                }
+                break;
+            case Direction::BOT_RIGHT : 
+                if(positionX % 2) {
+                    positionX = positionX + 1;
+                } else {
+                    positionX = positionX + 1;
+                    positionY = positionY + 1;
+                }
+                break;
+            case Direction::BOT : 
+                positionY = positionY + 1;
+                break;
+            case Direction::BOT_LEFT :
+                if(positionX % 2) {
+                    positionX = positionX - 1;
+                } else {
+                    positionX = positionX - 1;
+                    positionY = positionY - 1;
+                }
+            case Direction::TOP_LEFT :
+                if(positionX % 2) {
+                    positionX = positionX - 1;
+                    positionY = positionY - 1;
+                } else {
+                    positionX = positionX - 1;
+                }            
         }
     }
 

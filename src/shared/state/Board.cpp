@@ -335,7 +335,7 @@ namespace state {
                     addTerrain(terrainToAdd);
                     break;
                 case '6' :  //Wall top
-                    terrainToAdd = new Wall(Orientation::TOP, i % width, i / width);
+                    terrainToAdd = new Wall(Orientation::UP, i % width, i / width);
                     addTerrain(terrainToAdd);
                     break;
                 case '7' :  //Wall right

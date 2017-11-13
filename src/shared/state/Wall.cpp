@@ -18,8 +18,8 @@ namespace state {
                 this->typeId = TerrainTypeId::WALL_LEFT;
                 break;
                         
-            case Orientation::TOP :
-                this->orientation = Orientation::TOP;
+            case Orientation::UP :
+                this->orientation = Orientation::UP;
                 this->typeId = TerrainTypeId::WALL_TOP;
                 break;
             
@@ -46,8 +46,8 @@ namespace state {
                 this->typeId = TerrainTypeId::WALL_LEFT;
                 break;
                         
-            case Orientation::TOP :
-                this->orientation = Orientation::TOP;
+            case Orientation::UP :
+                this->orientation = Orientation::UP;
                 this->typeId = TerrainTypeId::WALL_TOP;
                 break;
             

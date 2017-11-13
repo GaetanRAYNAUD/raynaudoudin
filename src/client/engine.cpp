@@ -49,11 +49,11 @@ namespace engine {
         
         std::cout << "***************************************************" << std::endl;
         
-        command = new MoveCommand(1, 8, 4);
+        //command = new MoveCommand(1, 8, 4);
         std::cout << "Ajout d'une commande de déplacement de l'unité 1 en (8,4)" << std::endl;
         engine->addCommand(2, command);
         
-        command = new MoveCommand(2, 8, 3);
+        //command = new MoveCommand(2, 8, 3);
         std::cout << "Ajout d'une commande de déplacement de l'unité 2 en (8,3)" << std::endl;
         engine->addCommand(3, command);
         
