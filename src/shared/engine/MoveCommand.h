@@ -10,6 +10,7 @@ namespace engine {
   class Command;
 }
 
+#include "state/Direction.h"
 #include "CommandTypeId.h"
 #include "Command.h"
 
@@ -20,20 +21,17 @@ namespace engine {
     // Attributes
   protected:
     int idUnit;
-    int x;
-    int y;
+    state::Direction direction;
     // Operations
   public:
-    MoveCommand (int idUnit, int x, int y);
+    MoveCommand (int idUnit, state::Direction direction);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
     int getIdUnit() const;
     void setIdUnit(int idUnit);
-    int getX() const;
-    void setX(int x);
-    int getY() const;
-    void setY(int y);
+    state::Direction getDirection() const;
+    void setDirection(state::Direction direction);
   };
 
 };

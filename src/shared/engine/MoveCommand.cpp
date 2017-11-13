@@ -2,12 +2,12 @@
 
 namespace engine {
 
-    MoveCommand::MoveCommand(int idUnit, int x, int y) : idUnit(idUnit), x(x), y(y) {
+    MoveCommand::MoveCommand(int idUnit, state::Direction direction) : idUnit(idUnit), direction(direction) {
         
     }
 
     void MoveCommand::execute(state::State& state) {
-        state.getBoard().findUnit(idUnit)->Move(x, y);
+        state.getBoard().findUnit(idUnit)->Move(direction);
     }
 
     CommandTypeId MoveCommand::getTypeId() const {
