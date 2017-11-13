@@ -181,27 +181,27 @@ namespace state {
         Terrain* terrain = findTerrain(id);
         Terrain* terrainAround = nullptr;
         
-        terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() - 1);
-        if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }
-        terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY());
-        if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }     
-        terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() - 1);
-        if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }
-        terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() + 1);
+        terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() - 2);
         if (terrainAround != nullptr) {
             listIdTerrainArround.push_back(terrainAround->getId());
         }
         terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() - 1);
         if (terrainAround != nullptr) {
             listIdTerrainArround.push_back(terrainAround->getId());
+        }     
+        terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() + 1);
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
         }
-        terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY());
+        terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() + 2);
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
+        }
+        terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() + 1);
+        if (terrainAround != nullptr) {
+            listIdTerrainArround.push_back(terrainAround->getId());
+        }
+        terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() - 1);
         if (terrainAround != nullptr) {
             listIdTerrainArround.push_back(terrainAround->getId());
         }
@@ -215,27 +215,27 @@ namespace state {
         Unit* unit = findUnit(id);
         Unit* unitAround = nullptr;
         
-        unitAround = findUnitOnPosition(unit->getPositionX() - 1, unit->getPositionY() - 1);
-        if (unitAround != nullptr) {
-            listIdUnitArround.push_back(unitAround->getId());
-        }
-        unitAround = findUnitOnPosition(unit->getPositionX() - 1, unit->getPositionY());
-        if (unitAround != nullptr) {
-            listIdUnitArround.push_back(unitAround->getId());
-        }     
-        unitAround = findUnitOnPosition(unit->getPositionX(), unit->getPositionY() - 1);
-        if (unitAround != nullptr) {
-            listIdUnitArround.push_back(unitAround->getId());
-        }
-        unitAround = findUnitOnPosition(unit->getPositionX(), unit->getPositionY() + 1);
+        unitAround = findUnitOnPosition(unit->getPositionX(), unit->getPositionY() - 2);
         if (unitAround != nullptr) {
             listIdUnitArround.push_back(unitAround->getId());
         }
         unitAround = findUnitOnPosition(unit->getPositionX() + 1, unit->getPositionY() - 1);
         if (unitAround != nullptr) {
             listIdUnitArround.push_back(unitAround->getId());
+        }     
+        unitAround = findUnitOnPosition(unit->getPositionX() + 1, unit->getPositionY() + 1);
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
         }
-        unitAround = findUnitOnPosition(unit->getPositionX() + 1, unit->getPositionY());
+        unitAround = findUnitOnPosition(unit->getPositionX(), unit->getPositionY() + 2);
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX() - 1, unit->getPositionY() + 1);
+        if (unitAround != nullptr) {
+            listIdUnitArround.push_back(unitAround->getId());
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX() - 1, unit->getPositionY() - 1);
         if (unitAround != nullptr) {
             listIdUnitArround.push_back(unitAround->getId());
         }
@@ -270,7 +270,8 @@ namespace state {
         
         if(findUnit(unitId)->getSpeed() > terrainsAround.at(0)) {
             //directionAvailable.push_back();
-        }         
+        }
+        return directionAvailable;
     } 
 
     int Board::getHeight() const {
@@ -317,41 +318,80 @@ namespace state {
         
         Terrain* terrainToAdd = nullptr;
         for(int i = 0; i < width * height; i++) {
-            switch (terrainsTmp.at(i)) {
-                case '0' :  //Grass
-                    terrainToAdd = new Default(TerrainTypeId::GRASS, 1, i % width, i / width);
-                    addTerrain(terrainToAdd);
-                    break;
-                case '1' :  //Forest
-                    terrainToAdd = new Default(TerrainTypeId::FOREST, 2, i % width, i / width);
-                    addTerrain(terrainToAdd);
-                    break;
-                case '2' :  //Water
-                    terrainToAdd = new Default(TerrainTypeId::WATER, 5, i % width, i / width);
-                    addTerrain(terrainToAdd);
-                    break;
-                case '3' :  //House
-                    terrainToAdd = new House(i % width, i / width);
-                    addTerrain(terrainToAdd);
-                    break;
-                case '4' :  //Castle
-                    terrainToAdd = new Castle(i % width, i / width);
-                    addTerrain(terrainToAdd);
-                    break;
-                case '5' :  //Wall left
-                    terrainToAdd = new Wall(Orientation::LEFT, i % width, i / width);
-                    addTerrain(terrainToAdd);
-                    break;
-                case '6' :  //Wall top
-                    terrainToAdd = new Wall(Orientation::UP, i % width, i / width);
-                    addTerrain(terrainToAdd);
-                    break;
-                case '7' :  //Wall right
-                    terrainToAdd = new Wall(Orientation::RIGHT, i % width, i / width);
-                    addTerrain(terrainToAdd);
-                    break;
-                default :
-                    std::cerr << "Le type du terrain en (" << i % width << "," << i / width << ") n'est pas reconnu" << std::endl;
+            if((i / (width / 2)) % 2) {
+                switch (terrainsTmp.at(i)) {
+                    case 'G' :  //Grass
+                        terrainToAdd = new Default(TerrainTypeId::GRASS, 1, 2 * i % (width / 2), i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'F' :  //Forest
+                        terrainToAdd = new Default(TerrainTypeId::FOREST, 2, 2 * i % (width / 2), i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'W' :  //Water
+                        terrainToAdd = new Default(TerrainTypeId::WATER, 5, 2 * i % (width / 2), i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'H' :  //House
+                        terrainToAdd = new House(2 * i % (width / 2), i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'C' :  //Castle
+                        terrainToAdd = new Castle(2 * i % (width / 2), i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'L' :  //Wall left
+                        terrainToAdd = new Wall(Orientation::LEFT, 2 * i % (width / 2), i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'T' :  //Wall top
+                        terrainToAdd = new Wall(Orientation::UP, 2 * i % (width / 2), i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'R' :  //Wall right
+                        terrainToAdd = new Wall(Orientation::RIGHT, 2 * i % (width / 2), i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    default :
+                        std::cerr << "Le type du terrain en (" << 2 * i % (width / 2) << "," << i / (width / 2) << ") n'est pas reconnu" << std::endl;
+                }
+            } else {
+                switch (terrainsTmp.at(i)) {
+                    case 'G' :  //Grass
+                        terrainToAdd = new Default(TerrainTypeId::GRASS, 1, 2 * i % (width / 2) + 1, i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'F' :  //Forest
+                        terrainToAdd = new Default(TerrainTypeId::FOREST, 2, 2 * i % (width / 2) + 1, i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'W' :  //Water
+                        terrainToAdd = new Default(TerrainTypeId::WATER, 5, 2 * i % (width / 2) + 1, i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'H' :  //House
+                        terrainToAdd = new House(2 * i % (width / 2) + 1, i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'C' :  //Castle
+                        terrainToAdd = new Castle(2 * i % (width / 2) + 1, i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'L' :  //Wall left
+                        terrainToAdd = new Wall(Orientation::LEFT, 2 * i % (width / 2) + 1, i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'T' :  //Wall top
+                        terrainToAdd = new Wall(Orientation::UP, 2 * i % (width / 2) + 1, i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    case 'R' :  //Wall right
+                        terrainToAdd = new Wall(Orientation::RIGHT, 2 * i % (width / 2) + 1, i / (width / 2));
+                        addTerrain(terrainToAdd);
+                        break;
+                    default :
+                        std::cerr << "Le type du terrain en (" << 2 * i % (width / 2) + 1 << "," << i / (width / 2) << ") n'est pas reconnu" << std::endl;
+                }
             }
         }
     }
