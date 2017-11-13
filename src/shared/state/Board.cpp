@@ -269,7 +269,7 @@ namespace state {
         std::vector<int> terrainsAround = findTerrainAround(findTerrainOnPosition(findUnit(unitId)->getPositionX(), findUnit(unitId)->getPositionY()));
         
         if(findUnit(unitId)->getSpeed() > terrainsAround.at(0)) {
-            directionAvailable.push_back();
+            //directionAvailable.push_back();
         }            
     } 
 
