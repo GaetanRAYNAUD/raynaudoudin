@@ -400,7 +400,6 @@ namespace state {
                     case 'C' :  //Castle
                         terrainToAdd = new Castle(2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
-                        std::cout << "Castle en (" << terrainToAdd->getPositionX() << "," << terrainToAdd->getPositionY() << ")" << std::endl;
                         break;
                     case 'L' :  //Wall left
                         terrainToAdd = new Wall(Orientation::LEFT, 2 * (i % (width / 2)), i / (width / 2));

@@ -22,7 +22,6 @@ namespace render {
                     window.close();
             }
             
-            //scene->stateChanged(event);
             scene->draw(window);
             window.display();
         }
