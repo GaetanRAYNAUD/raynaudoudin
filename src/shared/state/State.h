@@ -20,16 +20,18 @@ namespace state {
   private:
     Board board;
   protected:
-    int turn;
+    int turn     = 0;
+    int epoch     = 0;
     // Operations
   public:
     State ();
     Board& getBoard ();
     const Board& getBoard () const;
-    void nextTurn ();
     // Setters and Getters
     int getTurn() const;
     void setTurn(int turn);
+    int getEpoch() const;
+    void setEpoch(int epoch);
   };
 
 };
