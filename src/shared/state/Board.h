@@ -61,9 +61,10 @@ namespace state {
     /// 		
     /// @param id		(???) 
     Terrain* findTerrain (int id) const;
-    std::vector<int> findUnitAround (int id);
+    std::vector<int> findIdUnitAround (int id);
     Unit* findUnitOnPosition (int positionX, int positionY) const;
-    std::vector<int> findTerrainAround (int id);
+    std::vector<int> findIdTerrainAround (int id);
+    std::vector<Terrain*> findTerrainAround (int id);
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
     std::vector<Direction> directionAvailable (int unitId);
     void moveUnit (int id, Direction direction);
