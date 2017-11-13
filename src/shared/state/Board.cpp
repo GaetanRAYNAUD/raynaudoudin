@@ -1,6 +1,5 @@
 #include <fstream>
 #include <iostream>
-//#include <algorithm>
 
 #include "Board.h"
 #include "Default.h"
@@ -261,16 +260,46 @@ namespace state {
     }
         
     void Board::moveUnit(int id, Direction direction) {
+        Unit* unit = findUnit(id);
         
+        switch (direction) {
+            case Direction::TOP:
+                unit->setPositionY(unit->getPositionY() - 2);
+                break;
+            case Direction::TOP_RIGHT:
+                unit->setPositionX(unit->getPositionX() + 1);
+                unit->setPositionY(unit->getPositionY() - 1);
+                break;
+            case Direction::BOT_RIGHT:
+                unit->setPositionX(unit->getPositionX() + 1);
+                unit->setPositionY(unit->getPositionY() + 1);
+                break;
+            case Direction::BOT:
+                unit->setPositionY(unit->getPositionY() + 2);
+                break;
+            case Direction::BOT_LEFT:
+                unit->setPositionX(unit->getPositionX() - 1);
+                unit->setPositionY(unit->getPositionY() + 1);
+                break;
+            case Direction::TOP_LEFT:
+                unit->setPositionX(unit->getPositionX() - 1);
+                unit->setPositionY(unit->getPositionY() - 1);
+                break;
+        }
     }
         
     std::vector<Direction> Board::directionAvailable(int unitId) {
         std::vector<Direction> directionAvailable;
-        std::vector<int> terrainsAround = findTerrainAround(findTerrainOnPosition(findUnit(unitId)->getPositionX(), findUnit(unitId)->getPositionY())->getId());
-        
-        if(findUnit(unitId)->getSpeed() > terrainsAround.at(0)) {
-            //directionAvailable.push_back();
-        }
+        Unit* unit = findUnit(unitId);
+        std::vector<int> terrainsAround = findTerrainAround(
+            findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getId());
+
+//        for (t_id : terrainsAround) {
+//            if (findTerrain(t_id)->getMovementCost() <= unit->getSpeed()) {
+//                
+//            }
+//        }
+
         return directionAvailable;
     } 
 
