@@ -321,76 +321,76 @@ namespace state {
             if((i / (width / 2)) % 2) {
                 switch (terrainsTmp.at(i)) {
                     case 'G' :  //Grass
-                        terrainToAdd = new Default(TerrainTypeId::GRASS, 1, 2 * i % (width / 2), i / (width / 2));
+                        terrainToAdd = new Default(TerrainTypeId::GRASS, 1, 2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'F' :  //Forest
-                        terrainToAdd = new Default(TerrainTypeId::FOREST, 2, 2 * i % (width / 2), i / (width / 2));
+                        terrainToAdd = new Default(TerrainTypeId::FOREST, 2, 2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'W' :  //Water
-                        terrainToAdd = new Default(TerrainTypeId::WATER, 5, 2 * i % (width / 2), i / (width / 2));
+                        terrainToAdd = new Default(TerrainTypeId::WATER, 5, 2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'H' :  //House
-                        terrainToAdd = new House(2 * i % (width / 2), i / (width / 2));
+                        terrainToAdd = new House(2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'C' :  //Castle
-                        terrainToAdd = new Castle(2 * i % (width / 2), i / (width / 2));
+                        terrainToAdd = new Castle(2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'L' :  //Wall left
-                        terrainToAdd = new Wall(Orientation::LEFT, 2 * i % (width / 2), i / (width / 2));
+                        terrainToAdd = new Wall(Orientation::LEFT, 2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'T' :  //Wall top
-                        terrainToAdd = new Wall(Orientation::UP, 2 * i % (width / 2), i / (width / 2));
+                        terrainToAdd = new Wall(Orientation::UP, 2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'R' :  //Wall right
-                        terrainToAdd = new Wall(Orientation::RIGHT, 2 * i % (width / 2), i / (width / 2));
+                        terrainToAdd = new Wall(Orientation::RIGHT, 2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     default :
-                        std::cerr << "Le type du terrain en (" << 2 * i % (width / 2) << "," << i / (width / 2) << ") n'est pas reconnu" << std::endl;
+                        std::cerr << "Le type du terrain en (" << 2 * (i % (width / 2)) << "," << i / (width / 2) << ") n'est pas reconnu" << std::endl;
                 }
             } else {
                 switch (terrainsTmp.at(i)) {
                     case 'G' :  //Grass
-                        terrainToAdd = new Default(TerrainTypeId::GRASS, 1, 2 * i % (width / 2) + 1, i / (width / 2));
+                        terrainToAdd = new Default(TerrainTypeId::GRASS, 1, 2 * (i % (width / 2)) + 1, i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'F' :  //Forest
-                        terrainToAdd = new Default(TerrainTypeId::FOREST, 2, 2 * i % (width / 2) + 1, i / (width / 2));
+                        terrainToAdd = new Default(TerrainTypeId::FOREST, 2, 2 * (i % (width / 2)) + 1, i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'W' :  //Water
-                        terrainToAdd = new Default(TerrainTypeId::WATER, 5, 2 * i % (width / 2) + 1, i / (width / 2));
+                        terrainToAdd = new Default(TerrainTypeId::WATER, 5, 2 * (i % (width / 2)) + 1, i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'H' :  //House
-                        terrainToAdd = new House(2 * i % (width / 2) + 1, i / (width / 2));
+                        terrainToAdd = new House(2 * (i % (width / 2)) + 1, i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'C' :  //Castle
-                        terrainToAdd = new Castle(2 * i % (width / 2) + 1, i / (width / 2));
+                        terrainToAdd = new Castle(2 * (i % (width / 2)) + 1, i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'L' :  //Wall left
-                        terrainToAdd = new Wall(Orientation::LEFT, 2 * i % (width / 2) + 1, i / (width / 2));
+                        terrainToAdd = new Wall(Orientation::LEFT, 2 * (i % (width / 2)) + 1, i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'T' :  //Wall top
-                        terrainToAdd = new Wall(Orientation::UP, 2 * i % (width / 2) + 1, i / (width / 2));
+                        terrainToAdd = new Wall(Orientation::UP, 2 * (i % (width / 2)) + 1, i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     case 'R' :  //Wall right
-                        terrainToAdd = new Wall(Orientation::RIGHT, 2 * i % (width / 2) + 1, i / (width / 2));
+                        terrainToAdd = new Wall(Orientation::RIGHT, 2 * (i % (width / 2)) + 1, i / (width / 2));
                         addTerrain(terrainToAdd);
                         break;
                     default :
-                        std::cerr << "Le type du terrain en (" << 2 * i % (width / 2) + 1 << "," << i / (width / 2) << ") n'est pas reconnu" << std::endl;
+                        std::cerr << "Le type du terrain en (" << 2 * (i % (width / 2)) + 1 << "," << i / (width / 2) << ") n'est pas reconnu" << std::endl;
                 }
             }
         }
