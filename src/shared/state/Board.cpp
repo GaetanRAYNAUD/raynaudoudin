@@ -160,7 +160,7 @@ namespace state {
     }
 
     Terrain* Board::findTerrainOnPosition(int positionX, int positionY) const {
-        if(positionX < 0 || positionY < 0 || positionX > width || positionY > height) {
+        if(positionX < 0 || positionY < 0 || positionX > width || positionY > 2 * height) {
             return nullptr;
         } else {
             for (auto& it : terrains) {
@@ -400,6 +400,7 @@ namespace state {
                     case 'C' :  //Castle
                         terrainToAdd = new Castle(2 * (i % (width / 2)), i / (width / 2));
                         addTerrain(terrainToAdd);
+                        std::cout << "Castle en (" << terrainToAdd->getPositionX() << "," << terrainToAdd->getPositionY() << ")" << std::endl;
                         break;
                     case 'L' :  //Wall left
                         terrainToAdd = new Wall(Orientation::LEFT, 2 * (i % (width / 2)), i / (width / 2));

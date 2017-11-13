@@ -19,11 +19,11 @@ namespace render {
             Tile tileTerrain = tileset->getTile(*(t.second.get()));
             surface->setSpriteTexture(i, tileTerrain);
             
-            posX = t.second.get()->getPositionX() * tileTerrain.getWidth() - t.second.get()->getPositionX() * tileTerrain.getWidth() / 4;
+            posX = t.second.get()->getPositionX() * tileTerrain.getHeight() - t.second.get()->getPositionX() * tileTerrain.getWidth() / 4;
             if (t.second.get()->getPositionX() % 2) {
-                posY = t.second.get()->getPositionY() * tileTerrain.getHeight();      
+                posY = t.second.get()->getPositionY() / 2 * tileTerrain.getHeight();
             } else {
-                posY = t.second.get()->getPositionY() * tileTerrain.getHeight() + tileTerrain.getHeight() / 2;
+                posY = t.second.get()->getPositionY() / 2 * tileTerrain.getHeight() + tileTerrain.getHeight() / 2;
             }
             
             surface->setSpriteLocation(i, posX, posY, tileTerrain.getWidth(), tileTerrain.getHeight());
