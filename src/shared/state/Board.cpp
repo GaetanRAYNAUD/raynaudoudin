@@ -337,15 +337,15 @@ namespace state {
             if (t->getMovementCost() <= unit->getSpeed()) {
                 if(t->getPositionY() == unit->getPositionY() - 2 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP);
-                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionX() == unit->getPositionY() - 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
+                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionY() == unit->getPositionY() - 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP_RIGHT);
-                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionX() == unit->getPositionY() + 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
+                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionY() == unit->getPositionY() + 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT_RIGHT);
                 } else if(t->getPositionY() == unit->getPositionY() + 2 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT);
-                } else if(t->getPositionX() == unit->getPositionX() - 1 && t->getPositionX() == unit->getPositionY() + 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
+                } else if(t->getPositionX() == unit->getPositionX() - 1 && t->getPositionY() == unit->getPositionY() + 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT_LEFT);
-                } else if(findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
+                } else if(t->getPositionX() == unit->getPositionX() - 1 && t->getPositionY() == unit->getPositionY() - 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP_LEFT);
                 }
             }

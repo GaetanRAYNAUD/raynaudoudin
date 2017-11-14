@@ -7,9 +7,9 @@ namespace engine {
     
     void test_createBoard(Engine* engine) {
         Command* command;
-        
+                
         std::cout << "***************************************************" << std::endl;
-        
+                
         command = new LoadCommand("res/map.txt");        
         std::cout << "Ajout d'une commande de création du jeu" << std::endl;        
         engine->addCommand(1, command);
@@ -22,16 +22,16 @@ namespace engine {
         } else {
             std::cout << "Le jeu n'a pas pu être créé" << std::endl;
         }
+        
+        std::cout << "***************************************************" << std::endl;
     }
     
     void test_spawnUnit(Engine* engine) {
         Command* command;
         
-        std::cout << "***************************************************" << std::endl;
-        
         command = new SpawnCommand(engine->getState().getBoard().findUnit(0)->getPositionX(), 
                 engine->getState().getBoard().findUnit(0)->getPositionY(), UnitTypeId::SWORDMAN);
-        std::cout << "Ajout d'une commande de recrutement d'une unité à partir du château en (3,1)" << std::endl;
+        std::cout << "Ajout d'une commande de recrutement d'une unité à partir du château en (" << engine->getState().getBoard().findUnit(0)->getPositionX() << "," <<  engine->getState().getBoard().findUnit(0)->getPositionY() << ")" << std::endl;
         engine->addCommand(1, command);
         
         std::cout << "Éxécution de la liste des commandes" << std::endl;
@@ -41,50 +41,110 @@ namespace engine {
             std::cout << "Unité correctement ajoutée au jeu" << std::endl;
         } else {
             std::cout << "L'unité n'a pas pu être ajoutée au jeu" << std::endl;
-        }       
+        }
+        
+        std::cout << "***************************************************" << std::endl;
     }
     
     void test_moveUnit(Engine* engine) {
         Command* command;
-        
-        std::cout << "***************************************************" << std::endl;
        
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 en (8,4)" << std::endl;
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::TOP);
+        engine->addCommand(1, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
         command = new MoveCommand(1, state::Direction::TOP);
         engine->addCommand(2, command);
         
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 en (8,3)" << std::endl;
-        command = new MoveCommand(2, state::Direction::BOT);
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::TOP_LEFT);
         engine->addCommand(3, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::BOT_LEFT);
+        engine->addCommand(4, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::BOT_LEFT);
+        engine->addCommand(5, command);
+
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+        engine->addCommand(6, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::BOT_LEFT);
+        engine->addCommand(5, command);
+
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+        engine->addCommand(6, command);
+
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::BOT_LEFT);
+        engine->addCommand(5, command);
+
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+        engine->addCommand(6, command);        
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT);
+        engine->addCommand(7, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT);
+        engine->addCommand(8, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        engine->addCommand(9, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
+        engine->addCommand(10, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        engine->addCommand(11, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
+        engine->addCommand(12, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        engine->addCommand(13, command);        
         
         std::cout << "Éxécution de la liste des commandes" << std::endl;
         engine->update();
                 
-        if(engine->getState().getBoard().isUnitOnPosition(8, 4)) {
-            if(engine->getState().getBoard().findUnitOnPosition(8, 4)->getId() == 1) {
-                std::cout << "L'unité 1 est bien en (8,4)" << std::endl;            
-            } else {
-                std::cout << "ERREUR : L'unité 1 n'est pas en (8,4)" << std::endl;    
-            }
-        } else {
-            std::cout << "ERREUR : Il n'y a pas d'unité en (8,4)" << std::endl;              
-        }
+//        if(engine->getState().getBoard().isUnitOnPosition(8, 4)) {
+//            if(engine->getState().getBoard().findUnitOnPosition(8, 4)->getId() == 1) {
+//                std::cout << "L'unité 1 est bien en (8,4)" << std::endl;            
+//            } else {
+//                std::cout << "ERREUR : L'unité 1 n'est pas en (8,4)" << std::endl;    
+//            }
+//        } else {
+//            std::cout << "ERREUR : Il n'y a pas d'unité en (8,4)" << std::endl;              
+//        }
+//        
+//        if(engine->getState().getBoard().isUnitOnPosition(8, 3)) {
+//            if(engine->getState().getBoard().findUnitOnPosition(8, 3)->getId() == 2) {
+//                std::cout << "L'unité 2 est bien en (8,3)" << std::endl;            
+//            } else {
+//                std::cout << "ERREUR : L'unité 2 n'est pas en (8,3)" << std::endl;    
+//            }
+//        } else {
+//            std::cout << "ERREUR : Il n'y a pas d'unité en (8,3)" << std::endl;              
+//        }
         
-        if(engine->getState().getBoard().isUnitOnPosition(8, 3)) {
-            if(engine->getState().getBoard().findUnitOnPosition(8, 3)->getId() == 2) {
-                std::cout << "L'unité 2 est bien en (8,3)" << std::endl;            
-            } else {
-                std::cout << "ERREUR : L'unité 2 n'est pas en (8,3)" << std::endl;    
-            }
-        } else {
-            std::cout << "ERREUR : Il n'y a pas d'unité en (8,3)" << std::endl;              
-        }      
+        std::cout << "***************************************************" << std::endl;
     }
     
     void test_attackUnit(Engine* engine) {
         Command* command;
-        
-        std::cout << "***************************************************" << std::endl;
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
         std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
@@ -113,7 +173,9 @@ namespace engine {
             std::cout << "Le personnage est mort après plusieurs attaques" << std::endl;
         } else {
             std::cout << "ERREUR : Le personnage n'est pas mort après plusieurs attaques" << std::endl;
-        }      
+        }
+        
+        std::cout << "***************************************************" << std::endl;        
     }
     
     void engineTest() {
@@ -131,6 +193,8 @@ namespace engine {
         scene = new Scene(engine->getState());
                                 
         std::cout << "Appuyer sur espace pour lancer les tests" << std::endl;
+        std::cout << "***************************************************" << std::endl;
+        
         while (window.isOpen()) {
             sf::Event event;
             
@@ -148,7 +212,7 @@ namespace engine {
                                 caseTest++; 
                                 break;
                             case 2:
-                                test_attackUnit(engine);
+                                //test_attackUnit(engine);
                                 scene = new Scene(engine->getState());
                                 caseTest++;
                                 break;
@@ -157,6 +221,7 @@ namespace engine {
                         }
                         
                         std::cout << "Appuyer sur espace pour continuer" << std::endl;
+                        std::cout << "***************************************************" << std::endl;                        
                     }
                     
                 if (event.type == sf::Event::Closed) {
