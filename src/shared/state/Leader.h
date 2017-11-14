@@ -17,7 +17,7 @@ namespace state {
   class Leader : public state::Unit {
     // Operations
   public:
-    Leader (TeamId team, int positionX = 0, int positionY = 0, RaceTypeId race = RaceTypeId::HUMAN);
+    Leader (TeamId team, int positionX, int positionY, RaceTypeId race);
     Unit* clone () const;
     // Setters and Getters
   };

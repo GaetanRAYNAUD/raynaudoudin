@@ -46,9 +46,53 @@ namespace engine {
         std::cout << "***************************************************" << std::endl;
     }
     
-    void test_moveUnit(Engine* engine) {
+    void test_moveUnit1(Engine* engine) {
         Command* command;
-       
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT);
+        engine->addCommand(1, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT);
+        engine->addCommand(2, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas-droit" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        engine->addCommand(3, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le haut-droit" << std::endl;
+        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
+        engine->addCommand(4, command);
+        
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas-droit" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        engine->addCommand(5, command);
+        
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        command = new EndTurnCommand();
+        engine->addCommand(6, command);
+        
+        std::cout << "Éxécution de la liste des commandes" << std::endl;
+        engine->update();
+        
+        if(engine->getState().getBoard().isUnitOnPosition(5, 8)) {
+            if(engine->getState().getBoard().findUnitOnPosition(5, 8)->getId() == 2) {
+                std::cout << "L'unité 2 est bien en (5,8)" << std::endl;            
+            } else {
+                std::cout << "ERREUR : L'unité 2 n'est pas en (5,8)" << std::endl;    
+            }
+        } else {
+            std::cout << "ERREUR : Il n'y a pas d'unité en (5,8)" << std::endl;              
+        }
+        
+        std::cout << "***************************************************" << std::endl;
+    }
+    
+    
+    void test_moveUnit2(Engine* engine) {
+        Command* command;
+        
         std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
         command = new MoveCommand(1, state::Direction::TOP);
         engine->addCommand(1, command);
@@ -57,60 +101,92 @@ namespace engine {
         command = new MoveCommand(1, state::Direction::TOP);
         engine->addCommand(2, command);
         
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut-gauche" << std::endl;
         command = new MoveCommand(1, state::Direction::TOP_LEFT);
         engine->addCommand(3, command);
         
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le bas-gauche" << std::endl;
         command = new MoveCommand(1, state::Direction::BOT_LEFT);
         engine->addCommand(4, command);
         
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
+        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le bas-gauche" << std::endl;
         command = new MoveCommand(1, state::Direction::BOT_LEFT);
-        engine->addCommand(5, command);     
+        engine->addCommand(5, command);
         
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::BOT);
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        command = new EndTurnCommand();
         engine->addCommand(6, command);
-        
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::BOT);
-        engine->addCommand(7, command);
-        
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
-        engine->addCommand(8, command);
-        
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
-        engine->addCommand(9, command);
-        
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
-        engine->addCommand(10, command);        
         
         std::cout << "Éxécution de la liste des commandes" << std::endl;
         engine->update();
                 
-//        if(engine->getState().getBoard().isUnitOnPosition(8, 4)) {
-//            if(engine->getState().getBoard().findUnitOnPosition(8, 4)->getId() == 1) {
-//                std::cout << "L'unité 1 est bien en (8,4)" << std::endl;            
-//            } else {
-//                std::cout << "ERREUR : L'unité 1 n'est pas en (8,4)" << std::endl;    
-//            }
-//        } else {
-//            std::cout << "ERREUR : Il n'y a pas d'unité en (8,4)" << std::endl;              
-//        }
-//        
-//        if(engine->getState().getBoard().isUnitOnPosition(8, 3)) {
-//            if(engine->getState().getBoard().findUnitOnPosition(8, 3)->getId() == 2) {
-//                std::cout << "L'unité 2 est bien en (8,3)" << std::endl;            
-//            } else {
-//                std::cout << "ERREUR : L'unité 2 n'est pas en (8,3)" << std::endl;    
-//            }
-//        } else {
-//            std::cout << "ERREUR : Il n'y a pas d'unité en (8,3)" << std::endl;              
-//        }
+        if(engine->getState().getBoard().isUnitOnPosition(15, 10)) {
+            if(engine->getState().getBoard().findUnitOnPosition(15, 10)->getId() == 1) {
+                std::cout << "L'unité 1 est bien en (15,10)" << std::endl;            
+            } else {
+                std::cout << "ERREUR : L'unité 1 n'est pas en (15,10)" << std::endl;    
+            }
+        } else {
+            std::cout << "ERREUR : Il n'y a pas d'unité en (15,10)" << std::endl;              
+        }
+        
+        std::cout << "***************************************************" << std::endl;
+    }
+    
+    void test_moveUnit3(Engine* engine) {
+        Command* command;
+        
+        std::cout << "Déplacement des unités 1 et 2 côte à côte" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        engine->addCommand(1, command);
+        
+        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
+        engine->addCommand(2, command);
+        
+        command = new EndTurnCommand();
+        engine->addCommand(3, command);
+        
+        command = new MoveCommand(1, state::Direction::BOT_LEFT);
+        engine->addCommand(4, command);
+
+        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+        engine->addCommand(5, command);
+        
+        command = new MoveCommand(1, state::Direction::BOT_LEFT);
+        engine->addCommand(6, command);
+
+        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+        engine->addCommand(7, command);         
+        
+        command = new EndTurnCommand();
+        engine->addCommand(8, command);
+        
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        engine->addCommand(9, command);
+
+        command = new EndTurnCommand();
+        engine->addCommand(10, command);
+
+        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+        engine->addCommand(11, command);
+        
+        command = new EndTurnCommand();
+        engine->addCommand(12, command);
+
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        engine->addCommand(13, command);
+
+        command = new EndTurnCommand();
+        engine->addCommand(14, command);        
+        
+        std::cout << "Éxécution de la liste des commandes" << std::endl;
+        engine->update();
+                
+        if(engine->getState().getBoard().isUnitAround(1, 2)) {
+            std::cout << "Les unités 1 et 2 sont bien côte à côte." << std::endl;
+        } else {
+            std::cout << "ERREUR : Les unités 1 et 2 ne sont pas côte à côte." << std::endl;
+        }
         
         std::cout << "***************************************************" << std::endl;
     }
@@ -179,11 +255,21 @@ namespace engine {
                                 caseTest++; 
                                 break;
                             case 1:
-                                test_moveUnit(engine);
+                                test_moveUnit1(engine);
                                 scene = new Scene(engine->getState());
                                 caseTest++; 
                                 break;
                             case 2:
+                                test_moveUnit2(engine);
+                                scene = new Scene(engine->getState());
+                                caseTest++; 
+                                break;
+                            case 3:
+                                test_moveUnit3(engine);
+                                scene = new Scene(engine->getState());
+                                caseTest++; 
+                                break;                                
+                            case 4:
                                 //test_attackUnit(engine);
                                 scene = new Scene(engine->getState());
                                 caseTest++;

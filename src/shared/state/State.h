@@ -29,6 +29,7 @@ namespace state {
     Board& getBoard ();
     const Board& getBoard () const;
     const TeamId getCurrentTeam () const;
+    void endTurn ();
     // Setters and Getters
     int getTurn() const;
     void setTurn(int turn);

@@ -54,7 +54,7 @@ namespace state {
     /// @param terrain		(???) 
     void addTerrain (Terrain* terrain);
     void deleteUnit (int id);
-    bool isUnitAround (int idAttacker, int idDefender);
+    bool isUnitAround (int idAttacker, int idDefender) const;
     bool isUnitOnPosition (int x, int y) const;
     Unit* findUnit (int id) const;
     Team* findTeam (TeamId id) const;
@@ -73,6 +73,7 @@ namespace state {
     const std::map<TeamId, std::unique_ptr<Team> >& getTeams () const;
     const std::map<int, std::unique_ptr<Terrain> >& getTerrains () const;
     const std::map<int, std::unique_ptr<Unit> >& getUnits () const;
+    void endTurn (TeamId currentTeam);
     void loadTerrainsFromFile (std::string path);
     // Setters and Getters
   };

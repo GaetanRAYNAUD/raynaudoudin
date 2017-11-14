@@ -17,7 +17,7 @@ namespace state {
   class Swordman : public state::Unit {
     // Operations
   public:
-    Swordman (TeamId team, int positionX = 0, int positionY = 0, RaceTypeId race = RaceTypeId::HUMAN);
+    Swordman (TeamId team, int positionX, int positionY, RaceTypeId race);
     Unit* clone () const;
     // Setters and Getters
   };

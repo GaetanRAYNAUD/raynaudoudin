@@ -2,8 +2,9 @@
 
 namespace state {
 
-    Team::Team(TeamId id): id(id), gold(50) {
-        
+    Team::Team(TeamId id, RaceTypeId race): id(id), race(race) {
+        gold = 50;
+        nbHouses = 0;
     }
 
     int Team::getGold() const {
@@ -43,7 +44,7 @@ namespace state {
     }
 
     void Team::generateGold() {
-        gold += nbHouses * 2;
+        gold = gold + nbHouses * 2 + 5;
     }
 
     void Team::addHouse() {

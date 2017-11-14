@@ -18,12 +18,12 @@ namespace state {
     // Attributes
   private:
     TeamId id;
-    int gold     = 50;
-    int nbHouses     = 0;
-    RaceTypeId race     = RaceTypeId::HUMAN;
+    int gold;
+    int nbHouses;
+    RaceTypeId race;
     // Operations
   public:
-    Team (TeamId teamId);
+    Team (TeamId teamId, RaceTypeId race);
     const TeamId& getId () const;
     int getGold () const;
     const RaceTypeId& getRace () const;

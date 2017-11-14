@@ -23,14 +23,14 @@ namespace state {
         this->height = height;
         Unit* unit = nullptr;
         
-        unit = new Leader(TeamId::TEAM_1, 3, 4, RaceTypeId::HUMAN);
+        addTeam(new Team(TeamId::TEAM_1, RaceTypeId::HUMAN));
+        addTeam(new Team(TeamId::TEAM_2, RaceTypeId::ORC));
+        
+        unit = new Leader(TeamId::TEAM_1, 3, 4, findTeam(TeamId::TEAM_1)->getRace());
         addUnit(unit);
         
-        unit = new Leader(TeamId::TEAM_2, 18, 13, RaceTypeId::ORC);
+        unit = new Leader(TeamId::TEAM_2, 18, 13, findTeam(TeamId::TEAM_2)->getRace());
         addUnit(unit);
-        
-        addTeam(new Team(TeamId::TEAM_1));
-        addTeam(new Team(TeamId::TEAM_2));
     }
         
     Board::Board(const Board& other) {
@@ -100,12 +100,12 @@ namespace state {
         
         switch(unitTypeId) {
             case UnitTypeId::BOWMAN:
-                newUnit = new Bowman(team, x, y);
+                newUnit = new Bowman(team, x, y, findTeam(team)->getRace());
                 addUnit(newUnit);
                 break;
                 
             case UnitTypeId::SWORDMAN:
-                newUnit = new Swordman(team, x, y);
+                newUnit = new Swordman(team, x, y, findTeam(team)->getRace());
                 addUnit(newUnit);
                 break;
                 
@@ -118,7 +118,7 @@ namespace state {
         units.erase(units.find(id));
     }
 
-    bool Board::isUnitAround(int idAttacker, int idDefender) {
+    bool Board::isUnitAround(int idAttacker, int idDefender) const {
         std::vector<int> listIdUnitArround = findIdUnitAround(idAttacker);      
 
         for (int unitId : listIdUnitArround) {
@@ -267,7 +267,7 @@ namespace state {
 
 
     Unit* Board::findUnitOnPosition(int positionX, int positionY) const {
-        if(positionX < 0 || positionY < 0 || positionX > width || positionY > height) {
+        if(positionX < 0 || positionY < 0 || positionX > width || positionY > 2 * height) {
             return nullptr;
         } else {
             for (auto& it : units) {
@@ -374,6 +374,15 @@ namespace state {
         terrains.clear();
         units.clear();
     }
+
+    void Board::endTurn(TeamId currentTeam) {
+        for(auto& u : units) {
+            u.second.get()->setSpeed(5);
+        }
+        
+        findTeam(currentTeam)->generateGold();
+    }
+
 
     void Board::loadTerrainsFromFile(std::string path) {
         std::vector<char> terrainsTmp;

@@ -7,7 +7,9 @@ namespace engine {
     }
 
     void MoveCommand::execute(state::State& state) {
-        state.getBoard().moveUnit(idUnit, direction);
+        if(state.getBoard().findUnit(idUnit)->getTeam() == state.getCurrentTeam()) {
+            state.getBoard().moveUnit(idUnit, direction);
+        }
     }
 
     CommandTypeId MoveCommand::getTypeId() const {

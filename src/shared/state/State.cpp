@@ -36,6 +36,12 @@ namespace state {
         }
     }
 
+    void State::endTurn() {
+        board.endTurn(getCurrentTeam());
+        turn = turn + 1;
+    }
+
+
     void State::setTurn(int turn) {
         this->turn = turn;
     }
