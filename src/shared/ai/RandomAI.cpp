@@ -6,7 +6,7 @@ namespace ai {
 
     }
 
-    void RandomAI::run(engine::Engine& engine, int idUnit) {
+    void RandomAI::run(engine::Engine& engine) {
 //        std::uniform_real_distribution<int> dist(1, 5);
     }
 

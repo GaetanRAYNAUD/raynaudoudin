@@ -21,9 +21,9 @@ namespace ai {
   class AI {
     // Operations
   public:
-    virtual void run (engine::Engine& engine, int idUnit) = 0;
+    virtual void run (engine::Engine& engine) = 0;
   protected:
-    void listCommands (std::vector<std::unique_ptr<engine::Command>>& list, const state::State& state, int idUnit);
+    void listCommands (std::vector<std::unique_ptr<engine::Command>>& list, const state::State& state);
     // Setters and Getters
   };
 
