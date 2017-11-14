@@ -195,23 +195,23 @@ namespace engine {
         Command* command;
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
-        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
         engine->addCommand(4, command);
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
-        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
         engine->addCommand(5, command);
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
-        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
         engine->addCommand(6, command);
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
-        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
         engine->addCommand(7, command);
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
-        std::cout << "Ajout d'une commande d'attaque de la case (8,3) à (8,4)" << std::endl;
+        std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
         engine->addCommand(8, command);
         
         std::cout << "Éxécution de la  liste des commandes" << std::endl;
@@ -270,7 +270,7 @@ namespace engine {
                                 caseTest++; 
                                 break;                                
                             case 4:
-                                //test_attackUnit(engine);
+                                test_attackUnit(engine);
                                 scene = new Scene(engine->getState());
                                 caseTest++;
                                 break;
