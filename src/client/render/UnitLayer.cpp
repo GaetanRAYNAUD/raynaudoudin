@@ -21,9 +21,9 @@ namespace render {
             
             posX = u.second.get()->getPositionX() * tileUnit.getWidth() - u.second.get()->getPositionX() * tileUnit.getWidth() / 4;
             if (u.second.get()->getPositionX() % 2) {
-                posY = u.second.get()->getPositionY() * tileUnit.getHeight();      
+                posY = u.second.get()->getPositionY() / 2 * tileUnit.getHeight();      
             } else {
-                posY = u.second.get()->getPositionY() * tileUnit.getHeight() + tileUnit.getHeight() / 2;
+                posY = u.second.get()->getPositionY() / 2 * tileUnit.getHeight() + tileUnit.getHeight() / 2;
             }
             
             surface->setSpriteLocation(i, posX, posY, tileUnit.getWidth(), tileUnit.getHeight());
