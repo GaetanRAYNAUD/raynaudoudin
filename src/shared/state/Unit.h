@@ -12,7 +12,6 @@ namespace state {
 
 #include "UnitTypeId.h"
 #include "RaceTypeId.h"
-#include "Direction.h"
 #include "Weapon.h"
 
 namespace state {
@@ -38,7 +37,6 @@ namespace state {
     Unit& operator= (const Unit& other);
     virtual ~Unit ();
     void takeDamage (int damage);
-    void Move (Direction direction);
     bool isDead () const;
     int getPositionX () const;
     int getPositionY () const;

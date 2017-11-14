@@ -1,4 +1,5 @@
 #include "State.h"
+#include "TeamId.h"
 
 namespace state {
 
@@ -20,6 +21,19 @@ namespace state {
 
     int State::getEpoch() const {
         return epoch;
+    }
+    
+    const TeamId State::getCurrentTeam() const {
+        switch (turn % 2) {
+            case 0:
+                return TeamId::TEAM_1;
+                break;
+            case 1:
+                return TeamId::TEAM_2;
+                break;
+            default:
+                return TeamId::INVALIDTEAM;
+        }
     }
 
     void State::setTurn(int turn) {

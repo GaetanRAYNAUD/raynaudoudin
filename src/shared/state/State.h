@@ -9,6 +9,7 @@ namespace state {
 }
 
 #include "Board.h"
+#include "TeamId.h"
 #include "Observable.h"
 
 namespace state {
@@ -27,6 +28,7 @@ namespace state {
     State ();
     Board& getBoard ();
     const Board& getBoard () const;
+    const TeamId getCurrentTeam () const;
     // Setters and Getters
     int getTurn() const;
     void setTurn(int turn);
