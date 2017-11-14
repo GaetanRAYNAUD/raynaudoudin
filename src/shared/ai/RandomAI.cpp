@@ -1,4 +1,6 @@
 #include "RandomAI.h"
+#include "engine/EndTurnCommand.h"
+#include <iostream>
 
 namespace ai {
 
@@ -7,9 +9,16 @@ namespace ai {
     }
 
     void RandomAI::run(engine::Engine& engine) {
-        std::random_device rd;
         std::vector<engine::Command*> commands = listCommands(engine.getState());
-//        commands.at(randgen).execute(engine->getState());
+        if(commands.size() != 0) {
+            std::uniform_int_distribution<int> dis(0, commands.size());
+            int rand = dis(randgen);
+            engine.addCommand(1, commands.at(rand));
+            engine.update();
+        } else {
+            engine.addCommand(1, new engine::EndTurnCommand());
+            engine.update();
+        }
         
         commands.clear();
     }

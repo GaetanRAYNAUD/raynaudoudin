@@ -8,6 +8,43 @@ using namespace ai;
 namespace random_ai {
     
     void random_aiTest() {
+        Engine* engine = new Engine();
+        std::random_device rand;
+        AI* ai = new RandomAI(rand());
+        Scene* scene;
+        Command* command;
+        sf::Time timeSleep = sf::milliseconds(500);
         
+        int windowWidth = 1152;
+        int windowHeight = 576;
+        
+        sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
+        window.setFramerateLimit(30);
+                
+        command = new LoadCommand("res/map.txt");             
+        engine->addCommand(1, command);
+        engine->update();
+        
+        scene = new Scene(engine->getState());
+        
+        while (window.isOpen()) {
+            sf::Event event;
+            
+            while (window.pollEvent(event)) {                    
+                if (event.type == sf::Event::Closed) {
+                    window.close();
+                } 
+            }
+            
+            ai->run(*engine);
+            scene = new Scene(engine->getState());
+
+            scene->draw(window);
+            window.display();
+            sf::sleep(timeSleep);
+        }
+        
+        delete scene;
+        delete engine;
     }
 }

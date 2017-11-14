@@ -2,6 +2,7 @@
 #include "RandomAI.h"
 #include "engine/MoveCommand.h"
 #include "engine/AttackCommand.h"
+#include "engine/SpawnCommand.h"
 
 namespace ai {
 
@@ -23,6 +24,16 @@ namespace ai {
                 for(int& uAround : unitsAround) {
                     if(state.getBoard().findUnit(uAround)->getTeam() != u.second.get()->getTeam()) {
                         commands.push_back(new engine::AttackCommand(u.second.get()->getId(), uAround, u.second.get()->getWeapons().find(rand() % 2)->second->getTypeId()));
+                    }
+                }
+                
+                if(u.second.get()->getTypeId() == state::UnitTypeId::LEADER) {
+                    if(state.getBoard().findTeam(state.getBoard().findUnitOnPosition(u.second.get()->getPositionX(), u.second.get()->getPositionY())->getTeam())->verifyGold(state::UnitTypeId::SWORDMAN) && state.getBoard().findTerrainOnPosition(u.second.get()->getPositionX(), u.second.get()->getPositionY())->getTypeId() == state::TerrainTypeId::CASTLE) {
+                        commands.push_back(new engine::SpawnCommand(u.second.get()->getPositionX(), u.second.get()->getPositionY(), state::UnitTypeId::SWORDMAN));
+                    }
+                    
+                    if(state.getBoard().findTeam(state.getBoard().findUnitOnPosition(u.second.get()->getPositionX(), u.second.get()->getPositionY())->getTeam())->verifyGold(state::UnitTypeId::BOWMAN) && state.getBoard().findTerrainOnPosition(u.second.get()->getPositionX(), u.second.get()->getPositionY())->getTypeId() == state::TerrainTypeId::CASTLE) {
+                        commands.push_back(new engine::SpawnCommand(u.second.get()->getPositionX(), u.second.get()->getPositionY(), state::UnitTypeId::BOWMAN));
                     }
                 }
             }
