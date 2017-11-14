@@ -67,55 +67,27 @@ namespace engine {
         
         std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
         command = new MoveCommand(1, state::Direction::BOT_LEFT);
-        engine->addCommand(5, command);
-
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
-        command = new MoveCommand(1, state::Direction::TOP_LEFT);
-        engine->addCommand(6, command);
+        engine->addCommand(5, command);     
         
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
-        command = new MoveCommand(1, state::Direction::BOT_LEFT);
-        engine->addCommand(5, command);
-
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
-        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
+        command = new MoveCommand(2, state::Direction::BOT);
         engine->addCommand(6, command);
-
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
-        command = new MoveCommand(1, state::Direction::BOT_LEFT);
-        engine->addCommand(5, command);
-
-        std::cout << "Ajout d'une commande de déplacement de l'unité 1 vers le haut" << std::endl;
-        command = new MoveCommand(1, state::Direction::TOP_LEFT);
-        engine->addCommand(6, command);        
         
         std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
         command = new MoveCommand(2, state::Direction::BOT);
         engine->addCommand(7, command);
         
         std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::BOT);
+        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
         engine->addCommand(8, command);
         
         std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
         engine->addCommand(9, command);
         
         std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
-        engine->addCommand(10, command);
-        
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
         command = new MoveCommand(2, state::Direction::BOT_RIGHT);
-        engine->addCommand(11, command);
-        
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
-        engine->addCommand(12, command);
-        
-        std::cout << "Ajout d'une commande de déplacement de l'unité 2 vers le bas" << std::endl;
-        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
-        engine->addCommand(13, command);        
+        engine->addCommand(10, command);        
         
         std::cout << "Éxécution de la liste des commandes" << std::endl;
         engine->update();
