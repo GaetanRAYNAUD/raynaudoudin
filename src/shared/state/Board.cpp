@@ -296,25 +296,31 @@ namespace state {
                 switch (direction) {
                     case Direction::TOP:
                         unit->setPositionY(unit->getPositionY() - 2);
+                        unit->setSpeed(unit->getSpeed() - findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getMovementCost());
                         break;
                     case Direction::TOP_RIGHT:
                         unit->setPositionX(unit->getPositionX() + 1);
                         unit->setPositionY(unit->getPositionY() - 1);
+                        unit->setSpeed(unit->getSpeed() - findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getMovementCost());
                         break;
                     case Direction::BOT_RIGHT:
                         unit->setPositionX(unit->getPositionX() + 1);
                         unit->setPositionY(unit->getPositionY() + 1);
+                        unit->setSpeed(unit->getSpeed() - findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getMovementCost());
                         break;
                     case Direction::BOT:
                         unit->setPositionY(unit->getPositionY() + 2);
+                        unit->setSpeed(unit->getSpeed() - findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getMovementCost());
                         break;
                     case Direction::BOT_LEFT:
                         unit->setPositionX(unit->getPositionX() - 1);
                         unit->setPositionY(unit->getPositionY() + 1);
+                        unit->setSpeed(unit->getSpeed() - findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getMovementCost());
                         break;
                     case Direction::TOP_LEFT:
                         unit->setPositionX(unit->getPositionX() - 1);
                         unit->setPositionY(unit->getPositionY() - 1);
+                        unit->setSpeed(unit->getSpeed() - findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getMovementCost());
                         break;
                 }
             }
