@@ -7,7 +7,11 @@ namespace ai {
     }
 
     void RandomAI::run(engine::Engine& engine) {
-//        std::uniform_real_distribution<int> dist(1, 5);
+        std::random_device rd;
+        std::vector<engine::Command*> commands = listCommands(engine.getState());
+//        commands.at(randgen).execute(engine->getState());
+        
+        commands.clear();
     }
 
 }

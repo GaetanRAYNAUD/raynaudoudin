@@ -3,17 +3,20 @@
 #define AI__AI__H
 
 #include <vector>
-#include <memory>
 
 namespace engine {
   class Engine;
-  class Command;
 };
 namespace state {
   class State;
+};
+namespace engine {
+  class Command;
 }
 
+#include "engine/Engine.h"
 #include "engine/Command.h"
+#include "state/State.h"
 
 namespace ai {
 
@@ -23,7 +26,7 @@ namespace ai {
   public:
     virtual void run (engine::Engine& engine) = 0;
   protected:
-    void listCommands (std::vector<std::unique_ptr<engine::Command>>& list, const state::State& state);
+    std::vector<engine::Command*> listCommands (const state::State& state);
     // Setters and Getters
   };
 
