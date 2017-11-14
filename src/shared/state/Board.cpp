@@ -26,10 +26,10 @@ namespace state {
         Unit* unit = nullptr;
         Team* team = nullptr;
         
-        unit = new Leader(1, 3, 2, RaceTypeId::HUMAN);
+        unit = new Leader(1, 3, 4, RaceTypeId::HUMAN);
         addUnit(unit);
         
-        unit = new Leader(2, 18, 6, RaceTypeId::ORC);
+        unit = new Leader(2, 18, 13, RaceTypeId::ORC);
         addUnit(unit);
         
         team = new Team();
@@ -323,14 +323,26 @@ namespace state {
     std::vector<Direction> Board::directionAvailable(int unitId) {
         std::vector<Direction> directionAvailable;
         Unit* unit = findUnit(unitId);
-        std::vector<int> terrainsAround = findIdTerrainAround(
+        std::vector<Terrain*> terrainsAround = findTerrainAround(
             findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getId());
 
-//        for (t_id : terrainsAround) {
-//            if (findTerrain(t_id)->getMovementCost() <= unit->getSpeed()) {
-//                findTerrain(t_id).
-//            }
-//        }
+        for (Terrain* t : terrainsAround) {
+            if (t->getMovementCost() <= unit->getSpeed()) {
+                if(t->getPositionY() == unit->getPositionY() - 2) {
+                    directionAvailable.push_back(Direction::TOP);
+                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionX() == unit->getPositionY() - 1) {
+                    directionAvailable.push_back(Direction::TOP_RIGHT);
+                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionX() == unit->getPositionY() + 1) {
+                    directionAvailable.push_back(Direction::BOT_RIGHT);
+                } else if(t->getPositionY() == unit->getPositionY() + 2) {
+                    directionAvailable.push_back(Direction::BOT);
+                } else if(t->getPositionX() == unit->getPositionX() - 1 && t->getPositionX() == unit->getPositionY() + 1) {
+                    directionAvailable.push_back(Direction::BOT_LEFT);
+                } else {
+                    directionAvailable.push_back(Direction::TOP_LEFT);
+                }
+            }
+        }
 
         return directionAvailable;
     } 
