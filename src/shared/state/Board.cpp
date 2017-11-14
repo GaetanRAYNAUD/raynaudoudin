@@ -24,7 +24,6 @@ namespace state {
         this->width = width;
         this->height = height;
         Unit* unit = nullptr;
-        Team* team = nullptr;
         
         unit = new Leader(1, 3, 4, RaceTypeId::HUMAN);
         addUnit(unit);
@@ -32,11 +31,8 @@ namespace state {
         unit = new Leader(2, 18, 13, RaceTypeId::ORC);
         addUnit(unit);
         
-        team = new Team();
-        addTeam(team);
-        
-        team = new Team();
-        addTeam(team);
+        addTeam(new Team());
+        addTeam(new Team());
     }
         
     Board::Board(const Board& other) {
