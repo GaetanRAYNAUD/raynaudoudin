@@ -60,7 +60,7 @@ namespace state {
         return speed;
     }
 
-    int Unit::getTeam() const {
+    const TeamId& Unit::getTeam() const {
         return team;
     }
 
@@ -105,7 +105,7 @@ namespace state {
         this->speed = speed;
     }
 
-    void Unit::setTeam(int team) {
+    void Unit::setTeam(TeamId team) {
         this->team = team;
     }
 

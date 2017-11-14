@@ -2,15 +2,15 @@
 
 namespace state {
 
-    Team::Team() {
-        gold = 50;
+    Team::Team(TeamId id): id(id), gold(50) {
+        
     }
 
     int Team::getGold() const {
         return gold;
     }
 
-    int Team::getId() const {
+    const TeamId& Team::getId() const {
         return id;
     }
 
@@ -58,7 +58,7 @@ namespace state {
         return new Team(*this);
     }
 
-    void Team::setId(int id) {
+    void Team::setId(TeamId id) {
         this->id = id;
     }
 

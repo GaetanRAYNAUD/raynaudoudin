@@ -10,6 +10,7 @@ namespace state {
   class Weapon;
 }
 
+#include "TeamId.h"
 #include "UnitTypeId.h"
 #include "RaceTypeId.h"
 #include "Weapon.h"
@@ -26,7 +27,7 @@ namespace state {
     int speed     = 5;
     int positionX;
     int positionY;
-    int team;
+    TeamId team;
     std::map<int, std::unique_ptr<Weapon>> weapons;
     UnitTypeId typeId     = UnitTypeId::INVALIDUNIT;
     RaceTypeId race     = RaceTypeId::HUMAN;
@@ -44,7 +45,7 @@ namespace state {
     int getSpeed () const;
     const UnitTypeId& getTypeId () const;
     int getId () const;
-    int getTeam () const;
+    const TeamId& getTeam () const;
     const RaceTypeId& getRace () const;
     void setSpeed (int speed);
     virtual Unit* clone () const = 0;
@@ -53,7 +54,7 @@ namespace state {
     void setLife(int life);
     void setPositionX(int positionX);
     void setPositionY(int positionY);
-    void setTeam(int team);
+    void setTeam(TeamId team);
     const std::map<int, std::unique_ptr<Weapon>>& getWeapons() const;
     void setWeapons(const std::map<int, std::unique_ptr<Weapon>>& weapons);
     void setTypeId(UnitTypeId typeId);

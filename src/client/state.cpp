@@ -1,28 +1,12 @@
 #include "state.hpp"
 #include "state/RaceTypeId.h"
+#include "state/TeamId.h"
 
 namespace state {
     
     bool unitTest_shouldCreatState() {
         State* state = new State();
         return (state != NULL);
-    }
-
-    bool unitTest_shouldAddTeamToBoard() {
-        State* state = new State();
-        int teamsSize = state->getBoard().getTeams().size();
-        
-        std::cout << "  Il y a actuellement " << teamsSize << " équipe(s) dans le jeu" << std::endl;
-        
-        std::cout << "  Ajout d'une équipe au jeu" << std::endl;
-        
-        Team* team = new Team();
-        state->getBoard().addTeam(team);
-        
-        int teamsResize = state->getBoard().getTeams().size();
-        std::cout << "  Il y a maintenant " << teamsResize << " équipe(s) dans le jeu" << std::endl;
-        
-        return (teamsResize == teamsSize + 1);    
     }
 
     bool unitTest_shouldAddTerrainToBoard() {
@@ -79,7 +63,7 @@ namespace state {
         
         std::cout << "  Ajout d'une unité de type SWORDMAN au jeu" << std::endl;
         
-        Unit* unit = new Swordman(1, 1, 1, RaceTypeId::HUMAN);
+        Unit* unit = new Swordman(TeamId::TEAM_1, 1, 1, RaceTypeId::HUMAN);
         state->getBoard().addUnit(unit);
         
         unitSize = state->getBoard().getUnits().size();
@@ -112,7 +96,7 @@ namespace state {
         
         std::cout << "  Ajout d'une unité de type LEADER au jeu" << std::endl;
         
-        unit = new Leader(1, 1, 2, RaceTypeId::HUMAN);
+        unit = new Leader(TeamId::TEAM_1, 1, 2, RaceTypeId::HUMAN);
         state->getBoard().addUnit(unit);
         
         unitSize = state->getBoard().getUnits().size();
@@ -161,15 +145,7 @@ namespace state {
         } else {
             std::cout << "ERREUR : Etat non créé !" << std::endl;
         }
-        std::cout << "***************************************************" << std::endl;
-        
-        std::cout << "Tentative d'ajout d'une équipe au jeu" << std::endl;
-        
-        if(unitTest_shouldAddTeamToBoard()) {
-            std::cout << "Equipe correctement ajoutée au jeu" << std::endl;
-        } else {
-            std::cout << "ERREUR : Equipe non ajoutée au jeu !" << std::endl;
-        }
+
         std::cout << "***************************************************" << std::endl;
 
         std::cout << "Tentative d'ajout de terrains au jeu" << std::endl;

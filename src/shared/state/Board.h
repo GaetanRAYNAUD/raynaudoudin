@@ -16,6 +16,7 @@ namespace state {
 }
 
 #include "UnitTypeId.h"
+#include "TeamId.h"
 #include "Direction.h"
 #include "Observable.h"
 #include "Team.h"
@@ -33,10 +34,9 @@ namespace state {
     /// 	
     int width;
     int height;
-    std::map<int, std::unique_ptr<Team>> teams;
+    std::map<TeamId, std::unique_ptr<Team>> teams;
     std::map<int, std::unique_ptr<Terrain>> terrains;
     std::map<int, std::unique_ptr<Unit>> units;
-    static int idTeam;
     static int idTerrain;
     static int idUnit;
     // Operations
@@ -46,7 +46,7 @@ namespace state {
     Board& operator= (const Board& other);
     ~Board ();
     void addUnit (Unit* unit);
-    void createNewUnit (UnitTypeId unitTypeId, int team, int x, int y);
+    void createNewUnit (UnitTypeId unitTypeId, TeamId team, int x, int y);
     /// 	
     /// @param team		(???) 
     void addTeam (Team* team);
@@ -57,20 +57,20 @@ namespace state {
     bool isUnitAround (int idAttacker, int idDefender);
     bool isUnitOnPosition (int x, int y) const;
     Unit* findUnit (int id) const;
-    Team* findTeam (int id) const;
+    Team* findTeam (TeamId id) const;
     /// 		
     /// @param id		(???) 
     Terrain* findTerrain (int id) const;
-    std::vector<int> findIdUnitAround (int id);
+    std::vector<int> findIdUnitAround (int id) const;
     Unit* findUnitOnPosition (int positionX, int positionY) const;
-    std::vector<int> findIdTerrainAround (int id);
-    std::vector<Terrain*> findTerrainAround (int id);
+    std::vector<int> findIdTerrainAround (int id) const;
+    std::vector<Terrain*> findTerrainAround (int id) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
-    std::vector<Direction> directionAvailable (int unitId);
+    std::vector<Direction> directionAvailable (int unitId) const;
     void moveUnit (int id, Direction direction);
     int getHeight () const;
     int getWidth () const;
-    const std::map<int, std::unique_ptr<Team> >& getTeams () const;
+    const std::map<TeamId, std::unique_ptr<Team> >& getTeams () const;
     const std::map<int, std::unique_ptr<Terrain> >& getTerrains () const;
     const std::map<int, std::unique_ptr<Unit> >& getUnits () const;
     void loadTerrainsFromFile (std::string path);

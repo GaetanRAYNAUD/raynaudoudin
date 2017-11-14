@@ -9,4 +9,5 @@
 #include "engine/LoadCommand.h"
 #include "engine/AttackCommand.h"
 #include "engine/SpawnCommand.h"
+#include "engine/EndTurnCommand.h"
 #endif

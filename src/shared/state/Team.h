@@ -7,6 +7,7 @@ namespace state {
   class Team;
 }
 
+#include "TeamId.h"
 #include "RaceTypeId.h"
 #include "UnitTypeId.h"
 
@@ -16,17 +17,17 @@ namespace state {
   class Team {
     // Attributes
   private:
-    int id     = 0;
+    TeamId id;
     int gold     = 50;
     int nbHouses     = 0;
     RaceTypeId race     = RaceTypeId::HUMAN;
     // Operations
   public:
-    Team ();
-    int getId () const;
+    Team (TeamId teamId);
+    const TeamId& getId () const;
     int getGold () const;
     const RaceTypeId& getRace () const;
-    void setId (int id);
+    void setId (TeamId id);
     bool verifyGold (UnitTypeId unitTypeId) const;
     void generateGold ();
     void addHouse ();

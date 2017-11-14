@@ -13,26 +13,24 @@
 #include "Sword.h"
 
 namespace state {
-    int Board::idTeam = 0;
     int Board::idTerrain = 0;
     int Board::idUnit = 0;
     
     Board::Board(int width, int height) {
-        idTeam = 0;
         idTerrain = 0;
         idUnit = 0;
         this->width = width;
         this->height = height;
         Unit* unit = nullptr;
         
-        unit = new Leader(1, 3, 4, RaceTypeId::HUMAN);
+        unit = new Leader(TeamId::TEAM_1, 3, 4, RaceTypeId::HUMAN);
         addUnit(unit);
         
-        unit = new Leader(2, 18, 13, RaceTypeId::ORC);
+        unit = new Leader(TeamId::TEAM_2, 18, 13, RaceTypeId::ORC);
         addUnit(unit);
         
-        addTeam(new Team());
-        addTeam(new Team());
+        addTeam(new Team(TeamId::TEAM_1));
+        addTeam(new Team(TeamId::TEAM_2));
     }
         
     Board::Board(const Board& other) {
@@ -76,10 +74,7 @@ namespace state {
     }
 
     void Board::addTeam(Team* team) {
-        team->setId(idTeam);
         teams.insert(std::make_pair(team->getId(), std::unique_ptr<Team>(team)));
-        
-        idTeam++;
     }
 
     void Board::addTerrain(Terrain* terrain) {
@@ -100,7 +95,7 @@ namespace state {
         idUnit++;
     }
     
-    void Board::createNewUnit(UnitTypeId unitTypeId, int team, int x, int y) {
+    void Board::createNewUnit(UnitTypeId unitTypeId, TeamId team, int x, int y) {
         Unit* newUnit;
         
         switch(unitTypeId) {
@@ -147,7 +142,7 @@ namespace state {
         return units.find(id)->second.get();
     }
 
-    Team* Board::findTeam(int id) const {
+    Team* Board::findTeam(TeamId id) const {
         return teams.find(id)->second.get();
     }
 
@@ -171,7 +166,7 @@ namespace state {
         }
     }
         
-    std::vector<int> Board::findIdTerrainAround(int id) {
+    std::vector<int> Board::findIdTerrainAround(int id) const {
         std::vector<int> listIdTerrainArround;
         Terrain* terrain = findTerrain(id);
         Terrain* terrainAround = nullptr;
@@ -204,7 +199,7 @@ namespace state {
         return listIdTerrainArround;
     }
     
-    std::vector<Terrain*> Board::findTerrainAround(int id) {
+    std::vector<Terrain*> Board::findTerrainAround(int id) const {
         std::vector<Terrain*> listIdTerrainArround;
         Terrain* terrain = findTerrain(id);
         Terrain* terrainAround = nullptr;
@@ -237,7 +232,7 @@ namespace state {
         return listIdTerrainArround;
     }
 
-    std::vector<int> Board::findIdUnitAround(int id) {
+    std::vector<int> Board::findIdUnitAround(int id) const {
         std::vector<int> listIdUnitArround;
         Unit* unit = findUnit(id);
         Unit* unitAround = nullptr;
@@ -327,7 +322,7 @@ namespace state {
         }
     }
         
-    std::vector<Direction> Board::directionAvailable(int unitId) {
+    std::vector<Direction> Board::directionAvailable(int unitId) const {
         std::vector<Direction> directionAvailable;
         Unit* unit = findUnit(unitId);
         std::vector<Terrain*> terrainsAround = findTerrainAround(
@@ -362,7 +357,7 @@ namespace state {
         return width;
     }
 
-    const std::map<int, std::unique_ptr<Team> >& Board::getTeams() const {      
+    const std::map<TeamId, std::unique_ptr<Team> >& Board::getTeams() const {      
         return teams;
     }
 

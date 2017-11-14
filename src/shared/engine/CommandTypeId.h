@@ -9,7 +9,8 @@ namespace engine {
     LOAD     = 1,
     MOVE     = 2,
     ATTACK     = 3,
-    SPAWN     = 4
+    SPAWN     = 4,
+    END_TURN
   };
 
 };

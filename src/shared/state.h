@@ -2,6 +2,7 @@
 #ifndef __STATE__H
 #define __STATE__H
 
+#include "state/TeamId.h"
 #include "state/RaceTypeId.h"
 #include "state/UnitTypeId.h"
 #include "state/Team.h"
@@ -26,7 +27,6 @@
 #include "state/Sword.h"
 #include "state/Bow.h"
 #include "state/Bowman.h"
-#include "state/TeamId.h"
 #include "state/State.h"
 #include "state/BoardEvent.h"
 #include "state/StateEventId.h"
