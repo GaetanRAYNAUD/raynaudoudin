@@ -289,30 +289,35 @@ namespace state {
         
     void Board::moveUnit(int id, Direction direction) {
         Unit* unit = findUnit(id);
+        std::vector<Direction> directionsAvailable = directionAvailable(id);
         
-        switch (direction) {
-            case Direction::TOP:
-                unit->setPositionY(unit->getPositionY() - 2);
-                break;
-            case Direction::TOP_RIGHT:
-                unit->setPositionX(unit->getPositionX() + 1);
-                unit->setPositionY(unit->getPositionY() - 1);
-                break;
-            case Direction::BOT_RIGHT:
-                unit->setPositionX(unit->getPositionX() + 1);
-                unit->setPositionY(unit->getPositionY() + 1);
-                break;
-            case Direction::BOT:
-                unit->setPositionY(unit->getPositionY() + 2);
-                break;
-            case Direction::BOT_LEFT:
-                unit->setPositionX(unit->getPositionX() - 1);
-                unit->setPositionY(unit->getPositionY() + 1);
-                break;
-            case Direction::TOP_LEFT:
-                unit->setPositionX(unit->getPositionX() - 1);
-                unit->setPositionY(unit->getPositionY() - 1);
-                break;
+        for (Direction d : directionsAvailable) {
+            if (d == direction) {
+                switch (direction) {
+                    case Direction::TOP:
+                        unit->setPositionY(unit->getPositionY() - 2);
+                        break;
+                    case Direction::TOP_RIGHT:
+                        unit->setPositionX(unit->getPositionX() + 1);
+                        unit->setPositionY(unit->getPositionY() - 1);
+                        break;
+                    case Direction::BOT_RIGHT:
+                        unit->setPositionX(unit->getPositionX() + 1);
+                        unit->setPositionY(unit->getPositionY() + 1);
+                        break;
+                    case Direction::BOT:
+                        unit->setPositionY(unit->getPositionY() + 2);
+                        break;
+                    case Direction::BOT_LEFT:
+                        unit->setPositionX(unit->getPositionX() - 1);
+                        unit->setPositionY(unit->getPositionY() + 1);
+                        break;
+                    case Direction::TOP_LEFT:
+                        unit->setPositionX(unit->getPositionX() - 1);
+                        unit->setPositionY(unit->getPositionY() - 1);
+                        break;
+                }
+            }
         }
     }
         
@@ -324,17 +329,17 @@ namespace state {
 
         for (Terrain* t : terrainsAround) {
             if (t->getMovementCost() <= unit->getSpeed()) {
-                if(t->getPositionY() == unit->getPositionY() - 2) {
+                if(t->getPositionY() == unit->getPositionY() - 2 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP);
-                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionX() == unit->getPositionY() - 1) {
+                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionX() == unit->getPositionY() - 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP_RIGHT);
-                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionX() == unit->getPositionY() + 1) {
+                } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionX() == unit->getPositionY() + 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT_RIGHT);
-                } else if(t->getPositionY() == unit->getPositionY() + 2) {
+                } else if(t->getPositionY() == unit->getPositionY() + 2 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT);
-                } else if(t->getPositionX() == unit->getPositionX() - 1 && t->getPositionX() == unit->getPositionY() + 1) {
+                } else if(t->getPositionX() == unit->getPositionX() - 1 && t->getPositionX() == unit->getPositionY() + 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT_LEFT);
-                } else {
+                } else if(findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP_LEFT);
                 }
             }
