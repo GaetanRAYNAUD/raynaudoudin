@@ -12,6 +12,11 @@
 
 namespace engine {
     void engineTest();
+    void test_spawnUnit(Engine* engine);
+    void test_moveUnit1(Engine* engine);
+    void test_moveUnit2(Engine* engine);
+    void test_moveUnit3(Engine* engine);
+    void test_attackUnit(Engine* engine);
 }
 
 #endif /* ENGINE_HPP */
