@@ -4,6 +4,7 @@
 #include "engine/AttackCommand.h"
 #include "engine/SpawnCommand.h"
 #include "engine/EndTurnCommand.h"
+#include <iostream>
 
 namespace ai {
 
@@ -24,7 +25,11 @@ namespace ai {
                 
                 for(int& uAround : unitsAround) {
                     if(state.getBoard().findUnit(uAround)->getTeam() != u.second.get()->getTeam()) {
-                        commands.push_back(new engine::AttackCommand(u.second.get()->getId(), uAround, u.second.get()->getWeapons().find(rand() % 2)->second->getTypeId()));
+                        if(u.second.get()->getTypeId() == state::UnitTypeId::LEADER || u.second.get()->getTypeId() == state::UnitTypeId::BOWMAN) {
+                            commands.push_back(new engine::AttackCommand(u.second.get()->getId(), uAround, u.second.get()->getWeapons().find(rand() % 2 + 1)->second->getTypeId()));
+                        } else {
+                            commands.push_back(new engine::AttackCommand(u.second.get()->getId(), uAround, u.second.get()->getWeapons().find(1)->second->getTypeId()));
+                        }
                     }
                 }
                 

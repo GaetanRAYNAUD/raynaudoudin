@@ -9,7 +9,7 @@ namespace engine {
 
     void AttackCommand::attackUnit(state::State& state, int idUnitAttacker, int idUnitDefender, state::WeaponTypeId weaponTypeId) {
         if(state.getBoard().findUnit(idUnitAttacker)->getTeam() == state.getCurrentTeam()) {
-            if (state.getBoard().isUnitAround(idUnitAttacker, idUnitDefender)) {            
+            if (state.getBoard().isUnitAround(idUnitAttacker, idUnitDefender) && state.getBoard().findUnit(idUnitAttacker)->getSpeed() > 0) {            
                 state.getBoard().findUnit(idUnitDefender)->takeDamage(
                     state.getBoard().findUnit(idUnitAttacker)->getWeapons().at(weaponTypeId)->getDamage());
 
