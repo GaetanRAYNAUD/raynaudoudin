@@ -21,7 +21,7 @@ namespace render {
         tileMenuLeft = tileset->getTile(MenuTypeId::MENU_LEFT);
         
         surface->setSpriteTexture(1, tileMenuLeft);
-        surface->setSpriteLocation(1, 0, tileMenuTop.getHeight(), tileMenuLeft.getWidth(), 1080);
+        surface->setSpriteLocation(1, 0, tileMenuTop.getHeight(), 72 / 4, 1080);
     }
 
     void StateLayer::stateChanged(const state::Event& event) {
