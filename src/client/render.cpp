@@ -5,7 +5,7 @@ using namespace state;
 namespace render {
     
     void renderTest() {
-        int windowWidth = 1152;
+        int windowWidth = 1188;
         int windowHeight = 576;
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         window.setFramerateLimit(30);

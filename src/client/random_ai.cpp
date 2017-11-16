@@ -13,9 +13,9 @@ namespace random_ai {
         AI* ai = new RandomAI(rand());
         Scene* scene;
         Command* command;
-        sf::Time timeSleep = sf::milliseconds(500);
+        sf::Time timeSleep = sf::milliseconds(100);
         
-        int windowWidth = 1152;
+        int windowWidth = 1188;
         int windowHeight = 576;
         
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
@@ -24,13 +24,12 @@ namespace random_ai {
         command = new LoadCommand("res/map.txt");             
         engine->addCommand(1, command);
         engine->update();
-        
-        scene = new Scene(engine->getState());
-        
+      
+        scene = new Scene(engine->getState());        
         while (window.isOpen()) {
             sf::Event event;
             
-            while (window.pollEvent(event)) {                    
+            while (window.pollEvent(event)) {            
                 if (event.type == sf::Event::Closed) {
                     window.close();
                 } 

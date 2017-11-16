@@ -231,7 +231,7 @@ namespace engine {
         Scene* scene;
         int caseTest = 0;
         
-        int windowWidth = 1152;
+        int windowWidth = 1188;
         int windowHeight = 576;
         
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
