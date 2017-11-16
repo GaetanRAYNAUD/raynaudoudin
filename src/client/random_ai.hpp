@@ -10,6 +10,7 @@
 #include "../shared/engine.h"
 #include "engine/Engine.h"
 #include "../shared/ai.h"
+#include "engine.hpp"
 
 namespace random_ai {
     void random_aiTest();

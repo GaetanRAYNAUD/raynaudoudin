@@ -25,6 +25,11 @@ namespace random_ai {
         engine->addCommand(1, command);
         engine->update();
       
+        test_spawnUnit(engine);
+        test_moveUnit1(engine);
+        test_moveUnit2(engine);
+        test_moveUnit3(engine);
+        
         scene = new Scene(engine->getState());
         while (window.isOpen()) {
             sf::Event event;
@@ -41,9 +46,9 @@ namespace random_ai {
             scene->draw(window);
             window.display();
             sf::sleep(timeSleep);
+            delete scene;
         }
         
-        delete scene;
         delete engine;
     }
 }
