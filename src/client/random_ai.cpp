@@ -13,7 +13,7 @@ namespace random_ai {
         AI* ai = new RandomAI(rand());
         Scene* scene;
         Command* command;
-        sf::Time timeSleep = sf::milliseconds(100);
+        sf::Time timeSleep = sf::milliseconds(500);
         
         int windowWidth = 1188;
         int windowHeight = 576;
@@ -23,20 +23,6 @@ namespace random_ai {
                 
         command = new LoadCommand("res/map.txt");
         engine->addCommand(1, command);
-        engine->update();
-        
-        command = new SpawnCommand(3, 4, state::UnitTypeId::SWORDMAN);
-        engine->addCommand(1, command);
-        command = new EndTurnCommand();
-        engine->addCommand(2, command);
-        command = new SpawnCommand(18, 13, state::UnitTypeId::SWORDMAN);
-        engine->addCommand(3, command);
-        command = new SpawnCommand(18, 13, state::UnitTypeId::SWORDMAN);
-        engine->addCommand(4, command);
-        command = new SpawnCommand(18, 13, state::UnitTypeId::SWORDMAN);
-        engine->addCommand(5, command);
-        command = new SpawnCommand(18, 13, state::UnitTypeId::SWORDMAN);
-        engine->addCommand(6, command);        
         engine->update();
       
         scene = new Scene(engine->getState());

@@ -151,7 +151,7 @@ namespace state {
         std::cout << "Tentative d'ajout de terrains au jeu" << std::endl;
         
         if(unitTest_shouldAddTerrainToBoard()) {
-            std::cout << "Terrains correctement ajouté au jeu" << std::endl;
+            std::cout << "Terrains correctement ajoutés au jeu" << std::endl;
         } else {
             std::cout << "ERREUR : L'ajout de terrain au jeu à planté !" << std::endl;
         }
@@ -160,7 +160,7 @@ namespace state {
         std::cout << "Tentative d'ajout d'unités au jeu" << std::endl;
         
         if(unitTest_shouldAddUnitToBoard()) {
-            std::cout << "Unités correctement ajouté au jeu" << std::endl;
+            std::cout << "Unités correctement ajoutées au jeu" << std::endl;
         } else {
             std::cout << "ERREUR : L'ajout d'unité au jeu à planté !" << std::endl;
         }
