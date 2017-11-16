@@ -21,11 +21,25 @@ namespace random_ai {
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         window.setFramerateLimit(30);
                 
-        command = new LoadCommand("res/map.txt");             
+        command = new LoadCommand("res/map.txt");
         engine->addCommand(1, command);
         engine->update();
+        
+        command = new SpawnCommand(3, 4, state::UnitTypeId::SWORDMAN);
+        engine->addCommand(1, command);
+        command = new EndTurnCommand();
+        engine->addCommand(2, command);
+        command = new SpawnCommand(18, 13, state::UnitTypeId::SWORDMAN);
+        engine->addCommand(3, command);
+        command = new SpawnCommand(18, 13, state::UnitTypeId::SWORDMAN);
+        engine->addCommand(4, command);
+        command = new SpawnCommand(18, 13, state::UnitTypeId::SWORDMAN);
+        engine->addCommand(5, command);
+        command = new SpawnCommand(18, 13, state::UnitTypeId::SWORDMAN);
+        engine->addCommand(6, command);        
+        engine->update();
       
-        scene = new Scene(engine->getState());        
+        scene = new Scene(engine->getState());
         while (window.isOpen()) {
             sf::Event event;
             

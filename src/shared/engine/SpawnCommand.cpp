@@ -13,8 +13,8 @@ namespace engine {
                         state.getBoard().findUnitOnPosition(x, y)->getTypeId() == state::UnitTypeId::LEADER) {
                     if (!state.getBoard().isUnitOnPosition(x - 1, y - 1)) {
                         state.getBoard().createNewUnit(unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam(), x - 1, y - 1);
-                    } else if (!state.getBoard().isUnitOnPosition(x, y - 1)) {
-                        state.getBoard().createNewUnit(unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam(), x, y - 1);
+                    } else if (!state.getBoard().isUnitOnPosition(x, y - 2)) {
+                        state.getBoard().createNewUnit(unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam(), x, y - 2);
                     } else if (!state.getBoard().isUnitOnPosition(x + 1, y - 1)) {
                         state.getBoard().createNewUnit(unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam(), x + 1, y - 1);
                     }
