@@ -3,6 +3,7 @@
 #include "engine/MoveCommand.h"
 #include "engine/AttackCommand.h"
 #include "engine/SpawnCommand.h"
+#include "engine/EndTurnCommand.h"
 
 namespace ai {
 
@@ -28,7 +29,7 @@ namespace ai {
                 }
                 
                 if(u.second.get()->getTypeId() == state::UnitTypeId::LEADER) {
-                    if(state.getBoard().findTeam(state.getBoard().findUnitOnPosition(u.second.get()->getPositionX(), u.second.get()->getPositionY())->getTeam())->verifyGold(state::UnitTypeId::SWORDMAN) && state.getBoard().findTerrainOnPosition(u.second.get()->getPositionX(), u.second.get()->getPositionY())->getTypeId() == state::TerrainTypeId::CASTLE) {
+                    if(state.getBoard().findTeam(u.second.get()->getTeam())->verifyGold(state::UnitTypeId::SWORDMAN) && state.getBoard().findTerrainOnPosition(u.second.get()->getPositionX(), u.second.get()->getPositionY())->getTypeId() == state::TerrainTypeId::CASTLE) {
                         commands.push_back(new engine::SpawnCommand(u.second.get()->getPositionX(), u.second.get()->getPositionY(), state::UnitTypeId::SWORDMAN));
                     }
                     
@@ -37,6 +38,7 @@ namespace ai {
                     }
                 }
             }
+            commands.push_back(new engine::EndTurnCommand());
         }
         
         return commands;
