@@ -13,7 +13,7 @@ namespace random_ai {
         AI* ai = new RandomAI(rand());
         Scene* scene;
         Command* command;
-        sf::Time timeSleep = sf::milliseconds(50);
+        sf::Time timeSleep = sf::milliseconds(500);
         
         int windowWidth = 1188;
         int windowHeight = 576;
