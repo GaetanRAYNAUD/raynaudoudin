@@ -23,7 +23,7 @@ namespace engine {
             std::cout << "Le jeu n'a pas pu être créé" << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;
+        std::cout << "***************************************************" << std::endl;       
     }
     
     void test_spawnUnit(Engine* engine) {
@@ -43,7 +43,7 @@ namespace engine {
             std::cout << "L'unité n'a pas pu être ajoutée au jeu" << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;
+        std::cout << "***************************************************" << std::endl;     
     }
     
     void test_moveUnit1(Engine* engine) {
@@ -86,7 +86,7 @@ namespace engine {
             std::cout << "ERREUR : Il n'y a pas d'unité en (5,8)" << std::endl;              
         }
         
-        std::cout << "***************************************************" << std::endl;
+        std::cout << "***************************************************" << std::endl;       
     }
     
     
@@ -130,7 +130,7 @@ namespace engine {
             std::cout << "ERREUR : Il n'y a pas d'unité en (15,10)" << std::endl;              
         }
         
-        std::cout << "***************************************************" << std::endl;
+        std::cout << "***************************************************" << std::endl;      
     }
     
     void test_moveUnit3(Engine* engine) {
@@ -188,7 +188,7 @@ namespace engine {
             std::cout << "ERREUR : Les unités 1 et 2 ne sont pas côte à côte." << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;
+        std::cout << "***************************************************" << std::endl;      
     }
     
     void test_attackUnit(Engine* engine) {
@@ -196,23 +196,75 @@ namespace engine {
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
         std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
-        engine->addCommand(4, command);
+        engine->addCommand(1, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(2, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(3, command);
+        
+        std::cout << "Éxécution de la  liste des commandes" << std::endl;
+        engine->update();
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
         std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
-        engine->addCommand(5, command);
+        engine->addCommand(1, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(2, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(3, command);
+        
+        std::cout << "Éxécution de la  liste des commandes" << std::endl;
+        engine->update();
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
         std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
-        engine->addCommand(6, command);
+        engine->addCommand(1, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(2, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(3, command);
+        
+        std::cout << "Éxécution de la  liste des commandes" << std::endl;
+        engine->update();
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
         std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
-        engine->addCommand(7, command);
+        engine->addCommand(1, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(2, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(3, command);
+        
+        std::cout << "Éxécution de la  liste des commandes" << std::endl;
+        engine->update();
         
         command = new AttackCommand(1, 2, WeaponTypeId::SWORD);
         std::cout << "Ajout d'une commande d'attaque de l'unité 1 sur l'unité 2" << std::endl;
-        engine->addCommand(8, command);
+        engine->addCommand(1, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(2, command);
+        
+        command = new EndTurnCommand();
+        std::cout << "Ajout d'une commande de fin de tour" << std::endl;
+        engine->addCommand(3, command);
         
         std::cout << "Éxécution de la  liste des commandes" << std::endl;
         engine->update();
@@ -223,7 +275,7 @@ namespace engine {
             std::cout << "ERREUR : Le personnage n'est pas mort après plusieurs attaques" << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;        
+        std::cout << "***************************************************" << std::endl;
     }
     
     void engineTest() {
