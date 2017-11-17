@@ -3,6 +3,7 @@
 #define RENDER__SURFACE__H
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include <string>
 
 namespace sf {
@@ -26,6 +27,8 @@ namespace render {
   private:
     sf::Texture texture;
     sf::VertexArray quads;
+    std::vector<sf::Text> texts;
+    sf::Font font;
     // Operations
   public:
     void loadTexture (const std::string& image_file);
@@ -36,6 +39,7 @@ namespace render {
     /// @param target		(???) 
     /// @param states		(???) 
     void draw (sf::RenderTarget& target, sf::RenderStates states) const;
+    void addText (int x, int y, const std::string& msg, sf::Color color);
     // Setters and Getters
   };
 

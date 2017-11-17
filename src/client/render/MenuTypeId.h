@@ -7,7 +7,9 @@ namespace render {
 
   enum MenuTypeId {
     MENU_TOP     = 1,
-    MENU_LEFT     = 2
+    MENU_LEFT     = 2,
+    MENU_GOLD     = 3,
+    MENU_HOUSE     = 4
   };
 
 };

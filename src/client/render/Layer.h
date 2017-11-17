@@ -3,7 +3,6 @@
 #define RENDER__LAYER__H
 
 #include <memory>
-#include <string>
 
 namespace render {
   class Surface;
@@ -29,7 +28,6 @@ namespace render {
     const Surface* getSurface () const;
     void setSurface (Surface* surface);
     virtual void initSurface () = 0;
-    void printText (int x, int y, const std::string& msg, int size, const sf::Color color);
     // Setters and Getters
     const std::shared_ptr<TileSet>& getTileset() const;
     void setTileset(const std::shared_ptr<TileSet>& tileset);

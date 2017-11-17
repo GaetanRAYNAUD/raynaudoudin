@@ -29,8 +29,6 @@ namespace render {
             surface->setSpriteLocation(i, posX, posY, tileUnit.getWidth(), tileUnit.getHeight());
             i++;
         }
-        
-        printText(10, 10, "55", 12, sf::Color::White);
     }
 
     void UnitLayer::stateChanged(const state::Event& event) {

@@ -8,10 +8,10 @@ namespace render {
     }
 
     void StateLayer::initSurface() {
-        Tile tileMenuTop, tileMenuLeft;
+        Tile tileMenuTop, tileMenuLeft, tileGold, tileHouse;
         
         surface->loadTexture(tileset->getImageFile());
-        surface->initQuads(2);
+        surface->initQuads(4);
         
         tileMenuTop = tileset->getTile(MenuTypeId::MENU_TOP);
         
@@ -22,6 +22,20 @@ namespace render {
         
         surface->setSpriteTexture(1, tileMenuLeft);
         surface->setSpriteLocation(1, 0, tileMenuTop.getHeight(), 72 / 4, 1080);
+        
+        tileGold = tileset->getTile(MenuTypeId::MENU_GOLD);
+        
+        surface->setSpriteTexture(2, tileGold);
+        surface->setSpriteLocation(2, 18, 12, 16, 16);
+        
+        tileHouse = tileset->getTile(MenuTypeId::MENU_HOUSE);
+        
+        surface->setSpriteTexture(3, tileHouse);
+        surface->setSpriteLocation(3, 100, 12, 16, 16);      
+        
+        surface->addText(35, 10, std::to_string(state.getBoard().findTeam(state.getCurrentTeam())->getGold()), sf::Color::White);
+        
+        surface->addText(118, 11, std::to_string(state.getBoard().findTeam(state.getCurrentTeam())->getGold()), sf::Color::White); 
     }
 
     void StateLayer::stateChanged(const state::Event& event) {
