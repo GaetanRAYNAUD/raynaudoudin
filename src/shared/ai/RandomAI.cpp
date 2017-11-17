@@ -1,6 +1,6 @@
 #include "RandomAI.h"
 #include "engine/EndTurnCommand.h"
-#include <iostream>
+#include "engine/HandleWinCommand.h"
 
 namespace ai {
 
@@ -19,6 +19,9 @@ namespace ai {
             engine.addCommand(1, new engine::EndTurnCommand());
             engine.update();
         }
+        
+        engine.addCommand(2, new engine::HandleWinCommand());
+        engine.update();
         
         commands.clear();
     }

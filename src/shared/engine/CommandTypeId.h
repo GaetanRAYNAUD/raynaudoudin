@@ -10,7 +10,8 @@ namespace engine {
     MOVE     = 2,
     ATTACK     = 3,
     SPAWN     = 4,
-    END_TURN
+    END_TURN,
+    HANDLE_WIN     = 6
   };
 
 };

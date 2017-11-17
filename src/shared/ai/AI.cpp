@@ -4,7 +4,6 @@
 #include "engine/AttackCommand.h"
 #include "engine/SpawnCommand.h"
 #include "engine/EndTurnCommand.h"
-#include <iostream>
 
 namespace ai {
 

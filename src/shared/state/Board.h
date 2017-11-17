@@ -54,6 +54,7 @@ namespace state {
     /// @param terrain		(???) 
     void addTerrain (Terrain* terrain);
     void deleteUnit (int id);
+    bool isLeaderNotAlive (TeamId teamId);
     bool isUnitAround (int idAttacker, int idDefender) const;
     bool isUnitOnPosition (int x, int y) const;
     Unit* findUnit (int id) const;

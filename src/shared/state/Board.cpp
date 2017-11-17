@@ -117,6 +117,16 @@ namespace state {
     void Board::deleteUnit(int id) {       
         units.erase(units.find(id));
     }
+    
+    bool Board::isLeaderNotAlive(TeamId teamId) {
+        for(auto& u : units) {
+            if (u.second->getTypeId() == UnitTypeId::LEADER  && u.second->getTeam() == teamId) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
 
     bool Board::isUnitAround(int idAttacker, int idDefender) const {
         std::vector<int> listIdUnitArround = findIdUnitAround(idAttacker);      
@@ -154,10 +164,10 @@ namespace state {
         if(positionX < 0 || positionY < 0 || positionX > width || positionY > 2 * height) {
             return nullptr;
         } else {
-            for (auto& it : terrains) {
-                if (it.second->getPositionX() == positionX) {
-                    if (it.second->getPositionY() == positionY) {
-                        return it.second.get();
+            for (auto& t : terrains) {
+                if (t.second->getPositionX() == positionX) {
+                    if (t.second->getPositionY() == positionY) {
+                        return t.second.get();
                     }
                 }
             }
@@ -270,10 +280,10 @@ namespace state {
         if(positionX < 0 || positionY < 0 || positionX > width || positionY > 2 * height) {
             return nullptr;
         } else {
-            for (auto& it : units) {
-                if (it.second->getPositionX() == positionX) {
-                    if (it.second->getPositionY() == positionY) {
-                        return it.second.get();
+            for (auto& u : units) {
+                if (u.second->getPositionX() == positionX) {
+                    if (u.second->getPositionY() == positionY) {
+                        return u.second.get();
                     }
                 }
             }

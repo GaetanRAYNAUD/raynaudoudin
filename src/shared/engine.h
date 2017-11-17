@@ -10,4 +10,5 @@
 #include "engine/AttackCommand.h"
 #include "engine/SpawnCommand.h"
 #include "engine/EndTurnCommand.h"
+#include "engine/HandleWinCommand.h"
 #endif
