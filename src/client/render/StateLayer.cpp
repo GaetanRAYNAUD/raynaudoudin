@@ -32,6 +32,8 @@ namespace render {
         
         surface->setSpriteTexture(3, tileHouse);
         surface->setSpriteLocation(3, 100, 12, 16, 16);      
+        
+        surface->addText(34, 12, std::to_string(state.getBoard().findTeam(state.getCurrentTeam())->getGold()));        
     }
 
     void StateLayer::stateChanged(const state::Event& event) {

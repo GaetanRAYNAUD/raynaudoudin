@@ -5,9 +5,13 @@
 namespace render {
 
     void Surface::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-//        states.transform *= getTransform();
+        states.transform *= getTransform();
         states.texture = &texture;
         target.draw(quads, states);
+
+//        for(auto& t : texts) {
+//            target.draw(t);           
+//        }
     }
 
     void Surface::initQuads(int count) {
@@ -33,5 +37,23 @@ namespace render {
         quads[i * 4 + 2].texCoords = sf::Vector2f(texture.getX() + texture.getWidth(), texture.getY() + texture.getHeight());
         quads[i * 4 + 3].texCoords = sf::Vector2f(texture.getX(), texture.getY() + texture.getHeight());
     }
+
+    void Surface::addText(int x, int y, const std::string& msg) {
+        sf::Text text;
+        sf::Font font;
+        
+        if (!font.loadFromFile("res/font/calibri.ttf")) {
+            std::cerr << "Unable to load font file" << std::endl;
+        }
+        
+        text.setFont(font);
+        text.setString("Test");
+        text.setColor(sf::Color::White);
+        text.setCharacterSize(12);
+        text.setPosition(36, 12);
+                       
+        texts.push_back(text);
+    }
+
 
 }
