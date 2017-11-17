@@ -8,10 +8,10 @@ namespace render {
     }
 
     void StateLayer::initSurface() {
-        Tile tileMenuTop, tileMenuLeft, tileGold, tileHouse;
+        Tile tileMenuTop, tileMenuLeft, tileGold, tileHouse, tileTeam;
         
         surface->loadTexture(tileset->getImageFile());
-        surface->initQuads(4);
+        surface->initQuads(5);
         
         tileMenuTop = tileset->getTile(MenuTypeId::MENU_TOP);
         
@@ -31,11 +31,20 @@ namespace render {
         tileHouse = tileset->getTile(MenuTypeId::MENU_HOUSE);
         
         surface->setSpriteTexture(3, tileHouse);
-        surface->setSpriteLocation(3, 100, 12, 16, 16);      
+        surface->setSpriteLocation(3, 100, 12, 16, 16);
+        
+        if(state.getCurrentTeam() == state::TeamId::TEAM_1) {
+            tileTeam = tileset->getTile(MenuTypeId::MENU_TEAM_1);
+        } else {
+            tileTeam = tileset->getTile(MenuTypeId::MENU_TEAM_2);
+        }
+        
+        surface->setSpriteTexture(4, tileTeam);
+        surface->setSpriteLocation(4, 182, 12, 16, 16);        
         
         surface->addText(35, 10, std::to_string(state.getBoard().findTeam(state.getCurrentTeam())->getGold()), sf::Color::White);
         
-        surface->addText(118, 11, std::to_string(state.getBoard().findTeam(state.getCurrentTeam())->getGold()), sf::Color::White); 
+        surface->addText(118, 11, std::to_string(state.getBoard().findTeam(state.getCurrentTeam())->getNbHouses()), sf::Color::White); 
     }
 
     void StateLayer::stateChanged(const state::Event& event) {

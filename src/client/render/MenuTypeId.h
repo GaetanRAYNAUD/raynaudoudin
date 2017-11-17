@@ -9,7 +9,9 @@ namespace render {
     MENU_TOP     = 1,
     MENU_LEFT     = 2,
     MENU_GOLD     = 3,
-    MENU_HOUSE     = 4
+    MENU_HOUSE     = 4,
+    MENU_TEAM_1     = 5,
+    MENU_TEAM_2     = 6
   };
 
 };
