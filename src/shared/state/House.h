@@ -7,6 +7,7 @@ namespace state {
   class Terrain;
 }
 
+#include "TeamId.h"
 #include "Terrain.h"
 
 namespace state {
@@ -15,12 +16,14 @@ namespace state {
   class House : public state::Terrain {
     // Attributes
   private:
-    int teamId;
+    TeamId teamId;
     // Operations
   public:
     House (int positionX = 0, int positionY = 0);
-    void claim (int teamId);
+    void claim (TeamId teamId);
     Terrain* clone () const;
+    void setTeamId (TeamId teamId);
+    const TeamId& getTeamId () const;
     // Setters and Getters
   };
 
