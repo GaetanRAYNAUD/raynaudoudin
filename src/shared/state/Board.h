@@ -69,13 +69,14 @@ namespace state {
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
     std::vector<Direction> directionAvailable (int unitId) const;
     void moveUnit (int id, Direction direction);
+    void claimHouse (TeamId teamId, int x, int y);
+    void endTurn (TeamId currentTeam);
+    void loadTerrainsFromFile (std::string path);
     int getHeight () const;
     int getWidth () const;
     const std::map<TeamId, std::unique_ptr<Team> >& getTeams () const;
     const std::map<int, std::unique_ptr<Terrain> >& getTerrains () const;
     const std::map<int, std::unique_ptr<Unit> >& getUnits () const;
-    void endTurn (TeamId currentTeam);
-    void loadTerrainsFromFile (std::string path);
     // Setters and Getters
   };
 

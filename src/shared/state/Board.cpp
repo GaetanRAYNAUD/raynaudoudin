@@ -110,7 +110,7 @@ namespace state {
                 break;
                 
             default:
-                break;                
+                break;
         }
     }
 
@@ -129,7 +129,7 @@ namespace state {
     }
 
     bool Board::isUnitAround(int idAttacker, int idDefender) const {
-        std::vector<int> listIdUnitArround = findIdUnitAround(idAttacker);      
+        std::vector<int> listIdUnitArround = findIdUnitAround(idAttacker);
 
         for (int unitId : listIdUnitArround) {
             if (unitId == idDefender) {
@@ -330,6 +330,8 @@ namespace state {
                 }
             }
         }
+        
+        claimHouse(unit->getTeam(), unit->getPositionX(), unit->getPositionY());
     }
         
     std::vector<Direction> Board::directionAvailable(int unitId) const {
@@ -357,34 +359,25 @@ namespace state {
         }
 
         return directionAvailable;
-    } 
-
-    int Board::getHeight() const {
-        return height;
     }
 
-    int Board::getWidth() const {
-        return width;
+    void Board::claimHouse(TeamId teamId, int x, int y) {
+        House* tmpHouse;
+        
+        if(findTerrainOnPosition(x, y)->getTypeId() == TerrainTypeId::HOUSE) {
+            tmpHouse = (House*)findTerrainOnPosition(x, y);
+            if(tmpHouse->getTeamId() != teamId) {
+                if(tmpHouse->getTeamId() != TeamId::INVALIDTEAM) {
+                    findTeam(tmpHouse->getTeamId())->removeHouse();
+                }
+                
+                tmpHouse->claim(teamId);
+                findTeam(teamId)->addHouse();
+            }
+        }   
     }
-
-    const std::map<TeamId, std::unique_ptr<Team> >& Board::getTeams() const {      
-        return teams;
-    }
-
-    const std::map<int, std::unique_ptr<Terrain> >& Board::getTerrains() const {
-        return terrains;
-    }
-
-    const std::map<int, std::unique_ptr<Unit> >& Board::getUnits() const {
-        return units;
-    }
-
-    Board::~Board() {
-        teams.clear();
-        terrains.clear();
-        units.clear();
-    }
-
+    
+    
     void Board::endTurn(TeamId currentTeam) {
         for(auto& u : units) {
             u.second.get()->setSpeed(5);
@@ -397,7 +390,7 @@ namespace state {
     void Board::loadTerrainsFromFile(std::string path) {
         std::vector<char> terrainsTmp;
         std::ifstream file;
-        file.open(path, std::ios::in);    
+        file.open(path, std::ios::in);
         std::string line;
             
         while(!file.eof()){
@@ -411,7 +404,7 @@ namespace state {
         file.close();
         
         Terrain* terrainToAdd = nullptr;
-        for(int i = 0; i < width * height; i++) {
+        for(int i = 0;i < width * height;i++) {
             if((i / (width / 2)) % 2) {
                 switch (terrainsTmp.at(i)) {
                     case 'G' :  //Grass
@@ -489,6 +482,32 @@ namespace state {
             }
         }
     }
+    
 
+    int Board::getHeight() const {
+        return height;
+    }
+
+    int Board::getWidth() const {
+        return width;
+    }
+
+    const std::map<TeamId, std::unique_ptr<Team> >& Board::getTeams() const {      
+        return teams;
+    }
+
+    const std::map<int, std::unique_ptr<Terrain> >& Board::getTerrains() const {
+        return terrains;
+    }
+
+    const std::map<int, std::unique_ptr<Unit> >& Board::getUnits() const {
+        return units;
+    }
+
+    Board::~Board() {
+        teams.clear();
+        terrains.clear();
+        units.clear();
+    }
 
 }

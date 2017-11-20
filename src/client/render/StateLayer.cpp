@@ -1,5 +1,8 @@
 #include "StateLayer.h"
 #include "MenuTileSet.h"
+#include "state/House.h"
+
+#include <vector>
 
 namespace render {
 
@@ -8,10 +11,14 @@ namespace render {
     }
 
     void StateLayer::initSurface() {
-        Tile tileMenuTop, tileMenuLeft, tileGold, tileHouse, tileTeam;
+        Tile tileMenuTop, tileMenuLeft, tileGold, tileHouse, tileTeam; 
+        std::vector<Tile> tilesFlagHouse;
+        state::House* tmpHouse;
+        int posX, posY;
+        int nbQuads = 5;
         
         surface->loadTexture(tileset->getImageFile());
-        surface->initQuads(5);
+        surface->initQuads(nbQuads);
         
         tileMenuTop = tileset->getTile(MenuTypeId::MENU_TOP);
         
@@ -40,8 +47,34 @@ namespace render {
         }
         
         surface->setSpriteTexture(4, tileTeam);
-        surface->setSpriteLocation(4, 182, 12, 16, 16);        
+        surface->setSpriteLocation(4, 182, 12, 16, 16); 
         
+        for(auto& t : state.getBoard().getTerrains()) {
+            if(t.second.get()->getTypeId() == state::TerrainTypeId::HOUSE) {
+                tmpHouse = (state::House*)t.second.get();
+                nbQuads = nbQuads + 1;
+                surface->initQuads(nbQuads);
+                
+                if(tmpHouse->getTeamId() == state::TeamId::TEAM_1) {
+                    tilesFlagHouse.push_back(tileset->getTile(MenuTypeId::MENU_TEAM_1));
+                } else if(tmpHouse->getTeamId() == state::TeamId::TEAM_2) {
+                    tilesFlagHouse.push_back(tileset->getTile(MenuTypeId::MENU_TEAM_2));
+                } else {
+                    continue;
+                }
+                
+                posX = tmpHouse->getPositionX() * 72 - tmpHouse->getPositionX() * 72 / 4;
+                if (tmpHouse->getPositionX() % 2) {
+                    posY = tmpHouse->getPositionY() / 2 * 72;      
+                } else {
+                    posY = tmpHouse->getPositionY() / 2 * 72 + 72 / 2;
+                }
+                
+                surface->setSpriteTexture(nbQuads - 1, tilesFlagHouse.back());
+                surface->setSpriteLocation(nbQuads - 1, posX + 50, posY + 10, 16, 16);           
+            }
+        }       
+
         surface->addText(35, 10, std::to_string(state.getBoard().findTeam(state.getCurrentTeam())->getGold()), sf::Color::White);
         
         surface->addText(118, 11, std::to_string(state.getBoard().findTeam(state.getCurrentTeam())->getNbHouses()), sf::Color::White); 
