@@ -25,7 +25,7 @@ namespace state {
     int epoch     = 0;
     // Operations
   public:
-    State ();
+    State (int width, int height);
     Board& getBoard ();
     const Board& getBoard () const;
     const TeamId getCurrentTeam () const;

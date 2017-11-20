@@ -3,8 +3,8 @@
 
 namespace state {
 
-    State::State() {
-        board = Board(22, 8);
+    State::State(int width, int height) {
+        board = Board(width, height);
     }
     
     Board& State::getBoard() {

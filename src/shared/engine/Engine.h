@@ -26,7 +26,7 @@ namespace engine {
     std::map<int, std::unique_ptr<Command>> currentCommands;
     // Operations
   public:
-    Engine ();
+    Engine (int width, int height);
     virtual ~Engine ();
     const state::State& getState () const;
     void addCommand (int priority, Command* cmd);

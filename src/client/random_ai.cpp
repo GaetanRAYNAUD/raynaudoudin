@@ -8,7 +8,7 @@ using namespace ai;
 namespace random_ai {
     
     void random_aiTest() {
-        Engine* engine = new Engine();
+        Engine* engine = new Engine(22, 8);
         std::random_device rand;
         AI* ai = new RandomAI(rand());
         Scene* scene;

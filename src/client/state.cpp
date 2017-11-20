@@ -5,12 +5,12 @@
 namespace state {
     
     bool unitTest_shouldCreatState() {
-        State* state = new State();
+        State* state = new State(22, 8);
         return (state != NULL);
     }
 
     bool unitTest_shouldAddTerrainToBoard() {
-        State* state = new State();
+        State* state = new State(22, 8);
         int terrainSize = state->getBoard().getTerrains().size();
         
         std::cout << "  Il y a actuellement " << terrainSize << " terrain(s) dans le jeu" << std::endl;
@@ -56,7 +56,7 @@ namespace state {
     }
 
     bool unitTest_shouldAddUnitToBoard() {
-        State* state = new State();
+        State* state = new State(22, 8);
         int unitSize = state->getBoard().getUnits().size();
         
         std::cout << "  Il y a actuellement " << unitSize << " unité(s) dans le jeu" << std::endl;

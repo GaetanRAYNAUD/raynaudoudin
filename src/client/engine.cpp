@@ -279,7 +279,7 @@ namespace engine {
     }
     
     void engineTest() {
-        Engine* engine = new Engine();
+        Engine* engine = new Engine(22, 8);
         Scene* scene;
         int caseTest = 0;
         

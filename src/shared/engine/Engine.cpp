@@ -2,8 +2,8 @@
 
 namespace engine {
 
-    Engine::Engine() {
-        currentState = state::State();
+    Engine::Engine(int width, int height) : currentState(width, height) {
+        
     }
 
     void Engine::addCommand(int priority, Command* cmd) {
