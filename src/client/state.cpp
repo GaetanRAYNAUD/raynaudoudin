@@ -4,13 +4,12 @@
 
 namespace state {
     
-    bool unitTest_shouldCreatState() {
-        State* state = new State(22, 8);
-        return (state != NULL);
+    bool unitTest_shouldCreatState(State** state) {
+        *state = new State(22, 8);
+        return (state != nullptr);
     }
 
-    bool unitTest_shouldAddTerrainToBoard() {
-        State* state = new State(22, 8);
+    bool unitTest_shouldAddTerrainToBoard(State* state) {
         int terrainSize = state->getBoard().getTerrains().size();
         
         std::cout << "  Il y a actuellement " << terrainSize << " terrain(s) dans le jeu" << std::endl;
@@ -55,8 +54,7 @@ namespace state {
         }
     }
 
-    bool unitTest_shouldAddUnitToBoard() {
-        State* state = new State(22, 8);
+    bool unitTest_shouldAddUnitToBoard(State* state) {
         int unitSize = state->getBoard().getUnits().size();
         
         std::cout << "  Il y a actuellement " << unitSize << " unité(s) dans le jeu" << std::endl;
@@ -137,10 +135,12 @@ namespace state {
     }
 
     void unitTest() {
+        State* state = nullptr;
+        
         std::cout << "***************************************************" << std::endl;
         std::cout << "Tentative de création d'un état" << std::endl;
 
-        if(unitTest_shouldCreatState()) {
+        if(unitTest_shouldCreatState(&state)) {
             std::cout << "Etat créé" << std::endl;
         } else {
             std::cout << "ERREUR : Etat non créé !" << std::endl;
@@ -150,7 +150,7 @@ namespace state {
 
         std::cout << "Tentative d'ajout de terrains au jeu" << std::endl;
         
-        if(unitTest_shouldAddTerrainToBoard()) {
+        if(unitTest_shouldAddTerrainToBoard(state)) {
             std::cout << "Terrains correctement ajoutés au jeu" << std::endl;
         } else {
             std::cout << "ERREUR : L'ajout de terrain au jeu à planté !" << std::endl;
@@ -159,13 +159,15 @@ namespace state {
         
         std::cout << "Tentative d'ajout d'unités au jeu" << std::endl;
         
-        if(unitTest_shouldAddUnitToBoard()) {
+        if(unitTest_shouldAddUnitToBoard(state)) {
             std::cout << "Unités correctement ajoutées au jeu" << std::endl;
         } else {
             std::cout << "ERREUR : L'ajout d'unité au jeu à planté !" << std::endl;
         }
         std::cout << "***************************************************" << std::endl;
         std::cout << "Tests terminés!!" << std::endl;
+        
+        delete state;
     }
 
 }
