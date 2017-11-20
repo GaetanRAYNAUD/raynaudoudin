@@ -44,7 +44,7 @@ namespace state {
 
 
     void Team::generateGold() {
-        gold = gold + nbHouses * 2 + 5;
+        gold = gold + nbHouses * 5;
     }
 
     void Team::addHouse() {
