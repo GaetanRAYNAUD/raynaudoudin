@@ -303,26 +303,31 @@ namespace engine {
                         switch (caseTest) {           
                             case 0:
                                 test_spawnUnit(engine);
+                                delete scene;
                                 scene = new Scene(engine->getState());
                                 caseTest++; 
                                 break;
                             case 1:
                                 test_moveUnit1(engine);
+                                delete scene;
                                 scene = new Scene(engine->getState());
                                 caseTest++; 
                                 break;
                             case 2:
                                 test_moveUnit2(engine);
+                                delete scene;                                
                                 scene = new Scene(engine->getState());
                                 caseTest++; 
                                 break;
                             case 3:
                                 test_moveUnit3(engine);
+                                delete scene;                                
                                 scene = new Scene(engine->getState());
                                 caseTest++; 
                                 break;                                
                             case 4:
                                 test_attackUnit(engine);
+                                delete scene;                                
                                 scene = new Scene(engine->getState());
                                 caseTest++;
                                 break;
