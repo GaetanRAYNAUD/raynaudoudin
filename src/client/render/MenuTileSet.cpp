@@ -8,7 +8,7 @@ namespace render {
         menus.insert(std::make_pair(MenuTypeId::MENU_GOLD, Tile(59, 37, 16, 16)));
         menus.insert(std::make_pair(MenuTypeId::MENU_HOUSE, Tile(59, 52, 16, 16)));   
         menus.insert(std::make_pair(MenuTypeId::MENU_TEAM_1, Tile(59, 68, 27, 18)));
-        menus.insert(std::make_pair(MenuTypeId::MENU_TEAM_2, Tile(61, 87, 21, 16)));        
+        menus.insert(std::make_pair(MenuTypeId::MENU_TEAM_2, Tile(61, 87, 21, 16)));     
     }
 
     int MenuTileSet::getCellHeight() const {
