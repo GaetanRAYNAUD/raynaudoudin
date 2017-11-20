@@ -44,7 +44,10 @@ int main(int argc,char* argv[])
             cout << "Lancement de l'ia aléatoire" << endl;
             random_aiTest();
             
-        }else {
+        } else if (string(argv[1]) == "heuristic_ai"){
+            cout << "Lancement de l'ia heuristique" << endl;
+            
+        } else {
             cout << "Commande inconnue" << endl;
             cout << "Liste des commandes : " << endl;
             cout << "hello : Affiche un message de bienvenue" << endl;
@@ -52,6 +55,7 @@ int main(int argc,char* argv[])
             cout << "render : Lance le rendu d'un état" << endl;
             cout << "engine : Lance le moteur du jeu" << endl;
             cout << "random_ai : Lance l'ia aléatoire du jeu" << endl;
+            cout << "heuristique_ai : Lancement de l'ia heuristique" << endl;
         }
     }
     return 0;
