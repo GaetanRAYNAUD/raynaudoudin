@@ -21,12 +21,18 @@ namespace render {
   protected:
     std::unique_ptr<Surface> surface;
     std::shared_ptr<TileSet> tileset;
+    int shiftWidth;
+    int shiftHeight;
     // Operations
   public:
     Layer ();
     virtual ~Layer ();
     const Surface* getSurface () const;
+    int getShiftWidth () const;
+    int getShiftHeight () const;
     void setSurface (Surface* surface);
+    void setShiftWidth (int shiftWidth);
+    void setShiftHeight (int shiftHeight);
     virtual void initSurface () = 0;
     // Setters and Getters
     const std::shared_ptr<TileSet>& getTileset() const;

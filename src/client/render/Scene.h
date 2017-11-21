@@ -30,6 +30,9 @@ namespace render {
   class Scene {
     // Associations
     // Attributes
+  public:
+    int shiftWidth;
+    int shiftHeight;
   private:
     const state::State& state;
     int width     = 0;
@@ -42,6 +45,10 @@ namespace render {
     Scene (const state::State& state);
     int getWidth () const;
     int getHeigh () const;
+    int getShiftWidth () const;
+    int getShiftHeight () const;
+    void setShiftWidth (int shiftWidth);
+    void setShiftHeight (int shiftHeight);
     void stateChanged (const state::Event& event);
     void draw (sf::RenderWindow& window);
     // Setters and Getters
