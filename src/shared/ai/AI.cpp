@@ -22,10 +22,12 @@ namespace ai {
                 
                 unitsAround = state.getBoard().findIdUnitAround(u.second.get()->getId());
                 
-                for(int& uAround : unitsAround) {
+                for(auto& uAround : unitsAround) {
                     if(state.getBoard().findUnit(uAround)->getTeam() != u.second.get()->getTeam()) {
                         if(u.second.get()->getTypeId() == state::UnitTypeId::LEADER || u.second.get()->getTypeId() == state::UnitTypeId::BOWMAN) {
-                            commands.push_back(new engine::AttackCommand(u.second.get()->getId(), uAround, u.second.get()->getWeapons().find(rand() % 2 + 1)->second->getTypeId()));
+                            for(auto& w : u.second.get()->getWeapons()) {
+                                commands.push_back(new engine::AttackCommand(u.second.get()->getId(), uAround, w.second.get()->getTypeId()));
+                            }
                         } else {
                             commands.push_back(new engine::AttackCommand(u.second.get()->getId(), uAround, u.second.get()->getWeapons().find(1)->second->getTypeId()));
                         }

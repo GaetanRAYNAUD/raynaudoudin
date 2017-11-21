@@ -23,7 +23,7 @@ namespace engine {
     std::string fileName;
     // Operations
   public:
-    LoadCommand (const char* f);
+    LoadCommand (const std::string fileName);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters

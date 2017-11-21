@@ -21,16 +21,12 @@ namespace state {
         idUnit = 0;
         this->width = width;
         this->height = height;
-        Unit* unit = nullptr;
         
         addTeam(new Team(TeamId::TEAM_1, RaceTypeId::HUMAN));
         addTeam(new Team(TeamId::TEAM_2, RaceTypeId::ORC));
         
-        unit = new Leader(TeamId::TEAM_1, 3, 4, findTeam(TeamId::TEAM_1)->getRace());
-        addUnit(unit);
-        
-        unit = new Leader(TeamId::TEAM_2, 18, 13, findTeam(TeamId::TEAM_2)->getRace());
-        addUnit(unit);
+        addUnit(new Leader(TeamId::TEAM_1, 3, 4, findTeam(TeamId::TEAM_1)->getRace()));
+        addUnit(new Leader(TeamId::TEAM_2, 18, 13, findTeam(TeamId::TEAM_2)->getRace()));
     }
         
     Board::Board(const Board& other) {
@@ -95,18 +91,14 @@ namespace state {
         idUnit++;
     }
     
-    void Board::createNewUnit(UnitTypeId unitTypeId, TeamId team, int x, int y) {
-        Unit* newUnit;
-        
+    void Board::createNewUnit(UnitTypeId unitTypeId, TeamId team, int x, int y) {        
         switch(unitTypeId) {
             case UnitTypeId::BOWMAN:
-                newUnit = new Bowman(team, x, y, findTeam(team)->getRace());
-                addUnit(newUnit);
+                addUnit(new Bowman(team, x, y, findTeam(team)->getRace()));
                 break;
                 
             case UnitTypeId::SWORDMAN:
-                newUnit = new Swordman(team, x, y, findTeam(team)->getRace());
-                addUnit(newUnit);
+                addUnit(new Swordman(team, x, y, findTeam(team)->getRace()));
                 break;
                 
             default:
@@ -205,7 +197,7 @@ namespace state {
         if (terrainAround != nullptr) {
             listIdTerrainArround.push_back(terrainAround->getId());
         }
-        
+
         return listIdTerrainArround;
     }
     
@@ -213,7 +205,7 @@ namespace state {
         std::vector<Terrain*> listIdTerrainArround;
         Terrain* terrain = findTerrain(id);
         Terrain* terrainAround = nullptr;
-        
+
         terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() - 2);
         if (terrainAround != nullptr) {
             listIdTerrainArround.push_back(terrainAround);
@@ -238,7 +230,7 @@ namespace state {
         if (terrainAround != nullptr) {
             listIdTerrainArround.push_back(terrainAround);
         }
-        
+
         return listIdTerrainArround;
     }
 
@@ -271,7 +263,7 @@ namespace state {
         if (unitAround != nullptr) {
             listIdUnitArround.push_back(unitAround->getId());
         }
-        
+
         return listIdUnitArround;
     }
 
@@ -337,8 +329,7 @@ namespace state {
     std::vector<Direction> Board::directionAvailable(int unitId) const {
         std::vector<Direction> directionAvailable;
         Unit* unit = findUnit(unitId);
-        std::vector<Terrain*> terrainsAround = findTerrainAround(
-            findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getId());
+        std::vector<Terrain*> terrainsAround = findTerrainAround(findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getId());
 
         for (Terrain* t : terrainsAround) {
             if (t->getMovementCost() <= unit->getSpeed()) {
@@ -358,11 +349,37 @@ namespace state {
             }
         }
 
+        terrainsAround.clear();
         return directionAvailable;
     }
+    
+    std::vector<Direction> Board::directionAvailable(int x, int y) const {
+        std::vector<Direction> directionAvailable;
+        Terrain* terrain = findTerrainOnPosition(x, y);
+        std::vector<Terrain*> terrainsAround = findTerrainAround(terrain->getId());
+
+        for (Terrain* t : terrainsAround) {
+                if(t->getPositionY() == terrain->getPositionY() - 2) {
+                    directionAvailable.push_back(Direction::TOP);
+                } else if(t->getPositionX() == terrain->getPositionX() + 1) {
+                    directionAvailable.push_back(Direction::TOP_RIGHT);
+                } else if(t->getPositionX() == terrain->getPositionX() + 1) {
+                    directionAvailable.push_back(Direction::BOT_RIGHT);
+                } else if(t->getPositionY() == terrain->getPositionY() + 2) {
+                    directionAvailable.push_back(Direction::BOT);
+                } else if(t->getPositionX() == terrain->getPositionX() - 1) {
+                    directionAvailable.push_back(Direction::BOT_LEFT);
+                } else if(t->getPositionX() == terrain->getPositionX() - 1) {
+                    directionAvailable.push_back(Direction::TOP_LEFT);
+                }
+        }
+
+        terrainsAround.clear();
+        return directionAvailable;
+    }    
 
     void Board::claimHouse(TeamId teamId, int x, int y) {
-        House* tmpHouse;
+        House* tmpHouse = nullptr;
         
         if(findTerrainOnPosition(x, y)->getTypeId() == TerrainTypeId::HOUSE) {
             tmpHouse = (House*)findTerrainOnPosition(x, y);
@@ -374,7 +391,7 @@ namespace state {
                 tmpHouse->claim(teamId);
                 findTeam(teamId)->addHouse();
             }
-        }   
+        }
     }
     
     
@@ -441,6 +458,7 @@ namespace state {
                         break;
                     default :
                         std::cerr << "Le type du terrain en (" << 2 * (i % (width / 2)) << "," << i / (width / 2) << ") n'est pas reconnu" << std::endl;
+                        break;
                 }
             } else {
                 switch (terrainsTmp.at(i)) {
@@ -478,6 +496,7 @@ namespace state {
                         break;
                     default :
                         std::cerr << "Le type du terrain en (" << 2 * (i % (width / 2)) + 1 << "," << i / (width / 2) << ") n'est pas reconnu" << std::endl;
+                        break;
                 }
             }
         }

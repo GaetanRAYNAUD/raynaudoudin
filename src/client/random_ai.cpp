@@ -8,15 +8,16 @@ using namespace ai;
 namespace random_ai {
     
     void random_aiTest() {
-        Engine* engine = new Engine(22, 8);
+        int windowWidth = 1188;
+        int windowHeight = 576;
+        int mapWidth = 22;
+        int mapHeight = 8;
+        Engine* engine = new Engine(mapWidth, mapHeight);
         std::random_device rand;
-        AI* ai = new RandomAI(rand());
+        RandomAI* ai = new RandomAI(rand());
         Scene* scene;
         Command* command;
         sf::Time timeSleep = sf::milliseconds(500);
-        
-        int windowWidth = 1188;
-        int windowHeight = 576;
         
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         window.setFramerateLimit(30);
@@ -41,14 +42,15 @@ namespace random_ai {
             }
             
             ai->run(*engine);
+            delete scene;
             scene = new Scene(engine->getState());
 
             scene->draw(window);
             window.display();
             sf::sleep(timeSleep);
-            delete scene;
         }
         
         delete engine;
+        delete ai;
     }
 }

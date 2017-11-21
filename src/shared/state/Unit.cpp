@@ -112,10 +112,6 @@ namespace state {
     void Unit::setTypeId(UnitTypeId typeId) {
         this->typeId = typeId;
     }
-
-    void Unit::setWeapons(const std::map<int, std::unique_ptr<Weapon> >& weapons) {
-        
-    }
     
     const RaceTypeId& Unit::getRace() const {
         return race;

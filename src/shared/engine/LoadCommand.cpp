@@ -2,8 +2,8 @@
 
 namespace engine {
 
-    LoadCommand::LoadCommand(const char* f) {
-        fileName = f;
+    LoadCommand::LoadCommand(const std::string fileName) : fileName(fileName) {
+        
     }
 
     void LoadCommand::execute(state::State& state) {
