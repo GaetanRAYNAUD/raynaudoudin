@@ -404,7 +404,7 @@ namespace state {
         file.close();
         
         Terrain* terrainToAdd = nullptr;
-        for(int i = 0;i < width * height;i++) {
+        for(int i = 0; i < width * height; i++) {
             if((i / (width / 2)) % 2) {
                 switch (terrainsTmp.at(i)) {
                     case 'G' :  //Grass

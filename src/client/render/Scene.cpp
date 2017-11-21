@@ -23,6 +23,26 @@ namespace render {
         return width;
     }
 
+    int Scene::getShiftHeight() const {
+        return shiftHeight;
+    }
+
+    int Scene::getShiftWidth() const {
+        return shiftWidth;
+    }
+    
+    void Scene::setShiftHeight(int shiftHeight) {
+        this->shiftHeight = shiftHeight;
+        stateLayer.setShiftHeight(shiftHeight);
+        stateLayer.initSurface();
+    }
+
+    void Scene::setShiftWidth(int shiftWidth) {
+        this->shiftWidth = shiftWidth;
+        stateLayer.setShiftWidth(shiftWidth);
+        stateLayer.initSurface();
+    }
+
     void Scene::stateChanged(const state::Event& event) {
 
     }
