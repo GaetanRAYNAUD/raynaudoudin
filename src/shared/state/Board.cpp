@@ -26,7 +26,7 @@ namespace state {
         addTeam(new Team(TeamId::TEAM_2, RaceTypeId::ORC));
         
         addUnit(new Leader(TeamId::TEAM_1, 3, 4, findTeam(TeamId::TEAM_1)->getRace()));
-        addUnit(new Leader(TeamId::TEAM_2, 18, 13, findTeam(TeamId::TEAM_2)->getRace()));
+        addUnit(new Leader(TeamId::TEAM_2, width - 4, 2 * height - 3, findTeam(TeamId::TEAM_2)->getRace()));
     }
         
     Board::Board(const Board& other) {

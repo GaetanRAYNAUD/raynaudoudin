@@ -5,9 +5,9 @@ using namespace state;
 namespace render {
     
     void renderTest() {
-        int windowWidth = 1188;
-        int windowHeight = 576;
-        int mapWidth = 22;
+        int windowWidth = 1260;
+        int windowHeight = 648;
+        int mapWidth = 44;
         int mapHeight = 16;
         int shiftWidth = 0;
         int shiftHeight = 0;
