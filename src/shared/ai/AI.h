@@ -24,6 +24,7 @@ namespace ai {
   class AI {
     // Operations
   public:
+    virtual ~AI ();
     virtual void run (engine::Engine& engine) = 0;
   protected:
     std::vector<engine::Command*> listCommands (const state::State& state);

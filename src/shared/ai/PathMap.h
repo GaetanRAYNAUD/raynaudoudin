@@ -33,15 +33,16 @@ namespace ai {
     // Operations
   public:
     int getWeight (const Point& p) const;
-    /// 	
-    /// @param p		(???) 
-    void setWeight (const Point& p);
     std::vector<int> getWeights () const;
     void init (const state::Board& grid);
     void addSink (Point p);
     /// 			
     /// @param grid		(???) 
     void update (const state::Board& grid);
+  protected:
+    /// 	
+    /// @param p		(???) 
+    void setWeight (const Point& p);
     // Setters and Getters
   };
 

@@ -47,5 +47,9 @@ namespace ai {
         
         return commands;
     }
+    
+    AI::~AI() {
+
+    }
 
 }

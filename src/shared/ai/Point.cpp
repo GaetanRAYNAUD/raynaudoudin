@@ -14,6 +14,10 @@ namespace ai {
         return y;
     }
 
+    int Point::getWeight() const {
+        return weight;
+    }
+
     void Point::setX(int x) {
         this->x = x;
     }
@@ -22,8 +26,27 @@ namespace ai {
         this->y = y;
     }
 
+    void Point::setWeight(int weight) {
+        this->weight = weight;
+    }
+
     Point Point::transform(state::Direction d) {
-        return Point();//-Werror
+        switch (d) {
+            case state::Direction::TOP:
+                return Point(x, y - 2, weight);
+            case state::Direction::TOP_RIGHT:
+                return Point(x + 1, y - 1, weight);
+            case state::Direction::BOT_RIGHT:
+                return Point(x + 1, y + 1, weight);
+            case state::Direction::BOT:
+                return Point(x, y + 2, weight);
+            case state::Direction::BOT_LEFT:
+                return Point(x - 1, y + 1, weight);
+            case state::Direction::TOP_LEFT:
+                return Point(x - 1, y - 1, weight);
+            default:
+                return Point(x, y, weight);
+        }
     }
     
 }
