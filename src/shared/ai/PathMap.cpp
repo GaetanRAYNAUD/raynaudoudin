@@ -17,15 +17,11 @@ namespace ai {
     }
 
     void PathMap::init(const state::Board& grid) {
-        const std::map<int, std::unique_ptr<state::Terrain> >& terrains = grid.getTerrains();
         const std::map<int, std::unique_ptr<state::Unit> >& units = grid.getUnits();
         std::vector<state::Direction> directions;
         
-//        for (auto& t : terrains) {
-//            queue.push(Point(t.second->getPositionX(), t.second->getPositionY(), std::numeric_limits<int>::infinity()));
-//        }
+        weights.resize(height / 2 * width, std::numeric_limits<int>::infinity());
         
-        weights.resize(height * width, std::numeric_limits<int>::infinity());
         for (auto& u : units) {
             if (u.second->getTeam() == state::TeamId::TEAM_1) {
                 queue.push(Point(u.second->getPositionX(), u.second->getPositionY(), 0));
@@ -38,9 +34,9 @@ namespace ai {
                         Point pointTmp = point.transform(d);
                         
                         pointTmp.setWeight(point.getWeight() + grid.findTerrainOnPosition(pointTmp.getX(), pointTmp.getY())->getMovementCost());
-                        if (pointTmp.getWeight() < weights[pointTmp.getX() + width * (pointTmp.getY() / 2)]) {
+                        if (pointTmp.getWeight() < getWeight(pointTmp)) {
                             queue.push(pointTmp);
-                            weights[pointTmp.getX() + width * (pointTmp.getY() / 2)] = pointTmp.getWeight();
+                            setWeight(pointTmp.getWeight());
                         }
                     }
                 }
@@ -48,15 +44,8 @@ namespace ai {
         }       
     }
 
-    void PathMap::addSink(Point p) {
-//        queue.push(p);
-//        
-//        while (!queue.empty()) {
-//            auto p = queue.top();
-//            queue.pop();
-//            
-//            weights.push_back();
-//        }
+    void PathMap::addWell(Point p) {
+
     }
 
     void PathMap::update(const state::Board& grid) {

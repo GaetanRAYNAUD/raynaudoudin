@@ -8,23 +8,51 @@ using namespace ai;
 namespace heuristic_ai {
     
     void heuristic_aiTest() {
-        std::priority_queue<Point, std::vector<Point>, PointCompareWeight> queue;
+        int windowWidth = 1188;
+        int windowHeight = 576;
+        int mapWidth = 22;
+        int mapHeight = 8;
+        Engine* engine = new Engine(mapWidth, mapHeight);
+        std::random_device rand;
+        RandomAI* ai = new RandomAI(rand());
+        Scene* scene;
+        Command* command;
+        sf::Time timeSleep = sf::milliseconds(500);
         
-        queue.push(Point(0,0,1));
-        queue.push(Point(1,1,0));
-        queue.push(Point(0,0,0));
-        queue.push(Point(2,4,0));
-        queue.push(Point(2,8,0));
-        queue.push(Point(0,1,0));
-        queue.push(Point(1,0,0));
-        queue.push(Point(0,0,2));
-        queue.push(Point(0,0,4));
-        queue.push(Point(0,0,3));
+        sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
+        window.setFramerateLimit(30);
+                
+        command = new LoadCommand("res/map.txt");
+        engine->addCommand(1, command);
+        engine->update();
+      
+        test_spawnUnit(engine);
+        test_moveUnit1(engine);
+        test_moveUnit2(engine);
+        test_moveUnit3(engine);
         
-        while (!queue.empty()) {
-            std::cout << queue.top().getX() << queue.top().getY() << queue.top().getWeight() << std::endl;
-            queue.pop();
-        }        
+        scene = new Scene(engine->getState());
+        while (window.isOpen()) {
+            sf::Event event;
+            
+            while (window.pollEvent(event)) {            
+                if (event.type == sf::Event::Closed) {
+                    window.close();
+                } 
+            }
+            
+            ai->run(*engine);
+            delete scene;
+            scene = new Scene(engine->getState());
+
+            scene->draw(window);
+            window.display();
+            sf::sleep(timeSleep);
+        }
+        
+        delete scene;
+        delete engine;
+        delete ai;     
     }
 
 }

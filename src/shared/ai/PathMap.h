@@ -25,9 +25,9 @@ namespace ai {
   class PathMap {
     // Attributes
   private:
-    int width     = 0;
+    int width;
     /// 				
-    int height     = 0;
+    int height;
     std::vector<int> weights;
     std::priority_queue<Point, std::vector<Point>, PointCompareWeight> queue;
     // Operations
@@ -35,7 +35,7 @@ namespace ai {
     int getWeight (const Point& p) const;
     std::vector<int> getWeights () const;
     void init (const state::Board& grid);
-    void addSink (Point p);
+    void addWell (Point p);
     /// 			
     /// @param grid		(???) 
     void update (const state::Board& grid);
