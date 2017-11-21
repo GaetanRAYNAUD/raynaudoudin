@@ -35,16 +35,5 @@ namespace render {
             }
             i++;
         }
-        
     }
-
-    void UnitLayer::stateChanged(const state::Event& event) {
-
-    }
-
-    void UnitLayer::updateUnit(int i, int j) {
-
-    }
-
-
 }

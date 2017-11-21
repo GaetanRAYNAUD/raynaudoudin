@@ -50,6 +50,7 @@ namespace random_ai {
             sf::sleep(timeSleep);
         }
         
+        delete scene;
         delete engine;
         delete ai;
     }
