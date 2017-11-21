@@ -28,7 +28,11 @@ namespace render {
             
             surface->setSpriteLocation(i, posX, posY, tileUnit.getWidth(), tileUnit.getHeight());
             
-            surface->addText(posX + tileUnit.getWidth() / 3, posY + tileUnit.getHeight() - 20, std::to_string(u.second.get()->getLife()), sf::Color::Red);
+            if(u.second->getTeam() == state::TeamId::TEAM_1) {
+                surface->addText(posX + tileUnit.getWidth() / 3, posY + tileUnit.getHeight() - 20, std::to_string(u.second.get()->getLife()), sf::Color::Red);
+            } else if(u.second->getTeam() == state::TeamId::TEAM_2) {
+                surface->addText(posX + tileUnit.getWidth() / 3, posY + tileUnit.getHeight() - 20, std::to_string(u.second.get()->getLife()), sf::Color::Green);
+            }
             i++;
         }
         
