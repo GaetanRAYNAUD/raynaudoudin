@@ -15,14 +15,16 @@ void testSFML() {
 #include "render.hpp"
 #include "engine.hpp"
 #include "random_ai.hpp"
+#include "heuristic_ai.hpp"
 
 using namespace std;
 using namespace state;
 using namespace render;
 using namespace engine;
 using namespace random_ai;
+using namespace heuristic_ai;
 
-int main(int argc,char* argv[]) 
+int main(int argc, char* argv[]) 
 {
     if( argc > 1) {
         if (string(argv[1]) == "hello") {
@@ -46,6 +48,7 @@ int main(int argc,char* argv[])
             
         } else if (string(argv[1]) == "heuristic_ai"){
             cout << "Lancement de l'ia heuristique" << endl;
+            heuristic_aiTest();
             
         } else {
             cout << "Commande inconnue" << endl;
