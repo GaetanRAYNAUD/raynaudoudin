@@ -34,6 +34,14 @@ namespace heuristic_ai {
         scene = new Scene(engine->getState());
         while (window.isOpen()) {
             sf::Event event;
+            
+            ai->run(*engine);
+            
+            delete scene;
+            scene = new Scene(engine->getState());
+            scene->setShiftWidth(view.getCenter().x - windowWidth / 2);
+            scene->setShiftHeight(view.getCenter().y - windowHeight / 2); 
+            
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
                     window.close();
@@ -59,19 +67,14 @@ namespace heuristic_ai {
                         view.setCenter(view.getCenter().x, mapHeight * 72 - windowHeight / 2);
                     }
                     
-                    scene->setShiftWidth(view.getCenter().x - windowWidth / 2);
-                    scene->setShiftHeight(view.getCenter().y - windowHeight / 2); 
+//                    scene->setShiftWidth(view.getCenter().x - windowWidth / 2);
+//                    scene->setShiftHeight(view.getCenter().y - windowHeight / 2); 
                     window.setView(view);
                     
                 } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                     startMousePos = sf::Mouse::getPosition();
                 }
             }
-            
-            ai->run(*engine);
-            
-            delete scene;
-            scene = new Scene(engine->getState());
             scene->draw(window);
             window.display();
             
