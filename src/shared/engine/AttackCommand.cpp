@@ -32,4 +32,17 @@ namespace engine {
         return CommandTypeId::ATTACK;
     }
 
+    int AttackCommand::getIdUnitAttacker() const {
+        return idUnitAttacker;
+    }
+
+    int AttackCommand::getIdUnitDefender() const {
+        return idUnitDefender;
+    }
+
+    state::WeaponTypeId AttackCommand::getWeaponTypeId() const {
+        return weaponTypeId;
+    }
+
+
 }

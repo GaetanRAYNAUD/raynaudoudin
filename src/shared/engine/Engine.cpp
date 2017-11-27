@@ -2,7 +2,7 @@
 
 namespace engine {
 
-    Engine::Engine(int width, int height) : currentState(width, height) {
+    Engine::Engine(int width, int height) : state(width, height) {
         
     }
 
@@ -11,12 +11,12 @@ namespace engine {
     }
 
     const state::State& Engine::getState() const {
-        return currentState;
+        return state;
     }
 
     void Engine::update() {
         for(auto& c : currentCommands) {
-            c.second.get()->execute(currentState);
+            c.second.get()->execute(state);
         }
         
         currentCommands.clear();

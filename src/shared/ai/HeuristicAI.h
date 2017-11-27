@@ -26,24 +26,29 @@ namespace ai {
   class HeuristicAI : public ai::AI {
     // Associations
     // Attributes
-  public:
-    PathMap houseTeam2PathMap;
-  private:
+  protected:
     std::mt19937 randgen;
     PathMap unitTeam1PathMap;
     PathMap unitTeam2PathMap;
     PathMap houseTeam1PathMap;
+    PathMap houseTeam2PathMap;
     // Operations
   public:
     HeuristicAI (int randomSeed);
-    const PathMap& getUnitTeam1PathMap () const;
-    const PathMap& getUnitTeam2PathMap () const;
-    const PathMap& getHouseTeam1PathMap () const;
-    const PathMap& getHouseTeam2PathMap () const;
     void run (engine::Engine& engine);
   private:
     void initPathMaps (const state::Board& board);
     // Setters and Getters
+    const std::mt19937& getRandgen() const;
+    void setRandgen(const std::mt19937& randgen);
+    const PathMap& getUnitTeam1PathMap() const;
+    void setUnitTeam1PathMap(const PathMap& unitTeam1PathMap);
+    const PathMap& getUnitTeam2PathMap() const;
+    void setUnitTeam2PathMap(const PathMap& unitTeam2PathMap);
+    const PathMap& getHouseTeam1PathMap() const;
+    void setHouseTeam1PathMap(const PathMap& houseTeam1PathMap);
+    const PathMap& getHouseTeam2PathMap() const;
+    void setHouseTeam2PathMap(const PathMap& houseTeam2PathMap);
   };
 
 };

@@ -21,17 +21,20 @@ namespace engine {
   class Engine {
     // Associations
     // Attributes
-  private:
-    state::State currentState;
+  protected:
+    state::State state;
     std::map<int, std::unique_ptr<Command>> currentCommands;
     // Operations
   public:
     Engine (int width, int height);
     virtual ~Engine ();
-    const state::State& getState () const;
     void addCommand (int priority, Command* cmd);
     void update ();
     // Setters and Getters
+    const state::State& getState() const;
+    void setState(const state::State& state);
+    const std::map<int, std::unique_ptr<Command>>& getCurrentCommands() const;
+    void setCurrentCommands(const std::map<int, std::unique_ptr<Command>>& currentCommands);
   };
 
 };

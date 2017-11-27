@@ -36,4 +36,15 @@ namespace engine {
         return CommandTypeId::SPAWN;
     }
 
+    state::UnitTypeId SpawnCommand::getUnitTypeId() const {
+        return unitTypeId;
+    }
+
+    int SpawnCommand::getX() const {
+        return x;
+    }
+
+    int SpawnCommand::getY() const {
+        return y;
+    }
 }

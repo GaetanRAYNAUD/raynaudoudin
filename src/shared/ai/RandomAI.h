@@ -18,13 +18,15 @@ namespace ai {
   /// class RandomAI - 
   class RandomAI : public ai::AI {
     // Attributes
-  public:
+  protected:
     std::mt19937 randgen;
     // Operations
   public:
     RandomAI (int randomSeed);
     void run (engine::Engine& engine);
     // Setters and Getters
+    const std::mt19937& getRandgen() const;
+    void setRandgen(const std::mt19937& randgen);
   };
 
 };

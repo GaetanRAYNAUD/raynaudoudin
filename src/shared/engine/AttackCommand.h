@@ -20,7 +20,7 @@ namespace engine {
   class AttackCommand : public engine::Command {
     // Associations
     // Attributes
-  private:
+  protected:
     int idUnitAttacker;
     int idUnitDefender;
     state::WeaponTypeId weaponTypeId;
@@ -37,6 +37,12 @@ namespace engine {
     /// @param idUnit		(???) 
     void killUnit (state::State& state, int idUnit);
     // Setters and Getters
+    int getIdUnitAttacker() const;
+    void setIdUnitAttacker(int idUnitAttacker);
+    int getIdUnitDefender() const;
+    void setIdUnitDefender(int idUnitDefender);
+    state::WeaponTypeId getWeaponTypeId() const;
+    void setWeaponTypeId(state::WeaponTypeId weaponTypeId);
   };
 
 };

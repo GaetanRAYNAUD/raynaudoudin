@@ -16,4 +16,12 @@ namespace engine {
         return CommandTypeId::MOVE;
     }
 
+    state::Direction MoveCommand::getDirection() const {
+        return direction;
+    }
+
+    int MoveCommand::getIdUnit() const {
+        return idUnit;
+    }
+
 }

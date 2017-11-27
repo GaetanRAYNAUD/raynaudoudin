@@ -22,7 +22,7 @@ namespace ai {
   /// class PathMap - 
   class PathMap {
     // Attributes
-  private:
+  protected:
     int width;
     /// 				
     int height;
@@ -36,12 +36,19 @@ namespace ai {
     /// @param board		(???) 
     void update (const state::Board& board);
     int getWeight (const Point& p) const;
-    std::vector<int> getWeights () const;
   protected:
     /// 	
     /// @param p		(???) 
     void setWeight (const Point& p);
     // Setters and Getters
+    int getWidth() const;
+    void setWidth(int width);
+    int getHeight() const;
+    void setHeight(int height);
+    const std::vector<int>& getWeights() const;
+    void setWeights(const std::vector<int>& weights);
+    const std::priority_queue<Point, std::vector<Point>, PointCompareWeight>& getQueue() const;
+    void setQueue(const std::priority_queue<Point, std::vector<Point>, PointCompareWeight>& queue);
   };
 
 };

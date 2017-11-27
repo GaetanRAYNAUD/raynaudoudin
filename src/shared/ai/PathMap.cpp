@@ -12,7 +12,7 @@ namespace ai {
         weights[p.getX() + width * (p.getY() / 2)] = p.getWeight();
     }
     
-    std::vector<int> PathMap::getWeights() const {
+    const std::vector<int>& PathMap::getWeights() const {
         return weights;
     }
 
