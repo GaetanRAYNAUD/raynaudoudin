@@ -42,7 +42,7 @@ namespace ai {
         
         for (auto& t : terrains) {
             if (t.second->getTypeId() == state::TerrainTypeId::HOUSE) {
-                switch (((state::House) (t.second))->getTeamId()) {
+                switch (((state::House*)t.second.get())->getTeamId()) {
                     case state::TeamId::TEAM_1:
                         houseTeam1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
                         break;
