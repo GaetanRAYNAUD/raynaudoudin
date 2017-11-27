@@ -5,13 +5,11 @@
 #include <vector>
 #include <queue>
 
-namespace ai {
-  class Point;
-};
 namespace state {
   class Board;
 };
 namespace ai {
+  class Point;
   class PointCompareWeight;
 }
 
@@ -32,13 +30,13 @@ namespace ai {
     std::priority_queue<Point, std::vector<Point>, PointCompareWeight> queue;
     // Operations
   public:
-    int getWeight (const Point& p) const;
-    std::vector<int> getWeights () const;
-    void init (const state::Board& grid);
+    void init (const state::Board& board);
     void addWell (Point p);
     /// 			
-    /// @param grid		(???) 
-    void update (const state::Board& grid);
+    /// @param board		(???) 
+    void update (const state::Board& board);
+    int getWeight (const Point& p) const;
+    std::vector<int> getWeights () const;
   protected:
     /// 	
     /// @param p		(???) 

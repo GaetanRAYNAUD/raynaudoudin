@@ -23,15 +23,20 @@ namespace ai {
   class HeuristicAI : public ai::AI {
     // Associations
     // Attributes
+  public:
+    PathMap houseTeam2PathMap;
   private:
     std::mt19937 randgen;
-    PathMap Team1_PathMap;
-    PathMap Team2_PathMap;
+    PathMap unitTeam1PathMap;
+    PathMap unitTeam2PathMap;
+    PathMap houseTeam1PathMap;
     // Operations
   public:
     HeuristicAI (int randomSeed);
-    const PathMap& getTeam1_PathMap () const;
-    const PathMap& getTeam2_PathMap () const;
+    const PathMap& getUnitTeam1PathMap () const;
+    const PathMap& getUnitTeam2PathMap () const;
+    const PathMap& getHouseTeam1PathMap () const;
+    const PathMap& getHouseTeam2PathMap () const;
     void run (engine::Engine& engine);
     // Setters and Getters
   };

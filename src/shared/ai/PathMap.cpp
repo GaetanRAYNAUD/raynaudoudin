@@ -16,40 +16,37 @@ namespace ai {
         return weights;
     }
 
-    void PathMap::init(const state::Board& grid) {
-        const std::map<int, std::unique_ptr<state::Unit> >& units = grid.getUnits();
-        std::vector<state::Direction> directions;
+    void PathMap::init(const state::Board& board) {
+        height = board.getHeight();
+        width = board.getWidth();
         
-        weights.resize(height / 2 * width, std::numeric_limits<int>::infinity());
-        
-        for (auto& u : units) {
-            if (u.second->getTeam() == state::TeamId::TEAM_1) {
-                queue.push(Point(u.second->getPositionX(), u.second->getPositionY(), 0));
-                while (!queue.empty()) {
-                    Point point = queue.top();
-                    queue.pop();
-                    
-                    directions = grid.directionAvailable(point.getX(), point.getY());
-                    for (auto d : directions) {
-                        Point pointTmp = point.transform(d);
-                        
-                        pointTmp.setWeight(point.getWeight() + grid.findTerrainOnPosition(pointTmp.getX(), pointTmp.getY())->getMovementCost());
-                        if (pointTmp.getWeight() < getWeight(pointTmp)) {
-                            queue.push(pointTmp);
-                            setWeight(pointTmp.getWeight());
-                        }
-                    }
-                }
-            }
-        }       
+        weights.clear();
+        weights.resize((height / 2) * width, std::numeric_limits<int>::infinity());
     }
 
     void PathMap::addWell(Point p) {
-
+        setWeight(p);
+        queue.push(p);
     }
 
-    void PathMap::update(const state::Board& grid) {
+    void PathMap::update(const state::Board& board) {
+        std::vector<state::Direction> directions;
+        
+        while (!queue.empty()) {
+            Point point = queue.top();
+            queue.pop();
 
+            directions = board.directionAvailable(point.getX(), point.getY());
+            for (auto d : directions) {
+                Point pointTmp = point.transform(d);
+
+                pointTmp.setWeight(point.getWeight() + board.findTerrainOnPosition(pointTmp.getX(), pointTmp.getY())->getMovementCost());
+                if (pointTmp.getWeight() < getWeight(pointTmp)) {
+                    queue.push(pointTmp);
+                    setWeight(pointTmp.getWeight());
+                }
+            }
+        }
     }
     
 }
