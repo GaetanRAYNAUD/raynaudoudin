@@ -21,7 +21,7 @@ namespace engine {
   class SpawnCommand : public engine::Command {
     // Associations
     // Attributes
-  protected:
+  private:
     int x;
     int y;
     state::UnitTypeId unitTypeId;
@@ -33,12 +33,6 @@ namespace engine {
   private:
     void spawnUnit (state::State& state, int x, int y, state::UnitTypeId unitTypeId);
     // Setters and Getters
-    int getX() const;
-    void setX(int x);
-    int getY() const;
-    void setY(int y);
-    state::UnitTypeId getUnitTypeId() const;
-    void setUnitTypeId(state::UnitTypeId unitTypeId);
   };
 
 };

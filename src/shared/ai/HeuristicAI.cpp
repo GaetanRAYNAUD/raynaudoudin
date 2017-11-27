@@ -22,15 +22,15 @@ namespace ai {
     const PathMap& HeuristicAI::getUnitTeam2PathMap() const {
         return unitTeam2PathMap;
     }
-    
-    void HeuristicAI::run(engine::Engine& engine) {
-        const std::map<int, std::unique_ptr<state::Unit> >& units = engine.getState().getBoard().getUnits();
-        const std::map<int, std::unique_ptr<state::Terrain> >& terrains = engine.getState().getBoard().getTerrains();
 
-        unitTeam1PathMap.init(engine.getState().getBoard());
-        unitTeam2PathMap.init(engine.getState().getBoard());
-        houseTeam1PathMap.init(engine.getState().getBoard());
-        houseTeam2PathMap.init(engine.getState().getBoard());
+    void HeuristicAI::initPathMaps(const state::Board& board) {
+        const std::map<int, std::unique_ptr<state::Unit> >& units = board.getUnits();
+        const std::map<int, std::unique_ptr<state::Terrain> >& terrains = board.getTerrains();
+
+        unitTeam1PathMap.init(board);
+        unitTeam2PathMap.init(board);
+        houseTeam1PathMap.init(board);
+        houseTeam2PathMap.init(board);
         
         for (auto& u : units) {
             if (u.second->getTeam() == state::TeamId::TEAM_1) {
@@ -56,7 +56,29 @@ namespace ai {
                         houseTeam2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
                 }
             }
-        }        
+        }
+    }
+    
+    void HeuristicAI::run(engine::Engine& engine) {
+//        std::vector<engine::Command*> commands = listCommands(engine.getState());
+//
+//        initPathMaps(engine.getState().getBoard());
+//        
+//        if(commands.size() > 0) {
+//            std::uniform_int_distribution<int> dis(0, commands.size() - 1);
+//            int rand = dis(randgen);
+//            engine.addCommand(1, commands.at(rand));
+//            engine.update();
+//        } else {
+//            engine.addCommand(1, new engine::EndTurnCommand());
+//            engine.update();
+//        }
+//        
+//        engine.addCommand(2, new engine::HandleWinCommand());
+//        engine.update();
+//        
+//        commands.clear();
+//        
     }
    
 }

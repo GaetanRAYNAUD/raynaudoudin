@@ -10,6 +10,9 @@ namespace ai {
 namespace engine {
   class Engine;
 };
+namespace state {
+  class Board;
+};
 namespace ai {
   class AI;
 }
@@ -38,6 +41,8 @@ namespace ai {
     const PathMap& getHouseTeam1PathMap () const;
     const PathMap& getHouseTeam2PathMap () const;
     void run (engine::Engine& engine);
+  private:
+    void initPathMaps (const state::Board& board);
     // Setters and Getters
   };
 

@@ -19,7 +19,7 @@ namespace engine {
   /// class MoveCommand - 
   class MoveCommand : public engine::Command {
     // Attributes
-  protected:
+  private:
     int idUnit;
     state::Direction direction;
     // Operations
@@ -28,10 +28,6 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
-    int getIdUnit() const;
-    void setIdUnit(int idUnit);
-    state::Direction getDirection() const;
-    void setDirection(state::Direction direction);
   };
 
 };
