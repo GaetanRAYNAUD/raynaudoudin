@@ -73,6 +73,7 @@ namespace ai {
     void HeuristicAI::run(engine::Engine& engine) {
         const std::map<int, std::unique_ptr<state::Unit> >& units = engine.getState().getBoard().getUnits();
         std::vector<engine::Command*> commands;
+        Point point(0, 0);
         unsigned int it;
 
         initPathMaps(engine.getState().getBoard());
@@ -82,54 +83,7 @@ namespace ai {
             case state::TeamId::TEAM_1:
                 for (auto& u : units) {
                             if (u.second->getTeam() == state::TeamId::TEAM_1) {
-                                Point point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
-                                if (point.getWeight() == 0) {
-                                    for (it = 0; it < commands.size(); it++) {
-                                        if (commands.at(it)->getTypeId() == engine::CommandTypeId::ATTACK) {
-                                            if (((engine::AttackCommand*)commands.at(it))->getIdUnitAttacker() == u.second->getId()) {
-                                                engine.addCommand(1, commands.at(it));
-                                                engine.update();
-                                                break;
-                                            }
-                                        }
-                                    }
-                                } else if (point.getWeight() > 0) {
-                                    bool commandMovement = false;
-                                    for (it = 0; it < commands.size(); it++) {
-                                        if (commands.at(it)->getTypeId() == engine::CommandTypeId::MOVE) {
-                                            if (((engine::MoveCommand*)commands.at(it))->getIdUnit() == u.second->getId()) {
-                                                commandMovement = true;                                    
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    while (commandMovement) {
-                                        engine.addCommand(1, commands.at(it));
-                                        engine.update();
-                                        initPathMaps(engine.getState().getBoard());
-                                        commands = listCommands(engine.getState());
-                                        commandMovement = false;
-
-                                        for (it = 0; it < commands.size(); it++) {
-                                            if (commands.at(it)->getTypeId() == engine::CommandTypeId::MOVE) {
-                                                if (((engine::MoveCommand*)commands.at(it))->getIdUnit() == u.second->getId()) {
-                                                    commandMovement = true;                                    
-                                                    break;
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                }
-                            }
-                        }                
-                break;
-                
-            case state::TeamId::TEAM_2:
-                for (auto& u : units) {
-                            if (u.second->getTeam() == state::TeamId::TEAM_2) {
-                                Point point = unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
+                                point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                                 if (point.getWeight() == 0) {
                                     for (it = 0; it < commands.size(); it++) {
                                         if (commands.at(it)->getTypeId() == engine::CommandTypeId::ATTACK) {
@@ -158,11 +112,66 @@ namespace ai {
                                         engine.update();
                                         initPathMaps(engine.getState().getBoard());
                                         commands = listCommands(engine.getState());
+                                        point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                                         commandMovement = false;
 
                                         for (it = 0; it < commands.size(); it++) {
                                             if (commands.at(it)->getTypeId() == engine::CommandTypeId::MOVE) {
-                                                if (((engine::MoveCommand*)commands.at(it))->getIdUnit() == u.second->getId()) {
+                                                if (((engine::MoveCommand*)commands.at(it))->getIdUnit() == u.second->getId() 
+                                                        && ((engine::MoveCommand*)commands.at(it))->getDirection() == 
+                                                        point.transformToDirection(Point(u.second->getPositionX(), u.second->getPositionY()))) {
+                                                    commandMovement = true;                                    
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }               
+                break;
+                
+            case state::TeamId::TEAM_2:
+                for (auto& u : units) {
+                            if (u.second->getTeam() == state::TeamId::TEAM_2) {
+                                point = unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
+                                if (point.getWeight() == 0) {
+                                    for (it = 0; it < commands.size(); it++) {
+                                        if (commands.at(it)->getTypeId() == engine::CommandTypeId::ATTACK) {
+                                            if (((engine::AttackCommand*)commands.at(it))->getIdUnitAttacker() == u.second->getId()) {
+                                                engine.addCommand(1, commands.at(it));
+                                                engine.update();
+                                                break;
+                                            }
+                                        }
+                                    }
+                                } else if (point.getWeight() > 0) {
+                                    bool commandMovement = false;
+                                    for (it = 0; it < commands.size(); it++) {
+                                        if (commands.at(it)->getTypeId() == engine::CommandTypeId::MOVE) {
+                                            if (((engine::MoveCommand*)commands.at(it))->getIdUnit() == u.second->getId() 
+                                                    && ((engine::MoveCommand*)commands.at(it))->getDirection() == 
+                                                    point.transformToDirection(Point(u.second->getPositionX(), u.second->getPositionY()))) {
+                                                commandMovement = true;                                    
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    while (commandMovement) {
+                                        engine.addCommand(1, commands.at(it));
+                                        engine.update();
+                                        initPathMaps(engine.getState().getBoard());
+                                        commands = listCommands(engine.getState());
+                                        point = unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
+                                        commandMovement = false;
+
+                                        for (it = 0; it < commands.size(); it++) {
+                                            if (commands.at(it)->getTypeId() == engine::CommandTypeId::MOVE) {
+                                                if (((engine::MoveCommand*)commands.at(it))->getIdUnit() == u.second->getId() 
+                                                        && ((engine::MoveCommand*)commands.at(it))->getDirection() == 
+                                                        point.transformToDirection(Point(u.second->getPositionX(), u.second->getPositionY()))) {
                                                     commandMovement = true;                                    
                                                     break;
                                                 }
