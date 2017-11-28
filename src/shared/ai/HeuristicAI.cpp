@@ -60,25 +60,37 @@ namespace ai {
     }
     
     void HeuristicAI::run(engine::Engine& engine) {
-//        std::vector<engine::Command*> commands = listCommands(engine.getState());
+//        const std::map<int, std::unique_ptr<state::Unit> >& units = engine.getState().getBoard().getUnits();
+//        std::vector<engine::Command*> commands;
 //
 //        initPathMaps(engine.getState().getBoard());
+//        commands = listCommands(engine.getState());
 //        
-//        if(commands.size() > 0) {
-//            std::uniform_int_distribution<int> dis(0, commands.size() - 1);
-//            int rand = dis(randgen);
-//            engine.addCommand(1, commands.at(rand));
-//            engine.update();
-//        } else {
-//            engine.addCommand(1, new engine::EndTurnCommand());
-//            engine.update();
+//        switch (engine.getState().getCurrentTeam()) {
+//            case state::TeamId::TEAM_1:
+//                break;
+//            case state::TeamId::TEAM_2:
+//                break;
 //        }
-//        
+//        for (auto& u : units) {
+//            if (u.second->getTeam() == state::TeamId::TEAM_1) {
+////                unitTeam2PathMap.
+//
+//                engine.addCommand(1, commands.at(rand));
+//                engine.update();
+//            }
+//        }
+//            
+//        engine.addCommand(1, new engine::EndTurnCommand());        
 //        engine.addCommand(2, new engine::HandleWinCommand());
 //        engine.update();
 //        
 //        commands.clear();
 //        
     }
+    
+//    const std::vector<int>& PathMap::getBestCommand(int x, int y) const {
+//        if ()
+//    }
    
 }

@@ -7,11 +7,11 @@
 namespace ai {
   class PathMap;
 };
-namespace engine {
-  class Engine;
-};
 namespace state {
   class Board;
+};
+namespace engine {
+  class Engine;
 };
 namespace ai {
   class AI;
@@ -35,9 +35,8 @@ namespace ai {
     // Operations
   public:
     HeuristicAI (int randomSeed);
-    void run (engine::Engine& engine);
-  private:
     void initPathMaps (const state::Board& board);
+    void run (engine::Engine& engine);
     // Setters and Getters
     const std::mt19937& getRandgen() const;
     void setRandgen(const std::mt19937& randgen);

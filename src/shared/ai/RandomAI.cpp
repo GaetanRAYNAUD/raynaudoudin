@@ -10,6 +10,7 @@ namespace ai {
 
     void RandomAI::run(engine::Engine& engine) {
         std::vector<engine::Command*> commands = listCommands(engine.getState());
+        
         if(commands.size() > 0) {
             std::uniform_int_distribution<int> dis(0, commands.size() - 1);
             int rand = dis(randgen);
