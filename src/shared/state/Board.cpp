@@ -361,19 +361,19 @@ namespace state {
         for (Terrain* t : terrainsAround) {
                 if(t->getPositionY() == terrain->getPositionY() - 2) {
                     directionAvailable.push_back(Direction::TOP);
-                } else if(t->getPositionX() == terrain->getPositionX() + 1) {
+                } else if(t->getPositionX() == terrain->getPositionX() + 1 && t->getPositionY() == terrain->getPositionY() - 1) {
                     directionAvailable.push_back(Direction::TOP_RIGHT);
-                } else if(t->getPositionX() == terrain->getPositionX() + 1) {
+                } else if(t->getPositionX() == terrain->getPositionX() + 1 && t->getPositionY() == terrain->getPositionY() + 1) {
                     directionAvailable.push_back(Direction::BOT_RIGHT);
                 } else if(t->getPositionY() == terrain->getPositionY() + 2) {
                     directionAvailable.push_back(Direction::BOT);
-                } else if(t->getPositionX() == terrain->getPositionX() - 1) {
+                } else if(t->getPositionX() == terrain->getPositionX() - 1 && t->getPositionY() == terrain->getPositionY() + 1) {
                     directionAvailable.push_back(Direction::BOT_LEFT);
-                } else if(t->getPositionX() == terrain->getPositionX() - 1) {
+                } else if(t->getPositionX() == terrain->getPositionX() - 1 && t->getPositionY() == terrain->getPositionY() - 1) {
                     directionAvailable.push_back(Direction::TOP_LEFT);
                 }
         }
-
+        
         terrainsAround.clear();
         return directionAvailable;
     }    

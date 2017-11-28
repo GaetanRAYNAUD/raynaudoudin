@@ -48,6 +48,12 @@ int main(int argc, char* argv[])
             
         } else if (string(argv[1]) == "heuristic_ai"){
             cout << "Lancement de l'ia heuristique" << endl;
+            cout << "Appuyez sur espace pour mettre le jeu en pause" << endl;
+            cout << "Appuyez sur A pour retirer les cartes de distances" << endl;
+            cout << "Appuyez sur Z pour afficher la carte de distance des unités humaines" << endl;
+            cout << "Appuyez sur E pour afficher la carte de distance des unités orcs" << endl;
+            cout << "Appuyez sur R pour afficher la carte de distance des maisons humaines" << endl;
+            cout << "Appuyez sur T pour afficher la carte de distance des maisons orcs" << endl;
             heuristic_aiTest();
             
         } else {

@@ -11,6 +11,7 @@ namespace render {
   class TerrainLayer;
   class UnitLayer;
   class StateLayer;
+  class DebugLayer;
 };
 namespace sf {
   class RenderWindow;
@@ -22,6 +23,7 @@ namespace state {
 #include "TerrainLayer.h"
 #include "UnitLayer.h"
 #include "StateLayer.h"
+#include "DebugLayer.h"
 #include "state/Observer.h"
 
 namespace render {
@@ -30,28 +32,32 @@ namespace render {
   class Scene {
     // Associations
     // Attributes
-  public:
-    int shiftWidth;
-    int shiftHeight;
   private:
     const state::State& state;
-    int width     = 0;
-    int heigh     = 0;
     TerrainLayer terrainLayer;
     UnitLayer unitLayer;
     StateLayer stateLayer;
+    DebugLayer debugLayer;
+  protected:
+    int width     = 0;
+    int heigh     = 0;
+    int shiftWidth;
+    int shiftHeight;
     // Operations
   public:
     Scene (const state::State& state);
-    int getWidth () const;
-    int getHeigh () const;
-    int getShiftWidth () const;
-    int getShiftHeight () const;
-    void setShiftWidth (int shiftWidth);
-    void setShiftHeight (int shiftHeight);
     void stateChanged (const state::Event& event);
     void draw (sf::RenderWindow& window);
+    DebugLayer& getDebugLayer ();
     // Setters and Getters
+    int getWidth() const;
+    void setWidth(int width);
+    int getHeigh() const;
+    void setHeigh(int heigh);
+    int getShiftWidth() const;
+    void setShiftWidth(int shiftWidth);
+    int getShiftHeight() const;
+    void setShiftHeight(int shiftHeight);
   };
 
 };
