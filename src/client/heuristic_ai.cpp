@@ -39,6 +39,10 @@ namespace heuristic_ai {
             if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
                 ai->run(*engine);
                 time = clock.getElapsedTime();
+                if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
+                    pause = true;
+                    std::cout << "L'équipe " << engine->getState().getWinner() << " a gagné !" << std::endl;
+                }
             }
             
             delete scene;

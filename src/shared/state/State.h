@@ -23,6 +23,7 @@ namespace state {
   protected:
     int turn     = 0;
     int epoch     = 0;
+    TeamId winner     = TeamId::INVALIDTEAM;
     // Operations
   public:
     State (int width, int height);
@@ -35,6 +36,8 @@ namespace state {
     void setTurn(int turn);
     int getEpoch() const;
     void setEpoch(int epoch);
+    TeamId getWinner() const;
+    void setWinner(TeamId winner);
   };
 
 };

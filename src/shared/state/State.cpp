@@ -49,5 +49,12 @@ namespace state {
     void State::setEpoch(int epoch) {
         this->epoch = epoch;
     }
-    
+
+    TeamId State::getWinner() const {
+        return winner;
+    }
+
+    void State::setWinner(TeamId winner) {
+        this->winner = winner;
+    }
 }
