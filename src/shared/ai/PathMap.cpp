@@ -26,7 +26,7 @@ namespace ai {
             int w = getWeight(Point(x, y));
             return Point(x, y, w);
         }
-        return Point(x, y, std::numeric_limits<int>::infinity());
+        return Point(x, y, std::numeric_limits<int>::max());
     }
     
     const Point PathMap::getBestPoint(int x, int y) const {
