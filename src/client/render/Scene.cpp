@@ -2,7 +2,7 @@
 
 namespace render {
 
-    Scene::Scene(const state::State& state) : state(state), terrainLayer(state.getBoard()), unitLayer(state.getBoard()), stateLayer(state) {
+    Scene::Scene(const state::State& state) : state(state), terrainLayer(state.getBoard()), unitLayer(state.getBoard()), stateLayer(state), debugLayer(state) {
         terrainLayer.initSurface();
         unitLayer.initSurface();       
         stateLayer.initSurface();
@@ -13,15 +13,12 @@ namespace render {
         window.draw(*(terrainLayer.getSurface()));       
         window.draw(*(unitLayer.getSurface()));
         window.draw(*(stateLayer.getSurface()));
+        window.draw(*(debugLayer.getSurface()));
     }
-
-    int Scene::getHeigh() const {
-        return heigh;
-    }
-
-    int Scene::getWidth() const {
-        return width;
-    }
+    
+    DebugLayer& Scene::getDebugLayer() {
+        return debugLayer;
+    }    
 
     int Scene::getShiftHeight() const {
         return shiftHeight;
@@ -30,7 +27,7 @@ namespace render {
     int Scene::getShiftWidth() const {
         return shiftWidth;
     }
-    
+
     void Scene::setShiftHeight(int shiftHeight) {
         this->shiftHeight = shiftHeight;
         stateLayer.setShiftHeight(shiftHeight);
@@ -42,9 +39,4 @@ namespace render {
         stateLayer.setShiftWidth(shiftWidth);
         stateLayer.initSurface();
     }
-
-    void Scene::stateChanged(const state::Event& event) {
-
-    }
-
 }

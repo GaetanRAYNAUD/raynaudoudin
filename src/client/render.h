@@ -12,6 +12,7 @@
 #include "render/UnitTileSet.h"
 #include "render/TerrainLayer.h"
 #include "render/UnitLayer.h"
+#include "render/DebugLayer.h"
 #include "render/Scene.h"
 #include "render/StateLayer.h"
 #endif
