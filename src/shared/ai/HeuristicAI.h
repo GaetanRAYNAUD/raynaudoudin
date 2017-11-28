@@ -32,6 +32,7 @@ namespace ai {
     PathMap unitTeam2PathMap;
     PathMap houseTeam1PathMap;
     PathMap houseTeam2PathMap;
+    PathMap castlePathMap;
     // Operations
   public:
     HeuristicAI (int randomSeed);
@@ -48,6 +49,8 @@ namespace ai {
     void setHouseTeam1PathMap(const PathMap& houseTeam1PathMap);
     const PathMap& getHouseTeam2PathMap() const;
     void setHouseTeam2PathMap(const PathMap& houseTeam2PathMap);
+    const PathMap& getCastlePathMap() const;
+    void setCastlePathMap(const PathMap& castlePathMap);
   };
 
 };

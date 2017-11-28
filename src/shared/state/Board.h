@@ -57,6 +57,7 @@ namespace state {
     bool isLeaderNotAlive (TeamId teamId);
     bool isUnitAround (int idAttacker, int idDefender) const;
     bool isUnitOnPosition (int x, int y) const;
+    int getUnitCountByTeam (TeamId idTeam) const;
     Unit* findUnit (int id) const;
     Team* findTeam (TeamId id) const;
     /// 		

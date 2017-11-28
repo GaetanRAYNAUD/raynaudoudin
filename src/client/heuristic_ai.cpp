@@ -69,6 +69,8 @@ namespace heuristic_ai {
                     displayMap = 3;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::T) {
                     displayMap = 4;
+                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Y) {
+                    displayMap = 5;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
                     if(timePause == 500) {
                         timePause = 10;
@@ -92,6 +94,9 @@ namespace heuristic_ai {
                 case 4:
                     scene->getDebugLayer().printPathMap(ai->getHouseTeam2PathMap().getWeights());
                     break;
+                case 5:
+                    scene->getDebugLayer().printPathMap(ai->getCastlePathMap().getWeights());
+                    break;                    
                 default:
                     break;
             }

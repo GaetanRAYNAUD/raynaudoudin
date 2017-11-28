@@ -140,6 +140,18 @@ namespace state {
         }    
     }
 
+    int Board::getUnitCountByTeam(TeamId idTeam) const {
+        int count = 0;
+        
+        for(auto& u : units) {
+            if(u.second->getTeam() == idTeam) {
+                count = count + 1;
+            }
+        }
+        
+        return count;
+    }
+
     Unit* Board::findUnit(int id) const {
         return units.find(id)->second.get();
     }

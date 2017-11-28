@@ -9,6 +9,8 @@
 #include "engine/HandleWinCommand.h"
 #include "engine/SpawnCommand.h"
 
+#include <iostream>
+
 namespace ai {
     
     HeuristicAI::HeuristicAI(int randomSeed): randgen(randomSeed) {
@@ -31,6 +33,10 @@ namespace ai {
         return unitTeam2PathMap;
     }
 
+    const PathMap& HeuristicAI::getCastlePathMap() const {
+        return castlePathMap;
+    }
+
     void HeuristicAI::initPathMaps(const state::Board& board) {
         const std::map<int, std::unique_ptr<state::Unit> >& units = board.getUnits();
         const std::map<int, std::unique_ptr<state::Terrain> >& terrains = board.getTerrains();
@@ -39,6 +45,7 @@ namespace ai {
         unitTeam2PathMap.init(board);
         houseTeam1PathMap.init(board);
         houseTeam2PathMap.init(board);
+        castlePathMap.init(board);
         
         for (auto& u : units) {
             if (u.second->getTeam() == state::TeamId::TEAM_1) {
@@ -63,6 +70,8 @@ namespace ai {
                         houseTeam1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
                         houseTeam2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
                 }
+            } else if(t.second->getTypeId() == state::TerrainTypeId::CASTLE) {
+                castlePathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
             }
         }
         
@@ -70,6 +79,7 @@ namespace ai {
         unitTeam2PathMap.update(board);
         houseTeam1PathMap.update(board);
         houseTeam2PathMap.update(board);
+        castlePathMap.update(board);
         
         for (auto& u : units) {
             if (u.second->getTeam() == state::TeamId::TEAM_1) {
@@ -122,14 +132,14 @@ namespace ai {
                             
                             commands.clear();
                         }
-                        
+
                         commands = listCommands(engine.getState());
                         if(unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight() < houseTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight()) {
                             point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                         } else {
                             point = houseTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                         }
-                        
+
                         if (unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight() == 0) {
                             for (it = 0; it < commands.size(); it++) {
                                 if (commands.at(it)->getTypeId() == engine::CommandTypeId::ATTACK) {
@@ -140,7 +150,7 @@ namespace ai {
                                     }
                                 }
                             }
-                            
+
                             commands.clear();
                         } else {
                             bool commandMovement = false;
