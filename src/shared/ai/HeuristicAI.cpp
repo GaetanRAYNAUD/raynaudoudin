@@ -113,8 +113,11 @@ namespace ai {
                                     }
                                 }
                             }
+                            
+                            commands.clear();
                         }
                         
+                        commands = listCommands(engine.getState());
                         point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                         if (point.getWeight() == 0) {
                             for (it = 0; it < commands.size(); it++) {
@@ -126,6 +129,8 @@ namespace ai {
                                     }
                                 }
                             }
+                            
+                            commands.clear();
                         } else if (point.getWeight() > 0) {
                             bool commandMovement = false;
                             for (it = 0; it < commands.size(); it++) {
@@ -158,6 +163,7 @@ namespace ai {
                                     }
                                 }
                             }
+                            commands.clear();
                         }
                     }
                 }               
@@ -192,7 +198,11 @@ namespace ai {
                                     }
                                 }
                             }
+                            
+                            commands.clear();
                         }
+                        
+                        commands = listCommands(engine.getState());
                         point = unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                         if (point.getWeight() == 0) {
                             for (it = 0; it < commands.size(); it++) {
@@ -236,6 +246,8 @@ namespace ai {
                                     }
                                 }
                             }
+                            
+                            commands.clear();                            
                         }
                     }
                 }
