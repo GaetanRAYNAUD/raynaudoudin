@@ -28,10 +28,9 @@ namespace engine {
     // Operations
   public:
     SpawnCommand (int x, int y, state::UnitTypeId unitTypeId);
+    void spawnUnit (state::State& state, int x, int y, state::UnitTypeId unitTypeId);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
-  private:
-    void spawnUnit (state::State& state, int x, int y, state::UnitTypeId unitTypeId);
     // Setters and Getters
     int getX() const;
     void setX(int x);

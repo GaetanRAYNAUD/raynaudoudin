@@ -27,15 +27,14 @@ namespace engine {
     // Operations
   public:
     AttackCommand (int idUnitAttacker, int idUnitDefender, state::WeaponTypeId weaponTypeId);
-    /// 		
-    CommandTypeId getTypeId () const;
-    void execute (state::State& state);
-  private:
     void attackUnit (state::State& state, int idUnitAttacker, int idUnitDefender, state::WeaponTypeId weaponTypeId);
     /// 	
     /// @param state		(???) 
     /// @param idUnit		(???) 
     void killUnit (state::State& state, int idUnit);
+    /// 		
+    CommandTypeId getTypeId () const;
+    void execute (state::State& state);
     // Setters and Getters
     int getIdUnitAttacker() const;
     void setIdUnitAttacker(int idUnitAttacker);
