@@ -5,14 +5,14 @@
 namespace ai {
 
     int PathMap::getWeight(const Point& p) const {
-        if (p.getX() >= 0 && p.getY() >= 0 && p.getX() < width && p.getY() < height) {
+        if (p.getX() >= 0 && p.getY() >= 0 && p.getX() < width && p.getY() < height * 2) {
             return weights[p.getX() + width * (p.getY() / 2)];
         }
         return std::numeric_limits<int>::infinity();
     }   
     
     void PathMap::setWeight(const Point& p) {
-        if (p.getX() >= 0 && p.getY() >= 0 && p.getX() < width && p.getY() < height) {
+        if (p.getX() >= 0 && p.getY() >= 0 && p.getX() < width && p.getY() < height * 2) {
             weights[p.getX() + width * (p.getY() / 2)] = p.getWeight();
         }
     }
@@ -22,7 +22,7 @@ namespace ai {
     }
     
     const Point PathMap::getPoint(int x, int y) const {
-        if (x >= 0 && y >= 0 && x < width && y < height) {
+        if (x >= 0 && y >= 0 && x < width && y < height * 2) {
             int w = getWeight(Point(x, y));
             return Point(x, y, w);
         }
@@ -47,7 +47,7 @@ namespace ai {
         width = board.getWidth();
         
         weights.clear();
-        weights.resize((height / 2) * width, std::numeric_limits<int>::max());
+        weights.resize(height * width, std::numeric_limits<int>::max());
     }
 
     void PathMap::addWell(Point p) {
