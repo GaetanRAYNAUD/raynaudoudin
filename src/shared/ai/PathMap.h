@@ -35,6 +35,8 @@ namespace ai {
     /// 			
     /// @param board		(???) 
     void update (const state::Board& board);
+    const Point getPoint (int x, int y) const;
+    const Point getBestPoint (int x, int y) const;
     int getWeight (const Point& p) const;
     /// 	
     /// @param p		(???) 

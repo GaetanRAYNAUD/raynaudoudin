@@ -57,6 +57,11 @@ namespace ai {
                 }
             }
         }
+        
+        unitTeam1PathMap.update(board);
+        unitTeam2PathMap.update(board);
+        houseTeam1PathMap.update(board);
+        houseTeam2PathMap.update(board);
     }
     
     void HeuristicAI::run(engine::Engine& engine) {
@@ -74,7 +79,7 @@ namespace ai {
 //        }
 //        for (auto& u : units) {
 //            if (u.second->getTeam() == state::TeamId::TEAM_1) {
-////                unitTeam2PathMap.
+//                unitTeam2PathMap.getWeight(Point(u.second->getPositionX() - 1, u.second->getPositionY()))
 //
 //                engine.addCommand(1, commands.at(rand));
 //                engine.update();
@@ -85,12 +90,7 @@ namespace ai {
 //        engine.addCommand(2, new engine::HandleWinCommand());
 //        engine.update();
 //        
-//        commands.clear();
-//        
+//        commands.clear();      
     }
-    
-//    const std::vector<int>& PathMap::getBestCommand(int x, int y) const {
-//        if ()
-//    }
-   
+
 }

@@ -2,6 +2,7 @@
 #ifndef AI__POINT__H
 #define AI__POINT__H
 
+#include <limits>
 
 namespace ai {
   class Point;
@@ -20,7 +21,7 @@ namespace ai {
     int weight;
     // Operations
   public:
-    Point (int x = 0, int y = 0, int weight = 0);
+    Point (int x, int y, int weight = std::numeric_limits<int>::infinity());
     Point transform (state::Direction d);
     // Setters and Getters
     int getX() const;
