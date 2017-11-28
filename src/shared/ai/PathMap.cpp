@@ -47,7 +47,7 @@ namespace ai {
         width = board.getWidth();
         
         weights.clear();
-        weights.resize((height / 2) * width, std::numeric_limits<int>::infinity());
+        weights.resize((height / 2) * width, std::numeric_limits<int>::max());
     }
 
     void PathMap::addWell(Point p) {

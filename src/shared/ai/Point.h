@@ -21,7 +21,7 @@ namespace ai {
     int weight;
     // Operations
   public:
-    Point (int x, int y, int weight = std::numeric_limits<int>::infinity());
+    Point (int x, int y, int weight = std::numeric_limits<int>::max());
     Point transform (state::Direction d);
     // Setters and Getters
     int getX() const;
