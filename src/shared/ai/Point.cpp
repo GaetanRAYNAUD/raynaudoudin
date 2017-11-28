@@ -30,7 +30,7 @@ namespace ai {
         this->weight = weight;
     }
 
-    Point Point::transform(state::Direction d) {
+    Point Point::transformToPoint(state::Direction d) {
         switch (d) {
             case state::Direction::TOP:
                 return Point(x, y - 2, weight);
@@ -46,6 +46,24 @@ namespace ai {
                 return Point(x - 1, y - 1, weight);
             default:
                 return Point(x, y, weight);
+        }
+    }
+    
+    state::Direction Point::transformToDirection(Point p) {
+        if(y == p.getY() - 2) {
+            return(state::Direction::TOP);
+        } else if(x == p.getX() + 1 && y == p.getY() - 1) {
+            return(state::Direction::TOP_RIGHT);
+        } else if(x == p.getX() + 1 && y == p.getY() + 1) {
+            return(state::Direction::BOT_RIGHT);
+        } else if(y == p.getY() + 2) {
+            return(state::Direction::BOT);
+        } else if(x == p.getX() - 1 && y == p.getY() + 1) {
+            return(state::Direction::BOT_LEFT);
+        } else if(x == p.getX() - 1 && y == p.getY() - 1) {
+            return(state::Direction::TOP_LEFT);
+        } else {
+            return state::Direction::BOT;
         }
     }
     

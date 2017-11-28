@@ -145,7 +145,8 @@ namespace ai {
                                     for (it = 0; it < commands.size(); it++) {
                                         if (commands.at(it)->getTypeId() == engine::CommandTypeId::MOVE) {
                                             if (((engine::MoveCommand*)commands.at(it))->getIdUnit() == u.second->getId() 
-                                                    && ((engine::MoveCommand*)commands.at(it))->getDirection() == point.) {
+                                                    && ((engine::MoveCommand*)commands.at(it))->getDirection() == 
+                                                    point.transformToDirection(Point(u.second->getPositionX(), u.second->getPositionY()))) {
                                                 commandMovement = true;                                    
                                                 break;
                                             }
