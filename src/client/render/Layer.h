@@ -27,7 +27,7 @@ namespace render {
   public:
     Layer ();
     virtual ~Layer ();
-    const Surface* getSurface () const;
+    Surface* getSurface () const;
     int getShiftWidth () const;
     int getShiftHeight () const;
     void setSurface (Surface* surface);

@@ -9,7 +9,7 @@ namespace render {
     
     }
     
-    const Surface* Layer::getSurface() const {
+    Surface* Layer::getSurface() const {
         return surface.get();
     }
 

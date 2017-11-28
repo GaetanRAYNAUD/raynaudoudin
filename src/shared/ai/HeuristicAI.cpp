@@ -9,8 +9,6 @@
 #include "engine/HandleWinCommand.h"
 #include "engine/SpawnCommand.h"
 
-#include <iostream>
-
 namespace ai {
     
     HeuristicAI::HeuristicAI(int randomSeed): randgen(randomSeed) {
@@ -72,6 +70,14 @@ namespace ai {
         unitTeam2PathMap.update(board);
         houseTeam1PathMap.update(board);
         houseTeam2PathMap.update(board);
+        
+        for (auto& u : units) {
+            if (u.second->getTeam() == state::TeamId::TEAM_1) {
+                unitTeam2PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
+            } else if (u.second->getTeam() == state::TeamId::TEAM_2) {
+                unitTeam1PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
+            }
+        }
     }
     
     void HeuristicAI::run(engine::Engine& engine) {

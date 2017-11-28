@@ -41,12 +41,18 @@ namespace heuristic_ai {
                 time = clock.getElapsedTime();
                 if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
                     pause = true;
-                    std::cout << "L'équipe " << engine->getState().getWinner() << " a gagné !" << std::endl;
                 }
             }
             
             delete scene;
             scene = new Scene(engine->getState());
+            
+            if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
+                pause = true;
+                std::string s = std::to_string(engine->getState().getWinner());
+                std::string winnerMessage = "L equipe " + s + " a gagne !";
+                scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
+            }
             
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
