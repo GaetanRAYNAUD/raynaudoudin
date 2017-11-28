@@ -14,6 +14,7 @@ namespace heuristic_ai {
         int windowHeight = 576;
         int mapWidth = 22;
         int mapHeight = 8;
+        int timePause = 500;
         Engine* engine = new Engine(mapWidth, mapHeight);  
         Scene* scene;
         Command* command;
@@ -37,7 +38,7 @@ namespace heuristic_ai {
         while (window.isOpen()) {
             sf::Event event;
             
-            if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > 300 && !pause) {            
+            if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
                 airand->run(*engine);
                 ai->initPathMaps(engine->getState().getBoard());
                 time = clock.getElapsedTime();
@@ -49,7 +50,7 @@ namespace heuristic_ai {
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
                     window.close(); 
-                } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+                } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
                     pause = !pause;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::A) {
                     displayMap = 0;
@@ -61,6 +62,12 @@ namespace heuristic_ai {
                     displayMap = 3;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::T) {
                     displayMap = 4;
+                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
+                    if(timePause == 500) {
+                        timePause = 10;
+                    } else {
+                        timePause = 500;
+                    }
                 }
                 
             }
