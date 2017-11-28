@@ -20,8 +20,6 @@ namespace heuristic_ai {
         Command* command;
         std::random_device rand;
         HeuristicAI* ai = new HeuristicAI(rand());
-        RandomAI* airand = new RandomAI(rand());
-        sf::Vector2i startMousePos, endMousePos;
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         sf::View view(sf::FloatRect(0, 0, windowWidth, windowHeight));
         sf::Clock clock;
@@ -39,8 +37,7 @@ namespace heuristic_ai {
             sf::Event event;
             
             if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
-                airand->run(*engine);
-                ai->initPathMaps(engine->getState().getBoard());
+                ai->run(*engine);
                 time = clock.getElapsedTime();
             }
             

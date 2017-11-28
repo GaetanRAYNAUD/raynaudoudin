@@ -4,6 +4,8 @@
 #include "state/Unit.h"
 #include "engine/AttackCommand.h"
 #include "engine/MoveCommand.h"
+#include "engine/EndTurnCommand.h"
+#include "engine/HandleWinCommand.h"
 
 namespace ai {
     
@@ -71,49 +73,110 @@ namespace ai {
     void HeuristicAI::run(engine::Engine& engine) {
         const std::map<int, std::unique_ptr<state::Unit> >& units = engine.getState().getBoard().getUnits();
         std::vector<engine::Command*> commands;
+        unsigned int it;
 
         initPathMaps(engine.getState().getBoard());
         commands = listCommands(engine.getState());
         
         switch (engine.getState().getCurrentTeam()) {
             case state::TeamId::TEAM_1:
+                for (auto& u : units) {
+                            if (u.second->getTeam() == state::TeamId::TEAM_1) {
+                                Point point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
+                                if (point.getWeight() == 0) {
+                                    for (it = 0; it < commands.size(); it++) {
+                                        if (commands[it]->getTypeId() == engine::CommandTypeId::ATTACK) {
+                                            if (((engine::AttackCommand*)commands[it])->getIdUnitAttacker() == u.second->getId()) {
+                                                engine.addCommand(1, commands.at(it));
+                                                engine.update();
+                                                break;
+                                            }
+                                        }
+                                    }
+                                } else if (point.getWeight() > 0) {
+                                    bool commandMovement = false;
+                                    for (it = 0; it < commands.size(); it++) {
+                                        if (commands[it]->getTypeId() == engine::CommandTypeId::MOVE) {
+                                            if (((engine::MoveCommand*)commands[it])->getIdUnit() == u.second->getId()) {
+                                                commandMovement = true;                                    
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    while (commandMovement) {
+                                        engine.addCommand(1, commands.at(it));
+                                        engine.update();
+                                        initPathMaps(engine.getState().getBoard());
+                                        commands = listCommands(engine.getState());
+                                        commandMovement = false;
+
+                                        for (it = 0; it < commands.size(); it++) {
+                                            if (commands[it]->getTypeId() == engine::CommandTypeId::MOVE) {
+                                                if (((engine::MoveCommand*)commands[it])->getIdUnit() == u.second->getId()) {
+                                                    commandMovement = true;                                    
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }                
+                break;
                 
-                break;
             case state::TeamId::TEAM_2:
+                for (auto& u : units) {
+                            if (u.second->getTeam() == state::TeamId::TEAM_2) {
+                                Point point = unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
+                                if (point.getWeight() == 0) {
+                                    for (it = 0; it < commands.size(); it++) {
+                                        if (commands[it]->getTypeId() == engine::CommandTypeId::ATTACK) {
+                                            if (((engine::AttackCommand*)commands[it])->getIdUnitAttacker() == u.second->getId()) {
+                                                engine.addCommand(1, commands.at(it));
+                                                engine.update();
+                                                break;
+                                            }
+                                        }
+                                    }
+                                } else if (point.getWeight() > 0) {
+                                    bool commandMovement = false;
+                                    for (it = 0; it < commands.size(); it++) {
+                                        if (commands[it]->getTypeId() == engine::CommandTypeId::MOVE) {
+                                            if (((engine::MoveCommand*)commands[it])->getIdUnit() == u.second->getId()) {
+                                                commandMovement = true;                                    
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    while (commandMovement) {
+                                        engine.addCommand(1, commands.at(it));
+                                        engine.update();
+                                        initPathMaps(engine.getState().getBoard());
+                                        commands = listCommands(engine.getState());
+                                        commandMovement = false;
+
+                                        for (it = 0; it < commands.size(); it++) {
+                                            if (commands[it]->getTypeId() == engine::CommandTypeId::MOVE) {
+                                                if (((engine::MoveCommand*)commands[it])->getIdUnit() == u.second->getId()) {
+                                                    commandMovement = true;                                    
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }                
                 break;
+            
             case state::TeamId::INVALIDTEAM:
                 break;
         }
-        for (auto& u : units) {
-            if (u.second->getTeam() == state::TeamId::TEAM_1) {
-                Point point = unitTeam2PathMap.getBestPoint(Point(u.second->getPositionX(), u.second->getPositionY()));
-                if (point.getWeight() == 0) {
-                    for (int i = 0; i < commands.size(); i++) {
-                        if (commands[i]->getTypeId() == engine::CommandTypeId::ATTACK) {
-                            if (((engine::AttackCommand*)commands[i])->getIdUnitAttacker() == u.second->getId()) {
-                                engine.addCommand(1, commands.at(i));
-                                engine.update();
-                                break;
-                            }
-                        }
-                    }
-                } else if (point.getWeight() > 0) {
-                    while (point.getWeight() > 0) {
-                        for (int i = 0; i < commands.size(); i++) {
-                            if (commands[i]->getTypeId() == engine::CommandTypeId::MOVE) {
-                                if (((engine::MoveCommand*)commands[i])->getIdUnit() == u.second->getId()) {
-                                    engine.addCommand(1, commands.at(i));
-                                    engine.update();
-                                    initPathMaps(engine.getState().getBoard());
-                                    commands = listCommands(engine.getState());                                    
-                                    break;
-                                }
-                            }
-                        }                        
-                    }
-                }
-            }
-        }//A finir
+        
             
         engine.addCommand(1, new engine::EndTurnCommand());        
         engine.addCommand(2, new engine::HandleWinCommand());
