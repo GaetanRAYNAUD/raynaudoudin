@@ -64,7 +64,7 @@ namespace ai {
 
             directions = board.directionAvailable(point.getX(), point.getY());
             for (auto d : directions) {
-                Point pointTmp = point.transform(d);
+                Point pointTmp = point.transformToPoint(d);
 
                 pointTmp.setWeight(point.getWeight() + board.findTerrainOnPosition(pointTmp.getX(), pointTmp.getY())->getMovementCost());
                 if (pointTmp.getWeight() < getWeight(pointTmp)) {     

@@ -22,7 +22,8 @@ namespace ai {
     // Operations
   public:
     Point (int x, int y, int weight = std::numeric_limits<int>::max());
-    Point transform (state::Direction d);
+    Point transformToPoint (state::Direction d);
+    state::Direction transformToDirection (Point p);
     // Setters and Getters
     int getX() const;
     void setX(int x);

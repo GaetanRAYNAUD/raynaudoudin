@@ -85,7 +85,7 @@ namespace ai {
                                 Point point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                                 if (point.getWeight() == 0) {
                                     for (it = 0; it < commands.size(); it++) {
-                                        if (commands[it]->getTypeId() == engine::CommandTypeId::ATTACK) {
+                                        if (commands.at(it)->getTypeId() == engine::CommandTypeId::ATTACK) {
                                             if (((engine::AttackCommand*)commands[it])->getIdUnitAttacker() == u.second->getId()) {
                                                 engine.addCommand(1, commands.at(it));
                                                 engine.update();
@@ -96,7 +96,7 @@ namespace ai {
                                 } else if (point.getWeight() > 0) {
                                     bool commandMovement = false;
                                     for (it = 0; it < commands.size(); it++) {
-                                        if (commands[it]->getTypeId() == engine::CommandTypeId::MOVE) {
+                                        if (commands.at(it)->getTypeId() == engine::CommandTypeId::MOVE) {
                                             if (((engine::MoveCommand*)commands[it])->getIdUnit() == u.second->getId()) {
                                                 commandMovement = true;                                    
                                                 break;
@@ -133,7 +133,7 @@ namespace ai {
                                 if (point.getWeight() == 0) {
                                     for (it = 0; it < commands.size(); it++) {
                                         if (commands[it]->getTypeId() == engine::CommandTypeId::ATTACK) {
-                                            if (((engine::AttackCommand*)commands[it])->getIdUnitAttacker() == u.second->getId()) {
+                                            if (((engine::AttackCommand*)commands.at(it))->getIdUnitAttacker() == u.second->getId()) {
                                                 engine.addCommand(1, commands.at(it));
                                                 engine.update();
                                                 break;
@@ -143,8 +143,8 @@ namespace ai {
                                 } else if (point.getWeight() > 0) {
                                     bool commandMovement = false;
                                     for (it = 0; it < commands.size(); it++) {
-                                        if (commands[it]->getTypeId() == engine::CommandTypeId::MOVE) {
-                                            if (((engine::MoveCommand*)commands[it])->getIdUnit() == u.second->getId()) {
+                                        if (commands.at(it)->getTypeId() == engine::CommandTypeId::MOVE) {
+                                            if (((engine::MoveCommand*)commands.at(it))->getIdUnit() == u.second->getId()) {
                                                 commandMovement = true;                                    
                                                 break;
                                             }
