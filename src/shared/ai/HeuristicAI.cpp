@@ -9,11 +9,9 @@
 #include "engine/HandleWinCommand.h"
 #include "engine/SpawnCommand.h"
 
-#include <iostream>
-
 namespace ai {
     
-    HeuristicAI::HeuristicAI(int randomSeed): randgen(randomSeed) {
+    HeuristicAI::HeuristicAI() {
 
     }
 

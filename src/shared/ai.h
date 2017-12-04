@@ -8,4 +8,5 @@
 #include "ai/PointCompareWeight.h"
 #include "ai/PathMap.h"
 #include "ai/HeuristicAI.h"
+#include "ai/DeepAI.h"
 #endif

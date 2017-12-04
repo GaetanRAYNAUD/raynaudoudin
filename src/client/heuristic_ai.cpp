@@ -19,7 +19,7 @@ namespace heuristic_ai {
         Scene* scene;
         Command* command;
         std::random_device rand;
-        HeuristicAI* ai = new HeuristicAI(rand());
+        HeuristicAI* ai = new HeuristicAI();
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         sf::View view(sf::FloatRect(0, 0, windowWidth, windowHeight));
         sf::Clock clock;
