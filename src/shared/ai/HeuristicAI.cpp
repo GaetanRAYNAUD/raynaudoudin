@@ -15,26 +15,6 @@ namespace ai {
 
     }
 
-    const PathMap& HeuristicAI::getHouseTeam1PathMap() const {
-        return houseTeam1PathMap;
-    }
-
-    const PathMap& HeuristicAI::getHouseTeam2PathMap() const {
-        return houseTeam2PathMap;
-    }
-
-    const PathMap& HeuristicAI::getUnitTeam1PathMap() const {
-        return unitTeam1PathMap;
-    }
-
-    const PathMap& HeuristicAI::getUnitTeam2PathMap() const {
-        return unitTeam2PathMap;
-    }
-
-    const PathMap& HeuristicAI::getCastlePathMap() const {
-        return castlePathMap;
-    }
-
     void HeuristicAI::initPathMaps(const state::Board& board) {
         const std::map<int, std::unique_ptr<state::Unit> >& units = board.getUnits();
         const std::map<int, std::unique_ptr<state::Terrain> >& terrains = board.getTerrains();
@@ -296,5 +276,25 @@ namespace ai {
         
         commands.clear();      
     }
+    
+    const PathMap& HeuristicAI::getHouseTeam1PathMap() const {
+        return houseTeam1PathMap;
+    }
 
+    const PathMap& HeuristicAI::getHouseTeam2PathMap() const {
+        return houseTeam2PathMap;
+    }
+
+    const PathMap& HeuristicAI::getUnitTeam1PathMap() const {
+        return unitTeam1PathMap;
+    }
+
+    const PathMap& HeuristicAI::getUnitTeam2PathMap() const {
+        return unitTeam2PathMap;
+    }
+
+    const PathMap& HeuristicAI::getCastlePathMap() const {
+        return castlePathMap;
+    }
+    
 }

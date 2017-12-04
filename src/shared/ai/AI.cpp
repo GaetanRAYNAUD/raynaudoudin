@@ -50,10 +50,6 @@ namespace ai {
         return commands;
     }
     
-//    std::vector<engine::Command*> AI::getCommandsByType(engine::CommandTypeId commandTypeId) {
-//        
-//    }
-    
     AI::~AI() {
 
     }
