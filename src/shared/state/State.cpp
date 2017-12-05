@@ -57,4 +57,34 @@ namespace state {
     void State::setWinner(TeamId winner) {
         this->winner = winner;
     }
+
+    void State::setBoard(const Board& board) {
+        this->board = board;
+    }
+
+    State* State::clone() const {
+        return new State(*this);
+    }
+
+    bool State::equals(const State& other) const {
+        if(epoch != other.epoch) {
+            return false;
+        }
+        
+        if(turn != other.turn) {
+            return false;
+        }
+        
+        if(winner != other.winner) {
+            return false;
+        }
+        
+        if(board.equals(other.getBoard()) == false) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
 }

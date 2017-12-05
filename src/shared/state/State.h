@@ -5,6 +5,7 @@
 
 namespace state {
   class Board;
+  class State;
   class Observable;
 }
 
@@ -18,9 +19,8 @@ namespace state {
   class State : public state::Observable {
     // Associations
     // Attributes
-  private:
-    Board board;
   protected:
+    Board board;
     int turn     = 0;
     int epoch     = 0;
     TeamId winner     = TeamId::INVALIDTEAM;
@@ -31,7 +31,10 @@ namespace state {
     const Board& getBoard () const;
     const TeamId getCurrentTeam () const;
     void endTurn ();
+    bool equals (const State& other) const;
+    State* clone () const;
     // Setters and Getters
+    void setBoard(const Board& board);
     int getTurn() const;
     void setTurn(int turn);
     int getEpoch() const;

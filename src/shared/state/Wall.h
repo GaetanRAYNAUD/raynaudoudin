@@ -24,6 +24,7 @@ namespace state {
     void setOrientation (Orientation orientation);
     const Orientation& getOrientation () const;
     Terrain* clone () const;
+    bool equals (const Terrain& other) const;
     // Setters and Getters
   };
 

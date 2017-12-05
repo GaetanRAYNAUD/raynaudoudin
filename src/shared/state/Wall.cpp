@@ -61,5 +61,32 @@ namespace state {
     Terrain* Wall::clone() const {
         return new Wall(*this);
     }
+
+    bool Wall::equals(const Terrain& other) const {
+        Wall& otherCompare = (Wall&)other;
+        
+        if(typeId != otherCompare.typeId) {
+            return false;
+        }
+        
+        if(movementCost != otherCompare.movementCost) {
+            return false;
+        }
+        
+        if(orientation != otherCompare.orientation) {
+            return false;
+        }
+        
+        if(positionX != otherCompare.positionX) {
+            return false;
+        }
+        
+        if(positionY != otherCompare.positionY) {
+            return false;
+        }
+        
+        return true;
+    }
+    
     
 }

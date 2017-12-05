@@ -19,6 +19,7 @@ namespace state {
   public:
     Leader (TeamId team, int positionX, int positionY, RaceTypeId race);
     Unit* clone () const;
+    bool equals (const Unit& other) const;
     // Setters and Getters
   };
 

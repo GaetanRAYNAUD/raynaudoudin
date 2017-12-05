@@ -25,6 +25,7 @@ namespace engine {
     state::UnitTypeId unitTypeId;
     state::TeamId teamId;
     int spawnUnitId;
+    int teamGold;
     // Operations
   public:
     SpawnAction (int x, int y, state::UnitTypeId unitTypeId, state::TeamId teamId);
@@ -41,6 +42,8 @@ namespace engine {
     void setTeamId(state::TeamId teamId);
     int getSpawnUnitId() const;
     void setSpawnUnitId(int spawnUnitId);
+    int getTeamGold() const;
+    void setTeamGold(int teamGold);
   };
 
 };

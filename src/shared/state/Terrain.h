@@ -30,6 +30,7 @@ namespace state {
     int getMovementCost () const;
     int getPositionX () const;
     int getPositionY () const;
+    bool equals (const Terrain& other) const;
     virtual Terrain* clone () const = 0;
     // Setters and Getters
     void setId(int id);

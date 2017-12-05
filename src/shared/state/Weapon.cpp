@@ -37,5 +37,17 @@ namespace state {
     const bool Weapon::isCloseCombat() {
         return false;
     }
+    
+    bool Weapon::equals(const Weapon& other) const {
+        if(typeId != other.typeId) {
+            return false;
+        }
+        
+        if(damage != other.damage) {         
+            return false;
+        }
+        
+        return true;
+    }
 
 }

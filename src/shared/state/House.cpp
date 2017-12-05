@@ -23,5 +23,30 @@ namespace state {
         return teamId;
     }
     
-    
+    bool House::equals(const Terrain& other) const {
+        House& otherCompare = (House&)other;
+        
+        if(typeId != otherCompare.typeId) {
+            return false;
+        }
+        
+        if(teamId != otherCompare.teamId) {
+            return false;
+        }
+        
+        if(movementCost != otherCompare.movementCost) {
+            return false;
+        }
+        
+        if(positionX != otherCompare.positionX) {
+            return false;
+        }
+        
+        if(positionY != otherCompare.positionY) {
+            return false;
+        }
+        
+        return true;
+    }
+
 }

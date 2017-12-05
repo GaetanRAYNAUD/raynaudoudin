@@ -541,6 +541,61 @@ namespace state {
         return units;
     }
 
+    bool Board::equals(const Board& other) const {
+        if(height != other.height) {
+            return false;
+        }
+        
+        if(width != other.width) {           
+            return false;
+        }
+        
+        if(idUnit != other.idUnit) {
+            return false;
+        }
+        
+        if(idTerrain != other.idTerrain) {           
+            return false;
+        }
+        
+        if(units.size() != other.units.size()) {
+            return false;
+        }
+        
+        if(teams.size() != other.teams.size()) {           
+            return false;
+        }
+
+        if(terrains.size() != other.terrains.size()) {           
+            return false;
+        }
+        
+        for(unsigned int i = 0; i < units.size(); i++) {
+            if(units.at(i)->equals(*other.units.at(i)->clone()) == false) {
+                std::cout << "unité " << i << " différente" << std::endl;                
+                return false;
+            }
+        }
+
+        for(unsigned int i = 0; i < terrains.size(); i++) {
+            if(terrains.at(i)->equals(*other.terrains.at(i)->clone()) == false) {
+                std::cout << "terrain " << i << " différente" << std::endl;                
+                return false;
+            }
+        }
+
+        if(teams.at(TeamId::TEAM_1)->equals(*other.teams.at(TEAM_1)->clone()) == false) {
+                std::cout << "team 1 différente" << std::endl;            
+            return false;
+        }  
+        
+        if(teams.at(TeamId::TEAM_2)->equals(*other.teams.at(TEAM_2)->clone()) == false) {
+                std::cout << "team 2 différente" << std::endl;            
+            return false;
+        }          
+        return true;
+    }
+
     Board::~Board() {
         teams.clear();
         terrains.clear();

@@ -48,6 +48,7 @@ namespace state {
     const TeamId& getTeam () const;
     const RaceTypeId& getRace () const;
     void setSpeed (int speed);
+    virtual bool equals (const Unit& other) const = 0;
     virtual Unit* clone () const = 0;
     // Setters and Getters
     void setId(int id);

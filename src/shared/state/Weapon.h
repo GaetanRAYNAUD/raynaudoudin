@@ -27,6 +27,7 @@ namespace state {
     int getDamage () const;
     const WeaponTypeId& getTypeId () const;
     int getId () const;
+    bool equals (const Weapon& other) const;
     virtual Weapon* clone () const = 0;
     // Setters and Getters
     void setId(int id);

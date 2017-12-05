@@ -46,10 +46,27 @@ namespace state {
         this->typeId = typeId;
     }
 
+    bool Terrain::equals(const Terrain& other) const {
+        if(typeId != other.typeId) {
+            return false;
+        }
+        
+        if(positionX != other.positionX) {
+            return false;
+        }
+        
+        if(positionY != other.positionY) {
+            return false;
+        }
+        
+        if(movementCost != other.movementCost) {
+            return false;
+        }
+        
+        return true;
+    }    
+
     Terrain::~Terrain() {
         
     }
-
-
-    
 }

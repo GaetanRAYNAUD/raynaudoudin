@@ -16,7 +16,8 @@ namespace rollback {
         int timePause = 1000;
         int epock = 0;
         std::stack<std::stack<std::shared_ptr<Action>>> actions;
-        Engine* engine = new Engine(mapWidth, mapHeight);  
+        std::stack<State*> states;
+        Engine* engine = new Engine(mapWidth, mapHeight);
         Scene* scene;
         Command* command;
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
@@ -45,6 +46,8 @@ namespace rollback {
                     case 0:
                         command = new SpawnCommand(engine->getState().getBoard().findUnit(0)->getPositionX(), engine->getState().getBoard().findUnit(0)->getPositionY(), UnitTypeId::SWORDMAN);
                         engine->addCommand(1, command);
+                        
+                        states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
                         delete scene;
@@ -71,6 +74,7 @@ namespace rollback {
                         command = new EndTurnCommand();
                         engine->addCommand(6, command);
 
+                        states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
                         delete scene;
@@ -87,8 +91,9 @@ namespace rollback {
 
                         command = new SpawnCommand(engine->getState().getBoard().findUnit(1)->getPositionX(), engine->getState().getBoard().findUnit(1)->getPositionY(), UnitTypeId::SWORDMAN);
                         engine->addCommand(3, command);
-                        
-                        actions.push(engine->update());                        
+                                               
+                        states.push(engine->getState().clone());                      
+                        actions.push(engine->update());                       
                         
                         delete scene;                                
                         scene = new Scene(engine->getState());
@@ -111,6 +116,7 @@ namespace rollback {
                         command = new MoveCommand(1, state::Direction::TOP);
                         engine->addCommand(5, command);                        
 
+                        states.push(engine->getState().clone());
                         actions.push(engine->update());
         
                         delete scene;                                
@@ -134,6 +140,7 @@ namespace rollback {
                         command = new MoveCommand(3, state::Direction::TOP_LEFT);
                         engine->addCommand(5, command);                        
 
+                        states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
                         delete scene;                                
@@ -157,6 +164,7 @@ namespace rollback {
                         command = new MoveCommand(4, state::Direction::TOP_LEFT);
                         engine->addCommand(5, command);                        
 
+                        states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
                         delete scene;                                
@@ -184,7 +192,9 @@ namespace rollback {
                         command = new EndTurnCommand();
                         engine->addCommand(6, command);
 
-                        actions.push(engine->update());                 
+                        states.push(engine->getState().clone());
+                        actions.push(engine->update());
+                        
                         delete scene;                                
                         scene = new Scene(engine->getState());
                         epock = epock + 1;                        
@@ -216,13 +226,19 @@ namespace rollback {
                         if(actions.size() > 0) {
                             engine->undo(actions.top());
                             actions.pop();
+                            
+                            if(states.top()->equals(engine->getState()) == false) {
+                                std::cout << "Etat " << states.size() - 1 << " mal restitué !" << std::endl;
+                            }
+                            
+                            states.pop();
+                        } else {
+                            std::cout << "Rollback correctement effectué !" << std::endl;
+                            window.close();
                         }
                         break;
                 }
             }
-            
-            delete scene;
-            scene = new Scene(engine->getState());
             
             if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
                 pause = true;
@@ -245,6 +261,9 @@ namespace rollback {
                 }
                 
             }
+            
+            delete scene;
+            scene = new Scene(engine->getState());            
             scene->draw(window);
             window.display();
         }

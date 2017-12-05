@@ -19,5 +19,47 @@ namespace state {
     Unit* Swordman::clone() const {
         return new Swordman(*this);
     }
+    
+    bool Swordman::equals(const Unit& other) const {
+        Swordman& otherCompare = (Swordman&)other;
+        
+        if(typeId != otherCompare.typeId) {
+            return false;
+        }
+        
+        if(team != otherCompare.team) {
+            return false;
+        }
+        
+        if(race != otherCompare.race) {
+            return false;
+        }
+        
+        if(life != otherCompare.life) {
+            return false;
+        }
+        
+        if(positionX != otherCompare.positionX) {
+            return false;
+        }
+        
+        if(positionY != otherCompare.positionY) {
+            return false;
+        }
+        
+        if(speed != otherCompare.speed) {
+            return false;
+        }
+        
+        if(weapons.size() != otherCompare.weapons.size()) {
+            return false;
+        }
+        
+        if(weapons.at(WeaponTypeId::SWORD)->equals(*otherCompare.weapons.at(WeaponTypeId::SWORD)->clone()) == false) {           
+            return false;
+        }
+        
+        return true;
+    }      
 
 }

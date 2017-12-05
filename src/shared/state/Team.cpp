@@ -18,17 +18,26 @@ namespace state {
         return gold;
     }
 
-    const TeamId& Team::getId() const {
+    TeamId Team::getId() const {
         return id;
     }
 
-    const RaceTypeId& Team::getRace() const {
+    RaceTypeId Team::getRace() const {
         return race;
     }
     
     int Team::getNbHouses() const {
         return nbHouses;
     }
+
+    void Team::setGold(int gold) {
+        this->gold = gold;
+    }
+
+    void Team::setId(TeamId id) {
+        this->id = id;
+    }
+    
    
     bool Team::verifyGold(UnitTypeId unitTypeId) const {
         if(gold >= unitsPrices.at(unitTypeId)) {
@@ -58,10 +67,21 @@ namespace state {
     Team* Team::clone() const {
         return new Team(*this);
     }
-
-    void Team::setId(TeamId id) {
-        this->id = id;
+    
+    bool Team::equals(const Team& other) const {
+        if(race != other.race) {
+            return false;
+        }
+                
+        if(gold != other.gold) {
+            return false;
+        }
+        
+        if(nbHouses != other.nbHouses) {
+            return false;
+        }
+        
+        return true;
     }
-
 
 }

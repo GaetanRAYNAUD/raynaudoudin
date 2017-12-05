@@ -24,6 +24,7 @@ namespace state {
     Terrain* clone () const;
     void setTeamId (TeamId teamId);
     const TeamId& getTeamId () const;
+    bool equals (const Terrain& other) const;
     // Setters and Getters
   };
 

@@ -80,6 +80,7 @@ namespace state {
     const std::map<TeamId, std::unique_ptr<Team> >& getTeams () const;
     const std::map<int, std::unique_ptr<Terrain> >& getTerrains () const;
     const std::map<int, std::unique_ptr<Unit> >& getUnits () const;
+    bool equals (const Board& other) const;
     // Setters and Getters
   };
 
