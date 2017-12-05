@@ -2,15 +2,19 @@
 #ifndef ENGINE__SPAWNCOMMAND__H
 #define ENGINE__SPAWNCOMMAND__H
 
+#include <stack>
+#include <memory>
 
 namespace state {
   class State;
 };
 namespace engine {
+  class Action;
   class Command;
 }
 
 #include "state/UnitTypeId.h"
+#include "Action.h"
 #include "CommandTypeId.h"
 #include "Command.h"
 #include "state/TerrainTypeId.h"
@@ -28,9 +32,9 @@ namespace engine {
     // Operations
   public:
     SpawnCommand (int x, int y, state::UnitTypeId unitTypeId);
-    void spawnUnit (state::State& state, int x, int y, state::UnitTypeId unitTypeId);
+    void spawnUnit (state::State& state, int x, int y, state::UnitTypeId unitTypeId, std::stack<std::shared_ptr<Action>>& acions);
     CommandTypeId getTypeId () const;
-    void execute (state::State& state);
+    void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
     // Setters and Getters
     int getX() const;
     void setX(int x);

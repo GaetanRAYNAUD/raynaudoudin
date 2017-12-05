@@ -6,7 +6,7 @@ namespace engine {
         
     }
 
-    void LoadCommand::execute(state::State& state) {
+    void LoadCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
         state.getBoard().loadTerrainsFromFile(fileName);
     }
 

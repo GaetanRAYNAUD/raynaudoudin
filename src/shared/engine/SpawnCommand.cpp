@@ -1,4 +1,5 @@
 #include "SpawnCommand.h"
+#include "SpawnAction.h"
 
 namespace engine {
 
@@ -6,21 +7,27 @@ namespace engine {
 
     }
    
-    void SpawnCommand::spawnUnit(state::State& state, int x, int y, state::UnitTypeId unitTypeId) {
+    void SpawnCommand::spawnUnit(state::State& state, int x, int y, state::UnitTypeId unitTypeId, std::stack<std::shared_ptr<Action>>& actions ) {
         if(state.getBoard().findUnitOnPosition(x, y)->getTeam() == state.getCurrentTeam()) {
             if(state.getBoard().findTeam(state.getBoard().findUnitOnPosition(x, y)->getTeam())->verifyGold(unitTypeId) && unitTypeId != state::UnitTypeId::LEADER) {
                 if (state.getBoard().findTerrainOnPosition(x, y)->getTypeId() == state::TerrainTypeId::CASTLE &&
                         state.getBoard().findUnitOnPosition(x, y)->getTypeId() == state::UnitTypeId::LEADER) {
                     if (!state.getBoard().isUnitOnPosition(x - 1, y - 1)) {
-                        state.getBoard().createNewUnit(unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam(), x - 1, y - 1);
+                        std::shared_ptr<Action> action(new SpawnAction(x - 1, y - 1, unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam()));
+                        actions.push(action);
+                        action->apply(state);                        
                         state.getBoard().findTeam(state.getBoard().findUnitOnPosition(x, y)->getTeam())->withdrawGold(unitTypeId);
                         
                     } else if (!state.getBoard().isUnitOnPosition(x, y - 2)) {
-                        state.getBoard().createNewUnit(unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam(), x, y - 2);
+                        std::shared_ptr<Action> action(new SpawnAction(x, y - 2, unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam()));
+                        actions.push(action);
+                        action->apply(state);  
                         state.getBoard().findTeam(state.getBoard().findUnitOnPosition(x, y)->getTeam())->withdrawGold(unitTypeId);
                         
                     } else if (!state.getBoard().isUnitOnPosition(x + 1, y - 1)) {
-                        state.getBoard().createNewUnit(unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam(), x + 1, y - 1);
+                        std::shared_ptr<Action> action(new SpawnAction(x + 1, y - 1, unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam()));
+                        actions.push(action);
+                        action->apply(state);  
                         state.getBoard().findTeam(state.getBoard().findUnitOnPosition(x, y)->getTeam())->withdrawGold(unitTypeId);
                     }
                 }
@@ -28,8 +35,8 @@ namespace engine {
         }
     }
 
-    void SpawnCommand::execute(state::State& state) {
-        spawnUnit(state, x, y, unitTypeId);
+    void SpawnCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
+        spawnUnit(state, x, y, unitTypeId, actions);
     }
 
     CommandTypeId SpawnCommand::getTypeId() const {

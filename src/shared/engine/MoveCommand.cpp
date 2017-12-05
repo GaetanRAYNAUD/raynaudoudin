@@ -1,4 +1,5 @@
 #include "MoveCommand.h"
+#include "MoveAction.h"
 
 namespace engine {
 
@@ -6,9 +7,11 @@ namespace engine {
         
     }
 
-    void MoveCommand::execute(state::State& state) {
+    void MoveCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
         if(state.getBoard().findUnit(idUnit)->getTeam() == state.getCurrentTeam()) {
-            state.getBoard().moveUnit(idUnit, direction);
+            std::shared_ptr<Action> action(new MoveAction(idUnit, direction));
+            actions.push(action);
+            action->apply(state);
         }
     }
 

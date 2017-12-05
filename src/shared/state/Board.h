@@ -15,6 +15,7 @@ namespace state {
   class Observable;
 }
 
+#include "Unit.h"
 #include "UnitTypeId.h"
 #include "TeamId.h"
 #include "Direction.h"
@@ -22,7 +23,6 @@ namespace state {
 #include "Team.h"
 #include "Terrain.h"
 #include "RaceTypeId.h"
-#include "Unit.h"
 
 namespace state {
 
@@ -46,6 +46,7 @@ namespace state {
     Board& operator= (const Board& other);
     ~Board ();
     void addUnit (Unit* unit);
+    void addUnit (std::unique_ptr<Unit> unit, int idUnit);
     void createNewUnit (UnitTypeId unitTypeId, TeamId team, int x, int y);
     /// 	
     /// @param team		(???) 

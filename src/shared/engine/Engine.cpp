@@ -14,13 +14,25 @@ namespace engine {
         return state;
     }
 
-    void Engine::update() {
+    std::stack<std::shared_ptr<Action>> Engine::update() {
+        std::stack<std::shared_ptr<Action>> actions;
+        
         for(auto& c : currentCommands) {
-            c.second.get()->execute(state);
+            c.second.get()->execute(state, actions);
         }
         
         currentCommands.clear();
+        
+        return actions;
     }
+
+    void Engine::undo(std::stack<std::shared_ptr<Action>>& actions) {
+        for(unsigned int i = 0; i < actions.size(); i++) {
+            actions.top()->undo(state);
+            actions.pop();
+        }
+    }
+    
 
     Engine::~Engine() {
 
