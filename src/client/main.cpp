@@ -16,6 +16,7 @@ void testSFML() {
 #include "engine.hpp"
 #include "random_ai.hpp"
 #include "heuristic_ai.hpp"
+#include "rollback.hpp"
 
 using namespace std;
 using namespace state;
@@ -23,6 +24,7 @@ using namespace render;
 using namespace engine;
 using namespace random_ai;
 using namespace heuristic_ai;
+using namespace rollback;
 
 int main(int argc, char* argv[]) 
 {
@@ -54,7 +56,12 @@ int main(int argc, char* argv[])
             cout << "Appuyez sur E pour afficher la carte de distance des unités orcs" << endl;
             cout << "Appuyez sur R pour afficher la carte de distance des maisons humaines" << endl;
             cout << "Appuyez sur T pour afficher la carte de distance des maisons orcs" << endl;
+            cout << "Appuyez sur Y pour afficher la carte de distance des châteaux" << endl;            
             heuristic_aiTest();
+            
+        } else if (string(argv[1]) == "rollback"){
+            cout << "Lancement du test de rollback" << endl;
+            rollback_Test();
             
         } else {
             cout << "Commande inconnue" << endl;
@@ -65,6 +72,8 @@ int main(int argc, char* argv[])
             cout << "engine : Lance le moteur du jeu" << endl;
             cout << "random_ai : Lance l'ia aléatoire du jeu" << endl;
             cout << "heuristique_ai : Lancement de l'ia heuristique" << endl;
+            cout << "rollback : Lance le test de rollback" << endl;
+            cout << "deep_ai : Lancement de l'ia deep" << endl;            
         }
     }
     return 0;
