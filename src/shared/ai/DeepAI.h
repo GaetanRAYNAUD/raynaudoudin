@@ -31,13 +31,14 @@ namespace ai {
     PathMap houseTeam1PathMap;
     PathMap houseTeam2PathMap;
     PathMap castlePathMap;
-    int maxDepth;
-    int maxUpdates;
-    int updatesCount;
+    int maxDepth     = 6;
+    int maxUpdates     = 5000;
+    int updatesCount     = 0;
     // Operations
   public:
     DeepAI (const state::State& state);
     int alphabeta (engine::Engine& engine, state::Direction& direction, int depth);
+    int getHeuristic (const state::State& state);
     void stateChanged (const state::Event& event);
     void run (engine::Engine& engine);
     // Setters and Getters

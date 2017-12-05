@@ -8,7 +8,7 @@ namespace ai {
         if (p.getX() >= 0 && p.getY() >= 0 && p.getX() < width && p.getY() < height * 2) {
             return weights[p.getX() + width * (p.getY() / 2)];
         }
-        return std::numeric_limits<int>::infinity();
+        return std::numeric_limits<int>::max();
     }   
     
     void PathMap::setWeight(const Point& p) {
