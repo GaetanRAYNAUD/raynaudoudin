@@ -2,15 +2,16 @@
 #ifndef AI__DEEPAI__H
 #define AI__DEEPAI__H
 
+#include <random>
 
 namespace ai {
   class PathMap;
 };
-namespace state {
-  class State;
-};
 namespace engine {
   class Engine;
+};
+namespace state {
+  class State;
 };
 namespace ai {
   class AI;
@@ -25,6 +26,8 @@ namespace ai {
   class DeepAI : public ai::AI {
     // Associations
     // Attributes
+  public:
+    int leavesCount     = 0;
   protected:
     PathMap unitTeam1PathMap;
     PathMap unitTeam2PathMap;
@@ -33,10 +36,12 @@ namespace ai {
     PathMap castlePathMap;
     int maxDepth     = 6;
     int maxUpdates     = 5000;
+    int maxLeaves     = 5;
     int updatesCount     = 0;
+    std::mt19937 randgen;
     // Operations
   public:
-    DeepAI (const state::State& state);
+    DeepAI (int randomSeed);
     int alphabeta (engine::Engine& engine, state::Direction& direction, int depth);
     int getHeuristic (const state::State& state);
     void stateChanged (const state::Event& event);
@@ -56,8 +61,12 @@ namespace ai {
     void setMaxDepth(int maxDepth);
     int getMaxUpdates() const;
     void setMaxUpdates(int maxUpdates);
+    int getMaxLeaves() const;
+    void setMaxLeaves(int maxLeaves);
     int getUpdatesCount() const;
     void setUpdatesCount(int updatesCount);
+    const std::mt19937& getRandgen() const;
+    void setRandgen(const std::mt19937& randgen);
   };
 
 };
