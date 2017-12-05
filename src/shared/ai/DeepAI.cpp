@@ -1,4 +1,5 @@
 #include "DeepAI.h"
+#include "engine/EndTurnCommand.h"
 
 namespace ai {
 
@@ -71,10 +72,6 @@ namespace ai {
                 actions.push(engine.update());
                 commandCount++;
 
-                if (commands.at(rand)->getTypeId() == engine::CommandTypeId::END_TURN) {
-                    break;
-                }
-
                 commands = listCommands(engine.getState());
                 std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
                 rand = uniform(randgen);
@@ -137,8 +134,11 @@ namespace ai {
     }
 
     void DeepAI::run(engine::Engine& engine) {
-
+        minimax_rec_max(engine, 0);
+        engine.addCommand(1, new engine::EndTurnCommand()); 
+        engine.update();
     }
 
+    
 }
 

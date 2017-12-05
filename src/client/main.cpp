@@ -17,6 +17,7 @@ void testSFML() {
 #include "random_ai.hpp"
 #include "heuristic_ai.hpp"
 #include "rollback.hpp"
+#include "deep_ai.hpp"
 
 using namespace std;
 using namespace state;
@@ -25,6 +26,7 @@ using namespace engine;
 using namespace random_ai;
 using namespace heuristic_ai;
 using namespace rollback;
+using namespace deep_ai;
 
 int main(int argc, char* argv[]) 
 {
@@ -50,7 +52,8 @@ int main(int argc, char* argv[])
             
         } else if (string(argv[1]) == "heuristic_ai"){
             cout << "Lancement de l'ia heuristique" << endl;
-            cout << "Appuyez sur espace pour mettre le jeu en pause" << endl;
+            cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
+            cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
             cout << "Appuyez sur A pour retirer les cartes de distances" << endl;
             cout << "Appuyez sur Z pour afficher la carte de distance des unités humaines" << endl;
             cout << "Appuyez sur E pour afficher la carte de distance des unités orcs" << endl;
@@ -61,7 +64,15 @@ int main(int argc, char* argv[])
             
         } else if (string(argv[1]) == "rollback"){
             cout << "Lancement du test de rollback" << endl;
+            cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
+            cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
             rollback_Test();
+            
+        } else if (string(argv[1]) == "deep_ai"){
+            cout << "Lancement de l'ia deep" << endl;
+            cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
+            cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
+            deep_aiTest();            
             
         } else {
             cout << "Commande inconnue" << endl;

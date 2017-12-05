@@ -10,6 +10,7 @@ namespace ai {
 
     void RandomAI::run(engine::Engine& engine) {
         std::vector<engine::Command*> commands = listCommands(engine.getState());
+        commands.push_back(new engine::EndTurnCommand());
         
         if(commands.size() > 0) {
             std::uniform_int_distribution<int> dis(0, commands.size() - 1);
@@ -20,7 +21,7 @@ namespace ai {
             engine.addCommand(1, new engine::EndTurnCommand());
             engine.update();
         }
-        
+            
         engine.addCommand(2, new engine::HandleWinCommand());
         engine.update();
         
