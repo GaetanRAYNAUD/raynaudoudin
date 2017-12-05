@@ -1,5 +1,6 @@
 #include "Engine.h"
 
+#include <iostream>
 namespace engine {
 
     Engine::Engine(int width, int height) : state(width, height) {
@@ -27,7 +28,8 @@ namespace engine {
     }
 
     void Engine::undo(std::stack<std::shared_ptr<Action>>& actions) {
-        for(unsigned int i = 0; i < actions.size(); i++) {
+        unsigned int size = actions.size();
+        for(unsigned int i = 0; i < size; i++) {
             actions.top()->undo(state);
             actions.pop();
         }

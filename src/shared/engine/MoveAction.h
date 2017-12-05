@@ -20,21 +20,18 @@ namespace engine {
     // Attributes
   protected:
     int idUnit;
-    int x;
-    int y;
+    int speed;
     state::Direction direction;
     // Operations
   public:
-    MoveAction (int idUnit, state::Direction direction);
+    MoveAction (int idUnit, state::Direction direction, int speed);
     void apply (state::State& state);
     void undo (state::State& state);
     // Setters and Getters
     int getIdUnit() const;
     void setIdUnit(int idUnit);
-    int getX() const;
-    void setX(int x);
-    int getY() const;
-    void setY(int y);
+    int getSpeed() const;
+    void setSpeed(int speed);
     state::Direction getDirection() const;
     void setDirection(state::Direction direction);
   };

@@ -3,7 +3,7 @@
 
 namespace engine {
 
-    MoveAction::MoveAction(int idUnit, state::Direction direction) : idUnit(idUnit), direction(direction) {
+    MoveAction::MoveAction(int idUnit, state::Direction direction, int speed) : idUnit(idUnit), speed(speed), direction(direction) {
 
     }
 
@@ -12,6 +12,7 @@ namespace engine {
     }
 
     void MoveAction::undo(state::State& state) {
+        state.getBoard().findUnit(idUnit)->setSpeed(speed);
         switch (direction) {
             case state::Direction::TOP:
                 state.getBoard().moveUnit(idUnit, state::Direction::BOT);                
@@ -32,6 +33,7 @@ namespace engine {
                 state.getBoard().moveUnit(idUnit, state::Direction::BOT_RIGHT);                  
                 break;
         }
+        state.getBoard().findUnit(idUnit)->setSpeed(speed);        
     }
 
 }
