@@ -16,19 +16,16 @@ namespace engine {
                         std::shared_ptr<Action> action(new SpawnAction(x - 1, y - 1, unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam()));
                         actions.push(action);
                         action->apply(state);                        
-                        state.getBoard().findTeam(state.getBoard().findUnitOnPosition(x, y)->getTeam())->withdrawGold(unitTypeId);
                         
                     } else if (!state.getBoard().isUnitOnPosition(x, y - 2)) {
                         std::shared_ptr<Action> action(new SpawnAction(x, y - 2, unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam()));
                         actions.push(action);
                         action->apply(state);  
-                        state.getBoard().findTeam(state.getBoard().findUnitOnPosition(x, y)->getTeam())->withdrawGold(unitTypeId);
                         
                     } else if (!state.getBoard().isUnitOnPosition(x + 1, y - 1)) {
                         std::shared_ptr<Action> action(new SpawnAction(x + 1, y - 1, unitTypeId, state.getBoard().findUnitOnPosition(x, y)->getTeam()));
                         actions.push(action);
-                        action->apply(state);  
-                        state.getBoard().findTeam(state.getBoard().findUnitOnPosition(x, y)->getTeam())->withdrawGold(unitTypeId);
+                        action->apply(state);
                     }
                 }
             }

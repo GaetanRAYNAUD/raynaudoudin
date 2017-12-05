@@ -9,17 +9,16 @@ namespace rollback {
     
     void rollback_Test() {
         bool pause = 0;
-        int displayMap = 0;
         int windowWidth = 1188;
         int windowHeight = 576;
         int mapWidth = 22;
         int mapHeight = 8;
-        int timePause = 500;
+        int timePause = 1000;
+        int epock = 0;
+        std::stack<std::stack<std::shared_ptr<Action>>> actions;
         Engine* engine = new Engine(mapWidth, mapHeight);  
         Scene* scene;
         Command* command;
-        std::random_device rand;
-        HeuristicAI* ai = new HeuristicAI();
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         sf::View view(sf::FloatRect(0, 0, windowWidth, windowHeight));
         sf::Clock clock;
@@ -37,10 +36,188 @@ namespace rollback {
             sf::Event event;
             
             if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
-                ai->run(*engine);
                 time = clock.getElapsedTime();
                 if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
                     pause = true;
+                }
+
+                switch (epock) {           
+                    case 0:
+                        command = new SpawnCommand(engine->getState().getBoard().findUnit(0)->getPositionX(), engine->getState().getBoard().findUnit(0)->getPositionY(), UnitTypeId::SWORDMAN);
+                        engine->addCommand(1, command);
+                        actions.push(engine->update());
+                        
+                        delete scene;
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;
+                        
+                    case 1:
+                        command = new MoveCommand(2, state::Direction::BOT);
+                        engine->addCommand(1, command);
+
+                        command = new MoveCommand(2, state::Direction::BOT);
+                        engine->addCommand(2, command);
+
+                        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+                        engine->addCommand(3, command);
+
+                        command = new MoveCommand(2, state::Direction::TOP_RIGHT);
+                        engine->addCommand(4, command);
+
+                        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+                        engine->addCommand(5, command);
+
+                        command = new EndTurnCommand();
+                        engine->addCommand(6, command);
+
+                        actions.push(engine->update());
+                        
+                        delete scene;
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;
+                        
+                    case 2:
+                        command = new SpawnCommand(engine->getState().getBoard().findUnit(1)->getPositionX(), engine->getState().getBoard().findUnit(1)->getPositionY(), UnitTypeId::SWORDMAN);
+                        engine->addCommand(1, command);
+                        
+                        command = new SpawnCommand(engine->getState().getBoard().findUnit(1)->getPositionX(), engine->getState().getBoard().findUnit(1)->getPositionY(), UnitTypeId::SWORDMAN);
+                        engine->addCommand(2, command);
+
+                        command = new SpawnCommand(engine->getState().getBoard().findUnit(1)->getPositionX(), engine->getState().getBoard().findUnit(1)->getPositionY(), UnitTypeId::SWORDMAN);
+                        engine->addCommand(3, command);
+                        
+                        actions.push(engine->update());                        
+                        
+                        delete scene;                                
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;    
+                        
+                    case 3:
+                        command = new MoveCommand(1, state::Direction::BOT_LEFT);
+                        engine->addCommand(1, command);
+                        
+                        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+                        engine->addCommand(2, command);                        
+
+                        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+                        engine->addCommand(3, command);
+                        
+                        command = new MoveCommand(1, state::Direction::TOP_LEFT);
+                        engine->addCommand(4, command);
+
+                        command = new MoveCommand(1, state::Direction::TOP);
+                        engine->addCommand(5, command);                        
+
+                        actions.push(engine->update());
+        
+                        delete scene;                                
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;
+                        
+                    case 4:
+                        command = new MoveCommand(3, state::Direction::TOP_LEFT);
+                        engine->addCommand(1, command);
+                        
+                        command = new MoveCommand(3, state::Direction::TOP_LEFT);
+                        engine->addCommand(2, command);                        
+
+                        command = new MoveCommand(3, state::Direction::BOT_LEFT);
+                        engine->addCommand(3, command);
+                        
+                        command = new MoveCommand(3, state::Direction::TOP_LEFT);
+                        engine->addCommand(4, command);
+
+                        command = new MoveCommand(3, state::Direction::TOP_LEFT);
+                        engine->addCommand(5, command);                        
+
+                        actions.push(engine->update());
+                        
+                        delete scene;                                
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;
+
+                    case 5:
+                        command = new MoveCommand(4, state::Direction::TOP_LEFT);
+                        engine->addCommand(1, command);
+                        
+                        command = new MoveCommand(4, state::Direction::TOP_LEFT);
+                        engine->addCommand(2, command);                        
+
+                        command = new MoveCommand(4, state::Direction::TOP_LEFT);
+                        engine->addCommand(3, command);
+                        
+                        command = new MoveCommand(4, state::Direction::TOP_LEFT);
+                        engine->addCommand(4, command);
+
+                        command = new MoveCommand(4, state::Direction::TOP_LEFT);
+                        engine->addCommand(5, command);                        
+
+                        actions.push(engine->update());
+                        
+                        delete scene;                                
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;
+                        break;
+
+                    case 6:
+                        
+                        command = new MoveCommand(5, state::Direction::TOP_LEFT);
+                        engine->addCommand(1, command);
+                        
+                        command = new MoveCommand(5, state::Direction::TOP_LEFT);
+                        engine->addCommand(2, command);                        
+
+                        command = new MoveCommand(5, state::Direction::TOP_LEFT);
+                        engine->addCommand(3, command);
+                        
+                        command = new MoveCommand(5, state::Direction::TOP_LEFT);
+                        engine->addCommand(4, command);
+
+                        command = new MoveCommand(5, state::Direction::TOP_LEFT);
+                        engine->addCommand(5, command);
+                        
+                        command = new EndTurnCommand();
+                        engine->addCommand(6, command);
+
+                        actions.push(engine->update());                 
+                        delete scene;                                
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;
+
+                    case 7:
+                        
+                        delete scene;                                
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;
+
+                    case 8:
+                        
+                        delete scene;                                
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;
+
+                    case 9:
+                        
+                        delete scene;                                
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;                        
+                        break;
+
+                        
+                    default:
+                        if(actions.size() > 0) {
+                            engine->undo(actions.top());
+                            actions.pop();
+                        }
+                        break;
                 }
             }
             
@@ -59,46 +236,14 @@ namespace rollback {
                     window.close(); 
                 } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
                     pause = !pause;
-                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::A) {
-                    displayMap = 0;
-                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Z) {
-                    displayMap = 1;
-                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::E) {
-                    displayMap = 2;
-                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::R) {
-                    displayMap = 3;
-                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::T) {
-                    displayMap = 4;
-                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Y) {
-                    displayMap = 5;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
-                    if(timePause == 500) {
+                    if(timePause == 1000) {
                         timePause = 10;
                     } else {
-                        timePause = 500;
+                        timePause = 1000;
                     }
                 }
                 
-            }
-
-            switch(displayMap) {
-                case 1:
-                    scene->getDebugLayer().printPathMap(ai->getUnitTeam1PathMap().getWeights());
-                    break;
-                case 2:
-                    scene->getDebugLayer().printPathMap(ai->getUnitTeam2PathMap().getWeights());
-                    break;
-                case 3:
-                    scene->getDebugLayer().printPathMap(ai->getHouseTeam1PathMap().getWeights());
-                    break;
-                case 4:
-                    scene->getDebugLayer().printPathMap(ai->getHouseTeam2PathMap().getWeights());
-                    break;
-                case 5:
-                    scene->getDebugLayer().printPathMap(ai->getCastlePathMap().getWeights());
-                    break;                    
-                default:
-                    break;
             }
             scene->draw(window);
             window.display();
@@ -106,7 +251,6 @@ namespace rollback {
         
         delete scene;
         delete engine;
-        delete ai;
     }
 }
 
