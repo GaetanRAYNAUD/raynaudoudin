@@ -7,20 +7,33 @@ namespace ai {
     }
 
     int DeepAI::alphabeta(engine::Engine& engine, state::Direction& direction, int depth) {
-        std::vector<engine::Command*> commands = listCommands(engine.getState());
+//        std::vector<engine::Command*> commands = listCommands(engine.getState());
 //        std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
 //        int rand = uniform(randgen);
 //        int val;
 //        
-//        if (depth % 2 == 0) { /*Noeud min*/
-//            val = std::numeric_limits<int>::max();
-//            while (leavesCount)
-//            for (unsigned int i = 0; i < )
-//            engine.addCommand(1, commands.at(it));
-//            engine.update();    
-//        } else {
-//            
+//        while (!commands.empty()) {
+//            engine.addCommand(1, commands.at(rand));
+//            engine.update();
+//            if (commands.at(rand)->getTypeId() == engine::CommandTypeId::END_TURN) {
+//                break;
+//            }
+//            commands = listCommands(engine.getState());
+//            std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
+//            rand = uniform(randgen);
 //        }
+//        
+//        if (engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
+//            return getHeuristic(engine.getState());
+//        }
+//        
+//        
+//        
+//        val = std::numeric_limits<int>::min();
+        
+
+        //for (unsigned int i = 0; i < )
+    
         return -1;
     }
     
