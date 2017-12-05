@@ -2,18 +2,21 @@
 #ifndef ENGINE__HANDLEWINCOMMAND__H
 #define ENGINE__HANDLEWINCOMMAND__H
 
+#include <stack>
+#include <memory>
 
 namespace state {
   class State;
 };
 namespace engine {
+  class Action;
   class Command;
 }
 
 #include "CommandTypeId.h"
+#include "Action.h"
 #include "Command.h"
 #include "state/TeamId.h"
-#include "state/UnitTypeId.h"
 
 namespace engine {
 
@@ -24,7 +27,7 @@ namespace engine {
   public:
     HandleWinCommand ();
     CommandTypeId getTypeId () const;
-    void execute (state::State& state);
+    void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
     // Setters and Getters
   };
 

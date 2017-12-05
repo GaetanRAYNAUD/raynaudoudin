@@ -91,6 +91,12 @@ namespace state {
         idUnit++;
     }
     
+    void Board::addUnit(std::unique_ptr<Unit> unit, int idUnit) {
+        if(findUnitOnPosition(unit->getPositionX(), unit->getPositionY()) == nullptr) {
+            units.insert(std::make_pair(idUnit, std::move(unit)));
+        }
+    }    
+    
     void Board::createNewUnit(UnitTypeId unitTypeId, TeamId team, int x, int y) {        
         switch(unitTypeId) {
             case UnitTypeId::BOWMAN:

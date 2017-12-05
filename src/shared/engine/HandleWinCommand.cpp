@@ -1,4 +1,6 @@
 #include "HandleWinCommand.h"
+#include "WinnerAction.h"
+
 
 namespace engine {
         
@@ -6,11 +8,15 @@ namespace engine {
 
     }
     
-    void HandleWinCommand::execute(state::State& state) {       
+    void HandleWinCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {       
         if (state.getBoard().isLeaderNotAlive(state::TeamId::TEAM_1)) {
-            state.setWinner(state::TeamId::TEAM_2);
+            std::shared_ptr<Action> action(new WinnerAction(state::TeamId::TEAM_2));
+            actions.push(action);
+            action->apply(state);
         } else if (state.getBoard().isLeaderNotAlive(state::TeamId::TEAM_2)) {
-            state.setWinner(state::TeamId::TEAM_1);
+            std::shared_ptr<Action> action(new WinnerAction(state::TeamId::TEAM_1));
+            actions.push(action);            
+            action->apply(state);           
         } else {
             return;
         }

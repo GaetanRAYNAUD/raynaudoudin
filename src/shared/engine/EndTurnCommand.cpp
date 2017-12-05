@@ -1,4 +1,5 @@
 #include "EndTurnCommand.h"
+#include "EndTurnAction.h"
 
 namespace engine {
 
@@ -6,8 +7,10 @@ namespace engine {
 
     }
 
-    void EndTurnCommand::execute(state::State& state) {
-        state.endTurn();
+    void EndTurnCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
+        std::shared_ptr<Action> action(new EndTurnAction());        
+        actions.push(action);
+        action->apply(state);
     }
 
     CommandTypeId EndTurnCommand::getTypeId() const {

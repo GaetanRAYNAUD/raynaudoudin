@@ -4,15 +4,18 @@
 
 #include <map>
 #include <memory>
+#include <stack>
 
 namespace state {
   class State;
 };
 namespace engine {
   class Command;
+  class Action;
 }
 
 #include "state/State.h"
+#include "Action.h"
 #include "Command.h"
 
 namespace engine {
@@ -29,7 +32,8 @@ namespace engine {
     Engine (int width, int height);
     virtual ~Engine ();
     void addCommand (int priority, Command* cmd);
-    void update ();
+    std::stack<std::shared_ptr<Action>> update ();
+    void undo (std::stack<std::shared_ptr<Action>>& actions);
     // Setters and Getters
     const state::State& getState() const;
     void setState(const state::State& state);
