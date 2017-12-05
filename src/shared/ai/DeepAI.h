@@ -26,8 +26,6 @@ namespace ai {
   class DeepAI : public ai::AI {
     // Associations
     // Attributes
-  public:
-    int leavesCount     = 0;
   protected:
     PathMap unitTeam1PathMap;
     PathMap unitTeam2PathMap;
@@ -42,7 +40,8 @@ namespace ai {
     // Operations
   public:
     DeepAI (int randomSeed);
-    int alphabeta (engine::Engine& engine, state::Direction& direction, int depth);
+    int minimax_rec_min (engine::Engine& engine, int depth);
+    int minimax_rec_max (engine::Engine& engine, int depth);
     int getHeuristic (const state::State& state);
     void stateChanged (const state::Event& event);
     void run (engine::Engine& engine);
