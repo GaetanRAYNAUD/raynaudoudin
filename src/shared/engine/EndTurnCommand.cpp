@@ -8,7 +8,7 @@ namespace engine {
     }
 
     void EndTurnCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
-        std::shared_ptr<Action> action(new EndTurnAction());        
+        std::shared_ptr<Action> action(new EndTurnAction());
         actions.push(action);
         action->apply(state);
     }

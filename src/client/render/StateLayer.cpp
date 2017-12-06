@@ -13,7 +13,7 @@ namespace render {
     }
 
     void StateLayer::initSurface() {
-        Tile tileMenuTop, tileMenuLeft, tileGold, tileHouse, tileTeam; 
+        Tile tileMenuTop, tileMenuLeft, tileGold, tileHouse, tileTeam;
         std::vector<Tile> tilesFlagHouse;
         state::House* tmpHouse;
         int posX, posY;
@@ -49,7 +49,7 @@ namespace render {
         }
         
         surface->setSpriteTexture(4, tileTeam);
-        surface->setSpriteLocation(4, 182 + shiftWidth, 12+ shiftHeight, 16, 16); 
+        surface->setSpriteLocation(4, 182 + shiftWidth, 12+ shiftHeight, 16, 16);
         
         for(auto& t : state.getBoard().getTerrains()) {
             if(t.second.get()->getTypeId() == state::TerrainTypeId::HOUSE) {

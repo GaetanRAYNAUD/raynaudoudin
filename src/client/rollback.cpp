@@ -15,6 +15,7 @@ namespace rollback {
         int mapHeight = 8;
         int timePause = 1000;
         int epock = 0;
+        int statesGood = 0;
         std::stack<std::stack<std::shared_ptr<Action>>> actions;
         std::stack<State*> states;
         Engine* engine = new Engine(mapWidth, mapHeight);
@@ -52,7 +53,7 @@ namespace rollback {
                         
                         delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
+                        epock = epock + 1;
                         break;
                         
                     case 1:
@@ -79,7 +80,7 @@ namespace rollback {
                         
                         delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
+                        epock = epock + 1;
                         break;
                         
                     case 2:
@@ -92,20 +93,20 @@ namespace rollback {
                         command = new SpawnCommand(engine->getState().getBoard().findUnit(1)->getPositionX(), engine->getState().getBoard().findUnit(1)->getPositionY(), UnitTypeId::SWORDMAN);
                         engine->addCommand(3, command);
                                                
-                        states.push(engine->getState().clone());                      
-                        actions.push(engine->update());                       
+                        states.push(engine->getState().clone());
+                        actions.push(engine->update());
                         
-                        delete scene;                                
+                        delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
-                        break;    
+                        epock = epock + 1;
+                        break;
                         
                     case 3:
                         command = new MoveCommand(1, state::Direction::BOT_LEFT);
                         engine->addCommand(1, command);
                         
                         command = new MoveCommand(1, state::Direction::TOP_LEFT);
-                        engine->addCommand(2, command);                        
+                        engine->addCommand(2, command);
 
                         command = new MoveCommand(1, state::Direction::TOP_LEFT);
                         engine->addCommand(3, command);
@@ -114,14 +115,14 @@ namespace rollback {
                         engine->addCommand(4, command);
 
                         command = new MoveCommand(1, state::Direction::TOP);
-                        engine->addCommand(5, command);                        
+                        engine->addCommand(5, command);
 
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
         
-                        delete scene;                                
+                        delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
+                        epock = epock + 1;
                         break;
                         
                     case 4:
@@ -129,7 +130,7 @@ namespace rollback {
                         engine->addCommand(1, command);
                         
                         command = new MoveCommand(3, state::Direction::TOP_LEFT);
-                        engine->addCommand(2, command);                        
+                        engine->addCommand(2, command);
 
                         command = new MoveCommand(3, state::Direction::BOT_LEFT);
                         engine->addCommand(3, command);
@@ -138,14 +139,14 @@ namespace rollback {
                         engine->addCommand(4, command);
 
                         command = new MoveCommand(3, state::Direction::TOP_LEFT);
-                        engine->addCommand(5, command);                        
+                        engine->addCommand(5, command);
 
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;                                
+                        delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
+                        epock = epock + 1;
                         break;
 
                     case 5:
@@ -153,7 +154,7 @@ namespace rollback {
                         engine->addCommand(1, command);
                         
                         command = new MoveCommand(4, state::Direction::TOP_LEFT);
-                        engine->addCommand(2, command);                        
+                        engine->addCommand(2, command);
 
                         command = new MoveCommand(4, state::Direction::TOP_LEFT);
                         engine->addCommand(3, command);
@@ -162,12 +163,12 @@ namespace rollback {
                         engine->addCommand(4, command);
 
                         command = new MoveCommand(4, state::Direction::TOP_LEFT);
-                        engine->addCommand(5, command);                        
+                        engine->addCommand(5, command);
 
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;                                
+                        delete scene;
                         scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
@@ -178,7 +179,7 @@ namespace rollback {
                         engine->addCommand(1, command);
                         
                         command = new MoveCommand(5, state::Direction::TOP_LEFT);
-                        engine->addCommand(2, command);                        
+                        engine->addCommand(2, command);
 
                         command = new MoveCommand(5, state::Direction::TOP_LEFT);
                         engine->addCommand(3, command);
@@ -195,30 +196,97 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;                                
+                        delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
+                        epock = epock + 1;
                         break;
 
                     case 7:
+                        command = new SpawnCommand(engine->getState().getBoard().findUnit(0)->getPositionX(), engine->getState().getBoard().findUnit(0)->getPositionY(), UnitTypeId::BOWMAN);
+                        engine->addCommand(1, command);
+
+                        states.push(engine->getState().clone());
+                        actions.push(engine->update());
                         
-                        delete scene;                                
+                        delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
+                        epock = epock + 1;
                         break;
 
                     case 8:
+                        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+                        engine->addCommand(1, command);
                         
-                        delete scene;                                
+                        command = new MoveCommand(2, state::Direction::BOT_RIGHT);
+                        engine->addCommand(2, command);
+                        
+                        states.push(engine->getState().clone());
+                        actions.push(engine->update());
+                        
+                        delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
+                        epock = epock + 1;
                         break;
 
                     case 9:
+                        command = new MoveCommand(0, state::Direction::BOT_RIGHT);
+                        engine->addCommand(1, command);
                         
-                        delete scene;                                
+                        command = new MoveCommand(0, state::Direction::BOT_RIGHT);
+                        engine->addCommand(2, command);
+                        
+                        command = new MoveCommand(0, state::Direction::BOT_RIGHT);
+                        engine->addCommand(3, command);
+                        
+                        command = new MoveCommand(0, state::Direction::BOT_RIGHT);
+                        engine->addCommand(4, command);
+
+                        command = new MoveCommand(0, state::Direction::BOT_RIGHT);
+                        engine->addCommand(5, command);
+                        
+                        states.push(engine->getState().clone());
+                        actions.push(engine->update());
+                        
+                        delete scene;
                         scene = new Scene(engine->getState());
-                        epock = epock + 1;                        
+                        epock = epock + 1;
+                        break;
+                        
+                    case 10:
+                        command = new MoveCommand(6, state::Direction::BOT_RIGHT);
+                        engine->addCommand(1, command);
+                        
+                        command = new MoveCommand(6, state::Direction::BOT_RIGHT);
+                        engine->addCommand(2, command);
+                        
+                        command = new MoveCommand(6, state::Direction::BOT_RIGHT);
+                        engine->addCommand(3, command);
+                        
+                        command = new MoveCommand(6, state::Direction::BOT_RIGHT);
+                        engine->addCommand(4, command);
+
+                        command = new MoveCommand(6, state::Direction::BOT_RIGHT);
+                        engine->addCommand(5, command);
+                        
+                        command = new EndTurnCommand();
+                        engine->addCommand(6, command);
+                        
+                        states.push(engine->getState().clone());
+                        actions.push(engine->update());
+                        
+                        delete scene;
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;
+                        break;
+
+                        case 11:                     
+                        
+                        states.push(engine->getState().clone());
+                        actions.push(engine->update());
+                        
+                        delete scene;
+                        scene = new Scene(engine->getState());
+                        epock = epock + 1;
                         break;
 
                         
@@ -228,13 +296,21 @@ namespace rollback {
                             actions.pop();
                             
                             if(states.top()->equals(engine->getState()) == false) {
-                                std::cout << "Etat " << states.size() - 1 << " mal restitué !" << std::endl;
+                                std::cout << "Etat " << states.size() << " mal restitué !" << std::endl;
+                            } else {
+                                statesGood = statesGood + 1;
                             }
                             
                             states.pop();
                         } else {
-                            std::cout << "Rollback correctement effectué !" << std::endl;
+                            if(statesGood == epock) {
+                                std::cout << "Rollback correctement effectué !" << std::endl;
+                            } else {
+                                std::cout << "Il y a " << epock - statesGood << " mal restitués !" << std::endl;
+                            }
+                            
                             window.close();
+                            
                         }
                         break;
                 }
@@ -249,7 +325,7 @@ namespace rollback {
             
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
-                    window.close(); 
+                    window.close();
                 } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
                     pause = !pause;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
@@ -263,7 +339,7 @@ namespace rollback {
             }
             
             delete scene;
-            scene = new Scene(engine->getState());            
+            scene = new Scene(engine->getState());
             scene->draw(window);
             window.display();
         }

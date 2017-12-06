@@ -439,7 +439,7 @@ namespace state {
         file.close();
         
         Terrain* terrainToAdd = nullptr;
-        for(int i = 0; i < width * height; i++) {
+        for(int i = 0;i < width * height;i++) {
             if((i / (width / 2)) % 2) {
                 switch (terrainsTmp.at(i)) {
                     case 'G' :  //Grass
@@ -570,27 +570,27 @@ namespace state {
             return false;
         }
         
-        for(unsigned int i = 0; i < units.size(); i++) {
+        for(unsigned int i = 0;i < units.size();i++) {
             if(units.at(i)->equals(*other.units.at(i)->clone()) == false) {
-                std::cout << "unité " << i << " différente" << std::endl;                
+                std::cout << "unité " << i << " différente" << std::endl;
                 return false;
             }
         }
 
-        for(unsigned int i = 0; i < terrains.size(); i++) {
+        for(unsigned int i = 0;i < terrains.size();i++) {
             if(terrains.at(i)->equals(*other.terrains.at(i)->clone()) == false) {
-                std::cout << "terrain " << i << " différente" << std::endl;                
+                std::cout << "terrain " << i << " différente" << std::endl;
                 return false;
             }
         }
 
         if(teams.at(TeamId::TEAM_1)->equals(*other.teams.at(TEAM_1)->clone()) == false) {
-                std::cout << "team 1 différente" << std::endl;            
+                std::cout << "team 1 différente" << std::endl;
             return false;
         }  
         
         if(teams.at(TeamId::TEAM_2)->equals(*other.teams.at(TEAM_2)->clone()) == false) {
-                std::cout << "team 2 différente" << std::endl;            
+                std::cout << "team 2 différente" << std::endl;
             return false;
         }          
         return true;

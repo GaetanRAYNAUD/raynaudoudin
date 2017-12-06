@@ -13,7 +13,7 @@ namespace state {
         positionX = unit.positionX;
         positionY = unit.positionY;
         team = unit.team;
-        typeId = unit.typeId;    
+        typeId = unit.typeId;
         race = unit.race;
         
         for(auto& w : unit.weapons) {

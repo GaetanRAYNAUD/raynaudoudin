@@ -10,8 +10,8 @@ namespace engine {
                 
         std::cout << "***************************************************" << std::endl;
                 
-        command = new LoadCommand("res/map.txt");        
-        std::cout << "Ajout d'une commande de création du jeu" << std::endl;        
+        command = new LoadCommand("res/map.txt");
+        std::cout << "Ajout d'une commande de création du jeu" << std::endl;
         engine->addCommand(1, command);
         
         std::cout << "Éxécution de la liste des commandes" << std::endl;
@@ -23,7 +23,7 @@ namespace engine {
             std::cout << "Le jeu n'a pas pu être créé" << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;       
+        std::cout << "***************************************************" << std::endl;
     }
     
     void test_spawnUnit(Engine* engine) {
@@ -43,7 +43,7 @@ namespace engine {
             std::cout << "L'unité n'a pas pu être ajoutée au jeu" << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;     
+        std::cout << "***************************************************" << std::endl;
     }
     
     void test_moveUnit1(Engine* engine) {
@@ -78,15 +78,15 @@ namespace engine {
         
         if(engine->getState().getBoard().isUnitOnPosition(5, 8)) {
             if(engine->getState().getBoard().findUnitOnPosition(5, 8)->getId() == 2) {
-                std::cout << "L'unité 2 est bien en (5,8)" << std::endl;            
+                std::cout << "L'unité 2 est bien en (5,8)" << std::endl;
             } else {
-                std::cout << "ERREUR : L'unité 2 n'est pas en (5,8)" << std::endl;    
+                std::cout << "ERREUR : L'unité 2 n'est pas en (5,8)" << std::endl;
             }
         } else {
-            std::cout << "ERREUR : Il n'y a pas d'unité en (5,8)" << std::endl;              
+            std::cout << "ERREUR : Il n'y a pas d'unité en (5,8)" << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;       
+        std::cout << "***************************************************" << std::endl;
     }
     
     
@@ -122,15 +122,15 @@ namespace engine {
                 
         if(engine->getState().getBoard().isUnitOnPosition(15, 10)) {
             if(engine->getState().getBoard().findUnitOnPosition(15, 10)->getId() == 1) {
-                std::cout << "L'unité 1 est bien en (15,10)" << std::endl;            
+                std::cout << "L'unité 1 est bien en (15,10)" << std::endl;
             } else {
-                std::cout << "ERREUR : L'unité 1 n'est pas en (15,10)" << std::endl;    
+                std::cout << "ERREUR : L'unité 1 n'est pas en (15,10)" << std::endl;
             }
         } else {
-            std::cout << "ERREUR : Il n'y a pas d'unité en (15,10)" << std::endl;              
+            std::cout << "ERREUR : Il n'y a pas d'unité en (15,10)" << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;      
+        std::cout << "***************************************************" << std::endl;
     }
     
     void test_moveUnit3(Engine* engine) {
@@ -156,7 +156,7 @@ namespace engine {
         engine->addCommand(6, command);
 
         command = new MoveCommand(1, state::Direction::TOP_LEFT);
-        engine->addCommand(7, command);         
+        engine->addCommand(7, command);
         
         command = new EndTurnCommand();
         engine->addCommand(8, command);
@@ -177,7 +177,7 @@ namespace engine {
         engine->addCommand(13, command);
 
         command = new EndTurnCommand();
-        engine->addCommand(14, command);        
+        engine->addCommand(14, command);
         
         std::cout << "Éxécution de la liste des commandes" << std::endl;
         engine->update();
@@ -188,7 +188,7 @@ namespace engine {
             std::cout << "ERREUR : Les unités 1 et 2 ne sont pas côte à côte." << std::endl;
         }
         
-        std::cout << "***************************************************" << std::endl;      
+        std::cout << "***************************************************" << std::endl;
     }
     
     void test_attackUnit(Engine* engine) {
@@ -305,29 +305,29 @@ namespace engine {
                                 test_spawnUnit(engine);
                                 delete scene;
                                 scene = new Scene(engine->getState());
-                                caseTest++; 
+                                caseTest++;
                                 break;
                             case 1:
                                 test_moveUnit1(engine);
                                 delete scene;
                                 scene = new Scene(engine->getState());
-                                caseTest++; 
+                                caseTest++;
                                 break;
                             case 2:
                                 test_moveUnit2(engine);
-                                delete scene;                                
+                                delete scene;
                                 scene = new Scene(engine->getState());
-                                caseTest++; 
+                                caseTest++;
                                 break;
                             case 3:
                                 test_moveUnit3(engine);
-                                delete scene;                                
+                                delete scene;
                                 scene = new Scene(engine->getState());
-                                caseTest++; 
-                                break;                                
+                                caseTest++;
+                                break;
                             case 4:
                                 test_attackUnit(engine);
-                                delete scene;                                
+                                delete scene;
                                 scene = new Scene(engine->getState());
                                 caseTest++;
                                 break;
@@ -336,7 +336,7 @@ namespace engine {
                         }
                         
                         std::cout << "Appuyer sur espace pour continuer" << std::endl;
-                        std::cout << "***************************************************" << std::endl;                        
+                        std::cout << "***************************************************" << std::endl;
                     }
                     
                 if (event.type == sf::Event::Closed) {

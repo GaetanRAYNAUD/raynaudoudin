@@ -26,7 +26,7 @@ namespace state {
             default :
                 this->orientation = Orientation::RIGHT;
                 this->typeId = TerrainTypeId::WALL_RIGHT;
-                break;                
+                break;
         }
     }
 
@@ -54,7 +54,7 @@ namespace state {
             default :
                 this->orientation = Orientation::RIGHT;
                 this->typeId = TerrainTypeId::WALL_RIGHT;
-                break;                
+                break;
         }
     }
 

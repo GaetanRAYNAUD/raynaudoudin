@@ -15,8 +15,8 @@ namespace engine {
             action->apply(state);
         } else if (state.getBoard().isLeaderNotAlive(state::TeamId::TEAM_2)) {
             std::shared_ptr<Action> action(new WinnerAction(state::TeamId::TEAM_1));
-            actions.push(action);            
-            action->apply(state);           
+            actions.push(action);
+            action->apply(state);
         } else {
             return;
         }

@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
             cout << "Appuyez sur E pour afficher la carte de distance des unités orcs" << endl;
             cout << "Appuyez sur R pour afficher la carte de distance des maisons humaines" << endl;
             cout << "Appuyez sur T pour afficher la carte de distance des maisons orcs" << endl;
-            cout << "Appuyez sur Y pour afficher la carte de distance des châteaux" << endl;            
+            cout << "Appuyez sur Y pour afficher la carte de distance des châteaux" << endl;
             heuristic_aiTest();
             
         } else if (string(argv[1]) == "rollback"){
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
             cout << "Lancement de l'ia deep" << endl;
             cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
             cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
-            deep_aiTest();            
+            deep_aiTest();
             
         } else {
             cout << "Commande inconnue" << endl;
@@ -84,7 +84,7 @@ int main(int argc, char* argv[])
             cout << "random_ai : Lance l'ia aléatoire du jeu" << endl;
             cout << "heuristique_ai : Lancement de l'ia heuristique" << endl;
             cout << "rollback : Lance le test de rollback" << endl;
-            cout << "deep_ai : Lancement de l'ia deep" << endl;            
+            cout << "deep_ai : Lancement de l'ia deep" << endl;
         }
     }
     return 0;

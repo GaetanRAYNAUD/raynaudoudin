@@ -4,13 +4,13 @@ namespace render {
 
     Scene::Scene(const state::State& state) : state(state), terrainLayer(state.getBoard()), unitLayer(state.getBoard()), stateLayer(state), debugLayer(state) {
         terrainLayer.initSurface();
-        unitLayer.initSurface();       
+        unitLayer.initSurface();
         stateLayer.initSurface();
     }
 
     void Scene::draw(sf::RenderWindow& window) {
         window.clear();
-        window.draw(*(terrainLayer.getSurface()));       
+        window.draw(*(terrainLayer.getSurface()));
         window.draw(*(unitLayer.getSurface()));
         window.draw(*(stateLayer.getSurface()));
         window.draw(*(debugLayer.getSurface()));

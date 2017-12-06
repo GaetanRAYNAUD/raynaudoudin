@@ -21,7 +21,7 @@ namespace render {
             
             posX = u.second.get()->getPositionX() * tileUnit.getWidth() - u.second.get()->getPositionX() * tileUnit.getWidth() / 4;
             if (u.second.get()->getPositionX() % 2) {
-                posY = u.second.get()->getPositionY() / 2 * tileUnit.getHeight();      
+                posY = u.second.get()->getPositionY() / 2 * tileUnit.getHeight();
             } else {
                 posY = u.second.get()->getPositionY() / 2 * tileUnit.getHeight() + tileUnit.getHeight() / 2;
             }

@@ -11,7 +11,7 @@ namespace engine {
         teamGold = state.getBoard().findTeam(teamId)->getGold();
         state.getBoard().createNewUnit(unitTypeId, teamId, x, y);
         spawnUnitId = state.getBoard().findUnitOnPosition(x, y)->getId();
-        state.getBoard().findTeam(teamId)->withdrawGold(unitTypeId);        
+        state.getBoard().findTeam(teamId)->withdrawGold(unitTypeId);
     }
 
     void SpawnAction::undo(state::State& state) {

@@ -2,6 +2,7 @@
 #include "Sword.h"
 #include "Bow.h"
 
+#include <iostream>
 namespace state {
 
     Leader::Leader(TeamId team, int positionX, int positionY, RaceTypeId race) {
@@ -42,27 +43,33 @@ namespace state {
             return false;
         }
         
-        if(positionX != otherCompare.positionX) {      
+        if(positionX != otherCompare.positionX) {    
+            std::cout << "x differente" << std::endl;
             return false;
         }
         
-        if(positionY != otherCompare.positionY) {         
+        if(positionY != otherCompare.positionY) {
+            std::cout << "y differente" << std::endl;
             return false;
         }
         
-        if(speed != otherCompare.speed) {          
+        if(speed != otherCompare.speed) {
+            std::cout << "speed differente" << std::endl;
             return false;
         }
         
-        if(weapons.size() != otherCompare.weapons.size()) {          
+        if(weapons.size() != otherCompare.weapons.size()) {
+            std::cout << "weapon size differente" << std::endl;
             return false;
         }
         
-        if(weapons.at(WeaponTypeId::SWORD)->equals(*otherCompare.weapons.at(WeaponTypeId::SWORD)->clone()) == false) {           
+        if(weapons.at(WeaponTypeId::SWORD)->equals(*otherCompare.weapons.at(WeaponTypeId::SWORD)->clone()) == false) {
+            std::cout << "sword differente" << std::endl;
             return false;
         }
         
-        if(weapons.at(WeaponTypeId::BOW)->equals(*otherCompare.weapons.at(WeaponTypeId::BOW)->clone()) == false) {         
+        if(weapons.at(WeaponTypeId::BOW)->equals(*otherCompare.weapons.at(WeaponTypeId::BOW)->clone()) == false) {
+            std::cout << "bow differente" << std::endl;
             return false;
         }        
         

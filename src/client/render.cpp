@@ -11,7 +11,7 @@ namespace render {
         int mapHeight = 16;
         int shiftWidth = 0;
         int shiftHeight = 0;
-        sf::Vector2i startMousePos, endMousePos; 
+        sf::Vector2i startMousePos, endMousePos;
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         sf::View view(sf::FloatRect(0, 0, windowWidth, windowHeight));
         window.setFramerateLimit(30);
@@ -34,7 +34,7 @@ namespace render {
                     endMousePos = sf::Mouse::getPosition();
                     shiftWidth = startMousePos.x - endMousePos.x;
                     shiftHeight = startMousePos.y - endMousePos.y;
-                    view.move(shiftWidth, shiftHeight);                       
+                    view.move(shiftWidth, shiftHeight);
                     if (view.getCenter().x < windowWidth / 2) {
                         view.setCenter(windowWidth / 2, view.getCenter().y);
                     
@@ -50,7 +50,7 @@ namespace render {
                     }
                     
                     scene->setShiftWidth(view.getCenter().x - windowWidth / 2);
-                    scene->setShiftHeight(view.getCenter().y - windowHeight / 2); 
+                    scene->setShiftHeight(view.getCenter().y - windowHeight / 2);
                     window.setView(view);
                     
                 } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
