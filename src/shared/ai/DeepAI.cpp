@@ -12,11 +12,10 @@ namespace ai {
     int DeepAI::minimax_rec_min(engine::Engine& engine, int depth) {
         std::stack<std::stack<std::shared_ptr<engine::Action>>> actions;
         std::vector<engine::Command*> commands = listCommands(engine.getState());
-//        std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
-//        int rand = uniform(randgen);
+        std::uniform_int_distribution<int> uniform(0, (commands.size() == 0)?commands.size():commands.size() - 1);
+        int rand = uniform(randgen);
         int min = std::numeric_limits<int>::max();
         int heuristicChild;
-        int commandCount = 0;
         int leavesCount;
         
         if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
@@ -26,14 +25,15 @@ namespace ai {
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
             while (!commands.empty()) {
-                engine.addCommand(1, commands.at(0));
+                engine.addCommand(0, commands.at(rand));
                 actions.push(engine.update());
-                commandCount++;
 
                 commands = listCommands(engine.getState());
-//                std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
-//                rand = uniform(randgen);
+                std::uniform_int_distribution<int> uniform(0, (commands.size() == 0)?commands.size():commands.size() - 1);
+                rand = uniform(randgen);
             }
+            engine.addCommand(1, new engine::EndTurnCommand());
+            actions.push(engine.update());            
 
             heuristicChild = minimax_rec_max(engine, depth);
             
@@ -41,10 +41,9 @@ namespace ai {
                 min = heuristicChild;
             }
                     
-            while (commandCount > 0) {
+            while (!actions.empty()) {
                 engine.undo(actions.top());
                 actions.pop();
-                commandCount--;
             }
         }
         
@@ -54,11 +53,10 @@ namespace ai {
     int DeepAI::minimax_rec_max(engine::Engine& engine, int depth) {
         std::stack<std::stack<std::shared_ptr<engine::Action>>> actions;
         std::vector<engine::Command*> commands = listCommands(engine.getState());
-//        std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
-//        int rand = uniform(randgen);
+        std::uniform_int_distribution<int> uniform(0, (commands.size() == 0)?commands.size():commands.size() - 1);
+        int rand = uniform(randgen);
         int max = std::numeric_limits<int>::min();
         int heuristicChild;
-        int commandCount = 0;
         int leavesCount;
         
         if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
@@ -68,14 +66,15 @@ namespace ai {
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
             while (!commands.empty()) {
-                engine.addCommand(1, commands.at(0));
+                engine.addCommand(0, commands.at(rand));
                 actions.push(engine.update());
-                commandCount++;
 
                 commands = listCommands(engine.getState());
-//                std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
-//                rand = uniform(randgen);
+                std::uniform_int_distribution<int> uniform(0, (commands.size() == 0)?commands.size():commands.size() - 1);
+                rand = uniform(randgen);
             }
+            engine.addCommand(1, new engine::EndTurnCommand());
+            actions.push(engine.update());  
 
             heuristicChild = minimax_rec_min(engine, depth);
             
@@ -83,15 +82,19 @@ namespace ai {
                 max = heuristicChild;
             }
                     
-            while (commandCount > 0) {
+            while (!actions.empty()) {
                 engine.undo(actions.top());
                 actions.pop();
-                commandCount--;
             }
         }
         
         return max;
     }
+      
+    int DeepAI::minimax_max_init(engine::Engine& engine, int depth, std::stack<std::stack<std::shared_ptr<engine::Action> > > actions) {
+        return -1;
+    }
+
     
     int DeepAI::getHeuristic(const state::State& state) {
         const std::map<int, std::unique_ptr<state::Unit> >& units = state.getBoard().getUnits();
