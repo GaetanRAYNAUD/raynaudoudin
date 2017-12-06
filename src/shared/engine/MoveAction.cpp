@@ -1,5 +1,10 @@
 #include "MoveAction.h"
 #include "state/State.h"
+#include "state/Unit.h"
+#include "state/Terrain.h"
+#include "state/House.h"
+
+#include <iostream>
 
 namespace engine {
 
@@ -8,10 +13,21 @@ namespace engine {
     }
 
     void MoveAction::apply(state::State& state) {
-           state.getBoard().moveUnit(idUnit, direction);
+        for(auto& t : state.getBoard().findTerrainAround(state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY())->getId())) {
+            if(t->getTypeId() == state::TerrainTypeId::HOUSE) {
+                houseTeamId = ((state::House*)t)->getTeamId();
+                break;
+            }
+        }
+        state.getBoard().moveUnit(idUnit, direction);
     }
 
     void MoveAction::undo(state::State& state) {
+        if(state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY())->getTypeId() == state::TerrainTypeId::HOUSE) {        
+            ((state::House*)state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY()))->setTeamId(houseTeamId);
+            state.getBoard().findTeam(state.getBoard().findUnit(idUnit)->getTeam())->removeHouse();
+        }
+        
         state.getBoard().findUnit(idUnit)->setSpeed(speed);
         switch (direction) {
             case state::Direction::TOP:

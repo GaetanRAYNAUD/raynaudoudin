@@ -22,6 +22,11 @@ namespace state {
     const TeamId& House::getTeamId() const {
         return teamId;
     }
+
+    void House::setTeamId(TeamId teamId) {
+        this->teamId = teamId;
+    }
+    
     
     bool House::equals(const Terrain& other) const {
         House& otherCompare = (House&)other;

@@ -1,6 +1,7 @@
 #include "AttackAction.h"
 #include "state/State.h"
 
+#include <iostream>
 namespace engine {
 
     AttackAction::AttackAction(int idUnitAttacker, int idUnitDefender, state::WeaponTypeId weaponTypeId) : idUnitAttacker(idUnitAttacker), idUnitDefender(idUnitDefender), weaponTypeId(weaponTypeId) {
@@ -8,6 +9,7 @@ namespace engine {
     }
 
     void AttackAction::apply(state::State& state) {
+        speedAttacker = state.getBoard().findUnit(idUnitAttacker)->getSpeed();
         unitAttacked.reset(state.getBoard().findUnit(idUnitDefender)->clone());
         state.getBoard().findUnit(idUnitDefender)->takeDamage(state.getBoard().findUnit(idUnitAttacker)->getWeapons().at(weaponTypeId)->getDamage());
         state.getBoard().findUnit(idUnitAttacker)->setSpeed(0);
@@ -18,10 +20,8 @@ namespace engine {
     }
 
     void AttackAction::undo(state::State& state) {
-        if(state.getBoard().findUnit(idUnitDefender) != nullptr) {
-            state.getBoard().deleteUnit(idUnitDefender);
-        }
-        state.getBoard().addUnit(std::move(unitAttacked), idUnitDefender);
+        state.getBoard().findUnit(idUnitAttacker)->setSpeed(speedAttacker);
+        state.getBoard().addUnit(std::move(unitAttacked), unitAttacked->getId());
     }
 
 }

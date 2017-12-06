@@ -24,6 +24,7 @@ namespace engine {
   protected:
     int idUnitAttacker;
     int idUnitDefender;
+    int speedAttacker;
     state::WeaponTypeId weaponTypeId;
     std::unique_ptr<state::Unit> unitAttacked;
     // Operations
@@ -36,6 +37,8 @@ namespace engine {
     void setIdUnitAttacker(int idUnitAttacker);
     int getIdUnitDefender() const;
     void setIdUnitDefender(int idUnitDefender);
+    int getSpeedAttacker() const;
+    void setSpeedAttacker(int speedAttacker);
     state::WeaponTypeId getWeaponTypeId() const;
     void setWeaponTypeId(state::WeaponTypeId weaponTypeId);
     const std::unique_ptr<state::Unit>& getUnitAttacked() const;

@@ -54,28 +54,31 @@ namespace render {
         for(auto& t : state.getBoard().getTerrains()) {
             if(t.second.get()->getTypeId() == state::TerrainTypeId::HOUSE) {
                 tmpHouse = (state::House*)t.second.get();
-                nbQuads = nbQuads + 1;
-                surface->initQuads(nbQuads);
                 
-                if(tmpHouse->getTeamId() == state::TeamId::TEAM_1) {
-                    tilesFlagHouse.push_back(tileset->getTile(MenuTypeId::MENU_TEAM_1));
-                    
-                } else if(tmpHouse->getTeamId() == state::TeamId::TEAM_2) {
-                    tilesFlagHouse.push_back(tileset->getTile(MenuTypeId::MENU_TEAM_2));
-                    
-                } else {
+                if(tmpHouse->getTeamId() == state::TeamId::INVALIDTEAM) {
                     continue;
-                }
-                
-                posX = tmpHouse->getPositionX() * 72 - tmpHouse->getPositionX() * 72 / 4;
-                if (tmpHouse->getPositionX() % 2) {
-                    posY = tmpHouse->getPositionY() / 2 * 72;
                 } else {
-                    posY = tmpHouse->getPositionY() / 2 * 72 + 72 / 2;
+                    nbQuads = nbQuads + 1;
+                    surface->initQuads(nbQuads);                    
+                    
+                    if(tmpHouse->getTeamId() == state::TeamId::TEAM_1) {
+                        tilesFlagHouse.push_back(tileset->getTile(MenuTypeId::MENU_TEAM_1));
+
+                    } else if(tmpHouse->getTeamId() == state::TeamId::TEAM_2) {
+                        tilesFlagHouse.push_back(tileset->getTile(MenuTypeId::MENU_TEAM_2));
+
+                    }
+
+                    posX = tmpHouse->getPositionX() * 72 - tmpHouse->getPositionX() * 72 / 4;
+                    if (tmpHouse->getPositionX() % 2) {
+                        posY = tmpHouse->getPositionY() / 2 * 72;
+                    } else {
+                        posY = tmpHouse->getPositionY() / 2 * 72 + 72 / 2;
+                    }
+
+                    surface->setSpriteTexture(nbQuads - 1, tilesFlagHouse.back());
+                    surface->setSpriteLocation(nbQuads - 1, posX  + shiftWidth + 50, posY + shiftHeight + 10, 16, 16);
                 }
-                
-                surface->setSpriteTexture(nbQuads - 1, tilesFlagHouse.back());
-                surface->setSpriteLocation(nbQuads - 1, posX  + shiftWidth + 50, posY + shiftHeight + 10, 16, 16);
             }
         }       
 

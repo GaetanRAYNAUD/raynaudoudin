@@ -1,5 +1,6 @@
 #include "Team.h"
 
+#include <iostream>
 namespace state {
 
     const std::map<UnitTypeId, int> Team::unitsPrices = {
@@ -74,10 +75,12 @@ namespace state {
         }
                 
         if(gold != other.gold) {
+            std::cout << "gold different" << std::endl;
             return false;
         }
         
         if(nbHouses != other.nbHouses) {
+            std::cout << "nbhouse different" << std::endl;            
             return false;
         }
         

@@ -19,6 +19,7 @@ namespace engine {
             state.getBoard().findUnit(s.first)->setSpeed(s.second);
         }
         state.setTurn(state.getTurn() - 1);
+        state.getBoard().findTeam(state.getCurrentTeam())->setGold(state.getBoard().findTeam(state.getCurrentTeam())->getGold() - state.getBoard().findTeam(state.getCurrentTeam())->getNbHouses() * 5);                
     }
 
 }

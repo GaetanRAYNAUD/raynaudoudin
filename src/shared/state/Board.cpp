@@ -92,9 +92,7 @@ namespace state {
     }
     
     void Board::addUnit(std::unique_ptr<Unit> unit, int idUnit) {
-        if(findUnitOnPosition(unit->getPositionX(), unit->getPositionY()) == nullptr) {
-            units.insert(std::make_pair(idUnit, std::move(unit)));
-        }
+        units[idUnit] = std::move(unit);
     }    
     
     void Board::createNewUnit(UnitTypeId unitTypeId, TeamId team, int x, int y) {        
@@ -570,16 +568,16 @@ namespace state {
             return false;
         }
         
-        for(unsigned int i = 0;i < units.size();i++) {
-            if(units.at(i)->equals(*other.units.at(i)->clone()) == false) {
-                std::cout << "unité " << i << " différente" << std::endl;
+        for(auto& u : units) {
+            if(u.second->equals(*other.units.at(u.second->getId())->clone()) == false) {
+                std::cout << "unité différente" << std::endl;
                 return false;
             }
         }
 
-        for(unsigned int i = 0;i < terrains.size();i++) {
-            if(terrains.at(i)->equals(*other.terrains.at(i)->clone()) == false) {
-                std::cout << "terrain " << i << " différente" << std::endl;
+        for(auto& t : terrains) {
+            if(t.second->equals(*other.terrains.at(t.second->getId())->clone()) == false) {
+                std::cout << "terrain différente" << std::endl;
                 return false;
             }
         }

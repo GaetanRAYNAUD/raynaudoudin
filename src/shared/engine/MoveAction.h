@@ -11,17 +11,20 @@ namespace engine {
 }
 
 #include "state/Direction.h"
+#include "state/TeamId.h"
 #include "Action.h"
 
 namespace engine {
 
   /// class MoveAction - 
   class MoveAction : public engine::Action {
+    // Associations
     // Attributes
   protected:
     int idUnit;
     int speed;
     state::Direction direction;
+    state::TeamId houseTeamId     = state::TeamId::INVALIDTEAM;
     // Operations
   public:
     MoveAction (int idUnit, state::Direction direction, int speed);
@@ -34,6 +37,8 @@ namespace engine {
     void setSpeed(int speed);
     state::Direction getDirection() const;
     void setDirection(state::Direction direction);
+    state::TeamId getHouseTeamId() const;
+    void setHouseTeamId(state::TeamId houseTeamId);
   };
 
 };
