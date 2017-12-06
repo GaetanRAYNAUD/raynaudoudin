@@ -1,6 +1,8 @@
 #include "DeepAI.h"
 #include "engine/EndTurnCommand.h"
 
+#include <iostream>
+
 namespace ai {
 
     DeepAI::DeepAI(int randomSeed): randgen(randomSeed) {
@@ -10,8 +12,8 @@ namespace ai {
     int DeepAI::minimax_rec_min(engine::Engine& engine, int depth) {
         std::stack<std::stack<std::shared_ptr<engine::Action>>> actions;
         std::vector<engine::Command*> commands = listCommands(engine.getState());
-        std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
-        int rand = uniform(randgen);
+//        std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
+//        int rand = uniform(randgen);
         int min = std::numeric_limits<int>::max();
         int heuristicChild;
         int commandCount = 0;
@@ -20,22 +22,18 @@ namespace ai {
         if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
             return getHeuristic(engine.getState());
         }
+        depth++;
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
             while (!commands.empty()) {
-                engine.addCommand(1, commands.at(rand));
+                engine.addCommand(1, commands.at(0));
                 actions.push(engine.update());
                 commandCount++;
 
-                if (commands.at(rand)->getTypeId() == engine::CommandTypeId::END_TURN) {
-                    break;
-                }
-
                 commands = listCommands(engine.getState());
-                std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
-                rand = uniform(randgen);
+//                std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
+//                rand = uniform(randgen);
             }
-            depth++,
 
             heuristicChild = minimax_rec_max(engine, depth);
             
@@ -46,6 +44,7 @@ namespace ai {
             while (commandCount > 0) {
                 engine.undo(actions.top());
                 actions.pop();
+                commandCount--;
             }
         }
         
@@ -55,8 +54,8 @@ namespace ai {
     int DeepAI::minimax_rec_max(engine::Engine& engine, int depth) {
         std::stack<std::stack<std::shared_ptr<engine::Action>>> actions;
         std::vector<engine::Command*> commands = listCommands(engine.getState());
-        std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
-        int rand = uniform(randgen);
+//        std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
+//        int rand = uniform(randgen);
         int max = std::numeric_limits<int>::min();
         int heuristicChild;
         int commandCount = 0;
@@ -65,18 +64,18 @@ namespace ai {
         if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
             return getHeuristic(engine.getState());
         }
+        depth++;
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
             while (!commands.empty()) {
-                engine.addCommand(1, commands.at(rand));
+                engine.addCommand(1, commands.at(0));
                 actions.push(engine.update());
                 commandCount++;
 
                 commands = listCommands(engine.getState());
-                std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
-                rand = uniform(randgen);
+//                std::uniform_int_distribution<int> uniform(0, commands.size() - 1);
+//                rand = uniform(randgen);
             }
-            depth++,
 
             heuristicChild = minimax_rec_min(engine, depth);
             
@@ -87,6 +86,7 @@ namespace ai {
             while (commandCount > 0) {
                 engine.undo(actions.top());
                 actions.pop();
+                commandCount--;
             }
         }
         
@@ -137,6 +137,7 @@ namespace ai {
         minimax_rec_max(engine, 0);
         engine.addCommand(1, new engine::EndTurnCommand()); 
         engine.update();
+        std::cout << "turn" << std::endl;
     }
 
     
