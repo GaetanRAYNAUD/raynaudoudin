@@ -75,7 +75,7 @@ namespace ai {
         unsigned int it;
 
         initPathMaps(engine.getState().getBoard());
-        commands = listCommands(engine.getState());
+        listCommands(engine.getState(), commands);
         
         switch (engine.getState().getCurrentTeam()) {
             case state::TeamId::TEAM_1:
@@ -97,7 +97,7 @@ namespace ai {
                                 engine.update();
                                 
                                 commandSpawn = false;
-                                commands = listCommands(engine.getState());
+                                listCommands(engine.getState(), commands);
                                 for (it = 0; it < commands.size(); it++) {
                                     if (commands.at(it)->getTypeId() == engine::CommandTypeId::SPAWN) {
                                         if (((engine::SpawnCommand*)commands.at(it))->getX() == u.second->getPositionX() && ((engine::SpawnCommand*)commands.at(it))->getY() == u.second->getPositionY()) {
@@ -111,7 +111,7 @@ namespace ai {
                             commands.clear();
                         }
 
-                        commands = listCommands(engine.getState());
+                        listCommands(engine.getState(), commands);
                         if(unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight() < houseTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight()) {
                             point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                         } else {
@@ -147,7 +147,7 @@ namespace ai {
                                 engine.addCommand(1, commands.at(it));
                                 engine.update();
                                 initPathMaps(engine.getState().getBoard());
-                                commands = listCommands(engine.getState());
+                                listCommands(engine.getState(), commands);
                                 if(unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight() < houseTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight()) {
                                     point = unitTeam2PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                                 } else {
@@ -191,7 +191,7 @@ namespace ai {
                                 engine.update();
                                 
                                 commandSpawn = false;
-                                commands = listCommands(engine.getState());
+                                listCommands(engine.getState(), commands);
                                 for (it = 0; it < commands.size(); it++) {
                                     if (commands.at(it)->getTypeId() == engine::CommandTypeId::SPAWN) {
                                         if (((engine::SpawnCommand*)commands.at(it))->getX() == u.second->getPositionX() && ((engine::SpawnCommand*)commands.at(it))->getY() == u.second->getPositionY()) {
@@ -205,7 +205,7 @@ namespace ai {
                             commands.clear();
                         }
                         
-                        commands = listCommands(engine.getState());
+                        listCommands(engine.getState(), commands);
                         if(unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight() < houseTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight()) {
                             point = unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                         } else {
@@ -239,7 +239,7 @@ namespace ai {
                                 engine.addCommand(1, commands.at(it));
                                 engine.update();
                                 initPathMaps(engine.getState().getBoard());
-                                commands = listCommands(engine.getState());
+                                listCommands(engine.getState(), commands);
                                 if(unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight() < houseTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight()) {
                                     point = unitTeam1PathMap.getBestPoint(u.second->getPositionX(), u.second->getPositionY());
                                 } else {

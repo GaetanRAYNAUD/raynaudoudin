@@ -9,7 +9,8 @@ namespace ai {
     }
 
     void RandomAI::run(engine::Engine& engine) {
-        std::vector<engine::Command*> commands = listCommands(engine.getState());
+        std::vector<engine::Command*> commands;
+        listCommands(engine.getState(), commands);
         commands.push_back(new engine::EndTurnCommand());
         
         if(commands.size() > 0) {

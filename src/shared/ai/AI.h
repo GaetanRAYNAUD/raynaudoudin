@@ -27,10 +27,10 @@ namespace ai {
     virtual ~AI ();
     virtual void run (engine::Engine& engine) = 0;
   protected:
-    std::vector<engine::Command*> listCommands (const state::State& state);
-    std::vector<engine::Command*> listCommandsMovement (const state::State& state, int idUnit);
-    std::vector<engine::Command*> listCommandsSpawn (const state::State& state, int idUnit);
-    std::vector<engine::Command*> listCommandsAttack (const state::State& state, int idUnit);
+    void listCommands (const state::State& state, std::vector<engine::Command*>& commands);
+    void listCommandsMovement (const state::State& state, int idUnit, std::vector<engine::Command*>& commands);
+    void listCommandsSpawn (const state::State& state, int idUnit, std::vector<engine::Command*>& commands);
+    void listCommandsAttack (const state::State& state, int idUnit, std::vector<engine::Command*>& commands);
     // Setters and Getters
   };
 
