@@ -161,8 +161,8 @@ namespace ai {
 
     void DeepAI::run(engine::Engine& engine) {
         std::stack<std::stack<std::shared_ptr<engine::Action> > > actions;
-        minimax_max_init(engine, 0, actions);
-//        minimax_rec_max(engine, 0,);
+//        minimax_max_init(engine, 0, actions);
+        minimax_rec_max(engine, 0);
         engine.addCommand(0, new engine::EndTurnCommand()); 
         engine.update();
         std::cout << "turn" << std::endl;
