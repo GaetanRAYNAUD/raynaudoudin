@@ -34,8 +34,9 @@ namespace engine {
     void addCommand (int priority, Command* cmd);
     std::stack<std::shared_ptr<Action>> update ();
     void undo (std::stack<std::shared_ptr<Action>>& actions);
+    state::State& getState ();
+    const state::State& getState () const;
     // Setters and Getters
-    const state::State& getState() const;
     void setState(const state::State& state);
     const std::map<int, std::unique_ptr<Command>>& getCurrentCommands() const;
     void setCurrentCommands(const std::map<int, std::unique_ptr<Command>>& currentCommands);

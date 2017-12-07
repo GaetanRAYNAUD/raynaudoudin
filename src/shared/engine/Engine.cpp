@@ -13,6 +13,10 @@ namespace engine {
     const state::State& Engine::getState() const {
         return state;
     }
+    
+    state::State& Engine::getState() {
+        return state;
+    }    
 
     std::stack<std::shared_ptr<Action>> Engine::update() {
         std::stack<std::shared_ptr<Action>> actions;
