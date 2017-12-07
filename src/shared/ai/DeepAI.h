@@ -46,7 +46,7 @@ namespace ai {
     int minimax_rec_max (engine::Engine& engine, int depth);
     void minimax_max_init (engine::Engine& engine, int depth, std::stack<std::stack<std::shared_ptr<engine::Action>>> bestActions);
     int getHeuristic (const state::State& state);
-    void stateChanged (const state::Event& event);
+    int uniform (int min, int max);
     void run (engine::Engine& engine);
     // Setters and Getters
     const PathMap& getUnitTeam1PathMap() const;
