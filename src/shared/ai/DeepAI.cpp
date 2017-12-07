@@ -1,8 +1,6 @@
 #include "DeepAI.h"
 #include "engine/EndTurnCommand.h"
 
-#include <iostream>
-
 namespace ai {
 
     DeepAI::DeepAI(int randomSeed): randgen(randomSeed) {
@@ -10,10 +8,18 @@ namespace ai {
     }
     
     void DeepAI::run(engine::Engine& engine) {
-        minimax_rec_max(engine, 0);
+        std::stack<std::stack<std::shared_ptr<engine::Action>>> bestActions;
+        
+        minimax_max_init(engine, 0, bestActions);
+        while (!bestActions.empty()) {
+            while (!bestActions.top().empty()) {
+                bestActions.top().top()->apply(engine.getState());
+                bestActions.top().pop();
+            }
+            bestActions.pop();
+        }
         engine.addCommand(0, new engine::EndTurnCommand()); 
         engine.update();
-        std::cout << "turn" << std::endl;
     }
     
     int DeepAI::minimax_rec_min(engine::Engine& engine, int depth) {
@@ -126,12 +132,12 @@ namespace ai {
                 
                 while (!bestActions.empty()) {
                     actions.pop();
-                }                
+                }
                 while (!actions.empty()) {
                     bestActions.push(actions.top());
                     engine.undo(actions.top());
                     actions.pop();
-                } 
+                }
             }
                     
             while (!actions.empty()) {
