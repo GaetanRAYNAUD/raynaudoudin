@@ -183,7 +183,28 @@ namespace state {
             return nullptr;
         }
     }
+
+    Terrain* Board::findTerrainOnPosition(int positionX, int positionY, Direction direction) const {
+        switch (direction) {
+            case Direction::TOP:
+                return findTerrainOnPosition(positionX, positionY - 2);
+            case Direction::TOP_RIGHT:
+                return findTerrainOnPosition(positionX + 1, positionY - 1);
+            case Direction::BOT_RIGHT:
+                return findTerrainOnPosition(positionX + 1, positionY + 1);
+            case Direction::BOT:
+                return findTerrainOnPosition(positionX, positionY + 2);
+            case Direction::BOT_LEFT:
+                return findTerrainOnPosition(positionX - 1, positionY + 1);
+            case Direction::TOP_LEFT:
+                return findTerrainOnPosition(positionX - 1, positionY - 1);
+        }
         
+        return nullptr;
+    }
+      
+    
+    
     std::vector<int> Board::findIdTerrainAround(int id) const {
         std::vector<int> listIdTerrainArround;
         Terrain* terrain = findTerrain(id);

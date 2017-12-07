@@ -9,9 +9,11 @@ namespace engine {
 
     void MoveCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
         if(state.getBoard().findUnit(idUnit)->getTeam() == state.getCurrentTeam()) {
-            std::shared_ptr<Action> action(new MoveAction(idUnit, direction, state.getBoard().findUnit(idUnit)->getSpeed()));
-            actions.push(action);
-            action->apply(state);
+            if(state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY(), direction) != nullptr) {
+                std::shared_ptr<Action> action(new MoveAction(idUnit, direction, state.getBoard().findUnit(idUnit)->getSpeed()));
+                actions.push(action);
+                action->apply(state);                
+            }
         }
     }
 
