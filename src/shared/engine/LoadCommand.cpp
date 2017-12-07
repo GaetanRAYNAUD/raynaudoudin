@@ -22,4 +22,9 @@ namespace engine {
         this->fileName = fileName;
     }
 
+    Command* LoadCommand::clone() const {
+        return new LoadCommand(*this);
+    }
+    
+
 }

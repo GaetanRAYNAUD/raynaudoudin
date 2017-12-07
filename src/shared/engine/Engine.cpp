@@ -18,6 +18,10 @@ namespace engine {
         return state;
     }    
 
+    const std::map<int, std::unique_ptr<Command> >& Engine::getCurrentCommands() const {
+        return currentCommands;
+    }
+
     std::stack<std::shared_ptr<Action>> Engine::update() {
         std::stack<std::shared_ptr<Action>> actions;
         

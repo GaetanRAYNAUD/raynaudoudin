@@ -28,6 +28,7 @@ namespace engine {
     HandleWinCommand ();
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
+    Command* clone () const;
     // Setters and Getters
   };
 

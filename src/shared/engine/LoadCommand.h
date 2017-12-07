@@ -30,6 +30,7 @@ namespace engine {
     LoadCommand (const std::string fileName);
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
+    Command* clone () const;
     // Setters and Getters
     const std::string& getFileName() const;
     void setFileName(const std::string& fileName);

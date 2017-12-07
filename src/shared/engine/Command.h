@@ -10,6 +10,7 @@ namespace state {
 };
 namespace engine {
   class Action;
+  class Command;
 }
 
 #include "CommandTypeId.h"
@@ -25,6 +26,7 @@ namespace engine {
     virtual ~Command ();
     virtual CommandTypeId getTypeId () const = 0;
     virtual void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions) = 0;
+    virtual Command* clone () const = 0;
     // Setters and Getters
   };
 

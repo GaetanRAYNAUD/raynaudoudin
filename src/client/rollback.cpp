@@ -48,8 +48,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -75,8 +73,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -93,8 +89,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -117,8 +111,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -141,8 +133,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
 
@@ -165,8 +155,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
 
@@ -193,8 +181,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
 
@@ -205,8 +191,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
 
@@ -220,8 +204,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
 
@@ -241,8 +223,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -265,8 +245,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
 
@@ -277,8 +255,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -289,8 +265,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -301,8 +275,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -316,8 +288,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -328,8 +298,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -340,8 +308,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -355,8 +321,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -370,8 +334,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -382,8 +344,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -394,8 +354,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -409,8 +367,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -421,8 +377,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -433,8 +387,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -445,8 +397,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -460,8 +410,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -475,8 +423,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -490,8 +436,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -505,8 +449,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -520,8 +462,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -538,8 +478,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -556,8 +494,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -574,8 +510,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -592,8 +526,6 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;
                         
@@ -607,13 +539,11 @@ namespace rollback {
                         states.push(engine->getState().clone());
                         actions.push(engine->update());
                         
-                        delete scene;
-                        scene = new Scene(engine->getState());
                         epock = epock + 1;
                         break;                     
 
                     default:
-                        if(actions.size() > 0) {
+                        if(!actions.empty()) {
                             engine->undo(actions.top());
                             
                             if(states.top()->equals(engine->getState())) {
@@ -667,6 +597,7 @@ namespace rollback {
         
         delete scene;
         delete engine;
+        delete command;
     }
 }
 

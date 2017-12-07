@@ -35,6 +35,7 @@ namespace engine {
     void spawnUnit (state::State& state, int x, int y, state::UnitTypeId unitTypeId, std::stack<std::shared_ptr<Action>>& acions);
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
+    Command* clone () const;
     // Setters and Getters
     int getX() const;
     void setX(int x);

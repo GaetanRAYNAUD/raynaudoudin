@@ -31,6 +31,7 @@ namespace engine {
     MoveCommand (int idUnit, state::Direction direction);
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
+    Command* clone () const;
     // Setters and Getters
     int getIdUnit() const;
     void setIdUnit(int idUnit);

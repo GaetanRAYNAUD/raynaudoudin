@@ -1,6 +1,8 @@
 #include "DeepAI.h"
 #include "engine/EndTurnCommand.h"
 
+#include<iostream>
+
 namespace ai {
 
     DeepAI::DeepAI(int randomSeed): randgen(randomSeed) {
@@ -8,16 +10,15 @@ namespace ai {
     }
     
     void DeepAI::run(engine::Engine& engine) {
-        std::stack<std::stack<std::shared_ptr<engine::Action>>> bestActions;
+//        std::vector<engine::Command*> bestCommands;
+//        
+//        minimax_max_init(engine, 0, bestCommands);
+//        
+//        for(int i = 0; (unsigned int)i < bestCommands.size(); i++) {
+//            engine.addCommand(i, bestCommands.at(i));
+//        }
+//        engine.update();
         
-        minimax_max_init(engine, 0, bestActions);
-        while (!bestActions.empty()) {
-            while (!bestActions.top().empty()) {
-                bestActions.top().top()->apply(engine.getState());
-                bestActions.top().pop();
-            }
-            bestActions.pop();
-        }
         engine.addCommand(0, new engine::EndTurnCommand()); 
         engine.update();
     }
@@ -102,9 +103,10 @@ namespace ai {
         return max;
     }
       
-    void DeepAI::minimax_max_init(engine::Engine& engine, int depth, std::stack<std::stack<std::shared_ptr<engine::Action> > > bestActions) {
+    void DeepAI::minimax_max_init(engine::Engine& engine, int depth, std::vector<engine::Command*>& bestCommand) {
         std::stack<std::stack<std::shared_ptr<engine::Action>>> actions;
         std::vector<engine::Command*> commands;
+        std::vector<engine::Command*> currentCommands;
         int max = std::numeric_limits<int>::min();
         int heuristicChild;
         int leavesCount;
@@ -115,13 +117,19 @@ namespace ai {
         }
         depth++;
         
-        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {            
+        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
+            listCommands(engine.getState(), commands);
+            
             while (!commands.empty()) {
                 listCommands(engine.getState(), commands);
                 rand = uniform(0, commands.size() - 1);
                 engine.addCommand(0, commands.at(rand));
-                actions.push(engine.update());
+                for(auto& c : engine.getCurrentCommands()) {
+                    currentCommands.push_back(c.second->clone());
+                }
+                actions.push(engine.update());              
             }
+            
             engine.addCommand(0, new engine::EndTurnCommand());
             actions.push(engine.update());
 
@@ -129,15 +137,10 @@ namespace ai {
             
             if (heuristicChild > max) {
                 max = heuristicChild;
-                
-                while (!bestActions.empty()) {
-                    actions.pop();
-                }
-                while (!actions.empty()) {
-                    bestActions.push(actions.top());
-                    engine.undo(actions.top());
-                    actions.pop();
-                }
+
+                bestCommand.clear();
+                bestCommand = currentCommands;  
+                currentCommands.clear();
             }
                     
             while (!actions.empty()) {

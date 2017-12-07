@@ -51,4 +51,9 @@ namespace engine {
     int SpawnCommand::getY() const {
         return y;
     }
+
+    Command* SpawnCommand::clone() const {
+        return new SpawnCommand(*this);
+    }
+
 }

@@ -34,5 +34,8 @@ namespace engine {
         return weaponTypeId;
     }
 
+    Command* AttackCommand::clone() const {
+        return new AttackCommand(*this);
+    }
 
 }

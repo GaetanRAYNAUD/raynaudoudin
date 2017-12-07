@@ -29,4 +29,8 @@ namespace engine {
         return idUnit;
     }
 
+    Command* MoveCommand::clone() const {
+        return new MoveCommand(*this);
+    }
+
 }

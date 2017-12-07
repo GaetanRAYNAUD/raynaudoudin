@@ -17,5 +17,10 @@ namespace engine {
         return CommandTypeId::END_TURN;
     }
 
+    Command* EndTurnCommand::clone() const {
+        return new EndTurnCommand(*this);
+    }
+
+
 }
 

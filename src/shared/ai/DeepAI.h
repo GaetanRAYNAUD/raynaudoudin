@@ -3,14 +3,14 @@
 #define AI__DEEPAI__H
 
 #include <random>
-#include <stack>
-#include <memory>
+#include <vector>
 
 namespace ai {
   class PathMap;
 };
 namespace engine {
   class Engine;
+  class Command;
 };
 namespace state {
   class State;
@@ -44,7 +44,7 @@ namespace ai {
     DeepAI (int randomSeed);
     int minimax_rec_min (engine::Engine& engine, int depth);
     int minimax_rec_max (engine::Engine& engine, int depth);
-    void minimax_max_init (engine::Engine& engine, int depth, std::stack<std::stack<std::shared_ptr<engine::Action>>> bestActions);
+    void minimax_max_init (engine::Engine& engine, int depth, std::vector<engine::Command*>& bestCommands);
     int getHeuristic (const state::State& state);
     int uniform (int min, int max);
     void run (engine::Engine& engine);

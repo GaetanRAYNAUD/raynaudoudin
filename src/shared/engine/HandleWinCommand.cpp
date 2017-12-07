@@ -26,4 +26,9 @@ namespace engine {
         return CommandTypeId::HANDLE_WIN;
     }
 
+    Command* HandleWinCommand::clone() const {
+        return new HandleWinCommand(*this);
+    }
+    
+
 }
