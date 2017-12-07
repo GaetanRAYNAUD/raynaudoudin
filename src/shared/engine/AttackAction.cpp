@@ -1,7 +1,6 @@
 #include "AttackAction.h"
 #include "state/State.h"
 
-#include <iostream>
 namespace engine {
 
     AttackAction::AttackAction(int idUnitAttacker, int idUnitDefender, state::WeaponTypeId weaponTypeId) : idUnitAttacker(idUnitAttacker), idUnitDefender(idUnitDefender), weaponTypeId(weaponTypeId) {

@@ -1,5 +1,4 @@
 #include "DebugLayer.h"
-#include <iostream>
 
 namespace render {
 

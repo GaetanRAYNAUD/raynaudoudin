@@ -1,6 +1,5 @@
 #include "Engine.h"
 
-#include <iostream>
 namespace engine {
 
     Engine::Engine(int width, int height) : state(width, height) {

@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Layer.h"
 #include "TerrainTileSet.h"
 
