@@ -29,16 +29,12 @@ namespace ai {
         }
         depth++;
         
-        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
-            listCommands(engine.getState(), commands);
-            rand = uniform(0, commands.size() - 1);
-            
+        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {            
             while (!commands.empty()) {
-                engine.addCommand(0, commands.at(rand));
-                actions.push(engine.update());
-                
                 listCommands(engine.getState(), commands);
                 rand = uniform(0, commands.size() - 1);
+                engine.addCommand(0, commands.at(rand));
+                actions.push(engine.update());
             }
             engine.addCommand(0, new engine::EndTurnCommand());
             actions.push(engine.update());          
@@ -73,16 +69,12 @@ namespace ai {
         }
         depth++;
         
-        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
-            listCommands(engine.getState(), commands);
-            rand = uniform(0, commands.size() - 1);
-            
+        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {            
             while (!commands.empty()) {
-                engine.addCommand(0, commands.at(rand));
-                actions.push(engine.update());
-                
                 listCommands(engine.getState(), commands);
                 rand = uniform(0, commands.size() - 1);
+                engine.addCommand(0, commands.at(rand));
+                actions.push(engine.update());
             }
             engine.addCommand(0, new engine::EndTurnCommand());
             actions.push(engine.update());
@@ -117,16 +109,12 @@ namespace ai {
         }
         depth++;
         
-        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
-            listCommands(engine.getState(), commands);
-            rand = uniform(0, commands.size() - 1);
-            
+        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {            
             while (!commands.empty()) {
-                engine.addCommand(0, commands.at(rand));
-                actions.push(engine.update());
-                
                 listCommands(engine.getState(), commands);
                 rand = uniform(0, commands.size() - 1);
+                engine.addCommand(0, commands.at(rand));
+                actions.push(engine.update());
             }
             engine.addCommand(0, new engine::EndTurnCommand());
             actions.push(engine.update());
