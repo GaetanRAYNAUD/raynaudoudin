@@ -20,6 +20,7 @@ namespace engine {
     // Attributes
   protected:
     std::map<int, int> speeds;
+    int gold;
     // Operations
   public:
     EndTurnAction ();
@@ -28,6 +29,8 @@ namespace engine {
     // Setters and Getters
     const std::map<int, int>& getSpeeds() const;
     void setSpeeds(const std::map<int, int>& speeds);
+    int getGold() const;
+    void setGold(int gold);
   };
 
 };

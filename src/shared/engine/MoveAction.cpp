@@ -4,8 +4,6 @@
 #include "state/Terrain.h"
 #include "state/House.h"
 
-#include <iostream>
-
 namespace engine {
 
     MoveAction::MoveAction(int idUnit, state::Direction direction, int speed) : idUnit(idUnit), speed(speed), direction(direction) {
@@ -23,9 +21,11 @@ namespace engine {
     }
 
     void MoveAction::undo(state::State& state) {
-        if(state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY())->getTypeId() == state::TerrainTypeId::HOUSE) {        
+        if(state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY())->getTypeId() == state::TerrainTypeId::HOUSE) {
             ((state::House*)state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY()))->setTeamId(houseTeamId);
-            state.getBoard().findTeam(state.getBoard().findUnit(idUnit)->getTeam())->removeHouse();
+            if(houseTeamId != state.getBoard().findUnit(idUnit)->getTeam()) {
+                state.getBoard().findTeam(state.getBoard().findUnit(idUnit)->getTeam())->removeHouse();
+            }
         }
         
         state.getBoard().findUnit(idUnit)->setSpeed(speed);

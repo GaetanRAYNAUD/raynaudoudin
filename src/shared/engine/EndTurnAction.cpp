@@ -11,6 +11,8 @@ namespace engine {
         for(auto& u : state.getBoard().getUnits()) {
             speeds.insert(std::make_pair(u.second->getId(), u.second->getSpeed()));
         }
+        
+        gold = state.getBoard().findTeam(state.getCurrentTeam())->getGold();
         state.endTurn();
     }
 
@@ -19,7 +21,7 @@ namespace engine {
             state.getBoard().findUnit(s.first)->setSpeed(s.second);
         }
         state.setTurn(state.getTurn() - 1);
-        state.getBoard().findTeam(state.getCurrentTeam())->setGold(state.getBoard().findTeam(state.getCurrentTeam())->getGold() - state.getBoard().findTeam(state.getCurrentTeam())->getNbHouses() * 5);                
+        state.getBoard().findTeam(state.getCurrentTeam())->setGold(gold);                
     }
 
 }
