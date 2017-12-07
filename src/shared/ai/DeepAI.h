@@ -44,7 +44,7 @@ namespace ai {
     DeepAI (int randomSeed);
     int minimax_rec_min (engine::Engine& engine, int depth);
     int minimax_rec_max (engine::Engine& engine, int depth);
-    int minimax_max_init (engine::Engine& engine, int depth, std::stack<std::stack<std::shared_ptr<engine::Action>>> actions);
+    void minimax_max_init (engine::Engine& engine, int depth, std::stack<std::stack<std::shared_ptr<engine::Action>>> bestActions);
     int getHeuristic (const state::State& state);
     void stateChanged (const state::Event& event);
     void run (engine::Engine& engine);
