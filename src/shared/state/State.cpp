@@ -41,7 +41,14 @@ namespace state {
         turn = turn + 1;
     }
 
+    void State::addEpoch() {
+        epoch = epoch + 1;
+    }
 
+    void State::removeEpoch() {
+        epoch = epoch - 1;
+    }
+    
     void State::setTurn(int turn) {
         this->turn = turn;
     }

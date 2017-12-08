@@ -30,6 +30,8 @@ namespace state {
     Board& getBoard ();
     const Board& getBoard () const;
     const TeamId getCurrentTeam () const;
+    void addEpoch ();
+    void removeEpoch ();
     void endTurn ();
     bool equals (const State& other) const;
     State* clone () const;
