@@ -8,6 +8,7 @@ namespace engine {
     }
 
     void AttackAction::apply(state::State& state) {
+        state.addEpoch();
         speedAttacker = state.getBoard().findUnit(idUnitAttacker)->getSpeed();
         unitAttacked.reset(state.getBoard().findUnit(idUnitDefender)->clone());
         state.getBoard().findUnit(idUnitDefender)->takeDamage(state.getBoard().findUnit(idUnitAttacker)->getWeapons().at(weaponTypeId)->getDamage());
@@ -15,10 +16,11 @@ namespace engine {
 
         if (state.getBoard().findUnit(idUnitDefender)->isDead()) {
             state.getBoard().deleteUnit(idUnitDefender);
-        }        
+        }      
     }
 
     void AttackAction::undo(state::State& state) {
+        state.removeEpoch();
         state.getBoard().findUnit(idUnitAttacker)->setSpeed(speedAttacker);
         state.getBoard().addUnit(std::move(unitAttacked), unitAttacked->getId());
     }

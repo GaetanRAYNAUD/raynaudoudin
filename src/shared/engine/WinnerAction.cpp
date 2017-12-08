@@ -7,11 +7,13 @@ namespace engine {
         
     }
 
-    void WinnerAction::apply(state::State& state) {
-        state.setWinner(teamId);
+    void WinnerAction::apply(state::State& state) {     
+        state.addEpoch();
+        state.setWinner(teamId);       
     }
 
     void WinnerAction::undo(state::State& state) {
+        state.removeEpoch();        
         state.setWinner(state::TeamId::INVALIDTEAM);
     }
 

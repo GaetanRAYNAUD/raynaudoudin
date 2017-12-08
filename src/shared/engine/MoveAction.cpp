@@ -10,17 +10,17 @@ namespace engine {
 
     }
 
-    void MoveAction::apply(state::State& state) {
-        for(auto& t : state.getBoard().findTerrainAround(state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY())->getId())) {
-            if(t->getTypeId() == state::TerrainTypeId::HOUSE) {
-                houseTeamId = ((state::House*)t)->getTeamId();
-                break;
-            }
+    void MoveAction::apply(state::State& state) {          
+        state.addEpoch();
+        state::Terrain* ter = state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY(), direction);
+        if(ter != nullptr && ter->getTypeId() == state::TerrainTypeId::HOUSE) {
+            houseTeamId = ((state::House*)state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY(), direction))->getTeamId();
         }
         state.getBoard().moveUnit(idUnit, direction);
     }
 
     void MoveAction::undo(state::State& state) {
+        state.removeEpoch();        
         if(state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY())->getTypeId() == state::TerrainTypeId::HOUSE) {
             ((state::House*)state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY()))->setTeamId(houseTeamId);
             if(houseTeamId != state.getBoard().findUnit(idUnit)->getTeam()) {
