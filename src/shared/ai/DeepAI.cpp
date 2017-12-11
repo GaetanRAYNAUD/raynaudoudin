@@ -10,14 +10,14 @@ namespace ai {
     }
     
     void DeepAI::run(engine::Engine& engine) {
-//        std::vector<engine::Command*> bestCommands;
-//        
-//        minimax_max_init(engine, 0, bestCommands);
-//        
-//        for(int i = 0; (unsigned int)i < bestCommands.size(); i++) {
-//            engine.addCommand(i, bestCommands.at(i));
-//        }
-//        engine.update();
+        std::vector<engine::Command*> bestCommands;
+        
+        minimax_max_init(engine, 0, bestCommands);
+        
+        for(int i = 0; (unsigned int)i < bestCommands.size(); i++) {
+            engine.addCommand(i, bestCommands.at(i));
+        }
+        engine.update();
         
         engine.addCommand(0, new engine::EndTurnCommand()); 
         engine.update();
@@ -37,11 +37,12 @@ namespace ai {
         depth++;
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {            
+            listCommands(engine.getState(), commands);
             while (!commands.empty()) {
-                listCommands(engine.getState(), commands);
                 rand = uniform(0, commands.size() - 1);
                 engine.addCommand(0, commands.at(rand));
                 actions.push(engine.update());
+                listCommands(engine.getState(), commands);
             }
             engine.addCommand(0, new engine::EndTurnCommand());
             actions.push(engine.update());          
@@ -76,12 +77,13 @@ namespace ai {
         }
         depth++;
         
-        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {            
+        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
+            listCommands(engine.getState(), commands);
             while (!commands.empty()) {
-                listCommands(engine.getState(), commands);
                 rand = uniform(0, commands.size() - 1);
                 engine.addCommand(0, commands.at(rand));
                 actions.push(engine.update());
+                listCommands(engine.getState(), commands);
             }
             engine.addCommand(0, new engine::EndTurnCommand());
             actions.push(engine.update());
@@ -119,15 +121,14 @@ namespace ai {
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
             listCommands(engine.getState(), commands);
-            
             while (!commands.empty()) {
-                listCommands(engine.getState(), commands);
                 rand = uniform(0, commands.size() - 1);
                 engine.addCommand(0, commands.at(rand));
                 for(auto& c : engine.getCurrentCommands()) {
                     currentCommands.push_back(c.second->clone());
                 }
-                actions.push(engine.update());              
+                actions.push(engine.update());
+                listCommands(engine.getState(), commands);
             }
             
             engine.addCommand(0, new engine::EndTurnCommand());
