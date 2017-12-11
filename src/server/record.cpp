@@ -9,7 +9,6 @@ namespace record {
     
     void record_test() {
         Engine* engine = new Engine(22, 8);
-        std::random_device rand;
         HeuristicAI* ai = new HeuristicAI();
         Command* command;
         Json::StyledWriter styledWriter;
@@ -28,6 +27,8 @@ namespace record {
         
         fileJson << styledWriter.write(jsonCommands);        
         fileJson.close();
+        
+        std::cout << "Commandes enregistrées avec succès !" << std::endl;
         
         delete engine;
         delete ai;
