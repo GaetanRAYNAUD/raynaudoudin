@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "../../../extern/jsoncpp-1.8.0/json/json.h"
 
 namespace engine {
 
@@ -32,6 +33,20 @@ namespace engine {
         currentCommands.clear();
         
         return actions;
+    }
+    
+    void Engine::update(Json::Value& jsonValue) {
+        std::stack<std::shared_ptr<Action>> actions;
+        
+        for(auto& c : currentCommands) {
+            c.second.get()->execute(state, actions);
+            c.second->serialize(jsonValue);
+        }
+        
+        currentCommands.clear();
+        while(!actions.empty()) {
+            actions.pop();
+        }
     }
 
     void Engine::undo(std::stack<std::shared_ptr<Action>>& actions) {

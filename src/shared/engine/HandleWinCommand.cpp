@@ -32,8 +32,10 @@ namespace engine {
     }
 
     void HandleWinCommand::serialize(Json::Value& out) const {
-               
+        Json::Value jsonCommand;
+        jsonCommand["Type"] = "HandleWinCommand";
         
+        out["Commands"].append(jsonCommand);
     }
 
     HandleWinCommand* HandleWinCommand::deserialize(const Json::Value& in) {

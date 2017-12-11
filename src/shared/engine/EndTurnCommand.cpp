@@ -23,7 +23,10 @@ namespace engine {
     }
 
     void EndTurnCommand::serialize(Json::Value& out) const {
-
+        Json::Value jsonCommand;
+        jsonCommand["Type"] = "EndTurnCommand";
+        
+        out["Commands"].append(jsonCommand);
     }
     
     EndTurnCommand* EndTurnCommand::deserialize(const Json::Value& in) {

@@ -40,7 +40,13 @@ namespace engine {
     }
 
     void AttackCommand::serialize(Json::Value& out) const {
-
+        Json::Value jsonCommand;
+        jsonCommand["Type"] = "AttackCommand";
+        jsonCommand["idAttacker"] = idUnitAttacker;
+        jsonCommand["idDefender"] = idUnitDefender;
+        jsonCommand["weaponTypeId"] = weaponTypeId;
+        
+        out["Commands"].append(jsonCommand);
     }
 
     AttackCommand* AttackCommand::deserialize(const Json::Value& in) {

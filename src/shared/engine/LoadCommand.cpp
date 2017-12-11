@@ -28,7 +28,11 @@ namespace engine {
     }
 
     void LoadCommand::serialize(Json::Value& out) const {
-
+        Json::Value jsonCommand;
+        jsonCommand["Type"] = "SpawnCommand";
+        jsonCommand["fileName"] = fileName;
+        
+        out["Commands"].append(jsonCommand);
     }
 
     LoadCommand* LoadCommand::deserialize(const Json::Value& in) {

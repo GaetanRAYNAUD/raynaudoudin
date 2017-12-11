@@ -5,6 +5,7 @@
 #include <map>
 #include <memory>
 #include <stack>
+#include <json/json.h>
 
 namespace state {
   class State;
@@ -35,6 +36,7 @@ namespace engine {
     virtual ~Engine ();
     void addCommand (int priority, Command* cmd);
     std::stack<std::shared_ptr<Action>> update ();
+    void update (Json::Value& jsonValue);
     void undo (std::stack<std::shared_ptr<Action>>& actions);
     state::State& getState ();
     const state::State& getState () const;

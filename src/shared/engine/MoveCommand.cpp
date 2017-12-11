@@ -35,7 +35,12 @@ namespace engine {
     }
 
     void MoveCommand::serialize(Json::Value& out) const {
-
+        Json::Value jsonCommand;
+        jsonCommand["Type"] = "MoveCommand";
+        jsonCommand["idUnit"] = idUnit;
+        jsonCommand["Direction"] = direction;
+        
+        out["Commands"].append(jsonCommand);
     }
 
     MoveCommand* MoveCommand::deserialize(const Json::Value& in) {
