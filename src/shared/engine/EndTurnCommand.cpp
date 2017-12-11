@@ -1,5 +1,6 @@
 #include "EndTurnCommand.h"
 #include "EndTurnAction.h"
+#include "../../../extern/jsoncpp-1.8.0/json/json.h"
 
 namespace engine {
 
@@ -21,6 +22,14 @@ namespace engine {
         return new EndTurnCommand(*this);
     }
 
+    void EndTurnCommand::serialize(Json::Value& out) const {
+
+    }
+    
+    EndTurnCommand* EndTurnCommand::deserialize(const Json::Value& in) {
+
+        return new EndTurnCommand();
+    }
 
 }
 

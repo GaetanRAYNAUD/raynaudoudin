@@ -5,6 +5,8 @@
 #include "engine/CommandTypeId.h"
 #include "engine/Action.h"
 #include "engine/Command.h"
+#include "engine/Observer.h"
+#include "engine/Observable.h"
 #include "engine/Engine.h"
 #include "engine/MoveCommand.h"
 #include "engine/LoadCommand.h"

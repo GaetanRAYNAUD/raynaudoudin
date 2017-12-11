@@ -5,6 +5,7 @@
 #include <string>
 #include <stack>
 #include <memory>
+#include <json/json.h>
 
 namespace state {
   class State;
@@ -12,6 +13,7 @@ namespace state {
 namespace engine {
   class Action;
   class Command;
+  class LoadCommand;
 }
 
 #include "CommandTypeId.h"
@@ -31,6 +33,8 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
     Command* clone () const;
+    void serialize (Json::Value& out) const;
+    static LoadCommand* deserialize (const Json::Value& in);
     // Setters and Getters
     const std::string& getFileName() const;
     void setFileName(const std::string& fileName);

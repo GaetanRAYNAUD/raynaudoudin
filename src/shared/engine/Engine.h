@@ -12,16 +12,18 @@ namespace state {
 namespace engine {
   class Command;
   class Action;
+  class Observable;
 }
 
 #include "state/State.h"
 #include "Action.h"
+#include "Observable.h"
 #include "Command.h"
 
 namespace engine {
 
   /// class Engine - 
-  class Engine {
+  class Engine : public engine::Observable {
     // Associations
     // Attributes
   protected:

@@ -1,5 +1,6 @@
 #include "MoveCommand.h"
 #include "MoveAction.h"
+#include "../../../extern/jsoncpp-1.8.0/json/json.h"
 
 namespace engine {
 
@@ -31,6 +32,15 @@ namespace engine {
 
     Command* MoveCommand::clone() const {
         return new MoveCommand(*this);
+    }
+
+    void MoveCommand::serialize(Json::Value& out) const {
+
+    }
+
+    MoveCommand* MoveCommand::deserialize(const Json::Value& in) {
+
+        return new MoveCommand(0, state::Direction::BOT);
     }
 
 }

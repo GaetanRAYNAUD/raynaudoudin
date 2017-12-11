@@ -4,6 +4,7 @@
 
 #include <stack>
 #include <memory>
+#include <json/json.h>
 
 namespace state {
   class State;
@@ -27,6 +28,8 @@ namespace engine {
     virtual CommandTypeId getTypeId () const = 0;
     virtual void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions) = 0;
     virtual Command* clone () const = 0;
+    virtual void serialize (Json::Value& out) const = 0;
+    static Command* deserialize (const Json::Value& in);
     // Setters and Getters
   };
 

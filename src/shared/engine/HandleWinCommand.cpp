@@ -1,5 +1,6 @@
 #include "HandleWinCommand.h"
 #include "WinnerAction.h"
+#include "../../../extern/jsoncpp-1.8.0/json/json.h"
 
 
 namespace engine {
@@ -29,6 +30,15 @@ namespace engine {
     Command* HandleWinCommand::clone() const {
         return new HandleWinCommand(*this);
     }
-    
+
+    void HandleWinCommand::serialize(Json::Value& out) const {
+               
+        
+    }
+
+    HandleWinCommand* HandleWinCommand::deserialize(const Json::Value& in) {
+        
+        return new HandleWinCommand();
+    }
 
 }

@@ -1,5 +1,6 @@
 #include "SpawnCommand.h"
 #include "SpawnAction.h"
+#include "../../../extern/jsoncpp-1.8.0/json/json.h"
 
 namespace engine {
 
@@ -54,6 +55,15 @@ namespace engine {
 
     Command* SpawnCommand::clone() const {
         return new SpawnCommand(*this);
+    }
+
+    void SpawnCommand::serialize(Json::Value& out) const {
+
+    }
+
+    SpawnCommand* SpawnCommand::deserialize(const Json::Value& in) {
+
+        return new SpawnCommand(0, 0, state::UnitTypeId::SWORDMAN);
     }
 
 }

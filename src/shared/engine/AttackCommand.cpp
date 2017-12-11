@@ -1,5 +1,6 @@
 #include "AttackCommand.h"
 #include "AttackAction.h"
+#include "../../../extern/jsoncpp-1.8.0/json/json.h"
 
 namespace engine {
 
@@ -36,6 +37,15 @@ namespace engine {
 
     Command* AttackCommand::clone() const {
         return new AttackCommand(*this);
+    }
+
+    void AttackCommand::serialize(Json::Value& out) const {
+
+    }
+
+    AttackCommand* AttackCommand::deserialize(const Json::Value& in) {
+
+        return new AttackCommand(0, 0, state::WeaponTypeId::SWORD);
     }
 
 }
