@@ -1,5 +1,5 @@
-#ifndef HEURISTICAI_HPP
-#define HEURISTICAI_HPP
+#ifndef THREAD_HPP
+#define THREAD_HPP
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -9,11 +9,10 @@
 #include "render.h"
 #include "../shared/engine.h"
 #include "engine/Engine.h"
-#include "../shared/ai.h"
+#include "../client/client.h"
 
-namespace heuristic_ai {
-    void heuristic_aiTest();
+namespace thread {
+    void thread_aiTest();
 }
 
-#endif /* HEURISTICAI_HPP */
-
+#endif /* THREAD_HPP */

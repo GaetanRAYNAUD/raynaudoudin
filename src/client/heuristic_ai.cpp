@@ -7,6 +7,10 @@ using namespace ai;
 
 namespace heuristic_ai {
     
+    void thread_ai() {
+        
+    }
+    
     void heuristic_aiTest() {
         bool pause = 0;
         int displayMap = 0;
@@ -17,41 +21,27 @@ namespace heuristic_ai {
         int timePause = 500;
         Engine* engine = new Engine(mapWidth, mapHeight);  
         Scene* scene;
-        Command* command;
         std::random_device rand;
         HeuristicAI* ai = new HeuristicAI();
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
-        sf::View view(sf::FloatRect(0, 0, windowWidth, windowHeight));
         sf::Clock clock;
         sf::Time time;
         
         window.setFramerateLimit(30);
-        window.setView(view);
-            
-        command = new LoadCommand("res/map.txt");
-        engine->addCommand(1, command);
+        
+        engine->addCommand(1, new LoadCommand("res/map.txt"));
         engine->update();
 
         scene = new Scene(engine->getState());
         while (window.isOpen()) {
             sf::Event event;
-            
-            if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
+            if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {
                 ai->run(*engine);
+                
                 time = clock.getElapsedTime();
                 if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
                     pause = true;
                 }
-            }
-            
-            delete scene;
-            scene = new Scene(engine->getState());
-            
-            if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
-                pause = true;
-                std::string s = std::to_string(engine->getState().getWinner());
-                std::string winnerMessage = "L equipe " + s + " a gagne !";
-                scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
             }
             
             while (window.pollEvent(event)) {
@@ -100,6 +90,17 @@ namespace heuristic_ai {
                 default:
                     break;
             }
+            
+            delete scene;
+            scene = new Scene(engine->getState());
+            
+            if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
+                pause = true;
+                std::string s = std::to_string(engine->getState().getWinner());
+                std::string winnerMessage = "L equipe " + s + " a gagne !";
+                scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
+            }
+            
             scene->draw(window);
             window.display();
         }
