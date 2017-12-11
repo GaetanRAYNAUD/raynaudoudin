@@ -78,16 +78,9 @@ int main(int argc, char* argv[])
             cout << "Lancement du jeu avec des threads" << endl;
             cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
             cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
-            
-        } else if (string(argv[1]) == "record"){
-            cout << "Enregistrement des actions de l'IA" << endl;
-            cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
-            cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
 
         } else if (string(argv[1]) == "play"){
             cout << "Restitutions des actions de l'IA" << endl;
-            cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
-            cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
             
         } else {
             cout << "Commande inconnue" << endl;
@@ -100,6 +93,8 @@ int main(int argc, char* argv[])
             cout << "heuristique_ai : Lancement de l'ia heuristique" << endl;
             cout << "rollback : Lance le test de rollback" << endl;
             cout << "deep_ai : Lancement de l'ia deep" << endl;
+            cout << "thread : Lancement le jeu avec des threads" << endl;
+            cout << "deep_ai : Restitue les actions de l'IA" << endl;
         }
     }
     return 0;
