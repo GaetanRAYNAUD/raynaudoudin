@@ -27,11 +27,13 @@ namespace ai {
     /// 				
     int height;
     std::vector<int> weights;
+    std::vector<bool> wall;
     std::priority_queue<Point, std::vector<Point>, PointCompareWeight> queue;
     // Operations
   public:
     void init (const state::Board& board);
     void addWell (Point p);
+    void addWall (Point p);
     /// 			
     /// @param board		(???) 
     void update (const state::Board& board);
@@ -41,6 +43,8 @@ namespace ai {
     /// 	
     /// @param p		(???) 
     void setWeight (const Point& p);
+    bool getWall (const Point& p) const;
+    void setWall (const Point& p);
     // Setters and Getters
     int getWidth() const;
     void setWidth(int width);

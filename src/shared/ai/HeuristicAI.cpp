@@ -30,29 +30,34 @@ namespace ai {
         
         for (auto& u : units) {
             if (u.second->getTeam() == state::TeamId::TEAM_1) {
-                unitTeam1PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY(), 0));
+                unitTeam1PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY()));
+                unitTeam2PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
             } else if (u.second->getTeam() == state::TeamId::TEAM_2) {
-                unitTeam2PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY(), 0));
+                unitTeam2PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY()));
+                unitTeam1PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
             }
+            houseTeam1PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
+            houseTeam2PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
+            castlePathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
         }
         
         for (auto& t : terrains) {
             if (t.second->getTypeId() == state::TerrainTypeId::HOUSE) {
                 switch (((state::House*)t.second.get())->getTeamId()) {
                     case state::TeamId::TEAM_1:
-                        houseTeam1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
+                        houseTeam1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
                         break;
                     
                     case state::TeamId::TEAM_2:
-                        houseTeam2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
+                        houseTeam2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
                         break;
                         
                     case state::TeamId::INVALIDTEAM:
-                        houseTeam1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
-                        houseTeam2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
+                        houseTeam1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+                        houseTeam2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
                 }
             } else if(t.second->getTypeId() == state::TerrainTypeId::CASTLE) {
-                castlePathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY(), 0));
+                castlePathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
             }
         }
         
@@ -61,18 +66,6 @@ namespace ai {
         houseTeam1PathMap.update(board);
         houseTeam2PathMap.update(board);
         castlePathMap.update(board);
-        
-        for (auto& u : units) {
-            if (u.second->getTeam() == state::TeamId::TEAM_1) {
-                unitTeam2PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
-                houseTeam2PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
-                castlePathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
-            } else if (u.second->getTeam() == state::TeamId::TEAM_2) {
-                unitTeam1PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
-                houseTeam1PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
-                castlePathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
-            }
-        }
     }
     
     void HeuristicAI::run(engine::Engine& engine) {
