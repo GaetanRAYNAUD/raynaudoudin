@@ -338,18 +338,6 @@ namespace state {
             return nullptr;
         }
     }
-    
-    std::vector<Unit*> Board::findUnitsByTeam(TeamId teamId) const {
-        std::vector<Unit*> listUnit;
-        
-        for (auto& u : units) {
-            if (u.second->getTeam() == teamId) {
-                listUnit.push_back(u.second.get());
-            }
-        }
-        
-        return listUnit;
-    }
         
     void Board::moveUnit(int id, Direction direction) {
         Unit* unit = findUnit(id);

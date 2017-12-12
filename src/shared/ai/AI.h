@@ -28,9 +28,9 @@ namespace ai {
     virtual void run (engine::Engine& engine) = 0;
   protected:
     void listCommands (const state::State& state, std::vector<engine::Command*>& commands);
-    void listCommandsMovement (const state::State& state, state::TeamId teamId, std::vector<engine::Command*>& commands);
-    void listCommandsSpawn (const state::State& state, state::TeamId teamId, std::vector<engine::Command*>& commands);
-    void listCommandsAttack (const state::State& state, state::TeamId teamId, std::vector<engine::Command*>& commands);
+    void listCommandsMovement (const state::State& state, std::vector<engine::Command*>& commands);
+    void listCommandsSpawn (const state::State& state, std::vector<engine::Command*>& commands);
+    void listCommandsAttack (const state::State& state, std::vector<engine::Command*>& commands);
     // Setters and Getters
   };
 

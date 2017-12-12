@@ -70,7 +70,6 @@ namespace state {
     std::vector<Terrain*> findTerrainsAround (int id) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY, Direction direction) const;
-    std::vector<Unit*> findUnitsByTeam (TeamId teamId) const;
     std::vector<Direction> directionAvailable (int unitId) const;
     std::vector<Direction> directionAvailable (int x, int y) const;
     void moveUnit (int id, Direction direction);
