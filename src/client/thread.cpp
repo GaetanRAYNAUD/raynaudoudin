@@ -1,4 +1,5 @@
 #include "thread.hpp"
+#include "engine/Engine.h"
 
 using namespace state;
 using namespace render;
@@ -8,6 +9,24 @@ using namespace client;
 
 namespace thread {
     
+    std::mutex mtx;
+    std::condition_variable cv;
+    bool ready = false;
+    bool loopThread = true;
+    
+    void thread_ai(Engine* engine) {
+        HeuristicAI* ai = new HeuristicAI();
+        
+        do {
+            std::unique_lock<std::mutex> lck(mtx);
+            while (!ready) cv.wait(lck);
+            ai->run(*engine);
+            ready = false;
+        } while (loopThread);
+        
+        delete ai;
+    }
+    
     void thread_aiTest() {
         bool pause = 0;
         int windowWidth = 1188;
@@ -16,9 +35,8 @@ namespace thread {
         int mapHeight = 8;
         int timePause = 500;
         Engine* engine = new Engine(mapWidth, mapHeight);  
-        Scene* scene;
+        Scene* scene = new Scene(engine->getState());
         std::random_device rand;
-        Client* client = new Client();
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         sf::Clock clock;
         sf::Time time;
@@ -28,24 +46,15 @@ namespace thread {
         engine->addCommand(1, new LoadCommand("res/map.txt"));
         engine->update();
 
-        scene = new Scene(engine->getState());
+        std::thread threadAI = std::thread(thread_ai, engine);
         while (window.isOpen()) {
             sf::Event event;
             
             if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {
-                client->run();
+                cv.notify_one();
+                ready = true;
   
                 time = clock.getElapsedTime();
-                if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
-                    pause = true;
-                }
-            }
-            
-            if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
-                pause = true;
-                std::string s = std::to_string(engine->getState().getWinner());
-                std::string winnerMessage = "L equipe " + s + " a gagne !";
-                scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
             }
             
             while (window.pollEvent(event)) {
@@ -62,15 +71,28 @@ namespace thread {
                 }
             }
             
+            mtx.lock();
             delete scene;
             scene = new Scene(engine->getState());
+            
+            if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
+                pause = true;
+                std::string s = std::to_string(engine->getState().getWinner());
+                std::string winnerMessage = "L equipe " + s + " a gagne !";
+                scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
+            }
+            mtx.unlock();
             
             scene->draw(window);
             window.display();
         }
         
+        cv.notify_one();
+        ready = true;
+        loopThread = false;
+        threadAI.join();
+        
         delete scene;
-        delete client;
         delete engine; 
     }
 }

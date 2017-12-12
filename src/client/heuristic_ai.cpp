@@ -7,10 +7,6 @@ using namespace ai;
 
 namespace heuristic_ai {
     
-    void thread_ai() {
-        
-    }
-    
     void heuristic_aiTest() {
         bool pause = 0;
         int displayMap = 0;

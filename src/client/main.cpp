@@ -18,6 +18,7 @@ void testSFML() {
 #include "heuristic_ai.hpp"
 #include "rollback.hpp"
 #include "deep_ai.hpp"
+#include "thread.hpp"
 #include "play.hpp"
 
 using namespace std;
@@ -28,6 +29,7 @@ using namespace random_ai;
 using namespace heuristic_ai;
 using namespace rollback;
 using namespace deep_ai;
+using namespace thread;
 using namespace play;
 
 int main(int argc, char* argv[]) 
@@ -80,6 +82,7 @@ int main(int argc, char* argv[])
             cout << "Lancement du jeu avec des threads" << endl;
             cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
             cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
+            thread_aiTest();
 
         } else if (string(argv[1]) == "play"){
             cout << "Restitutions des actions de l'IA" << endl;
