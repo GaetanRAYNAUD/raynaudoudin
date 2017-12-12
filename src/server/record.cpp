@@ -20,7 +20,10 @@ namespace record {
         engine.update(jsonCommands);
         
         while(engine.getState().getWinner() == TeamId::INVALIDTEAM) {
-            ai.run(engine, jsonCommands);
+            ai.run(engine);
+            engine.update(jsonCommands);
+            engine.addCommand(1, new HandleWinCommand());
+            engine.update(jsonCommands);
         }
         
         fileJson << styledWriter.write(jsonCommands);        

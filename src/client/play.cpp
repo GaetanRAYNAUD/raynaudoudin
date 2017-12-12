@@ -13,7 +13,7 @@ namespace play {
         int windowHeight = 576;
         int mapWidth = 22;
         int mapHeight = 8;
-        int timePause = 1000;
+        int timePause = 100;
         int commandIterator = 0;
         Engine engine(mapWidth, mapHeight);  
         Scene* scene = new Scene(engine.getState());
@@ -51,10 +51,10 @@ namespace play {
                 } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
                     pause = !pause;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
-                    if(timePause == 1000) {
+                    if(timePause == 100) {
                         timePause = 10;
                     } else {
-                        timePause = 1000;
+                        timePause = 100;
                     }
                 }
                 
