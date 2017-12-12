@@ -58,18 +58,19 @@ namespace state {
     bool isLeaderNotAlive (TeamId teamId);
     bool isUnitAround (int idAttacker, int idDefender) const;
     bool isUnitOnPosition (int x, int y) const;
-    int getUnitCountByTeam (TeamId idTeam) const;
     Unit* findUnit (int id) const;
     Team* findTeam (TeamId id) const;
     /// 		
     /// @param id		(???) 
     Terrain* findTerrain (int id) const;
-    std::vector<int> findIdUnitAround (int id) const;
+    std::vector<int> findIdUnitsAround (int id) const;
+    std::vector<Unit*> findUnitsAround (int id);
     Unit* findUnitOnPosition (int positionX, int positionY) const;
-    std::vector<int> findIdTerrainAround (int id) const;
-    std::vector<Terrain*> findTerrainAround (int id) const;
+    std::vector<int> findIdTerrainsAround (int id) const;
+    std::vector<Terrain*> findTerrainsAround (int id) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY, Direction direction) const;
+    std::vector<Unit*> findUnitsByTeam (TeamId teamId) const;
     std::vector<Direction> directionAvailable (int unitId) const;
     std::vector<Direction> directionAvailable (int x, int y) const;
     void moveUnit (int id, Direction direction);

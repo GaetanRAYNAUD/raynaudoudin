@@ -75,7 +75,7 @@ namespace ai {
     void HeuristicAI::run(engine::Engine& engine) {
         const std::map<int, std::unique_ptr<state::Unit> >& units = engine.getState().getBoard().getUnits();
         std::vector<engine::Command*> commands;
-        Point point(0, 0);
+        Point point;
         unsigned int it;
 
         initPathMaps(engine.getState().getBoard());
