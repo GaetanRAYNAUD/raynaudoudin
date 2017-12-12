@@ -33,6 +33,7 @@ namespace heuristic_ai {
             sf::Event event;
             if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {
                 ai->run(*engine);
+                engine->update();
                 
                 time = clock.getElapsedTime();
                 if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
