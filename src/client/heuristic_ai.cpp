@@ -14,7 +14,7 @@ namespace heuristic_ai {
         int windowHeight = 576;
         int mapWidth = 22;
         int mapHeight = 8;
-        int timePause = 500;
+        int timePause = 100;
         Engine* engine = new Engine(mapWidth, mapHeight);  
         Scene* scene;
         std::random_device rand;
@@ -33,6 +33,7 @@ namespace heuristic_ai {
             sf::Event event;
             if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {
                 ai->run(*engine);
+                engine->update();
                 
                 time = clock.getElapsedTime();
                 if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
@@ -58,14 +59,16 @@ namespace heuristic_ai {
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Y) {
                     displayMap = 5;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
-                    if(timePause == 500) {
+                    if(timePause == 100) {
                         timePause = 10;
                     } else {
-                        timePause = 500;
+                        timePause = 100;
                     }
-                }
-                
+                } 
             }
+            
+            delete scene;
+            scene = new Scene(engine->getState());
 
             switch(displayMap) {
                 case 1:
@@ -86,9 +89,6 @@ namespace heuristic_ai {
                 default:
                     break;
             }
-            
-            delete scene;
-            scene = new Scene(engine->getState());
             
             if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
                 pause = true;

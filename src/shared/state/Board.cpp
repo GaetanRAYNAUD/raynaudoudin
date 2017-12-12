@@ -125,7 +125,7 @@ namespace state {
     }
 
     bool Board::isUnitAround(int idAttacker, int idDefender) const {
-        std::vector<int> listIdUnitArround = findIdUnitAround(idAttacker);
+        std::vector<int> listIdUnitArround = findIdUnitsAround(idAttacker);
 
         for (int unitId : listIdUnitArround) {
             if (unitId == idDefender) {
@@ -142,18 +142,6 @@ namespace state {
         } else {
             return true;
         }    
-    }
-
-    int Board::getUnitCountByTeam(TeamId idTeam) const {
-        int count = 0;
-        
-        for(auto& u : units) {
-            if(u.second->getTeam() == idTeam) {
-                count = count + 1;
-            }
-        }
-        
-        return count;
     }
 
     Unit* Board::findUnit(int id) const {
@@ -202,10 +190,8 @@ namespace state {
         
         return nullptr;
     }
-      
     
-    
-    std::vector<int> Board::findIdTerrainAround(int id) const {
+    std::vector<int> Board::findIdTerrainsAround(int id) const {
         std::vector<int> listIdTerrainArround;
         Terrain* terrain = findTerrain(id);
         Terrain* terrainAround = nullptr;
@@ -238,40 +224,40 @@ namespace state {
         return listIdTerrainArround;
     }
     
-    std::vector<Terrain*> Board::findTerrainAround(int id) const {
-        std::vector<Terrain*> listIdTerrainArround;
+    std::vector<Terrain*> Board::findTerrainsAround(int id) const {
+        std::vector<Terrain*> listTerrainArround;
         Terrain* terrain = findTerrain(id);
         Terrain* terrainAround = nullptr;
 
         terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() - 2);
         if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround);
+            listTerrainArround.push_back(terrainAround);
         }
         terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() - 1);
         if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround);
+            listTerrainArround.push_back(terrainAround);
         }     
         terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() + 1);
         if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround);
+            listTerrainArround.push_back(terrainAround);
         }
         terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() + 2);
         if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround);
+            listTerrainArround.push_back(terrainAround);
         }
         terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() + 1);
         if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround);
+            listTerrainArround.push_back(terrainAround);
         }
         terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() - 1);
         if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround);
+            listTerrainArround.push_back(terrainAround);
         }
 
-        return listIdTerrainArround;
+        return listTerrainArround;
     }
 
-    std::vector<int> Board::findIdUnitAround(int id) const {
+    std::vector<int> Board::findIdUnitsAround(int id) const {
         std::vector<int> listIdUnitArround;
         Unit* unit = findUnit(id);
         Unit* unitAround = nullptr;
@@ -303,7 +289,39 @@ namespace state {
 
         return listIdUnitArround;
     }
+    
+    std::vector<Unit*> Board::findUnitsAround(int id) {
+        std::vector<Unit*> listUnitArround;
+        Unit* unit = findUnit(id);
+        Unit* unitAround = nullptr;
+        
+        unitAround = findUnitOnPosition(unit->getPositionX(), unit->getPositionY() - 2);
+        if (unitAround != nullptr) {
+            listUnitArround.push_back(unitAround);
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX() + 1, unit->getPositionY() - 1);
+        if (unitAround != nullptr) {
+            listUnitArround.push_back(unitAround);
+        }     
+        unitAround = findUnitOnPosition(unit->getPositionX() + 1, unit->getPositionY() + 1);
+        if (unitAround != nullptr) {
+            listUnitArround.push_back(unitAround);
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX(), unit->getPositionY() + 2);
+        if (unitAround != nullptr) {
+            listUnitArround.push_back(unitAround);
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX() - 1, unit->getPositionY() + 1);
+        if (unitAround != nullptr) {
+            listUnitArround.push_back(unitAround);
+        }
+        unitAround = findUnitOnPosition(unit->getPositionX() - 1, unit->getPositionY() - 1);
+        if (unitAround != nullptr) {
+            listUnitArround.push_back(unitAround);
+        }
 
+        return listUnitArround;
+    }
 
     Unit* Board::findUnitOnPosition(int positionX, int positionY) const {
         if(positionX < 0 || positionY < 0 || positionX > width || positionY > 2 * height) {
@@ -366,7 +384,7 @@ namespace state {
     std::vector<Direction> Board::directionAvailable(int unitId) const {
         std::vector<Direction> directionAvailable;
         Unit* unit = findUnit(unitId);
-        std::vector<Terrain*> terrainsAround = findTerrainAround(findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getId());
+        std::vector<Terrain*> terrainsAround = findTerrainsAround(findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getId());
 
         for (Terrain* t : terrainsAround) {
             if (t->getMovementCost() <= unit->getSpeed()) {
@@ -393,7 +411,7 @@ namespace state {
     std::vector<Direction> Board::directionAvailable(int x, int y) const {
         std::vector<Direction> directionAvailable;
         Terrain* terrain = findTerrainOnPosition(x, y);
-        std::vector<Terrain*> terrainsAround = findTerrainAround(terrain->getId());
+        std::vector<Terrain*> terrainsAround = findTerrainsAround(terrain->getId());
 
         for (Terrain* t : terrainsAround) {
                 if(t->getPositionY() == terrain->getPositionY() - 2) {

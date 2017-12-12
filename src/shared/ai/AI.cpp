@@ -9,49 +9,63 @@
 #include <iostream>
 namespace ai {
 
-    void AI::listCommandsMovement(const state::State& state, int idUnit, std::vector<engine::Command*>& commands) {
-        state::Unit* unit = state.getBoard().findUnit(idUnit);
+    void AI::listCommandsMovement(const state::State& state, std::vector<engine::Command*>& commands) {
+        const std::map<int, std::unique_ptr<state::Unit> >& units = state.getBoard().getUnits();
         std::vector<state::Direction> directions;
         
         commands.clear();
         
-        if(unit->getTeam() == state.getCurrentTeam()) {
-            directions = state.getBoard().directionAvailable(unit->getId());
+        for (auto& u : units) {
+            if(u.second->getTeam() == state.getCurrentTeam()) {
+                directions = state.getBoard().directionAvailable(u.second->getId());
 
-            for(state::Direction d : directions) {
-                commands.push_back(new engine::MoveCommand(unit->getId(), d));
+                for(state::Direction d : directions) {
+                    commands.push_back(new engine::MoveCommand(u.second->getId(), d));
+                }
             }
         }
     }
     
-    void AI::listCommandsSpawn(const state::State& state, int idUnit, std::vector<engine::Command*>& commands) {
-        state::Unit* unit = state.getBoard().findUnit(idUnit);
+    void AI::listCommandsSpawn(const state::State& state, std::vector<engine::Command*>& commands) {
+        const std::map<int, std::unique_ptr<state::Unit> >& units = state.getBoard().getUnits();
         
         commands.clear();
     
-        if(unit->getTeam() == state.getCurrentTeam() && unit->getTypeId() == state::UnitTypeId::LEADER) {
-            if(state.getBoard().findTeam(unit->getTeam())->verifyGold(state::UnitTypeId::SWORDMAN) && state.getBoard().findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getTypeId() == state::TerrainTypeId::CASTLE) {
-                commands.push_back(new engine::SpawnCommand(unit->getPositionX(), unit->getPositionY(), state::UnitTypeId::SWORDMAN));
-            }
+        for (auto& u : units) {
+            if(u.second->getTeam() == state.getCurrentTeam()) {
+                if(u.second->getTypeId() == state::UnitTypeId::LEADER) {
+                    if(state.getBoard().findTeam(u.second->getTeam())->verifyGold(state::UnitTypeId::SWORDMAN) && 
+                            state.getBoard().findTerrainOnPosition(u.second->getPositionX(), u.second->getPositionY())->getTypeId() == state::TerrainTypeId::CASTLE) {
+                        commands.push_back(new engine::SpawnCommand(u.second->getPositionX(), u.second->getPositionY(), state::UnitTypeId::SWORDMAN));
+                    }
 
-            if(state.getBoard().findTeam(unit->getTeam())->verifyGold(state::UnitTypeId::BOWMAN) && state.getBoard().findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getTypeId() == state::TerrainTypeId::CASTLE) {
-                commands.push_back(new engine::SpawnCommand(unit->getPositionX(), unit->getPositionY(), state::UnitTypeId::BOWMAN));
+                    if(state.getBoard().findTeam(u.second->getTeam())->verifyGold(state::UnitTypeId::BOWMAN) && 
+                            state.getBoard().findTerrainOnPosition(u.second->getPositionX(), u.second->getPositionY())->getTypeId() == state::TerrainTypeId::CASTLE) {
+                        commands.push_back(new engine::SpawnCommand(u.second->getPositionX(), u.second->getPositionY(), state::UnitTypeId::BOWMAN));
+                    }
+
+                    break;
+                }
             }
         }
     }
     
-    void AI::listCommandsAttack(const state::State& state, int idUnit, std::vector<engine::Command*>& commands) {
-        state::Unit* unit = state.getBoard().findUnit(idUnit);
+    void AI::listCommandsAttack(const state::State& state, std::vector<engine::Command*>& commands) {
+       const std::map<int, std::unique_ptr<state::Unit> >& units = state.getBoard().getUnits();
         std::vector<int> unitsAround;
         
         commands.clear();
         
-        unitsAround = state.getBoard().findIdUnitAround(unit->getId());
+        for (auto& u : units) {
+            if(u.second->getTeam() == state.getCurrentTeam()) {
+                unitsAround = state.getBoard().findIdUnitsAround(u.second->getId());
 
-        for(auto& uAround : unitsAround) {
-            if(state.getBoard().findUnit(uAround)->getTeam() != unit->getTeam()) {
-                for(auto& w : unit->getWeapons()) {
-                    commands.push_back(new engine::AttackCommand(unit->getId(), uAround, w.second.get()->getTypeId()));
+                for(auto& uAround : unitsAround) {
+                    if(units.at(uAround)->getTeam() != u.second->getTeam()) {
+                        for(auto& w : u.second->getWeapons()) {
+                            commands.push_back(new engine::AttackCommand(u.second->getId(), uAround, w.second.get()->getTypeId()));
+                        }
+                    }
                 }
             }
         }
@@ -71,7 +85,7 @@ namespace ai {
                     commands.push_back(new engine::MoveCommand(u.second->getId(), d));
                 }
                 
-                unitsAround = state.getBoard().findIdUnitAround(u.second->getId());
+                unitsAround = state.getBoard().findIdUnitsAround(u.second->getId());
                 
                 for(auto& uAround : unitsAround) {
                     if(state.getBoard().findUnit(uAround)->getTeam() != u.second->getTeam()) {
