@@ -9,6 +9,9 @@
 #include "engine/HandleWinCommand.h"
 #include "engine/SpawnCommand.h"
 
+#include <iostream>
+using namespace std;
+
 namespace ai {
     
     HeuristicAI::HeuristicAI() {
@@ -93,16 +96,20 @@ namespace ai {
                     break;
                 }
                 if (commandsMovement.size() != 0) {
-                    state::Unit* unitToMove = engine.getState().getBoard().findUnit(((engine::MoveCommand*)commandsMovement.front())->getIdUnit());
-                    Point bestPoint = unitTeam2PathMap.getBestPoint(unitToMove->getPositionX(), unitToMove->getPositionX());
-
-                    for (unsigned int it = 0; it < commandsMovement.size(); it++) {
-                        state::Unit* unitToSearch = engine.getState().getBoard().findUnit(((engine::MoveCommand*)commandsMovement.at(it))->getIdUnit());
-                        if (unitToMove->getId() == unitToSearch->getId() && unitToSearch->getPositionX() == bestPoint.getX() && 
-                                unitToSearch->getPositionY() == bestPoint.getY()) {
+                    state::Unit* unit = engine.getState().getBoard().findUnit(((engine::MoveCommand*)commandsMovement.front())->getIdUnit());
+                    Point pointUnit(unit->getPositionX(), unit->getPositionY());
+                    Point bestPoint = unitTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY());
+                    unsigned int it;
+                    
+                    for (it = 0; it < commandsMovement.size(); it++) {
+                        if (unit->getId() == ((engine::MoveCommand*)commandsMovement.at(it))->getIdUnit() && 
+                                ((engine::MoveCommand*)commandsMovement.at(it))->getDirection() == bestPoint.transformToDirection(pointUnit)) {
                             engine.addCommand(1, commandsMovement.at(it));
                             break;
                         }
+                    }
+                    if (it == commandsMovement.size()) {
+                        engine.addCommand(1, commandsMovement.front());
                     }
                     break;
                 }
@@ -120,16 +127,20 @@ namespace ai {
                     break;
                 }
                 if (commandsMovement.size() != 0) {
-                    state::Unit* unitToMove = engine.getState().getBoard().findUnit(((engine::MoveCommand*)commandsMovement.front())->getIdUnit());
-                    Point bestPoint = unitTeam1PathMap.getBestPoint(unitToMove->getPositionX(), unitToMove->getPositionX());
-
-                    for (unsigned int it = 0; it < commandsMovement.size(); it++) {
-                        state::Unit* unitSearch = engine.getState().getBoard().findUnit(((engine::MoveCommand*)commandsMovement.at(it))->getIdUnit());
-                        if (unitToMove->getId() == unitSearch->getId() && unitSearch->getPositionX() == bestPoint.getX() && 
-                                unitSearch->getPositionY() == bestPoint.getY()) {
+                    state::Unit* unit = engine.getState().getBoard().findUnit(((engine::MoveCommand*)commandsMovement.front())->getIdUnit());
+                    Point pointUnit(unit->getPositionX(), unit->getPositionY());
+                    Point bestPoint = unitTeam1PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY());
+                    unsigned int it;
+                    
+                    for (it = 0; it < commandsMovement.size(); it++) {
+                        if (unit->getId() == ((engine::MoveCommand*)commandsMovement.at(it))->getIdUnit() && 
+                                ((engine::MoveCommand*)commandsMovement.at(it))->getDirection() == bestPoint.transformToDirection(pointUnit)) {
                             engine.addCommand(1, commandsMovement.at(it));
                             break;
                         }
+                    }
+                    if (it == commandsMovement.size()) {
+                        engine.addCommand(1, commandsMovement.front());
                     }
                     break;
                 }
