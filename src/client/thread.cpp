@@ -22,6 +22,8 @@ namespace thread {
             while (!ready) cv.wait(lck);
             ai->run(*engine);
             engine->update();
+            engine->addCommand(1, new HandleWinCommand());
+            engine->update();
             ready = false;
         } while (loopThread);
         
@@ -34,7 +36,7 @@ namespace thread {
         int windowHeight = 576;
         int mapWidth = 22;
         int mapHeight = 8;
-        int timePause = 500;
+        int timePause = 100;
         Engine* engine = new Engine(mapWidth, mapHeight);  
         Scene* scene = new Scene(engine->getState());
         std::random_device rand;
@@ -64,10 +66,10 @@ namespace thread {
                 } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
                     pause = !pause;
                 } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
-                    if(timePause == 500) {
+                    if(timePause == 100) {
                         timePause = 10;
                     } else {
-                        timePause = 500;
+                        timePause = 100;
                     }
                 }
             }
