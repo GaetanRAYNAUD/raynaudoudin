@@ -62,8 +62,12 @@ namespace ai {
         for (auto& u : units) {
             if (u.second->getTeam() == state::TeamId::TEAM_1) {
                 unitTeam2PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
+                houseTeam2PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
+                castlePathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
             } else if (u.second->getTeam() == state::TeamId::TEAM_2) {
                 unitTeam1PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
+                houseTeam1PathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
+                castlePathMap.setWeight(Point(u.second->getPositionX(), u.second->getPositionY()));
             }
         }
     }
