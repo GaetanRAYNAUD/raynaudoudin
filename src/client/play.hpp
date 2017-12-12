@@ -3,15 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "../shared/state.h"
-#include "state/Board.h"
-#include "render/Scene.h"
+#include <fstream>
+
 #include "render.h"
-#include "../shared/engine.h"
-#include "engine/Engine.h"
+#include "engine.h"
 
 namespace play {
     void play_Test();
+    void readCommandJson(Json::Value& jsonValue, engine::Engine& engine);
 }
 
 #endif /* PLAY_HPP */

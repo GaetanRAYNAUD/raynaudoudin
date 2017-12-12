@@ -50,8 +50,15 @@ namespace engine {
     }
 
     AttackCommand* AttackCommand::deserialize(const Json::Value& in) {
-
-        return new AttackCommand(0, 0, state::WeaponTypeId::SWORD);
+        int idUnitAttacker;
+        int idUnitDefender;
+        state::WeaponTypeId weaponTypeId;
+        
+        idUnitAttacker = in["idAttacker"].asInt();
+        idUnitDefender = in["idDefender"].asInt();
+        weaponTypeId = (state::WeaponTypeId)in["weaponTypeId"].asInt();
+        
+        return new AttackCommand(idUnitAttacker, idUnitDefender, weaponTypeId);
     }
 
 }

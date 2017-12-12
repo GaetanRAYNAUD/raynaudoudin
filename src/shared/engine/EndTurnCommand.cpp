@@ -30,7 +30,6 @@ namespace engine {
     }
     
     EndTurnCommand* EndTurnCommand::deserialize(const Json::Value& in) {
-
         return new EndTurnCommand();
     }
 

@@ -39,7 +39,6 @@ namespace engine {
     }
 
     HandleWinCommand* HandleWinCommand::deserialize(const Json::Value& in) {
-        
         return new HandleWinCommand();
     }
 

@@ -2,6 +2,7 @@
 #include "MoveAction.h"
 #include "../../../extern/jsoncpp-1.8.0/json/json.h"
 
+#include <iostream>
 namespace engine {
 
     MoveCommand::MoveCommand(int idUnit, state::Direction direction) : idUnit(idUnit), direction(direction) {
@@ -44,8 +45,13 @@ namespace engine {
     }
 
     MoveCommand* MoveCommand::deserialize(const Json::Value& in) {
+        int idUnit;
+        state::Direction direction;
+        
+        idUnit = in["idUnit"].asInt();
+        direction = (state::Direction)in["Direction"].asInt();
 
-        return new MoveCommand(0, state::Direction::BOT);
+        return new MoveCommand(idUnit, direction);
     }
 
 }
