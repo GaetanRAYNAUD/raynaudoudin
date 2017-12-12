@@ -68,11 +68,12 @@ namespace play {
                 std::string s = std::to_string(engine.getState().getWinner());
                 std::string winnerMessage = "L equipe " + s + " a gagne !";
                 scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
-            }         
+            }
             
             scene->draw(window);
             window.display();
         }
+        std::cout << "Restitution terminée !" << std::endl;
         
         delete scene;
     }
@@ -90,7 +91,7 @@ namespace play {
             } else if(jsonValue["Type"].asString() == "AttackCommand") {
                 engine.addCommand(1, engine::AttackCommand::deserialize(jsonValue));
             } else if(jsonValue["Type"].asString() == "SpawnCommand") {
-                //engine.addCommand(1, engine::SpawnCommand::deserialize(jsonValue));
+                engine.addCommand(1, engine::SpawnCommand::deserialize(jsonValue));
             } else if(jsonValue["Type"].asString() == "LoadCommand") {
                 engine.addCommand(1, engine::LoadCommand::deserialize(jsonValue));
             }

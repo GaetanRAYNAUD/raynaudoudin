@@ -39,7 +39,7 @@ namespace engine {
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
     Command* clone () const;
     void serialize (Json::Value& out) const;
-    SpawnCommand* deserialize (const Json::Value& in);
+    static SpawnCommand* deserialize (const Json::Value& in);
     // Setters and Getters
     int getX() const;
     void setX(int x);

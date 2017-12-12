@@ -39,7 +39,27 @@ namespace engine {
         Json::Value jsonCommand;
         jsonCommand["Type"] = "MoveCommand";
         jsonCommand["idUnit"] = idUnit;
-        jsonCommand["Direction"] = direction;
+        
+        switch (direction) {
+            case state::Direction::TOP:
+                jsonCommand["Direction"] = "TOP";
+                break;
+            case state::Direction::TOP_RIGHT:
+                jsonCommand["Direction"] = "TOP_RIGHT";
+                break;
+            case state::Direction::BOT_RIGHT:
+                jsonCommand["Direction"] = "BOT_RIGHT";
+                break;
+            case state::Direction::BOT:
+                jsonCommand["Direction"] = "BOT";
+                break;
+            case state::Direction::BOT_LEFT:
+                jsonCommand["Direction"] = "BOT_LEFT";
+                break;
+            case state::Direction::TOP_LEFT:
+                jsonCommand["Direction"] = "TOP_LEFT";
+                break;
+        }
         
         out["Commands"].append(jsonCommand);
     }
@@ -49,7 +69,22 @@ namespace engine {
         state::Direction direction;
         
         idUnit = in["idUnit"].asInt();
-        direction = (state::Direction)in["Direction"].asInt();
+        
+        if(in["Direction"].asString() == "TOP") {
+            direction = state::Direction::TOP;
+        } else if(in["Direction"].asString() == "TOP_RIGHT") {
+            direction = state::Direction::TOP_RIGHT;
+        } else if(in["Direction"].asString() == "BOT_RIGHT") {
+            direction = state::Direction::BOT_RIGHT;
+        } else if(in["Direction"].asString() == "BOT") {
+            direction = state::Direction::BOT;
+        } else if(in["Direction"].asString() == "BOT_LEFT") {
+            direction = state::Direction::BOT_LEFT;
+        } else if(in["Direction"].asString() == "TOP_LEFT") {
+            direction = state::Direction::TOP_LEFT;
+        } else {
+            direction = state::Direction::BOT;
+        }
 
         return new MoveCommand(idUnit, direction);
     }

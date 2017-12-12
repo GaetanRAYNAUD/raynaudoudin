@@ -62,14 +62,44 @@ namespace engine {
         jsonCommand["Type"] = "SpawnCommand";
         jsonCommand["x"] = x;
         jsonCommand["y"] = y;
-        jsonCommand["UnitTypeId"] = unitTypeId;
+        
+        switch (unitTypeId) {
+            case state::UnitTypeId::INVALIDUNIT:
+                jsonCommand["UnitTypeId"] = "INVALIDUNIT";
+                break;
+            case state::UnitTypeId::LEADER:
+                jsonCommand["UnitTypeId"] = "LEADER";
+                break;
+            case state::UnitTypeId::SWORDMAN:
+                jsonCommand["UnitTypeId"] = "SWORDMAN";
+                break;
+            case state::UnitTypeId::BOWMAN:
+                jsonCommand["UnitTypeId"] = "BOWMAN";
+                break;
+        }        
         
         out["Commands"].append(jsonCommand);
     }
 
     SpawnCommand* SpawnCommand::deserialize(const Json::Value& in) {
-
-        return new SpawnCommand(0, 0, state::UnitTypeId::SWORDMAN);
+        int x;
+        int y;
+        state::UnitTypeId unitTypeId;
+        
+        x = in["x"].asInt();
+        y = in["y"].asInt();
+        
+        if(in["UnitTypeId"].asString() == "LEADER") {
+            unitTypeId = state::UnitTypeId::LEADER;
+        } else if(in["UnitTypeId"].asString() == "SWORDMAN") {
+            unitTypeId = state::UnitTypeId::SWORDMAN;
+        } else if(in["UnitTypeId"].asString() == "BOWMAN") {
+            unitTypeId = state::UnitTypeId::BOWMAN;
+        } else {
+            unitTypeId = state::UnitTypeId::INVALIDUNIT;
+        }        
+        
+        return new SpawnCommand(x, y, unitTypeId);
     }
 
 }
