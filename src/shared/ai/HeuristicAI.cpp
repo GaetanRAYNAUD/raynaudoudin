@@ -102,7 +102,7 @@ namespace ai {
                         }
                     }
                     if (it == commandsMovement.size()) {
-                        engine.addCommand(1, commandsMovement.front());
+                        engine.getState().getBoard().findUnit(unit->getId())->setSpeed(0);
                     }
                     break;
                 }
@@ -133,7 +133,7 @@ namespace ai {
                         }
                     }
                     if (it == commandsMovement.size()) {
-                        engine.addCommand(1, commandsMovement.front());
+                        engine.getState().getBoard().findUnit(unit->getId())->setSpeed(0);
                     }
                     break;
                 }
