@@ -58,12 +58,14 @@ namespace ai {
         
         for (auto& u : units) {
             if(u.second->getTeam() == state.getCurrentTeam()) {
-                unitsAround = state.getBoard().findIdUnitsAround(u.second->getId());
+                if(u.second->getSpeed() > 0) {
+                    unitsAround = state.getBoard().findIdUnitsAround(u.second->getId());
 
-                for(auto& uAround : unitsAround) {
-                    if(units.at(uAround)->getTeam() != u.second->getTeam()) {
-                        for(auto& w : u.second->getWeapons()) {
-                            commands.push_back(new engine::AttackCommand(u.second->getId(), uAround, w.second.get()->getTypeId()));
+                    for(auto& uAround : unitsAround) {
+                        if(units.at(uAround)->getTeam() != u.second->getTeam()) {
+                            for(auto& w : u.second->getWeapons()) {
+                                commands.push_back(new engine::AttackCommand(u.second->getId(), uAround, w.second.get()->getTypeId()));
+                            }
                         }
                     }
                 }
@@ -85,12 +87,14 @@ namespace ai {
                     commands.push_back(new engine::MoveCommand(u.second->getId(), d));
                 }
                 
-                unitsAround = state.getBoard().findIdUnitsAround(u.second->getId());
-                
-                for(auto& uAround : unitsAround) {
-                    if(state.getBoard().findUnit(uAround)->getTeam() != u.second->getTeam()) {
-                        for(auto& w : u.second->getWeapons()) {
-                            commands.push_back(new engine::AttackCommand(u.second->getId(), uAround, w.second.get()->getTypeId()));
+                if(u.second->getSpeed() > 0) {
+                    unitsAround = state.getBoard().findIdUnitsAround(u.second->getId());
+
+                    for(auto& uAround : unitsAround) {
+                        if(state.getBoard().findUnit(uAround)->getTeam() != u.second->getTeam()) {
+                            for(auto& w : u.second->getWeapons()) {
+                                commands.push_back(new engine::AttackCommand(u.second->getId(), uAround, w.second.get()->getTypeId()));
+                            }
                         }
                     }
                 }
