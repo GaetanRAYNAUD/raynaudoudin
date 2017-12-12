@@ -34,6 +34,8 @@ namespace heuristic_ai {
             if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {
                 ai->run(*engine);
                 engine->update();
+                engine->addCommand(1, new HandleWinCommand());
+                engine->update();
                 
                 time = clock.getElapsedTime();
                 if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
