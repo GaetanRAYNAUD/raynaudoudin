@@ -18,6 +18,7 @@ void testSFML() {
 #include "heuristic_ai.hpp"
 #include "rollback.hpp"
 #include "deep_ai.hpp"
+#include "play.hpp"
 
 using namespace std;
 using namespace state;
@@ -27,6 +28,7 @@ using namespace random_ai;
 using namespace heuristic_ai;
 using namespace rollback;
 using namespace deep_ai;
+using namespace play;
 
 int main(int argc, char* argv[]) 
 {
@@ -81,6 +83,7 @@ int main(int argc, char* argv[])
 
         } else if (string(argv[1]) == "play"){
             cout << "Restitutions des actions de l'IA" << endl;
+            play_Test();
             
         } else {
             cout << "Commande inconnue" << endl;
