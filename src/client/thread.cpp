@@ -21,6 +21,7 @@ namespace thread {
             std::unique_lock<std::mutex> lck(mtx);
             while (!ready) cv.wait(lck);
             ai->run(*engine);
+            engine->update();
             ready = false;
         } while (loopThread);
         
