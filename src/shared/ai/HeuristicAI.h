@@ -2,7 +2,6 @@
 #ifndef AI__HEURISTICAI__H
 #define AI__HEURISTICAI__H
 
-#include <json/json.h>
 
 namespace ai {
   class PathMap;
@@ -37,7 +36,6 @@ namespace ai {
     HeuristicAI ();
     void initPathMaps (const state::Board& board);
     void run (engine::Engine& engine);
-    void run (engine::Engine& engine, Json::Value& jsonValue);
     // Setters and Getters
     const PathMap& getUnitTeam1PathMap() const;
     void setUnitTeam1PathMap(const PathMap& unitTeam1PathMap);
