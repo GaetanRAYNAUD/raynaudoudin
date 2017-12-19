@@ -1,26 +1,24 @@
 #include "DeepAI.h"
 #include "engine/EndTurnCommand.h"
 
-#include<iostream>
+#include <iostream>
 
 namespace ai {
 
     DeepAI::DeepAI(int randomSeed): randgen(randomSeed) {
-
+        maxLeaves = 1;
     }
     
     void DeepAI::run(engine::Engine& engine) {
         std::vector<engine::Command*> bestCommands;
+//        unsigned int i;
         
         minimax_max_init(engine, 0, bestCommands);
         
-        for(int i = 0; (unsigned int)i < bestCommands.size(); i++) {
-            engine.addCommand(i, bestCommands.at(i));
-        }
-        engine.update();
-        
-        engine.addCommand(0, new engine::EndTurnCommand()); 
-        engine.update();
+//        for(i = 0; i < bestCommands.size(); i++) {
+//            engine.addCommand(i, bestCommands.at(i));
+//        }
+//        engine.update();
     }
     
     int DeepAI::minimax_rec_min(engine::Engine& engine, int depth) {
@@ -38,13 +36,15 @@ namespace ai {
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {            
             listCommands(engine.getState(), commands);
-            while (!commands.empty()) {
-                rand = uniform(0, commands.size() - 1);
-                engine.addCommand(0, commands.at(rand));
-                actions.push(engine.update());
-                listCommands(engine.getState(), commands);
-            }
-            engine.addCommand(0, new engine::EndTurnCommand());
+//            while (!commands.empty()) {
+//                rand = uniform(0, commands.size() - 1);
+//                engine.addCommand(0, commands.at(rand));
+//                actions.push(engine.update());
+//                listCommands(engine.getState(), commands);
+//            }
+            rand = uniform(0, commands.size() - 1);
+            engine.addCommand(0, commands.at(rand));
+            engine.addCommand(1, new engine::EndTurnCommand());
             actions.push(engine.update());          
 
             heuristicChild = minimax_rec_max(engine, depth);
@@ -79,13 +79,15 @@ namespace ai {
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
             listCommands(engine.getState(), commands);
-            while (!commands.empty()) {
-                rand = uniform(0, commands.size() - 1);
-                engine.addCommand(0, commands.at(rand));
-                actions.push(engine.update());
-                listCommands(engine.getState(), commands);
-            }
-            engine.addCommand(0, new engine::EndTurnCommand());
+//            while (!commands.empty()) {
+//                rand = uniform(0, commands.size() - 1);
+//                engine.addCommand(0, commands.at(rand));
+//                actions.push(engine.update());
+//                listCommands(engine.getState(), commands);
+//            }
+            rand = uniform(0, commands.size() - 1);
+            engine.addCommand(0, commands.at(rand));
+            engine.addCommand(1, new engine::EndTurnCommand());
             actions.push(engine.update());
 
             heuristicChild = minimax_rec_min(engine, depth);
@@ -121,17 +123,21 @@ namespace ai {
         
         for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
             listCommands(engine.getState(), commands);
-            while (!commands.empty()) {
-                rand = uniform(0, commands.size() - 1);
-                engine.addCommand(0, commands.at(rand));
-                for(auto& c : engine.getCurrentCommands()) {
-                    currentCommands.push_back(c.second->clone());
-                }
-                actions.push(engine.update());
-                listCommands(engine.getState(), commands);
-            }
+//            while (!commands.empty()) {
+//                rand = uniform(0, commands.size() - 1);
+//                engine.addCommand(0, commands.at(rand));
+//                for(auto& c : engine.getCurrentCommands()) {
+//                    currentCommands.push_back(c.second->clone());
+//                }
+//                actions.push(engine.update());
+//                listCommands(engine.getState(), commands);
+//            }
             
-            engine.addCommand(0, new engine::EndTurnCommand());
+            rand = uniform(0, commands.size() - 1);
+            engine.addCommand(0, commands.at(rand));
+            engine.addCommand(1, new engine::EndTurnCommand());
+            currentCommands.push_back(commands.at(rand));
+            currentCommands.push_back(new engine::EndTurnCommand());
             actions.push(engine.update());
 
             heuristicChild = minimax_rec_min(engine, depth);

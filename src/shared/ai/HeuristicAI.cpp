@@ -94,7 +94,8 @@ namespace ai {
                     Point bestPoint;
                     unsigned int it;
                     
-                    if(unitTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight() < houseTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight()) {
+                    if(unitTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight() <
+                            houseTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight()) {
                         bestPoint = unitTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY());
                     } else {
                         bestPoint = houseTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY());
@@ -131,7 +132,8 @@ namespace ai {
                     Point bestPoint;
                     unsigned int it;
                     
-                    if(unitTeam1PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight() < houseTeam1PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight()) {
+                    if(unitTeam1PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight() <
+                            houseTeam1PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight()) {
                         bestPoint = unitTeam1PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY());
                     } else {
                         bestPoint = houseTeam1PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY());
