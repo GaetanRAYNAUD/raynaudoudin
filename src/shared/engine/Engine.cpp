@@ -29,7 +29,7 @@ namespace engine {
         std::stack<std::shared_ptr<Action>> actions;
         
         for(auto& c : currentCommands) {
-            if (currentCommands.size() > 1) std::cout << c.first << " type: " << c.second->getTypeId() << std::endl;
+//            if (currentCommands.size() > 1) std::cout << c.first << " type: " << c.second->getTypeId() << std::endl;
             c.second.get()->execute(state, actions);
         }
         
