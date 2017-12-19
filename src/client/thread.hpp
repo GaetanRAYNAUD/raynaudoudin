@@ -13,7 +13,6 @@
 #include "../shared/engine.h"
 #include "engine/Engine.h"
 #include "../shared/ai.h"
-#include "../client/client.h"
 
 namespace thread {
     void thread_aiTest();

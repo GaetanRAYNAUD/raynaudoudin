@@ -5,7 +5,6 @@ using namespace state;
 using namespace render;
 using namespace engine;
 using namespace ai;
-using namespace client;
 
 namespace thread {
     

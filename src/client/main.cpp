@@ -20,6 +20,7 @@ void testSFML() {
 #include "deep_ai.hpp"
 #include "thread.hpp"
 #include "play.hpp"
+#include "network.hpp"
 
 using namespace std;
 using namespace state;
@@ -31,6 +32,7 @@ using namespace rollback;
 using namespace deep_ai;
 using namespace thread;
 using namespace play;
+using namespace server;
 
 int main(int argc, char* argv[]) 
 {
@@ -87,6 +89,10 @@ int main(int argc, char* argv[])
         } else if (string(argv[1]) == "play"){
             cout << "Restitutions des actions de l'IA" << endl;
             play_Test();
+        
+        } else if (string(argv[1]) == "network"){
+            cout << "Lancement de la connection au réseau" << endl;
+            
             
         } else {
             cout << "Commande inconnue" << endl;
