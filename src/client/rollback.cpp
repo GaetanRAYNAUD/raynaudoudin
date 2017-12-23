@@ -561,7 +561,8 @@ namespace rollback {
                                 std::cout << "Il y a " << epock - statesGood << " états mal restitués !" << std::endl;
                             }
                             
-                            window.close();
+//                            window.close();
+                            epock = 0;
                             
                         }
                         break;
