@@ -563,7 +563,6 @@ namespace rollback {
 
                             epock = 0;
                             statesGood = 0;
-                            
                         }
                         break;
                 }
@@ -598,7 +597,6 @@ namespace rollback {
         
         delete scene;
         delete engine;
-        delete command;
     }
 }
 
