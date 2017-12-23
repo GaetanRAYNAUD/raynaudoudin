@@ -9,16 +9,18 @@ namespace engine {
 
     void SpawnAction::apply(state::State& state) {        
         state.addEpoch();
+        idUnit = state.getBoard().getIdUnit();
         teamGold = state.getBoard().findTeam(teamId)->getGold();
         state.getBoard().createNewUnit(unitTypeId, teamId, x, y);
         spawnUnitId = state.getBoard().findUnitOnPosition(x, y)->getId();
-        state.getBoard().findTeam(teamId)->withdrawGold(unitTypeId);        
+        state.getBoard().findTeam(teamId)->withdrawGold(unitTypeId);
     }
 
     void SpawnAction::undo(state::State& state) {
         state.removeEpoch();        
         state.getBoard().deleteUnit(spawnUnitId);
         state.getBoard().findTeam(teamId)->setGold(teamGold);
+        state.getBoard().setIdUnit(idUnit);
     }    
 }
 

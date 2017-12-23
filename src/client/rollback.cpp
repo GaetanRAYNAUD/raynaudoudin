@@ -560,9 +560,9 @@ namespace rollback {
                             } else {
                                 std::cout << "Il y a " << epock - statesGood << " états mal restitués !" << std::endl;
                             }
-                            
-//                            window.close();
+
                             epock = 0;
+                            statesGood = 0;
                             
                         }
                         break;

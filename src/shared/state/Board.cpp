@@ -13,8 +13,6 @@
 #include "Sword.h"
 
 namespace state {
-    int Board::idTerrain = 0;
-    int Board::idUnit = 0;
     
     Board::Board(int width, int height) {
         idTerrain = 0;
@@ -32,6 +30,8 @@ namespace state {
     Board::Board(const Board& other) {
         height = other.height;
         width = other.width;
+        idTerrain = other.idTerrain;
+        idUnit = other.idUnit;
         
         for(auto& t : other.teams) {
             teams.insert(std::make_pair(t.first, std::unique_ptr<Team>(t.second->clone())));
@@ -576,6 +576,14 @@ namespace state {
 
     const std::map<int, std::unique_ptr<Unit> >& Board::getUnits() const {
         return units;
+    }
+    
+    int Board::getIdUnit() const {
+        return idUnit;
+    }
+
+    void Board::setIdUnit(int idUnit) {
+        this->idUnit = idUnit;
     }
 
     bool Board::equals(const Board& other) const {

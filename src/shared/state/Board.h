@@ -30,15 +30,15 @@ namespace state {
   class Board : public state::Observable {
     // Associations
     // Attributes
-  private:
+  protected:
     /// 	
     int width;
     int height;
     std::map<TeamId, std::unique_ptr<Team>> teams;
     std::map<int, std::unique_ptr<Terrain>> terrains;
     std::map<int, std::unique_ptr<Unit>> units;
-    static int idTerrain;
-    static int idUnit;
+    int idTerrain;
+    int idUnit;
     // Operations
   public:
     Board (int width = 10, int height = 10);
@@ -76,13 +76,22 @@ namespace state {
     void claimHouse (TeamId teamId, int x, int y);
     void endTurn (TeamId currentTeam);
     void loadTerrainsFromFile (std::string path);
-    int getHeight () const;
-    int getWidth () const;
-    const std::map<TeamId, std::unique_ptr<Team> >& getTeams () const;
-    const std::map<int, std::unique_ptr<Terrain> >& getTerrains () const;
-    const std::map<int, std::unique_ptr<Unit> >& getUnits () const;
     bool equals (const Board& other) const;
     // Setters and Getters
+    int getWidth() const;
+    void setWidth(int width);
+    int getHeight() const;
+    void setHeight(int height);
+    const std::map<TeamId, std::unique_ptr<Team>>& getTeams() const;
+    void setTeams(const std::map<TeamId, std::unique_ptr<Team>>& teams);
+    const std::map<int, std::unique_ptr<Terrain>>& getTerrains() const;
+    void setTerrains(const std::map<int, std::unique_ptr<Terrain>>& terrains);
+    const std::map<int, std::unique_ptr<Unit>>& getUnits() const;
+    void setUnits(const std::map<int, std::unique_ptr<Unit>>& units);
+    int getIdTerrain() const;
+    void setIdTerrain(int idTerrain);
+    int getIdUnit() const;
+    void setIdUnit(int idUnit);
   };
 
 };

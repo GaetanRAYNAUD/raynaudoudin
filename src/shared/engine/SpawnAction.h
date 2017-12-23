@@ -22,6 +22,7 @@ namespace engine {
   protected:
     int x;
     int y;
+    int idUnit;
     state::UnitTypeId unitTypeId;
     state::TeamId teamId;
     int spawnUnitId;
@@ -36,6 +37,8 @@ namespace engine {
     void setX(int x);
     int getY() const;
     void setY(int y);
+    int getIdUnit() const;
+    void setIdUnit(int idUnit);
     state::UnitTypeId getUnitTypeId() const;
     void setUnitTypeId(state::UnitTypeId unitTypeId);
     state::TeamId getTeamId() const;
