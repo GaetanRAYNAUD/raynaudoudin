@@ -11,19 +11,17 @@ namespace server {
 
 #include "HttpStatus.h"
 #include "AbstractService.h"
-#include "Game.h"
 
 namespace server {
 
   /// class PlayerService - 
   class PlayerService : public server::AbstractService {
-    // Associations
     // Attributes
   private:
-    Game& game;
+    Game* game;
     // Operations
   public:
-    PlayerService (Game& game);
+    PlayerService (Game* game);
     HttpStatus get (Json::Value& out, int id) const;
     HttpStatus post (const Json::Value& in, int id);
     HttpStatus put (Json::Value& out, const Json::Value& in);

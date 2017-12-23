@@ -10,6 +10,7 @@ namespace server {
   class Player {
     // Attributes
   public:
+    /// 				
     std::string name;
     bool free     = true;
     // Operations

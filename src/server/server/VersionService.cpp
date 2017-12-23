@@ -1,7 +1,8 @@
 #include "VersionService.h"
 
 namespace server {
-    VersionService::VersionService () : AbstractService("/version") {
+    
+    VersionService::VersionService() : AbstractService("/version") {
 
     }
 

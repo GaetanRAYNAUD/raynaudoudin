@@ -1,11 +1,10 @@
 #ifndef NETWORK_HPP
 #define NETWORK_HPP
 
-#include "server.h"
-
 #include <iostream>
 #include <sstream>
 #include <string.h>
+#include <functional>
 #include <memory>
 
 namespace server {

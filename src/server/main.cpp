@@ -1,17 +1,11 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
 
-#include "state.hpp"
-#include "engine.hpp"
-#include "heuristic_ai.hpp"
 #include "record.hpp"
+#include "listen.hpp"
 
 using namespace std;
-using namespace state;
-using namespace engine;
-using namespace heuristic_ai;
 using namespace record;
+using namespace listen;
 
 int main(int argc, char* argv[]) 
 {
@@ -21,6 +15,9 @@ int main(int argc, char* argv[])
         } else if (string(argv[1]) == "record"){
             cout << "Enregistrement des actions de l'IA" << endl;
             record_test();
+        } else if (string(argv[1]) == "listen"){
+            cout << "Lancement des tests de l'API" << endl;
+            listen_Test();
         } else {
             cout << "Commande inconnue" << endl;
             cout << "Liste des commandes : " << endl;

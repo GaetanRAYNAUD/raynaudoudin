@@ -1,22 +1,41 @@
 #include "PlayerService.h"
+#include "Player.h"
+#include "Game.h"
 
 #include <string>
 
 namespace server {
-    PlayerService::PlayerService (Game& game) : AbstractService("/user"), game(game) {
+    
+    PlayerService::PlayerService(Game* game) : AbstractService("/player"), game(game) {
 
     }
 
-    HttpStatus PlayerService::get (Json::Value& out, int id) const {
-        Player player = game.getPlayer(id);
+    HttpStatus PlayerService::get(Json::Value& out, int id) const {
+        if(id >= 0) {  
+            const Player* player = game->getPlayer(id);
+            
+            if(player != nullptr) {
+                out["name"] = player->name;
 
-        out["free"] = player.free;
-        out["name"] = player.name;
+                return HttpStatus::OK;
 
-        return HttpStatus::OK;
+            } else {
+                return HttpStatus::NOT_FOUND;
+            }
+        } else {
+            Json::Value jsonPlayer;
+            
+            for(auto& p : game->getPlayers()) {
+                jsonPlayer["name"] = p.second->name;
+                
+                out["Players"].append(jsonPlayer);
+            }
+            
+            return HttpStatus::OK;
+        }
     }
 
-    HttpStatus PlayerService::post (const Json::Value& in, int id) {
+    HttpStatus PlayerService::post(const Json::Value& in, int id) {
 //        const Player* player = game.getPlayer(id);
 //        std::string name;
 //        bool free;
@@ -53,10 +72,10 @@ namespace server {
 //            return HttpStatus::NOT_FOUND;
 //        }
         
-        return HttpStatus::OK;
+        return HttpStatus::NO_CONTENT;
     }
 
-    HttpStatus PlayerService::put (Json::Value& out, const Json::Value& in) {            
+    HttpStatus PlayerService::put(Json::Value& out, const Json::Value& in) {            
 //        bool free;
 //        int id;
 //        std::string name;
@@ -89,7 +108,7 @@ namespace server {
         return HttpStatus::OK;
     }
 
-    HttpStatus PlayerService::remove (int id) {
+    HttpStatus PlayerService::remove(int id) {
         return HttpStatus::OK;
     }
 }
