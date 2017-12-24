@@ -34,9 +34,28 @@ using namespace thread;
 using namespace play;
 using namespace server;
 
-int main(int argc, char* argv[]) 
-{
-    if( argc > 1) {
+void listCommands() {
+    cout << "Commande inconnue" << endl;
+    cout << "Liste des commandes : " << endl;
+    cout << "hello : Affiche un message de bienvenue" << endl;
+    cout << "state : Effectue une série de tests pour vérifier le fonctionnement d'un état" << endl;
+    cout << "render : Lance le rendu d'un état" << endl;
+    cout << "engine : Lance le moteur du jeu" << endl;
+    cout << "random_ai : Lance l'ia aléatoire du jeu" << endl;
+    cout << "heuristique_ai : Lancement de l'ia heuristique" << endl;
+    cout << "rollback : Lance le test de rollback" << endl;
+    cout << "deep_ai : Lancement de l'ia deep" << endl;
+    cout << "thread : Lancement le jeu avec des threads" << endl;
+    cout << "play : Restitue les actions de l'IA" << endl;
+    cout << "network : Lancement de la connection à une partie en réseau" << endl;    
+}
+
+int main(int argc, char* argv[]) {
+    
+    if(argc == 1) {
+        listCommands();
+        
+    } else if(argc > 1) {
         if (string(argv[1]) == "hello") {
             cout << "Bonjour le monde!" << endl;
             
@@ -91,22 +110,11 @@ int main(int argc, char* argv[])
             play_Test();
         
         } else if (string(argv[1]) == "network"){
-            cout << "Lancement de la connection au réseau" << endl;
+            cout << "Lancement de la connection à une partie en réseau" << endl;
             
             
         } else {
-            cout << "Commande inconnue" << endl;
-            cout << "Liste des commandes : " << endl;
-            cout << "hello : Affiche un message de bienvenue" << endl;
-            cout << "state : Effectue une série de tests pour vérifier le fonctionnement d'un état" << endl;
-            cout << "render : Lance le rendu d'un état" << endl;
-            cout << "engine : Lance le moteur du jeu" << endl;
-            cout << "random_ai : Lance l'ia aléatoire du jeu" << endl;
-            cout << "heuristique_ai : Lancement de l'ia heuristique" << endl;
-            cout << "rollback : Lance le test de rollback" << endl;
-            cout << "deep_ai : Lancement de l'ia deep" << endl;
-            cout << "thread : Lancement le jeu avec des threads" << endl;
-            cout << "deep_ai : Restitue les actions de l'IA" << endl;
+            listCommands();
         }
     }
     return 0;
