@@ -6,13 +6,14 @@
 namespace server {
 
   enum HttpStatus {
-    OK,
-    CREATED,
-    NO_CONTENT,
-    BAD_REQUEST,
-    NOT_FOUND,
-    SERVER_ERROR,
-    NOT_IMPLEMENTED
+    OK     = 200,
+    CREATED     = 201,
+    NO_CONTENT     = 204,
+    BAD_REQUEST     = 400,
+    NOT_FOUND     = 404,
+    SERVER_ERROR     = 500,
+    NOT_IMPLEMENTED     = 501,
+    OUT_OF_RESSOURCES     = 503
   };
 
 };

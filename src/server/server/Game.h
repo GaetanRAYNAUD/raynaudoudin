@@ -19,6 +19,8 @@ namespace server {
   class Game {
     // Associations
     // Attributes
+  public:
+    const unsigned int maxPlayer     = 2;
   protected:
     std::map<int, std::unique_ptr<server::Player>> players;
     int idseq;
