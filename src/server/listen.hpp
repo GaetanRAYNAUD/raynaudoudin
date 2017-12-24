@@ -2,10 +2,21 @@
 #define LISTEN_HPP
 
 #include <iostream>
+#include <microhttpd.h>
+#include <string.h>
 
 #include "server.h"
 
-namespace listen {
+namespace listenn {
+    class Request {
+        public:
+            struct MHD_PostProcessor *pp = nullptr;
+            std::string data;
+            ~Request() {
+                if (pp) MHD_destroy_post_processor (pp);
+            }
+    };
+    
     void listen_Test();
 }
 

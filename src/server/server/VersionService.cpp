@@ -6,7 +6,7 @@ namespace server {
 
     }
 
-    HttpStatus VersionService::get (Json::Value& jsonOut, int id) const {
+    HttpStatus VersionService::get(Json::Value& jsonOut, int id) const {
         jsonOut["major"] = 1;
         jsonOut["minor"] = 0;
 

@@ -5,13 +5,13 @@
 #include <iostream>
 
 namespace server {
-    void ServicesManager::registerService(std::unique_ptr<AbstractService> service) {
+    void ServicesManager::registerService(std::unique_ptr<AbstractService> service) {   
         services.push_back(std::move(service));
     }
 
     AbstractService* ServicesManager::findService(const std::string& url) const {
         std::string req;
-
+        
         if(std::count(url.begin(), url.end(), '/') == 1) {
             req = url.substr(1);
         } else {
@@ -20,16 +20,16 @@ namespace server {
 
         if(req == "version") {
             for(auto& s : services) {
-                if(s->getPattern() == "/version") {
+                if(s->getPattern() == "/version") {              
                     return s.get();
                 }
             }
 
             return nullptr;
 
-        } else if(req == "user") {
+        } else if(req == "player") {
             for(auto& s : services) {
-                if(s->getPattern() == "/user") {
+                if(s->getPattern() == "/player") {
                     return s.get();
                 }
             }
