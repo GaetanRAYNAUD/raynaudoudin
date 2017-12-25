@@ -106,8 +106,7 @@ namespace listenn {
         return ret;
     }
 
-    void listen_Test() {
-        int port = 8080;
+    void listen_Test(int port) {
         
         try {
             ServicesManager servicesManager;

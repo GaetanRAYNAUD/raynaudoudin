@@ -11,7 +11,7 @@ void listCommands() {
     cout << "Commande inconnue" << endl;
     cout << "Liste des commandes : " << endl;
     cout << "record : Enregistre les commandes de l'IA" << endl;
-    cout << "listen : Lance le serveur pour faire une partie en réseau" << endl;
+    cout << "listen [port] : Lance le serveur pour faire une partie en réseau sur le port indiqué" << endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -27,11 +27,16 @@ int main(int argc, char* argv[]) {
             record_test();
         } else if (string(argv[1]) == "listen"){
             cout << "Lancement des tests de l'API" << endl;
-            listen_Test();
+            if(argv[2] != nullptr) {
+                listen_Test(atoi(argv[2]));
+            } else {
+                cout << "Veuillez indiquer le port pour le serveur" << endl;
+            }
         } else {
             listCommands();
         }
     }
+    
     return 0;
 }
 

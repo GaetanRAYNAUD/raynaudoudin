@@ -17,7 +17,7 @@ namespace listenn {
             }
     };
     
-    void listen_Test();
+    void listen_Test(int port);
 }
 
 #endif /* LISTEN_HPP */
