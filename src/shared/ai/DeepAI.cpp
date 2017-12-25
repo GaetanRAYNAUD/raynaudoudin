@@ -1,10 +1,14 @@
 #include "DeepAI.h"
 #include "engine/EndTurnCommand.h"
+#include "state/House.h"
+
+#include <iostream>
 
 namespace ai {
 
     DeepAI::DeepAI(int randomSeed): randgen(randomSeed) {
-        
+//        maxLeaves = 5;
+//        maxDepth = 5;
     }
     
     void DeepAI::run(engine::Engine& engine) {
@@ -139,12 +143,14 @@ namespace ai {
         const std::map<int, std::unique_ptr<state::Unit> >& units = state.getBoard().getUnits();
         int heuristic = 0;
         
+//        initPathMaps(state.getBoard());
         switch (state.getCurrentTeam()) {
             case state::TeamId::TEAM_1:
                 for (auto& u : units) {
                     switch (u.second->getTeam()) {
                         case state::TeamId::TEAM_1:
                             heuristic = heuristic + u.second->getLife();
+//                            heuristic = heuristic - team2PathMap.getPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight();
                             break;
                         case state::TeamId::TEAM_2:
                             heuristic = heuristic - u.second->getLife();
@@ -162,6 +168,7 @@ namespace ai {
                             break;
                         case state::TeamId::TEAM_2:
                             heuristic = heuristic + u.second->getLife();
+//                            heuristic = heuristic - team1PathMap.getPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight();
                             break;
                         default:
                             break;                            
@@ -173,6 +180,48 @@ namespace ai {
         }
         
         return heuristic;
+    }
+    
+    void DeepAI::initPathMaps(const state::Board& board) {
+        const std::map<int, std::unique_ptr<state::Unit> >& units = board.getUnits();
+        const std::map<int, std::unique_ptr<state::Terrain> >& terrains = board.getTerrains();
+
+        team1PathMap.init(board);
+        team2PathMap.init(board);
+        
+        for (auto& u : units) {
+            if (u.second->getTeam() == state::TeamId::TEAM_1) {
+                team1PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY()));
+                team2PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
+            } else if (u.second->getTeam() == state::TeamId::TEAM_2) {
+                team2PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY()));
+                team1PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
+            }
+        }
+        
+        for (auto& t : terrains) {
+            if (t.second->getTypeId() == state::TerrainTypeId::HOUSE) {
+                switch (((state::House*)t.second.get())->getTeamId()) {
+                    case state::TeamId::TEAM_1:
+                        team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+                        break;
+                    
+                    case state::TeamId::TEAM_2:
+                        team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+                        break;
+                        
+                    case state::TeamId::INVALIDTEAM:
+                        team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+                        team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+                }
+            } else if(t.second->getTypeId() == state::TerrainTypeId::CASTLE) {
+                team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+                team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+            }
+        }
+        
+        team1PathMap.update(board);
+        team2PathMap.update(board);
     }
     
     int DeepAI::uniform(int min, int max) {

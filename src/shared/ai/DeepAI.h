@@ -14,6 +14,7 @@ namespace engine {
 };
 namespace state {
   class State;
+  class Board;
 };
 namespace ai {
   class AI;
@@ -29,15 +30,10 @@ namespace ai {
     // Associations
     // Attributes
   protected:
-    PathMap unitTeam1PathMap;
-    PathMap unitTeam2PathMap;
-    PathMap houseTeam1PathMap;
-    PathMap houseTeam2PathMap;
-    PathMap castlePathMap;
+    PathMap team1PathMap;
+    PathMap team2PathMap;
     int maxDepth     = 6;
-    int maxUpdates     = 5000;
-    int maxLeaves     = 5;
-    int updatesCount     = 0;
+    int maxLeaves     = 6;
     std::mt19937 randgen;
     // Operations
   public:
@@ -47,26 +43,17 @@ namespace ai {
     void minimax_max_init (engine::Engine& engine, int depth, std::vector<engine::Command*>& bestCommands);
     int getHeuristic (const state::State& state);
     int uniform (int min, int max);
+    void initPathMaps (const state::Board& board);
     void run (engine::Engine& engine);
     // Setters and Getters
-    const PathMap& getUnitTeam1PathMap() const;
-    void setUnitTeam1PathMap(const PathMap& unitTeam1PathMap);
-    const PathMap& getUnitTeam2PathMap() const;
-    void setUnitTeam2PathMap(const PathMap& unitTeam2PathMap);
-    const PathMap& getHouseTeam1PathMap() const;
-    void setHouseTeam1PathMap(const PathMap& houseTeam1PathMap);
-    const PathMap& getHouseTeam2PathMap() const;
-    void setHouseTeam2PathMap(const PathMap& houseTeam2PathMap);
-    const PathMap& getCastlePathMap() const;
-    void setCastlePathMap(const PathMap& castlePathMap);
+    const PathMap& getTeam1PathMap() const;
+    void setTeam1PathMap(const PathMap& team1PathMap);
+    const PathMap& getTeam2PathMap() const;
+    void setTeam2PathMap(const PathMap& team2PathMap);
     int getMaxDepth() const;
     void setMaxDepth(int maxDepth);
-    int getMaxUpdates() const;
-    void setMaxUpdates(int maxUpdates);
     int getMaxLeaves() const;
     void setMaxLeaves(int maxLeaves);
-    int getUpdatesCount() const;
-    void setUpdatesCount(int updatesCount);
     const std::mt19937& getRandgen() const;
     void setRandgen(const std::mt19937& randgen);
   };
