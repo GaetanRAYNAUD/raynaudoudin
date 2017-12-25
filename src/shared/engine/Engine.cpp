@@ -1,8 +1,6 @@
 #include "Engine.h"
 #include "../../../extern/jsoncpp-1.8.0/json/json.h"
 
-#include <iostream>
-
 namespace engine {
 
     Engine::Engine(int width, int height) : state(width, height) {
@@ -29,7 +27,6 @@ namespace engine {
         std::stack<std::shared_ptr<Action>> actions;
         
         for(auto& c : currentCommands) {
-//            if (currentCommands.size() > 1) std::cout << c.first << " type: " << c.second->getTypeId() << std::endl;
             c.second.get()->execute(state, actions);
         }
         

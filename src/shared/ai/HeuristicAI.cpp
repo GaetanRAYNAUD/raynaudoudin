@@ -9,9 +9,6 @@
 #include "engine/HandleWinCommand.h"
 #include "engine/SpawnCommand.h"
 
-#include <iostream>
-using namespace std;
-
 namespace ai {
     
     HeuristicAI::HeuristicAI() {

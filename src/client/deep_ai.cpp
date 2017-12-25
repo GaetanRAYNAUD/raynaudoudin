@@ -8,12 +8,11 @@ using namespace ai;
 namespace deep_ai {
     
     void deep_aiTest() {
-        bool pause = 0;
+        bool pause = false;
         int windowWidth = 1188;
         int windowHeight = 576;
         int mapWidth = 22;
         int mapHeight = 8;
-        int timePause = 1000;
         Engine* engine = new Engine(mapWidth, mapHeight);  
         Scene* scene;
         Command* command;
@@ -21,8 +20,6 @@ namespace deep_ai {
         DeepAI* ai = new DeepAI(rand());
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         sf::View view(sf::FloatRect(0, 0, windowWidth, windowHeight));
-        sf::Clock clock;
-        sf::Time time;
         
         window.setFramerateLimit(30);
         window.setView(view);
@@ -34,13 +31,10 @@ namespace deep_ai {
         scene = new Scene(engine->getState());
         while (window.isOpen()) {
             sf::Event event;
-            
-            if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
-                ai->run(*engine);
-                time = clock.getElapsedTime();
-                if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
-                    pause = true;
-                }
+                   
+            ai->run(*engine);
+            if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
+                pause = true;
             }
             
             delete scene;
@@ -58,14 +52,7 @@ namespace deep_ai {
                     window.close(); 
                 } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
                     pause = !pause;
-                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
-                    if(timePause == 1000) {
-                        timePause = 10;
-                    } else {
-                        timePause = 1000;
-                    }
                 }
-                
             }
             
             scene->draw(window);

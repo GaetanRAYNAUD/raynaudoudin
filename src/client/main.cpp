@@ -95,7 +95,6 @@ int main(int argc, char* argv[]) {
             
         } else if (string(argv[1]) == "deep_ai"){
             cout << "Lancement de l'ia deep" << endl;
-            cout << "Appuyez sur ESPACE pour accélérer le jeu" << endl;
             cout << "Appuyez sur P pour mettre le jeu en pause" << endl;
             deep_aiTest();
             
