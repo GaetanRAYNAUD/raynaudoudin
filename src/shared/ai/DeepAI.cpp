@@ -2,13 +2,11 @@
 #include "engine/EndTurnCommand.h"
 #include "state/House.h"
 
-#include <iostream>
-
 namespace ai {
 
     DeepAI::DeepAI(int randomSeed): randgen(randomSeed) {
-//        maxLeaves = 5;
-//        maxDepth = 5;
+        maxLeaves = 4;
+        maxDepth = 4;
     }
     
     void DeepAI::run(engine::Engine& engine) {
@@ -36,7 +34,7 @@ namespace ai {
         }
         depth++;
         
-        for (leavesCount = 0; leavesCount < maxLeaves; leavesCount++) {
+        for (leavesCount = 0; leavesCount < maxLeaves * 2; leavesCount++) {
             listCommands(engine.getState(), commands);            
             rand = uniform(0, commands.size() - 1);
             engine.addCommand(0, commands.at(rand));
@@ -140,17 +138,16 @@ namespace ai {
     }
 
     int DeepAI::getHeuristic(const state::State& state) {
-        const std::map<int, std::unique_ptr<state::Unit> >& units = state.getBoard().getUnits();
         int heuristic = 0;
         
-//        initPathMaps(state.getBoard());
+        initPathMaps(state.getBoard());
         switch (state.getCurrentTeam()) {
             case state::TeamId::TEAM_1:
-                for (auto& u : units) {
+                for (auto& u : state.getBoard().getUnits()) {
                     switch (u.second->getTeam()) {
                         case state::TeamId::TEAM_1:
                             heuristic = heuristic + u.second->getLife();
-//                            heuristic = heuristic - team2PathMap.getPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight();
+                            heuristic = heuristic - team2PathMap.getPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight();
                             break;
                         case state::TeamId::TEAM_2:
                             heuristic = heuristic - u.second->getLife();
@@ -161,14 +158,14 @@ namespace ai {
                 }
                 break;
             case state::TeamId::TEAM_2:
-                for (auto& u : units) {
+                for (auto& u : state.getBoard().getUnits()) {
                     switch (u.second->getTeam()) {
                         case state::TeamId::TEAM_1:
                             heuristic = heuristic - u.second->getLife();
                             break;
                         case state::TeamId::TEAM_2:
                             heuristic = heuristic + u.second->getLife();
-//                            heuristic = heuristic - team1PathMap.getPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight();
+                            heuristic = heuristic - team1PathMap.getPoint(u.second->getPositionX(), u.second->getPositionY()).getWeight();
                             break;
                         default:
                             break;                            
@@ -178,7 +175,7 @@ namespace ai {
             default:
                 break;
         }
-        
+
         return heuristic;
     }
     
@@ -192,10 +189,10 @@ namespace ai {
         for (auto& u : units) {
             if (u.second->getTeam() == state::TeamId::TEAM_1) {
                 team1PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY()));
-                team2PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
+//                team2PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
             } else if (u.second->getTeam() == state::TeamId::TEAM_2) {
                 team2PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY()));
-                team1PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
+//                team1PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
             }
         }
         
@@ -214,10 +211,11 @@ namespace ai {
                         team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
                         team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
                 }
-            } else if(t.second->getTypeId() == state::TerrainTypeId::CASTLE) {
-                team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
-                team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
-            }
+            } 
+//            else if(t.second->getTypeId() == state::TerrainTypeId::CASTLE) {
+//                team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+//                team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+//            }
         }
         
         team1PathMap.update(board);
