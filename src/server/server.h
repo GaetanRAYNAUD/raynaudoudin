@@ -3,6 +3,7 @@
 #define __SERVER__H
 
 #include "server/Player.h"
+#include "server/GameStatus.h"
 #include "server/HttpStatus.h"
 #include "server/AbstractService.h"
 #include "server/PlayerService.h"
@@ -10,4 +11,6 @@
 #include "server/VersionService.h"
 #include "server/ServiceException.h"
 #include "server/ServicesManager.h"
+#include "server/GameService.h"
+#include "server/CommandService.h"
 #endif

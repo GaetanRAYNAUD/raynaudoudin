@@ -3,6 +3,10 @@
 
 namespace engine {
 
+    Engine::Engine() : state(22, 8) {
+
+    }
+
     Engine::Engine(int width, int height) : state(width, height) {
         
     }

@@ -41,6 +41,14 @@ namespace server {
         players.erase(ite);
     }
 
+    void Game::run() {
+
+    }
+
+    const engine::Engine& Game::getEngine() const {
+        return engine;
+    }
+
     const std::map<int, std::unique_ptr<Player> >& Game::getPlayers() const {
         return players;
     }
