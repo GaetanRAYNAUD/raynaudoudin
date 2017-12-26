@@ -2,13 +2,10 @@
 #define NETWORK_HPP
 
 #include <iostream>
-#include <sstream>
-#include <string.h>
-#include <functional>
-#include <memory>
+#include <unistd.h>
 
 namespace server {
-    void network_Test();    
+    void network_Test(int port, std::string name);    
 }
 
 #endif /* NETWORK_HPP */

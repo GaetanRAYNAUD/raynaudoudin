@@ -47,7 +47,7 @@ void listCommands() {
     cout << "deep_ai : Lancement de l'ia deep" << endl;
     cout << "thread : Lancement le jeu avec des threads" << endl;
     cout << "play : Restitue les actions de l'IA" << endl;
-    cout << "network : Lancement de la connection à une partie en réseau" << endl;    
+    cout << "network [port] [nom] : Lancement de la connection à une partie en réseau" << endl;    
 }
 
 int main(int argc, char* argv[]) {
@@ -110,8 +110,28 @@ int main(int argc, char* argv[]) {
             play_Test();
         
         } else if (string(argv[1]) == "network"){
+            int port;
+            string name;
+            
             cout << "Lancement de la connection à une partie en réseau" << endl;
             
+            if(argv[2] == nullptr) {
+                cout << "Veuillez indiquer le port du serveur" << endl;
+                
+                return 1;
+            } else {
+                port = atoi(argv[2]);
+            }
+            
+            if(argv[3] == nullptr) {
+                cout << "Veuillez indiquer le nom de votre joueur" << endl;
+                
+                return 1;
+            } else {
+                name = string(argv[3]);
+            }
+            
+            network_Test(port, name);
             
         } else {
             listCommands();
