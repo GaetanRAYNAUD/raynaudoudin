@@ -17,16 +17,16 @@ namespace record {
         fileJson.open("replay.txt");
 
         engine.addCommand(1, new LoadCommand("res/map.txt"));
-        engine.update(jsonCommands);
+        engine.update();
         
         while(engine.getState().getWinner() == TeamId::INVALIDTEAM) {
             ai.run(engine);
-            engine.update(jsonCommands);
+            engine.update();
             engine.addCommand(1, new HandleWinCommand());
-            engine.update(jsonCommands);
+            engine.update();
         }
         
-        fileJson << styledWriter.write(jsonCommands);        
+        fileJson << styledWriter.write(engine.getCommandHistory());        
         fileJson.close();
         
         std::cout << "Commandes enregistrées avec succès !" << std::endl;

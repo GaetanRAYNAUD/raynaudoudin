@@ -64,7 +64,7 @@ namespace server {
         int id;
         HttpStatus status = HttpStatus::SERVER_ERROR;
 
-        if(url.find("/", 1) == std::string::npos) {
+        if(url.find("/", 1) == std::string::npos || url.back() == '/') {
             id = 0;
         } else {            
             id = stoi(url.substr(url.find_first_of("/", 1) + 1, url.npos));

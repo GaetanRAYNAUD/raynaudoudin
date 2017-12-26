@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "server.h"
+#include "engine/Engine.h"
 
 namespace listenn {
     class Request {
