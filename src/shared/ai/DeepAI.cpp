@@ -7,6 +7,7 @@ namespace ai {
     DeepAI::DeepAI(int randomSeed): randgen(randomSeed) {
         maxLeaves = 4;
         maxDepth = 4;
+        //objectif maxLeaves = 5 et maxDepth = 4
     }
     
     void DeepAI::run(engine::Engine& engine) {
@@ -180,43 +181,37 @@ namespace ai {
     }
     
     void DeepAI::initPathMaps(const state::Board& board) {
-        const std::map<int, std::unique_ptr<state::Unit> >& units = board.getUnits();
-        const std::map<int, std::unique_ptr<state::Terrain> >& terrains = board.getTerrains();
-
         team1PathMap.init(board);
         team2PathMap.init(board);
         
-        for (auto& u : units) {
+        for (auto& u : board.getUnits()) {
             if (u.second->getTeam() == state::TeamId::TEAM_1) {
                 team1PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY()));
-//                team2PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
             } else if (u.second->getTeam() == state::TeamId::TEAM_2) {
                 team2PathMap.addWell(Point(u.second->getPositionX(), u.second->getPositionY()));
-//                team1PathMap.addWall(Point(u.second->getPositionX(), u.second->getPositionY()));
             }
         }
         
-        for (auto& t : terrains) {
-            if (t.second->getTypeId() == state::TerrainTypeId::HOUSE) {
-                switch (((state::House*)t.second.get())->getTeamId()) {
-                    case state::TeamId::TEAM_1:
-                        team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
-                        break;
-                    
-                    case state::TeamId::TEAM_2:
-                        team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
-                        break;
-                        
-                    case state::TeamId::INVALIDTEAM:
-                        team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
-                        team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
-                }
-            } 
-//            else if(t.second->getTypeId() == state::TerrainTypeId::CASTLE) {
+//        for (auto& t : board.getTerrains()) {
+//            if (t.second->getTypeId() == state::TerrainTypeId::HOUSE) {
+//                switch (((state::House*)t.second.get())->getTeamId()) {
+//                    case state::TeamId::TEAM_1:
+//                        team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+//                        break;
+//                    
+//                    case state::TeamId::TEAM_2:
+//                        team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+//                        break;
+//                        
+//                    case state::TeamId::INVALIDTEAM:
+//                        team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+//                        team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
+//                }
+//            } else if(t.second->getTypeId() == state::TerrainTypeId::CASTLE) {
 //                team1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
 //                team2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
 //            }
-        }
+//        }
         
         team1PathMap.update(board);
         team2PathMap.update(board);
