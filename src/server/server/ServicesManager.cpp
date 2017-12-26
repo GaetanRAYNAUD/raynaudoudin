@@ -34,7 +34,26 @@ namespace server {
                 }
             }
 
+            return nullptr;
+            
+        } else if(req == "game") {
+            for(auto& s : services) {
+                if(s->getPattern() == "/game") {
+                    return s.get();
+                }
+            }
+
             return nullptr;        
+            
+        } else if(req == "command") {
+            for(auto& s : services) {
+                if(s->getPattern() == "/command") {
+                    return s.get();
+                }
+            }
+
+            return nullptr;
+            
         } else {
             throw ServiceException(HttpStatus::BAD_REQUEST,"Page inexistante");
             return nullptr;

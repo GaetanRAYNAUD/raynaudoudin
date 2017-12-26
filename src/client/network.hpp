@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <unistd.h>
+#include <microhttpd.h>
+
+#include "server.h"
 
 namespace server {
     void network_Test(int port, std::string name);    

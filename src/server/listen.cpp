@@ -114,6 +114,7 @@ namespace listenn {
             
             servicesManager.registerService(std::move(std::unique_ptr<VersionService>(new VersionService())));
             servicesManager.registerService(std::move(std::unique_ptr<PlayerService>(new PlayerService(game))));
+            servicesManager.registerService(std::move(std::unique_ptr<GameService>(new GameService(game))));
 
             struct MHD_Daemon* server = nullptr;
             
