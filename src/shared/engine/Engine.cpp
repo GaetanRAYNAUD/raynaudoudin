@@ -1,5 +1,5 @@
 #include "Engine.h"
-#include "../../../extern/jsoncpp-1.8.0/json/json.h"
+#include "json/json.h"
 #include "engine/HandleWinCommand.h"
 #include "engine/MoveCommand.h"
 #include "engine/AttackCommand.h"

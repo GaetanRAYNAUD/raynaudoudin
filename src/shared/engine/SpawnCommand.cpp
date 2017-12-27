@@ -1,6 +1,6 @@
 #include "SpawnCommand.h"
 #include "SpawnAction.h"
-#include "../../../extern/jsoncpp-1.8.0/json/json.h"
+#include "json/json.h"
 
 namespace engine {
 

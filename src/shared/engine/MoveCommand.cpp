@@ -1,6 +1,6 @@
 #include "MoveCommand.h"
 #include "MoveAction.h"
-#include "../../../extern/jsoncpp-1.8.0/json/json.h"
+#include "json/json.h"
 
 #include <iostream>
 namespace engine {

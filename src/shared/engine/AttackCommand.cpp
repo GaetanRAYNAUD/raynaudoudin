@@ -1,6 +1,6 @@
 #include "AttackCommand.h"
 #include "AttackAction.h"
-#include "../../../extern/jsoncpp-1.8.0/json/json.h"
+#include "json/json.h"
 
 namespace engine {
 

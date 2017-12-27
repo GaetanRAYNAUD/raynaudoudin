@@ -1,6 +1,6 @@
 #include "EndTurnCommand.h"
 #include "EndTurnAction.h"
-#include "../../../extern/jsoncpp-1.8.0/json/json.h"
+#include "json/json.h"
 
 namespace engine {
 
