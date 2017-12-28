@@ -32,7 +32,7 @@ using namespace rollback;
 using namespace deep_ai;
 using namespace thread;
 using namespace play;
-using namespace server;
+using namespace network;
 
 void listCommands() {
     cout << "Commande inconnue" << endl;

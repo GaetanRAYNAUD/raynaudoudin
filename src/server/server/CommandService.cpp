@@ -39,7 +39,7 @@ namespace server {
         }
     }
 
-    HttpStatus CommandService::put(Json::Value& out, const Json::Value& in) {
+    HttpStatus CommandService::post(Json::Value& out, const Json::Value& in) {
         Json::Value jsonCommands;
         
         if(!in.empty()) {    

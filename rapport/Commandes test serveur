@@ -1,6 +1,6 @@
 Ajouter un joueur : 
-curl -X PUT --data '{"name":"Mathis"}' http://localhost:8080/player
-curl -X PUT --data '{"name":"Gaetan"}' http://localhost:8080/player
+curl -X POST --data '{"name":"Mathis"}' http://localhost:8080/player
+curl -X POST --data '{"name":"Gaetan"}' http://localhost:8080/player
 
 Voir un joueur : 
 curl http://localhost:8080/player/0
@@ -10,8 +10,8 @@ Voir la liste des tous les joueurs :
 curl http://localhost:8080/player/-1
 
 Modifier un joueur : 
-curl -X POST --data '{"name":"Gaetan"}' http://localhost:8080/player/1
-curl -X POST --data '{"name":"Mathis"}' http://localhost:8080/player/0
+curl -X PUT --data '{"name":"Gaetan"}' http://localhost:8080/player/1
+curl -X PUT --data '{"name":"Mathis"}' http://localhost:8080/player/0
 
 Supprimer un joueur : 
 curl -X DELETE http://localhost:8080/player/0

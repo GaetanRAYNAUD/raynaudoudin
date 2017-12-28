@@ -80,18 +80,6 @@ namespace server {
 
         } else if(method == "POST") {
             Json::Reader jsonReader;
-            Json::Value jsonValue;
-
-            if (!(jsonReader.parse(in, jsonValue, false))) {
-                std::cout << jsonReader.getFormattedErrorMessages() << std::endl;
-            }
-
-            status = findService(url)->post(jsonValue, id);
-
-            return status;
-
-        } else if(method == "PUT") {
-            Json::Reader jsonReader;
             Json::Value jsonIn;
             Json::Value jsonOut;
 
@@ -99,10 +87,22 @@ namespace server {
                 std::cout << jsonReader.getFormattedErrorMessages() << std::endl;
             }
 
-            status = findService(url)->put(jsonOut, jsonIn);
+            status = findService(url)->post(jsonOut, jsonIn);
             if(status == HttpStatus::CREATED) {
                 out = jsonOut.toStyledString();
             }
+
+            return status;            
+
+        } else if(method == "PUT") {
+            Json::Reader jsonReader;
+            Json::Value jsonValue;
+
+            if (!(jsonReader.parse(in, jsonValue, false))) {
+                std::cout << jsonReader.getFormattedErrorMessages() << std::endl;
+            }
+
+            status = findService(url)->put(jsonValue, id);
 
             return status;
 

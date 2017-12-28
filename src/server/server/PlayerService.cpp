@@ -38,44 +38,8 @@ namespace server {
         }
     }
 
-    HttpStatus PlayerService::post(const Json::Value& in, int id) {
-        const Player* player = game->getPlayer(id);
-
-        if(player != nullptr) {
-            std::string name;
-
-            if(in.size() == 1) {
-                if(in.isMember("name")) {
-                    if(in["name"].isString()) {
-                        name = in["name"].asString();
-                    } else {
-                        throw ServiceException(HttpStatus::BAD_REQUEST, "Bad request");
-
-                        return HttpStatus::BAD_REQUEST;
-                    }
-                } else {
-                    name = player->name;
-                }
-
-                game->setPlayer(id, std::move(std::unique_ptr<Player>(new Player(name, player->free))));
-
-                return HttpStatus::NO_CONTENT;
-
-            } else {
-                throw ServiceException(HttpStatus::BAD_REQUEST, "Bad request");
-
-                return HttpStatus::BAD_REQUEST;                    
-
-            }
-        } else {
-            throw ServiceException(HttpStatus::NOT_FOUND, "Not found");
-
-            return HttpStatus::NOT_FOUND;
-        }
-    }
-
-    HttpStatus PlayerService::put(Json::Value& out, const Json::Value& in) {            
-        int id;
+    HttpStatus PlayerService::post(Json::Value& out, const Json::Value& in) {
+          int id;
         std::string name;
         
         if(game->maxPlayer > game->getPlayers().size()) {
@@ -110,6 +74,42 @@ namespace server {
             
             return HttpStatus::OUT_OF_RESSOURCES;
         }
+    }
+
+    HttpStatus PlayerService::put(const Json::Value& in, int id) {
+        const Player* player = game->getPlayer(id);
+
+        if(player != nullptr) {
+            std::string name;
+
+            if(in.size() == 1) {
+                if(in.isMember("name")) {
+                    if(in["name"].isString()) {
+                        name = in["name"].asString();
+                    } else {
+                        throw ServiceException(HttpStatus::BAD_REQUEST, "Bad request");
+
+                        return HttpStatus::BAD_REQUEST;
+                    }
+                } else {
+                    name = player->name;
+                }
+
+                game->setPlayer(id, std::move(std::unique_ptr<Player>(new Player(name, player->free))));
+
+                return HttpStatus::NO_CONTENT;
+
+            } else {
+                throw ServiceException(HttpStatus::BAD_REQUEST, "Bad request");
+
+                return HttpStatus::BAD_REQUEST;                    
+
+            }
+        } else {
+            throw ServiceException(HttpStatus::NOT_FOUND, "Not found");
+            
+            return HttpStatus::NOT_FOUND;
+        }        
     }
 
     HttpStatus PlayerService::remove(int id) {

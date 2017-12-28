@@ -3,11 +3,10 @@
 
 #include <iostream>
 #include <unistd.h>
-#include <microhttpd.h>
 
-#include "server.h"
+#include "json/json.h"
 
-namespace server {
+namespace network {
     void network_Test(int port, std::string name);    
 }
 
