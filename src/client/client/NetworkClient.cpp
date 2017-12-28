@@ -1,5 +1,6 @@
 #include "NetworkClient.h"
 #include "ai/HeuristicAI.h"
+#include "engine/HandleWinCommand.h"
 
 #include <SFML/Network/Http.hpp>
 #include <iostream>
@@ -51,6 +52,7 @@ namespace client {
         
         if(response.getStatus() == sf::Http::Response::NotFound) {
             return false;
+            
         } else {
             if(!(jsonReader.parse(response.getBody(), jsonResponse, false))) {
                 std::cout  << jsonReader.getFormattedErrorMessages() << std::endl;
@@ -64,11 +66,8 @@ namespace client {
 
     void NetworkClient::putServerCommand(engine::Command* command) {
         sf::Http connection(url, port);
-        sf::Http::Request request;        
-        sf::Http::Response response;
-        Json::Value jsonResponse;
-        Json::Value jsonCommand;        
-        Json::Reader jsonReader;
+        sf::Http::Request request;
+        Json::Value jsonCommand;
         
         command->serialize(jsonCommand);
         
@@ -76,15 +75,19 @@ namespace client {
         request.setMethod(sf::Http::Request::Post);
         request.setBody(jsonCommand.asString());
         
-        response = connection.sendRequest(request);
-        
+        connection.sendRequest(request);
     }
 
     void NetworkClient::run() {
         Json::Value jsonCommands;
         
+        
+        
         if(getServerCommands(jsonCommands, engine.getState().getTurn())) {
             engine.addCommands(jsonCommands);
+            engine.update();
+            engine.addCommand(1, new engine::HandleWinCommand());
+            engine.update();
         }
         
         if(engine.getState().getCurrentTeam() == player) {
