@@ -5,6 +5,7 @@
 #include <random>
 
 namespace engine {
+  class Command;
   class Engine;
 };
 namespace ai {
@@ -23,7 +24,7 @@ namespace ai {
     // Operations
   public:
     RandomAI (int randomSeed);
-    void run (engine::Engine& engine);
+    engine::Command* run (engine::Engine& engine);
     // Setters and Getters
     const std::mt19937& getRandgen() const;
     void setRandgen(const std::mt19937& randgen);

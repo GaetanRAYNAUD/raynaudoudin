@@ -10,7 +10,7 @@ namespace ai {
         //objectif maxLeaves = 5 et maxDepth = 4
     }
     
-    void DeepAI::run(engine::Engine& engine) {
+    engine::Command* DeepAI::run(engine::Engine& engine) {
         std::vector<engine::Command*> bestCommands;
         
         minimax_max_init(engine, 0, bestCommands);
@@ -19,6 +19,8 @@ namespace ai {
             engine.addCommand(i, bestCommands.at(i));
         }
         engine.update();
+        
+        return nullptr;
     }
     
     void DeepAI::minimax_max_init(engine::Engine& engine, int depth, std::vector<engine::Command*>& bestCommand) {

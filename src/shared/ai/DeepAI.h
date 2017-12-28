@@ -44,7 +44,7 @@ namespace ai {
     int getHeuristic (const state::State& state);
     int uniform (int min, int max);
     void initPathMaps (const state::Board& board);
-    void run (engine::Engine& engine);
+    engine::Command* run (engine::Engine& engine);
     // Setters and Getters
     const PathMap& getTeam1PathMap() const;
     void setTeam1PathMap(const PathMap& team1PathMap);

@@ -65,7 +65,7 @@ namespace ai {
         castlePathMap.update(board);
     }
     
-    void HeuristicAI::run(engine::Engine& engine) {
+    engine::Command* HeuristicAI::run(engine::Engine& engine) {
         std::vector<engine::Command*> commandsAttack;
         std::vector<engine::Command*> commandsMovement;
         std::vector<engine::Command*> commandsSpawn;
@@ -159,6 +159,8 @@ namespace ai {
         commandsAttack.clear();
         commandsMovement.clear();
         commandsSpawn.clear();
+        
+        return nullptr;
     }
     
     const PathMap& HeuristicAI::getHouseTeam1PathMap() const {

@@ -5,13 +5,11 @@
 #include <vector>
 
 namespace engine {
+  class Command;
   class Engine;
 };
 namespace state {
   class State;
-};
-namespace engine {
-  class Command;
 }
 
 #include "engine/Engine.h"
@@ -25,7 +23,7 @@ namespace ai {
     // Operations
   public:
     virtual ~AI ();
-    virtual void run (engine::Engine& engine) = 0;
+    virtual engine::Command* run (engine::Engine& engine) = 0;
   protected:
     void listCommands (const state::State& state, std::vector<engine::Command*>& commands);
     void listCommandsMovement (const state::State& state, std::vector<engine::Command*>& commands);

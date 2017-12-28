@@ -10,6 +10,7 @@ namespace state {
   class Board;
 };
 namespace engine {
+  class Command;
   class Engine;
 };
 namespace ai {
@@ -35,7 +36,7 @@ namespace ai {
   public:
     HeuristicAI ();
     void initPathMaps (const state::Board& board);
-    void run (engine::Engine& engine);
+    engine::Command* run (engine::Engine& engine);
     // Setters and Getters
     const PathMap& getUnitTeam1PathMap() const;
     void setUnitTeam1PathMap(const PathMap& unitTeam1PathMap);

@@ -8,7 +8,7 @@ namespace ai {
 
     }
 
-    void RandomAI::run(engine::Engine& engine) {
+    engine::Command* RandomAI::run(engine::Engine& engine) {
         std::vector<engine::Command*> commands;
         listCommands(engine.getState(), commands);
         commands.push_back(new engine::EndTurnCommand());
@@ -27,6 +27,8 @@ namespace ai {
         engine.update();
         
         commands.clear();
+        
+        return nullptr;
     }
 
 }
