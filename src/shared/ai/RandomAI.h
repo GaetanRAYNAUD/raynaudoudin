@@ -12,6 +12,7 @@ namespace ai {
   class AI;
 }
 
+#include "state/TeamId.h"
 #include "AI.h"
 
 namespace ai {
@@ -24,7 +25,7 @@ namespace ai {
     // Operations
   public:
     RandomAI (int randomSeed);
-    engine::Command* run (engine::Engine& engine);
+    engine::Command* run (engine::Engine& engine, state::TeamId player);
     // Setters and Getters
     const std::mt19937& getRandgen() const;
     void setRandgen(const std::mt19937& randgen);

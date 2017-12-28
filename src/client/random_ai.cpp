@@ -41,7 +41,7 @@ namespace random_ai {
                 } 
             }
             
-            ai->run(*engine);
+            ai->run(*engine, state::TeamId::INVALIDTEAM);
             delete scene;
             scene = new Scene(engine->getState());
 

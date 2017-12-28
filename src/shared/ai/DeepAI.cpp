@@ -10,7 +10,7 @@ namespace ai {
         //objectif maxLeaves = 5 et maxDepth = 4
     }
     
-    engine::Command* DeepAI::run(engine::Engine& engine) {
+    engine::Command* DeepAI::run(engine::Engine& engine, state::TeamId player) {
         std::vector<engine::Command*> bestCommands;
         
         minimax_max_init(engine, 0, bestCommands);

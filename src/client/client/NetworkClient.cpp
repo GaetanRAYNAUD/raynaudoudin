@@ -87,7 +87,9 @@ namespace client {
             engine.addCommands(jsonCommands);
         }
         
-        //putServerCommand(player_ai->run());
+        if(engine.getState().getCurrentTeam() == player) {
+            putServerCommand(player_ai->run(engine, player));
+        }
     }
 
 }

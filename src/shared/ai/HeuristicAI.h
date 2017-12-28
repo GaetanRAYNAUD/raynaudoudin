@@ -18,6 +18,7 @@ namespace ai {
 }
 
 #include "PathMap.h"
+#include "state/TeamId.h"
 #include "AI.h"
 
 namespace ai {
@@ -36,7 +37,7 @@ namespace ai {
   public:
     HeuristicAI ();
     void initPathMaps (const state::Board& board);
-    engine::Command* run (engine::Engine& engine);
+    engine::Command* run (engine::Engine& engine, state::TeamId player);
     // Setters and Getters
     const PathMap& getUnitTeam1PathMap() const;
     void setUnitTeam1PathMap(const PathMap& unitTeam1PathMap);

@@ -32,7 +32,7 @@ namespace deep_ai {
         while (window.isOpen()) {
             sf::Event event;
                    
-            ai->run(*engine);
+            ai->run(*engine, state::TeamId::INVALIDTEAM);
             if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
                 pause = true;
             }

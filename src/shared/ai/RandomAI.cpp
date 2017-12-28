@@ -8,7 +8,7 @@ namespace ai {
 
     }
 
-    engine::Command* RandomAI::run(engine::Engine& engine) {
+    engine::Command* RandomAI::run(engine::Engine& engine, state::TeamId player) {
         std::vector<engine::Command*> commands;
         listCommands(engine.getState(), commands);
         commands.push_back(new engine::EndTurnCommand());

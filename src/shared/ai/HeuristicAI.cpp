@@ -65,7 +65,7 @@ namespace ai {
         castlePathMap.update(board);
     }
     
-    engine::Command* HeuristicAI::run(engine::Engine& engine) {
+    engine::Command* HeuristicAI::run(engine::Engine& engine, state::TeamId player) {
         std::vector<engine::Command*> commandsAttack;
         std::vector<engine::Command*> commandsMovement;
         std::vector<engine::Command*> commandsSpawn;

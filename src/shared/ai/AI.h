@@ -12,6 +12,7 @@ namespace state {
   class State;
 }
 
+#include "state/TeamId.h"
 #include "engine/Engine.h"
 #include "engine/Command.h"
 #include "state/State.h"
@@ -23,7 +24,7 @@ namespace ai {
     // Operations
   public:
     virtual ~AI ();
-    virtual engine::Command* run (engine::Engine& engine) = 0;
+    virtual engine::Command* run (engine::Engine& engine, state::TeamId player) = 0;
   protected:
     void listCommands (const state::State& state, std::vector<engine::Command*>& commands);
     void listCommandsMovement (const state::State& state, std::vector<engine::Command*>& commands);
