@@ -45,7 +45,7 @@ namespace network {
                 std::cout << "Statut actuel de la partie : " << jsonResponse["Game Status"].asString() << std::endl;
 
                 delete request;
-            return;
+                return;
             }
         } else {
             std::cout << "Erreur dans les données envoyées par le serveur !" << std::endl;

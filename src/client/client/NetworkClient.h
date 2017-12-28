@@ -33,7 +33,7 @@ namespace client {
   public:
     NetworkClient (const std::string& url, int port, state::TeamId player);
     std::string getGameStatus ();
-    bool getServerCommands (Json::Value& out);
+    bool getServerCommands (Json::Value& out, int turn);
     void putServerCommand (engine::Command* command);
     void run ();
     // Setters and Getters

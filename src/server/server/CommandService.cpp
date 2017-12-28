@@ -61,7 +61,6 @@ namespace server {
                         } else if(jsonCommands["Type"].asString() == "LoadCommand") {
                             engine.addCommand(jsonCommands["priority"].asInt(), engine::LoadCommand::deserialize(jsonCommands));
                         }
-                        engine.update();
                     }
                 }
             }
