@@ -15,6 +15,11 @@ namespace render {
         window.draw(*(stateLayer.getSurface()));
         window.draw(*(debugLayer.getSurface()));
     }
+
+    void Scene::stateChanged() {
+
+    }
+    
     
     DebugLayer& Scene::getDebugLayer() {
         return debugLayer;

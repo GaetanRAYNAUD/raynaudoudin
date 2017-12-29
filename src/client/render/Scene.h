@@ -46,7 +46,7 @@ namespace render {
     // Operations
   public:
     Scene (const state::State& state);
-    void stateChanged (const state::Event& event);
+    void stateChanged ();
     void draw (sf::RenderWindow& window);
     DebugLayer& getDebugLayer ();
     // Setters and Getters
