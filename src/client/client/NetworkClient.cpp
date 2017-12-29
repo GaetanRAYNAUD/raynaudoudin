@@ -79,20 +79,65 @@ namespace client {
     }
 
     void NetworkClient::run() {
+        bool pause = 0;
+        int windowWidth = 1188;
+        int windowHeight = 576;
+        int timePause = 100;        
         Json::Value jsonCommands;
+        render::Scene scene(engine.getState());
+        sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         
-        
-        
-        if(getServerCommands(jsonCommands, engine.getState().getTurn())) {
-            engine.addCommands(jsonCommands);
-            engine.update();
-            engine.addCommand(1, new engine::HandleWinCommand());
-            engine.update();
-        }
-        
-        if(engine.getState().getCurrentTeam() == player) {
-            putServerCommand(player_ai->run(engine, player));
-        }
+        window.setFramerateLimit(60);
+
+        while (window.isOpen()) {
+            sf::Event event;
+            
+            if(getGameStatus() != "RUNNING") {
+                std::cout << "La partie est terminée !" << std::endl;
+                std::cout << "Arrêt du client : " << player << "!" << std::endl;                
+                return;
+            }
+            
+            if(!pause) {
+
+                while (window.pollEvent(event)) {
+                    if(event.type == sf::Event::Closed) {
+                        window.close(); 
+                    } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
+                        pause = !pause;
+                    } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
+                        if(timePause == 100) {
+                            timePause = 10;
+                        } else {
+                            timePause = 100;
+                        }
+                    }
+
+                }
+
+                if(getServerCommands(jsonCommands, engine.getState().getTurn())) {
+                    engine.addCommands(jsonCommands);
+                    engine.update();
+
+                    scene.stateChanged();                
+                }
+
+                if(engine.getState().getCurrentTeam() == player) {
+                    putServerCommand(player_ai->run(engine, player));
+                }
+                
+                if(engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
+                    pause = true;
+                    std::string s = std::to_string(engine.getState().getWinner());
+                    std::string winnerMessage = "L equipe " + s + " a gagne !";
+                    scene.getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
+                }
+
+
+                scene.draw(window);
+                window.display();
+            }
+        }        
     }
 
 }

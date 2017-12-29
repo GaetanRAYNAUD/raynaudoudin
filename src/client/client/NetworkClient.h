@@ -11,11 +11,15 @@ namespace engine {
 };
 namespace ai {
   class AI;
+};
+namespace render {
+  class Scene;
 }
 
 #include "state/TeamId.h"
 #include "engine/Engine.h"
 #include "ai/AI.h"
+#include "render/Scene.h"
 
 namespace client {
 

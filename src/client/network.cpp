@@ -1,5 +1,3 @@
-#include <SFML/Network/Http.hpp>
-
 #include "network.hpp"
 
 using namespace std;
@@ -215,4 +213,10 @@ namespace network {
 
         delete request;
     }
+    
+    void network_Test2(int port, std::string name) {
+        client::NetworkClient clientPlayer1("http://localhost", port, state::TeamId::TEAM_1);
+        
+        clientPlayer1.run();
+    }    
 }
