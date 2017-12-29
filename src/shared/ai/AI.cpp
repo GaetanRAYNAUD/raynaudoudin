@@ -10,7 +10,7 @@
 namespace ai {
 
     void AI::listCommandsMovement(const state::State& state, std::vector<engine::Command*>& commands) {
-        const std::map<int, std::unique_ptr<state::Unit> >& units = state.getBoard().getUnits();
+        const std::map<int, std::unique_ptr<state::Unit>>& units = state.getBoard().getUnits();
         std::vector<state::Direction> directions;
         
         commands.clear();

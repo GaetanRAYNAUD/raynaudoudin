@@ -75,17 +75,17 @@ namespace ai {
         listCommandsAttack(engine.getState(), commandsAttack);
         listCommandsMovement(engine.getState(), commandsMovement);
         listCommandsSpawn(engine.getState(), commandsSpawn);
-        
+
         switch (engine.getState().getCurrentTeam()) {
             case state::TeamId::TEAM_1:
-                
+
                 if (commandsSpawn.size() != 0) {
-                    commandToReturn = commandsSpawn.front();
+                    commandToReturn = commandsSpawn.front()->clone();
                     break;
                 }
                 
                 if (commandsAttack.size() != 0) {
-                    commandToReturn = commandsAttack.front();
+                    commandToReturn = commandsAttack.front()->clone();
                     break;
                 }
                 
@@ -106,7 +106,7 @@ namespace ai {
                     for (it = 0; it < commandsMovement.size(); it++) {
                         if (unit->getId() == ((engine::MoveCommand*)commandsMovement.at(it))->getIdUnit() && 
                                 ((engine::MoveCommand*)commandsMovement.at(it))->getDirection() == bestPoint.transformToDirection(pointUnit)) {
-                            commandToReturn = commandsMovement.at(it);
+                            commandToReturn = commandsMovement.at(it)->clone();
                             break;
                         }
                     }
@@ -123,11 +123,11 @@ namespace ai {
                 
             case state::TeamId::TEAM_2:
                 if (commandsSpawn.size() != 0) {
-                    commandToReturn = commandsSpawn.front();
+                    commandToReturn = commandsSpawn.front()->clone();
                     break;
                 }
                 if (commandsAttack.size() != 0) {
-                    commandToReturn = commandsAttack.front();
+                    commandToReturn = commandsAttack.front()->clone();
                     break;
                 }
                 if (commandsMovement.size() != 0) {
@@ -146,7 +146,7 @@ namespace ai {
                     for (it = 0; it < commandsMovement.size(); it++) {
                         if (unit->getId() == ((engine::MoveCommand*)commandsMovement.at(it))->getIdUnit() && 
                                 ((engine::MoveCommand*)commandsMovement.at(it))->getDirection() == bestPoint.transformToDirection(pointUnit)) {
-                            commandToReturn = commandsMovement.at(it);
+                            commandToReturn = commandsMovement.at(it)->clone();
                             break;
                         }
                     }
@@ -168,9 +168,17 @@ namespace ai {
                 break;
         }
         
-        commandsAttack.clear();
-        commandsMovement.clear();
-        commandsSpawn.clear();
+        for(auto& c : commandsAttack) {
+            delete  c;
+        }
+        
+        for(auto& c : commandsMovement) {
+            delete  c;
+        }
+        
+        for(auto& c : commandsSpawn) {
+            delete  c;
+        }        
         
         return commandToReturn;
     }
