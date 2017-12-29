@@ -69,6 +69,7 @@ namespace ai {
         std::vector<engine::Command*> commandsAttack;
         std::vector<engine::Command*> commandsMovement;
         std::vector<engine::Command*> commandsSpawn;
+        engine::Command* commandToReturn = nullptr;
 
         initPathMaps(engine.getState().getBoard());
         listCommandsAttack(engine.getState(), commandsAttack);
@@ -77,14 +78,17 @@ namespace ai {
         
         switch (engine.getState().getCurrentTeam()) {
             case state::TeamId::TEAM_1:
+                
                 if (commandsSpawn.size() != 0) {
-                    engine.addCommand(1, commandsSpawn.front());
+                    commandToReturn = commandsSpawn.front();
                     break;
                 }
+                
                 if (commandsAttack.size() != 0) {
-                    engine.addCommand(1, commandsAttack.front());
+                    commandToReturn = commandsAttack.front();
                     break;
                 }
+                
                 if (commandsMovement.size() != 0) {
                     state::Unit* unit = engine.getState().getBoard().findUnit(((engine::MoveCommand*)commandsMovement.front())->getIdUnit());
                     Point pointUnit(unit->getPositionX(), unit->getPositionY());
@@ -94,6 +98,7 @@ namespace ai {
                     if(unitTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight() <
                             houseTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY()).getWeight()) {
                         bestPoint = unitTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY());
+                        
                     } else {
                         bestPoint = houseTeam2PathMap.getBestPoint(unit->getPositionX(), unit->getPositionY());
                     }
@@ -101,26 +106,28 @@ namespace ai {
                     for (it = 0; it < commandsMovement.size(); it++) {
                         if (unit->getId() == ((engine::MoveCommand*)commandsMovement.at(it))->getIdUnit() && 
                                 ((engine::MoveCommand*)commandsMovement.at(it))->getDirection() == bestPoint.transformToDirection(pointUnit)) {
-                            engine.addCommand(1, commandsMovement.at(it));
+                            commandToReturn = commandsMovement.at(it);
                             break;
                         }
                     }
+                    
                     if (it == commandsMovement.size()) {
                         unit->setSpeed(0);
+                    } else {
+                        break;
                     }
-                    break;
                 }
 
-                engine.addCommand(1, new engine::EndTurnCommand());
+                commandToReturn = new engine::EndTurnCommand();
                 break;
                 
             case state::TeamId::TEAM_2:
                 if (commandsSpawn.size() != 0) {
-                    engine.addCommand(1, commandsSpawn.front());
+                    commandToReturn = commandsSpawn.front();
                     break;
                 }
                 if (commandsAttack.size() != 0) {
-                    engine.addCommand(1, commandsAttack.front());
+                    commandToReturn = commandsAttack.front();
                     break;
                 }
                 if (commandsMovement.size() != 0) {
@@ -139,17 +146,22 @@ namespace ai {
                     for (it = 0; it < commandsMovement.size(); it++) {
                         if (unit->getId() == ((engine::MoveCommand*)commandsMovement.at(it))->getIdUnit() && 
                                 ((engine::MoveCommand*)commandsMovement.at(it))->getDirection() == bestPoint.transformToDirection(pointUnit)) {
-                            engine.addCommand(1, commandsMovement.at(it));
+                            commandToReturn = commandsMovement.at(it);
                             break;
                         }
                     }
                     if (it == commandsMovement.size()) {
                         unit->setSpeed(0);
                     }
-                    break;
+                    
+                    if (it == commandsMovement.size()) {
+                        unit->setSpeed(0);
+                    } else {
+                        break;
+                    }
                 }
 
-                engine.addCommand(1, new engine::EndTurnCommand());
+                commandToReturn = new engine::EndTurnCommand();
                 break;
             
             case state::TeamId::INVALIDTEAM:
@@ -160,7 +172,7 @@ namespace ai {
         commandsMovement.clear();
         commandsSpawn.clear();
         
-        return nullptr;
+        return commandToReturn;
     }
     
     const PathMap& HeuristicAI::getHouseTeam1PathMap() const {

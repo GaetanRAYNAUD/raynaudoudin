@@ -18,11 +18,16 @@ namespace thread {
         
         do {
             std::unique_lock<std::mutex> lck(mtx);
-            while (!ready) cv.wait(lck);
-            ai->run(*engine, state::TeamId::INVALIDTEAM);
+            
+            while (!ready) {
+                cv.wait(lck);
+            }
+            
+            engine->addCommand(1, ai->run(*engine, state::TeamId::INVALIDTEAM));
             engine->update();
             engine->addCommand(1, new HandleWinCommand());
             engine->update();
+                
             ready = false;
         } while (loopThread);
         
