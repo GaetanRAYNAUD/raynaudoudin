@@ -17,7 +17,9 @@ namespace render {
     }
 
     void Scene::stateChanged() {
-
+        terrainLayer.initSurface();
+        unitLayer.initSurface();
+        stateLayer.initSurface();
     }
     
     

@@ -16,7 +16,7 @@ namespace play {
         int timePause = 100;
         int commandIterator = 0;
         Engine engine(mapWidth, mapHeight);  
-        Scene* scene = new Scene(engine.getState());
+        Scene scene(engine.getState());
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         sf::Clock clock;
         sf::Time time;
@@ -60,22 +60,19 @@ namespace play {
                 
             }
             
-            delete scene;
-            scene = new Scene(engine.getState());   
-            
             if(engine.getState().getWinner() != TeamId::INVALIDTEAM) {
                 pause = true;
                 std::string s = std::to_string(engine.getState().getWinner());
                 std::string winnerMessage = "L equipe " + s + " a gagne !";
-                scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
+                scene.getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
             }
             
-            scene->draw(window);
+            scene.stateChanged();
+            scene.draw(window);
             window.display();
         }
-        std::cout << "Restitution terminée !" << std::endl;
         
-        delete scene;
+        std::cout << "Restitution terminée !" << std::endl;
     }
     
     void readCommandJson(Json::Value& jsonValue, engine::Engine& engine) {
