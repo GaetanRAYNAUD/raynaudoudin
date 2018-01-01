@@ -77,11 +77,6 @@ namespace server {
                 sleep(1);
             }
         }
-        
-        while(engine.getState().getWinner() == state::TeamId::INVALIDTEAM) {
-            engine.addCommand(1, new engine::HandleWinCommand());
-            engine.update();            
-        }
     }    
 }
 
