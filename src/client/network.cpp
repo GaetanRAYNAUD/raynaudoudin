@@ -215,7 +215,17 @@ namespace network {
     }
     
     void network_Test2(int port, std::string name) {
-        client::NetworkClient clientPlayer1("http://localhost", port, state::TeamId::TEAM_1);
+        client::NetworkClient clientPlayer1("http://localhost", port, name);
+        std::string gameStatus;
+        
+        gameStatus = clientPlayer1.getGameStatus();
+        
+        if(gameStatus == "RUNNING") {
+            std::cout << "La partie n'est plus en phase de création !" << std::endl;
+            std::cout << "Réessayez plus tard !" << std::endl;
+            std::cout << "Arrêt du client !" << std::endl;
+            return;
+        }
         
         clientPlayer1.run();
     }    

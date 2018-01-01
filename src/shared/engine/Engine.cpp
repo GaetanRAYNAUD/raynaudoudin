@@ -7,6 +7,7 @@
 #include "engine/LoadCommand.h"
 #include "engine/EndTurnCommand.h"
 
+#include <iostream>
 namespace engine {
 
     Engine::Engine() : state(22, 8) {
@@ -23,23 +24,29 @@ namespace engine {
 
     void Engine::addCommands(const Json::Value& in) {
         Json::Value jsonCommands;
-    
-        for(unsigned int i = 0; i < in["Commands"].size(); i++) {
-            jsonCommands = in["Commands"][i];
-            
-            if(!in.empty()) {            
-                if(jsonCommands["Type"].asString() == "HandleWinCommand") {
-                    addCommand(jsonCommands["priority"].asInt(), engine::HandleWinCommand::deserialize(jsonCommands));
-                } else if(jsonCommands["Type"].asString() == "EndTurnCommand") {
-                    addCommand(jsonCommands["priority"].asInt(), engine::EndTurnCommand::deserialize(jsonCommands));
-                } else if(jsonCommands["Type"].asString() == "MoveCommand") {
-                    addCommand(jsonCommands["priority"].asInt(), engine::MoveCommand::deserialize(jsonCommands));
-                } else if(jsonCommands["Type"].asString() == "AttackCommand") {
-                    addCommand(jsonCommands["priority"].asInt(), engine::AttackCommand::deserialize(jsonCommands));
-                } else if(jsonCommands["Type"].asString() == "SpawnCommand") {
-                    addCommand(jsonCommands["priority"].asInt(), engine::SpawnCommand::deserialize(jsonCommands));
-                } else if(jsonCommands["Type"].asString() == "LoadCommand") {
-                    addCommand(jsonCommands["priority"].asInt(), engine::LoadCommand::deserialize(jsonCommands));
+        
+        if(in.empty()) {
+            return;
+        }
+        
+        if(in.isMember("Commands")) {
+            for(unsigned int i = 0; i < in["Commands"].size(); i++) {
+                jsonCommands = in["Commands"][i];
+
+                if(!in.empty() && jsonCommands.isMember("Type") && jsonCommands.isMember("priority")) {
+                    if(jsonCommands["Type"] == "HandleWinCommand") {
+                        addCommand(jsonCommands["priority"].asInt(), engine::HandleWinCommand::deserialize(jsonCommands));
+                    } else if(jsonCommands["Type"] == "EndTurnCommand") {
+                        addCommand(jsonCommands["priority"].asInt(), engine::EndTurnCommand::deserialize(jsonCommands));
+                    } else if(jsonCommands["Type"] == "MoveCommand") {
+                        addCommand(jsonCommands["priority"].asInt(), engine::MoveCommand::deserialize(jsonCommands));
+                    } else if(jsonCommands["Type"] == "AttackCommand") {
+                        addCommand(jsonCommands["priority"].asInt(), engine::AttackCommand::deserialize(jsonCommands));
+                    } else if(jsonCommands["Type"] == "SpawnCommand") {
+                        addCommand(jsonCommands["priority"].asInt(), engine::SpawnCommand::deserialize(jsonCommands));
+                    } else if(jsonCommands["Type"] == "LoadCommand") {
+                        addCommand(jsonCommands["priority"].asInt(), engine::LoadCommand::deserialize(jsonCommands));
+                    }
                 }
             }
         }
@@ -65,11 +72,9 @@ namespace engine {
             c.second->serialize(commandHistory);
             
             commandHistory["Commands"][commandHistory["Commands"].size() - 1]["priority"] = c.first;
-            if(c.second->getTypeId() == CommandTypeId::END_TURN) {
-                commandHistory["Commands"][commandHistory["Commands"].size() - 1]["turn"] = state.getTurn() - 1;
-            } else {
-                commandHistory["Commands"][commandHistory["Commands"].size() - 1]["turn"] = state.getTurn();
-            }
+            commandHistory["Commands"][commandHistory["Commands"].size() - 1]["epoch"] = state.getEpoch();
+            
+            state.addEpoch();
         }
         
         currentCommands.clear();

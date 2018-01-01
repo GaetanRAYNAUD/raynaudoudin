@@ -4,14 +4,18 @@
 
 #include <string>
 
+#include "state/TeamId.h"
+
 namespace server {
 
   /// class Player - 
   class Player {
+    // Associations
     // Attributes
   public:
     /// 				
     std::string name;
+    state::TeamId teamId;
     bool free     = true;
     // Operations
   public:

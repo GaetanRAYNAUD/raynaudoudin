@@ -15,21 +15,22 @@ namespace server {
     }
 
     HttpStatus CommandService::get(Json::Value& out, int id) const {
-        if(id <= engine.getState().getTurn()) {   
-        Json::Value jsonCommands;
-        Json::Value commandHistory = engine.getCommandHistory();
-        
-        if(!commandHistory.empty()) {        
-            for(unsigned int i = 0; i < commandHistory["Commands"].size(); i++) {
-                jsonCommands = commandHistory["Commands"][i];
-                
-                if(jsonCommands["turn"].isInt() && jsonCommands["turn"].asInt() == id) {
-                    out["Commands"].append(jsonCommands);
-                } else if(jsonCommands["turn"].asInt() > id) {
-                    break;
+        if(id <= engine.getState().getEpoch()) {
+            Json::Value jsonCommands;
+            Json::Value commandHistory = engine.getCommandHistory();
+
+            if(!commandHistory.empty()) {        
+                for(unsigned int i = 0; i < commandHistory["Commands"].size(); i++) {
+                    jsonCommands = commandHistory["Commands"][i];
+
+                    if(jsonCommands["epoch"].isInt() && jsonCommands["epoch"].asInt() == id) {
+                        out["Commands"].append(jsonCommands);
+                    } else if(jsonCommands["epoch"].asInt() > id) {
+                        break;
+                    }
                 }
             }
-        }
+            
             return HttpStatus::OK;
             
         } else {
@@ -48,17 +49,17 @@ namespace server {
 
                 if(jsonCommands.isMember("Type") && jsonCommands.isMember("priority")) {
                     if(jsonCommands["Type"].isString() && jsonCommands["priority"].isInt()) {
-                        if(jsonCommands["Type"].asString() == "HandleWinCommand") {
+                        if(jsonCommands["Type"] == "HandleWinCommand") {
                             engine.addCommand(jsonCommands["priority"].asInt(), engine::HandleWinCommand::deserialize(jsonCommands));
-                        } else if(jsonCommands["Type"].asString() == "EndTurnCommand") {
+                        } else if(jsonCommands["Type"] == "EndTurnCommand") {
                             engine.addCommand(jsonCommands["priority"].asInt(), engine::EndTurnCommand::deserialize(jsonCommands));
-                        } else if(jsonCommands["Type"].asString() == "MoveCommand") {
+                        } else if(jsonCommands["Type"] == "MoveCommand") {
                             engine.addCommand(jsonCommands["priority"].asInt(), engine::MoveCommand::deserialize(jsonCommands));
-                        } else if(jsonCommands["Type"].asString() == "AttackCommand") {
+                        } else if(jsonCommands["Type"] == "AttackCommand") {
                             engine.addCommand(jsonCommands["priority"].asInt(), engine::AttackCommand::deserialize(jsonCommands));
-                        } else if(jsonCommands["Type"].asString() == "SpawnCommand") {
+                        } else if(jsonCommands["Type"] == "SpawnCommand") {
                             engine.addCommand(jsonCommands["priority"].asInt(), engine::SpawnCommand::deserialize(jsonCommands));
-                        } else if(jsonCommands["Type"].asString() == "LoadCommand") {
+                        } else if(jsonCommands["Type"] == "LoadCommand") {
                             engine.addCommand(jsonCommands["priority"].asInt(), engine::LoadCommand::deserialize(jsonCommands));
                         }
                     }
@@ -66,7 +67,7 @@ namespace server {
             }
         }
 
-        out["turn"] = engine.getState().getTurn();
+        out["epoch"] = engine.getState().getEpoch();
         
         return HttpStatus::CREATED;
     }

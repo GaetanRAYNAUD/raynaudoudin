@@ -30,12 +30,13 @@ namespace client {
   private:
     std::string url;
     int port;
-    state::TeamId player;
+    std::string player;
+    state::TeamId teamId;
     engine::Engine engine;
     std::unique_ptr<ai::AI> player_ai;
     // Operations
   public:
-    NetworkClient (const std::string& url, int port, state::TeamId player);
+    NetworkClient (const std::string& url, int port, std::string player);
     std::string getGameStatus ();
     bool getServerCommands (Json::Value& out, int turn);
     void putServerCommand (engine::Command* command);

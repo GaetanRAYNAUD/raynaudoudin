@@ -9,7 +9,7 @@ namespace server {
 
     HttpStatus GameService::get(Json::Value& out, int id) const {
         if(game->getEngine().getState().getEpoch() != 0) {
-            out["Game Status"] = "RUNNING";
+            out["Game Status"] = "RUNNING";          
         } else {
             out["Game Status"] = "CREATING";
         }

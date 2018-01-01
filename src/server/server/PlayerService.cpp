@@ -4,6 +4,7 @@
 #include "ServiceException.h"
 
 #include <string>
+#include <iostream>
 
 namespace server {
     
@@ -39,7 +40,7 @@ namespace server {
     }
 
     HttpStatus PlayerService::post(Json::Value& out, const Json::Value& in) {
-          int id;
+        int id;
         std::string name;
         
         if(game->maxPlayer > game->getPlayers().size()) {
@@ -56,6 +57,12 @@ namespace server {
                     id = game->addPlayer(std::move(std::unique_ptr<Player>(new Player(name, false))));
 
                     out["id"] = id;
+                    
+                    if(game->getPlayer(id)->teamId == state::TeamId::TEAM_1) {
+                        out["teamId"] = "TEAM_1";
+                    } else {
+                        out["teamId"] = "TEAM_2";
+                    }
 
                     return HttpStatus::CREATED;
                 } else {

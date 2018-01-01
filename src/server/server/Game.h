@@ -28,17 +28,18 @@ namespace server {
   public:
     const unsigned int maxPlayer     = 2;
   private:
+    /// 	
+    engine::Engine engine;
     std::unique_ptr<std::thread> engineThread;
   protected:
     std::map<int, std::unique_ptr<server::Player>> players;
     int idseq;
-    /// 	
-    engine::Engine engine;
     // Operations
   public:
     Game ();
     ~Game ();
     const Player* getPlayer (int id) const;
+    engine::Engine& getEngine ();
     int addPlayer (std::unique_ptr<server::Player> player);
     void setPlayer (int id, std::unique_ptr<server::Player> player);
     void removePlayer (int id);
@@ -48,8 +49,6 @@ namespace server {
     void setPlayers(const std::map<int, std::unique_ptr<server::Player>>& players);
     int getIdseq() const;
     void setIdseq(int idseq);
-    const engine::Engine& getEngine() const;
-    void setEngine(const engine::Engine& engine);
   };
 
 };
