@@ -23,7 +23,7 @@ namespace thread {
                 cv.wait(lck);
             }
             
-            engine->addCommand(1, ai->run(*engine, state::TeamId::INVALIDTEAM));
+            engine->addCommand(1, ai->run(*engine, engine->getState().getCurrentTeam()));
             engine->update();
             engine->addCommand(1, new HandleWinCommand());
             engine->update();

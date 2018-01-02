@@ -66,6 +66,10 @@ namespace ai {
     }
     
     engine::Command* HeuristicAI::run(engine::Engine& engine, state::TeamId player) {
+        if(engine.getState().getCurrentTeam() != player) {
+            return nullptr;
+        }
+        
         std::vector<engine::Command*> commandsAttack;
         std::vector<engine::Command*> commandsMovement;
         std::vector<engine::Command*> commandsSpawn;
@@ -76,7 +80,7 @@ namespace ai {
         listCommandsMovement(engine.getState(), commandsMovement);
         listCommandsSpawn(engine.getState(), commandsSpawn);
 
-        switch (engine.getState().getCurrentTeam()) {
+        switch (player) {
             case state::TeamId::TEAM_1:
 
                 if (commandsSpawn.size() != 0) {
