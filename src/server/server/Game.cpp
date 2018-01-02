@@ -67,15 +67,28 @@ namespace server {
         return players;
     }
 
-    void Game::run() {
-        while(getEngine().getState().getEpoch() == 0) {
-            if(getPlayers().size() == maxPlayer) {
+    void Game::run() {        
+        while(engine.getState().getEpoch() == 0) {
+            if(players.size() == maxPlayer) {
                 engine.addCommand(1, new engine::LoadCommand("res/map.txt"));
                 engine.update();
                 
             } else {
-                sleep(1);
+                usleep(300000);
             }
+        }
+
+        while(engine.getState().getWinner() == state::TeamId::INVALIDTEAM) {
+            if(players.size() < maxPlayer) {
+                return;
+            }
+            
+            if(engine.getCurrentCommands().size() > 0) {
+                engine.addCommand(engine.getCurrentCommands().size(), new engine::HandleWinCommand());
+                engine.update();
+            }
+            
+            usleep(30000);
         }
     }    
 }

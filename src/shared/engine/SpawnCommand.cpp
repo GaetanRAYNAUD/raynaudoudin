@@ -59,6 +59,7 @@ namespace engine {
 
     void SpawnCommand::serialize(Json::Value& out) const {
         Json::Value jsonCommand;
+
         jsonCommand["Type"] = "SpawnCommand";
         jsonCommand["x"] = x;
         jsonCommand["y"] = y;

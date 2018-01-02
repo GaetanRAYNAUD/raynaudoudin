@@ -18,10 +18,10 @@ namespace server {
   class PlayerService : public server::AbstractService {
     // Attributes
   private:
-    Game* game;
+    Game& game;
     // Operations
   public:
-    PlayerService (Game* game);
+    PlayerService (Game& game);
     HttpStatus get (Json::Value& out, int id) const;
     HttpStatus put (const Json::Value& in, int id);
     HttpStatus post (Json::Value& out, const Json::Value& in);

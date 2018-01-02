@@ -22,29 +22,25 @@ namespace engine {
         currentCommands.insert(std::make_pair(priority, std::unique_ptr<Command>(cmd)));
     }
 
-    void Engine::addCommands(const Json::Value& in) {
-        Json::Value jsonCommands;
-        
+    void Engine::addCommands(const Json::Value& in) {        
         if(in.empty()) {
             return;
         }
         
         if(in.isMember("Commands")) {
-            for(unsigned int i = 0; i < in["Commands"].size(); i++) {
-                jsonCommands = in["Commands"][i];
-
+            for(auto& jsonCommands : in["Commands"]) {               
                 if(!in.empty() && jsonCommands.isMember("Type") && jsonCommands.isMember("priority")) {
-                    if(jsonCommands["Type"] == "HandleWinCommand") {
+                    if(jsonCommands["Type"].asString() == "HandleWinCommand") {
                         addCommand(jsonCommands["priority"].asInt(), engine::HandleWinCommand::deserialize(jsonCommands));
-                    } else if(jsonCommands["Type"] == "EndTurnCommand") {
+                    } else if(jsonCommands["Type"].asString() == "EndTurnCommand") {
                         addCommand(jsonCommands["priority"].asInt(), engine::EndTurnCommand::deserialize(jsonCommands));
-                    } else if(jsonCommands["Type"] == "MoveCommand") {
+                    } else if(jsonCommands["Type"].asString() == "MoveCommand") {
                         addCommand(jsonCommands["priority"].asInt(), engine::MoveCommand::deserialize(jsonCommands));
-                    } else if(jsonCommands["Type"] == "AttackCommand") {
+                    } else if(jsonCommands["Type"].asString() == "AttackCommand") {
                         addCommand(jsonCommands["priority"].asInt(), engine::AttackCommand::deserialize(jsonCommands));
-                    } else if(jsonCommands["Type"] == "SpawnCommand") {
+                    } else if(jsonCommands["Type"].asString() == "SpawnCommand") {
                         addCommand(jsonCommands["priority"].asInt(), engine::SpawnCommand::deserialize(jsonCommands));
-                    } else if(jsonCommands["Type"] == "LoadCommand") {
+                    } else if(jsonCommands["Type"].asString() == "LoadCommand") {
                         addCommand(jsonCommands["priority"].asInt(), engine::LoadCommand::deserialize(jsonCommands));
                     }
                 }
@@ -68,13 +64,16 @@ namespace engine {
         std::stack<std::shared_ptr<Action>> actions;
         
         for(auto& c : currentCommands) {
-            c.second.get()->execute(state, actions);
             c.second->serialize(commandHistory);
             
             commandHistory["Commands"][commandHistory["Commands"].size() - 1]["priority"] = c.first;
             commandHistory["Commands"][commandHistory["Commands"].size() - 1]["epoch"] = state.getEpoch();
             
-            state.addEpoch();
+            c.second.get()->execute(state, actions);
+            
+            if(c.second->getTypeId() != CommandTypeId::HANDLE_WIN) {
+                state.addEpoch();
+            }            
         }
         
         currentCommands.clear();

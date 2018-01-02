@@ -110,12 +110,12 @@ namespace listenn {
         
         try {
             ServicesManager servicesManager;
-            Game* game = new Game();
+            Game game;
             
             servicesManager.registerService(std::move(std::unique_ptr<VersionService>(new VersionService())));
             servicesManager.registerService(std::move(std::unique_ptr<PlayerService>(new PlayerService(game))));
             servicesManager.registerService(std::move(std::unique_ptr<GameService>(new GameService(game))));
-            servicesManager.registerService(std::move(std::unique_ptr<CommandService>(new CommandService(game->getEngine()))));
+            servicesManager.registerService(std::move(std::unique_ptr<CommandService>(new CommandService(game.getEngine()))));
             
             struct MHD_Daemon* server = nullptr;
             

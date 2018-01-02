@@ -8,13 +8,13 @@
 
 namespace server {
     
-    PlayerService::PlayerService(Game* game) : AbstractService("/player"), game(game) {
+    PlayerService::PlayerService(Game& game) : AbstractService("/player"), game(game) {
 
     }
 
     HttpStatus PlayerService::get(Json::Value& out, int id) const {
         if(id >= 0) {  
-            const Player* player = game->getPlayer(id);
+            const Player* player = game.getPlayer(id);
             
             if(player != nullptr) {
                 out["name"] = player->name;
@@ -29,7 +29,7 @@ namespace server {
         } else {
             Json::Value jsonPlayer;
             
-            for(auto& p : game->getPlayers()) {
+            for(auto& p : game.getPlayers()) {
                 jsonPlayer["name"] = p.second->name;
                 
                 out["Players"].append(jsonPlayer);
@@ -43,7 +43,7 @@ namespace server {
         int id;
         std::string name;
         
-        if(game->maxPlayer > game->getPlayers().size()) {
+        if(game.maxPlayer > game.getPlayers().size()) {
             if(in.size() == 1) {
                 if(in.isMember("name")) {
                     if(in["name"].isString()) {
@@ -54,11 +54,11 @@ namespace server {
                         return HttpStatus::BAD_REQUEST;
                     }
 
-                    id = game->addPlayer(std::move(std::unique_ptr<Player>(new Player(name, false))));
+                    id = game.addPlayer(std::move(std::unique_ptr<Player>(new Player(name, false))));
 
                     out["id"] = id;
                     
-                    if(game->getPlayer(id)->teamId == state::TeamId::TEAM_1) {
+                    if(game.getPlayer(id)->teamId == state::TeamId::TEAM_1) {
                         out["teamId"] = "TEAM_1";
                     } else {
                         out["teamId"] = "TEAM_2";
@@ -84,7 +84,7 @@ namespace server {
     }
 
     HttpStatus PlayerService::put(const Json::Value& in, int id) {
-        const Player* player = game->getPlayer(id);
+        const Player* player = game.getPlayer(id);
 
         if(player != nullptr) {
             std::string name;
@@ -102,7 +102,7 @@ namespace server {
                     name = player->name;
                 }
 
-                game->setPlayer(id, std::move(std::unique_ptr<Player>(new Player(name, player->free))));
+                game.setPlayer(id, std::move(std::unique_ptr<Player>(new Player(name, player->free))));
 
                 return HttpStatus::NO_CONTENT;
 
@@ -120,14 +120,14 @@ namespace server {
     }
 
     HttpStatus PlayerService::remove(int id) {
-        if(game->getPlayer(id) == nullptr) {
+        if(game.getPlayer(id) == nullptr) {
             throw ServiceException(HttpStatus::NOT_FOUND, "Not found");
             
             return HttpStatus::NOT_FOUND;
         } else {
-            game->removePlayer(id);
+            game.removePlayer(id);
 
-            if(game->getPlayer(id) == nullptr) {
+            if(game.getPlayer(id) == nullptr) {
                 return HttpStatus::NO_CONTENT;
             } else {
                 throw ServiceException(HttpStatus::SERVER_ERROR, "Server error");

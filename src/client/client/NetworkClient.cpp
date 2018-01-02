@@ -60,6 +60,10 @@ namespace client {
                 std::cout  << jsonReader.getFormattedErrorMessages() << std::endl;
             }
             
+            if(out.empty()) {
+                return false;
+            }
+
             return true;
         }
     }
@@ -71,17 +75,20 @@ namespace client {
         
         command->serialize(jsonCommand);
         
+        jsonCommand["Commands"][0]["priority"] = engine.getCurrentCommands().size();
+        
         request.setUri("/command");
         request.setMethod(sf::Http::Request::Post);
-        request.setBody(jsonCommand.asString());
+        request.setBody(jsonCommand.toStyledString());
         
         connection.sendRequest(request);
     }
 
     void NetworkClient::run() {
+        bool pause = false;
         int windowWidth = 1188;
         int windowHeight = 576;
-        int idPlayer;
+        int timePause = 3000;
         std::string gameStatus;
         render::Scene scene(engine.getState());
         sf::Clock clock;
@@ -112,19 +119,21 @@ namespace client {
 
         if(response.getStatus() == sf::Http::Response::ServiceNotAvailable) {
             std::cout << "Partie pleine !" << std::endl;
-            std::cout << "Arrêt de la connection !" << std::endl;
+            endConnection();
+            std::cout << "Arrêt du client !" << std::endl;
 
             return;
 
         } else if(response.getStatus() == sf::Http::Response::BadRequest) {
             std::cout << "Requete invalide !" << std::endl;
-            std::cout << "Arrêt de la connection !" << std::endl;
+            endConnection();
+            std::cout << "Arrêt du client !" << std::endl;
 
             return;
 
         } else if(response.getStatus() == sf::Http::Response::ConnectionFailed) {
             std::cout << "Connection au serveur impossible, vérifiez qu'il est bien en fonctionnement !" << std::endl;
-            std::cout << "Arrêt de la connection !" << std::endl;
+            std::cout << "Arrêt du client !" << std::endl;
             
             return;
             
@@ -148,12 +157,13 @@ namespace client {
             
         } else {
             std::cout << "Erreur dans les données envoyées par le serveur !" << std::endl;
-            std::cout << "Arrêt de la connection !" << std::endl;
+            endConnection();            
+            std::cout << "Arrêt du client !" << std::endl;
                 
             return;
         }
         
-        std::cout << "En attente des autre joeurs." << std::endl;
+        std::cout << "En attente des autres joeurs." << std::endl;
         
         while(gameStatus != "RUNNING" && time.asMilliseconds() < 60000) {
             sleep(1);
@@ -169,12 +179,14 @@ namespace client {
         } else if(time.asMilliseconds() >= 60000) {
             std::cout << "1 minute sans que la partie démarre !" << std::endl;
             std::cout << "Réessayez plus tard !" << std::endl;
+            endConnection();
             std::cout << "Arrêt du client !" << std::endl;
             return;            
         }    
         
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
         window.setFramerateLimit(60);
+        clock.restart();
         
         while (window.isOpen()) {
             sf::Event event;
@@ -182,52 +194,70 @@ namespace client {
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
                     window.close();
+                } else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
+                    pause = !pause;
+                } else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
+                    if(timePause == 300) {
+                        timePause = 1000;
+                    } else {
+                        timePause = 300;
+                    }
                 }
             }
             
-            if(getGameStatus() != "RUNNING") {
-                std::cout << "La partie est terminée !" << std::endl;
-                std::cout << "Arrêt du client : " << player << "!" << std::endl;
-                return;
-                
-            } else if(getGameStatus() == "SERVERNOTFOUND") {
-                std::cout << "Connection au serveur impossible, vérifiez qu'il est bien en fonctionnement !" << std::endl;
+            if(getGameStatus() == "SERVERNOTFOUND") {
+                std::cout << "Connection au serveur impossible, vérifiez qu'il est bien en fonctionnement !" << std::endl;            
                 std::cout << "Arrêt de la connection !" << std::endl;
+                
+                return;
+                
+            } else if(getGameStatus() != "RUNNING") {
+                std::cout << "La partie est terminée !" << std::endl;
+                endConnection();                
+                std::cout << "Arrêt du client : " << player << "!" << std::endl;
+                
                 return;
             }
 
-            std::cout << "Check ok" << std::endl;
-            
-            if(getServerCommands(jsonCommands, engine.getState().getEpoch())) {
-                engine.addCommands(jsonCommands);
-                std::cout << "Epoch : " << engine.getState().getEpoch() << std::endl;
-                std::cout << jsonCommands << std::endl;
-                std::cout << "Command size : " << engine.getCurrentCommands().size() << std::endl;
-                engine.update();
-                
-                scene.stateChanged();
+            if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
+                if(getServerCommands(jsonCommands, engine.getState().getEpoch())) {
+                    engine.addCommands(jsonCommands);
+                    std::cout << "Epoch : " << engine.getState().getEpoch() << " state changed with " << engine.getCurrentCommands().size() << " commands !" << std::endl;
+                    std::cout << "Types : ";
+
+                    for(auto& c : engine.getCurrentCommands()) {
+                        std::cout << c.second->getTypeId() << ", ";
+                    }
+
+                    std::cout << std::endl;
+                    engine.update();
+
+                    scene.stateChanged();
+                }
+
+                if(engine.getState().getCurrentTeam() == teamId) {
+                    putServerCommand(player_ai->run(engine, teamId));
+                }
             }
-
-            std::cout << "Commands ok" << std::endl;
-
-            std::cout << engine.getCommandHistory().size() << std::endl;
-            
-            if(engine.getState().getCurrentTeam() == teamId) {
-                putServerCommand(player_ai->run(engine, teamId));
-            }
-
-            std::cout << "AI ok" << std::endl;
             
             if(engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
+                pause = true;                
                 std::string s = std::to_string(engine.getState().getWinner());
                 std::string winnerMessage = "L equipe " + s + " a gagne !";
                 scene.getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
             }
-
-
+            
             scene.draw(window);
             window.display();
         }
+        
+        endConnection();
+    }
+
+    void NetworkClient::endConnection() {
+        sf::Http connection(url, port);
+        sf::Http::Request request;
+        sf::Http::Response response;        
         
         request.setUri("/player/" + std::to_string(idPlayer));
         request.setMethod(sf::Http::Request::Delete);
@@ -249,6 +279,7 @@ namespace client {
         } else if(response.getStatus() == sf::Http::Response::NoContent) {
             std::cout << "Partie quittée avec succès !" << std::endl;
             std::cout << "A bientôt" << std::endl;
-        }        
+        } 
     }
+
 }

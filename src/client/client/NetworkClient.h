@@ -34,12 +34,14 @@ namespace client {
     state::TeamId teamId;
     engine::Engine engine;
     std::unique_ptr<ai::AI> player_ai;
+    int idPlayer;
     // Operations
   public:
     NetworkClient (const std::string& url, int port, std::string player);
     std::string getGameStatus ();
-    bool getServerCommands (Json::Value& out, int turn);
+    bool getServerCommands (Json::Value& out, int epoch);
     void putServerCommand (engine::Command* command);
+    void endConnection ();
     void run ();
     // Setters and Getters
   };
