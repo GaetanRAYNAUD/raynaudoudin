@@ -30,13 +30,17 @@ namespace server {
     int Game::addPlayer(std::unique_ptr<Player> player) {
         int id = idseq++;
 
-        players.insert(std::make_pair(id, std::move(player)));
-
-        if(players.size() == 1) {
-            players.at(id)->teamId = state::TeamId::TEAM_1;
+        if(players.size() == 0) {
+            player->teamId = state::TeamId::TEAM_1;
+            
+        } else if(players.size() == 1) {
+            player->teamId = state::TeamId::TEAM_2;
+            
         } else {
-            players.at(id)->teamId = state::TeamId::TEAM_1;
+            player->teamId = state::TeamId::INVALIDTEAM;
         }
+        
+        players.insert(std::make_pair(id, std::move(player)));        
         
         return id;
     }
@@ -90,6 +94,8 @@ namespace server {
             
             usleep(30000);
         }
+        
+        std::cout << "Partie terminée !" << std::endl;
     }    
 }
 

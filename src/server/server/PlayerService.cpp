@@ -60,8 +60,12 @@ namespace server {
                     
                     if(game.getPlayer(id)->teamId == state::TeamId::TEAM_1) {
                         out["teamId"] = "TEAM_1";
-                    } else {
+                        
+                    } else if(game.getPlayer(id)->teamId == state::TeamId::TEAM_2) {
                         out["teamId"] = "TEAM_2";
+                        
+                    } else {
+                        out["teamId"] = "INVALIDTEAM";
                     }
 
                     return HttpStatus::CREATED;

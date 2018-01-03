@@ -151,8 +151,16 @@ namespace client {
             
             if(jsonResponse["teamId"].asString() == "TEAM_1") {
                 teamId = state::TeamId::TEAM_1;
-            } else {
+                
+            } else if(jsonResponse["teamId"].asString() == "TEAM_2") {
                 teamId = state::TeamId::TEAM_2;
+                
+            } else {
+                std::cout << "Erreur dans les données envoyées par le serveur !" << std::endl;
+                endConnection();            
+                std::cout << "Arrêt du client !" << std::endl;
+
+                return;                
             }
             
         } else {
@@ -222,14 +230,6 @@ namespace client {
             if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
                 if(getServerCommands(jsonCommands, engine.getState().getEpoch())) {
                     engine.addCommands(jsonCommands);
-                    std::cout << "Epoch : " << engine.getState().getEpoch() << " state changed with " << engine.getCurrentCommands().size() << " commands !" << std::endl;
-                    std::cout << "Types : ";
-
-                    for(auto& c : engine.getCurrentCommands()) {
-                        std::cout << c.second->getTypeId() << ", ";
-                    }
-
-                    std::cout << std::endl;
                     engine.update();
 
                     scene.stateChanged();
