@@ -66,7 +66,7 @@ namespace ai {
     }
     
     engine::Command* HeuristicAI::run(engine::Engine& engine, state::TeamId player) {
-        if(engine.getState().getCurrentTeam() != player) {
+        if(engine.getState().getCurrentTeam() != player || player == state::TeamId::INVALIDTEAM) {
             return nullptr;
         }
         
