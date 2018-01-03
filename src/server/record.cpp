@@ -1,5 +1,4 @@
 #include "record.hpp"
-#include "json/json.h"
 
 using namespace state;
 using namespace engine;
@@ -20,7 +19,7 @@ namespace record {
         engine.update();
         
         while(engine.getState().getWinner() == TeamId::INVALIDTEAM) {
-            engine.addCommand(1, ai.run(engine, state::TeamId::INVALIDTEAM));
+            engine.addCommand(1, ai.run(engine, engine.getState().getCurrentTeam()));
             engine.update();
             engine.addCommand(1, new HandleWinCommand());
             engine.update();

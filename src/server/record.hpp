@@ -7,6 +7,8 @@
 #include "state.h"
 #include "engine.h"
 #include "ai.h"
+#include "json/json.h"
+#include "state/TeamId.h"
 
 namespace record {
     void record_test();
