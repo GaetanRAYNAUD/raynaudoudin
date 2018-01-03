@@ -5,8 +5,6 @@
 #include "engine/SpawnCommand.h"
 #include "engine/EndTurnCommand.h"
 
-
-#include <iostream>
 namespace ai {
 
     void AI::listCommandsMovement(const state::State& state, std::vector<engine::Command*>& commands) {

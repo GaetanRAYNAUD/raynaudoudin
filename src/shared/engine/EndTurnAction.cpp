@@ -9,6 +9,7 @@ namespace engine {
 
     void EndTurnAction::apply(state::State& state) {       
         state.addEpoch();
+        
         for(auto& u : state.getBoard().getUnits()) {
             speeds.insert(std::make_pair(u.second->getId(), u.second->getSpeed()));
         }
@@ -18,10 +19,12 @@ namespace engine {
     }
 
     void EndTurnAction::undo(state::State& state) {
-        state.removeEpoch();        
+        state.removeEpoch();
+        
         for(auto& s : speeds) {
             state.getBoard().findUnit(s.first)->setSpeed(s.second);
         }
+        
         state.setTurn(state.getTurn() - 1);
         state.getBoard().findTeam(state.getCurrentTeam())->setGold(gold);                
     }

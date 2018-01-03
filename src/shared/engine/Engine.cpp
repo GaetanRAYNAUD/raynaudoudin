@@ -7,7 +7,6 @@
 #include "engine/LoadCommand.h"
 #include "engine/EndTurnCommand.h"
 
-#include <iostream>
 namespace engine {
 
     Engine::Engine() : state(22, 8) {
@@ -70,10 +69,6 @@ namespace engine {
             commandHistory["Commands"][commandHistory["Commands"].size() - 1]["epoch"] = state.getEpoch();
             
             c.second.get()->execute(state, actions);
-            
-            if(c.second->getTypeId() != CommandTypeId::HANDLE_WIN) {
-                state.addEpoch();
-            }            
         }
         
         currentCommands.clear();

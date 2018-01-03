@@ -2,7 +2,6 @@
 #include "MoveAction.h"
 #include "json/json.h"
 
-#include <iostream>
 namespace engine {
 
     MoveCommand::MoveCommand(int idUnit, state::Direction direction) : idUnit(idUnit), direction(direction) {

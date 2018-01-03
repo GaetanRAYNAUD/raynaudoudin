@@ -29,7 +29,7 @@ namespace client {
         }
         
         if(!(jsonReader.parse(response.getBody(), jsonResponse, false))) {
-            std::cout  << jsonReader.getFormattedErrorMessages() << std::endl;
+            std::cout << jsonReader.getFormattedErrorMessages() << std::endl;
         }
         
         if(jsonResponse.isMember("Game Status")) {
@@ -171,7 +171,7 @@ namespace client {
             return;
         }
         
-        std::cout << "En attente des autres joeurs." << std::endl;
+        std::cout << "En attente des autres joueurs." << std::endl;
         
         while(gameStatus != "RUNNING" && time.asMilliseconds() < 60000) {
             sleep(1);

@@ -3,9 +3,6 @@
 #include "Game.h"
 #include "ServiceException.h"
 
-#include <string>
-#include <iostream>
-
 namespace server {
     
     PlayerService::PlayerService(Game& game) : AbstractService("/player"), game(game) {

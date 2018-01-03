@@ -7,8 +7,6 @@
 #include "engine/LoadCommand.h"
 #include "engine/EndTurnCommand.h"
 
-#include <iostream>
-
 namespace server {
 
     CommandService::CommandService(engine::Engine& engine) : AbstractService("/command"), engine(engine) {

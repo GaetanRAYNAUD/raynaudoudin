@@ -3,7 +3,6 @@
 #include "engine/HandleWinCommand.h"
 
 #include <unistd.h>
-#include <iostream>
 
 namespace server {
 
@@ -94,8 +93,6 @@ namespace server {
             
             usleep(30000);
         }
-        
-        std::cout << "Partie terminée !" << std::endl;
     }    
 }
 

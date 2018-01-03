@@ -1,6 +1,5 @@
 #include "GameService.h"
 
-#include <iostream>
 namespace server {
 
     GameService::GameService(Game& game) : AbstractService("/game"), game(game) {
