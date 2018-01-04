@@ -137,6 +137,7 @@ namespace listenn {
             
             (void) getc(stdin);
             
+            game.getEngine().getState().setWinner(state::TeamId::TEAM_1);
             MHD_stop_daemon(server);
             
         } catch(std::exception& e) {

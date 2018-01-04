@@ -12,6 +12,7 @@ namespace server {
     }
 
     Game::~Game() {
+        engineThread->join();
         engineThread->~thread();
     }
 
