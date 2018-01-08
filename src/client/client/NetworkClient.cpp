@@ -44,7 +44,6 @@ namespace client {
         sf::Http connection(url, port);
         sf::Http::Request request;
         sf::Http::Response response;
-        Json::Value jsonResponse;
         Json::Reader jsonReader;
         
         request.setUri("/command/" + std::to_string(epoch));
@@ -88,7 +87,7 @@ namespace client {
         bool pause = false;
         int windowWidth = 1188;
         int windowHeight = 576;
-        int timePause = 3000;
+        int timePause = 300;
         std::string gameStatus;
         render::Scene scene(engine.getState());
         sf::Clock clock;
@@ -227,17 +226,17 @@ namespace client {
                 return;
             }
 
-            if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {            
+            if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause && !pause) {
                 if(getServerCommands(jsonCommands, engine.getState().getEpoch())) {
                     engine.addCommands(jsonCommands);
                     engine.update();
-
-                    scene.stateChanged();
                 }
 
                 if(engine.getState().getCurrentTeam() == teamId) {
                     putServerCommand(player_ai->run(engine, teamId));
                 }
+                
+                time = clock.getElapsedTime();
             }
             
             if(engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
@@ -247,6 +246,8 @@ namespace client {
                 scene.getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
             }
             
+            scene.stateChanged();
+            scene.getDebugLayer().getSurface()->addText(windowWidth - player.length() * 10, 10, player, sf::Color::White);
             scene.draw(window);
             window.display();
         }
