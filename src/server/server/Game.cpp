@@ -82,7 +82,7 @@ namespace server {
             }
         }
 
-        while(engine.getState().getWinner() == state::TeamId::INVALIDTEAM) {
+        while(engine.getState().getWinner() == state::TeamId::INVALIDTEAM || players.size() < maxPlayer) {
             if(players.size() < maxPlayer) {
                 return;
             }
@@ -92,7 +92,7 @@ namespace server {
                 engine.update();
             }
             
-            usleep(30000);
+            usleep(300000);
         }
     }    
 }

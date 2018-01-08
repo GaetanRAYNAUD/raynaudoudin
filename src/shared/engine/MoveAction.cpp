@@ -12,8 +12,8 @@ namespace engine {
 
     void MoveAction::apply(state::State& state) {          
         state.addEpoch();
-        state::Terrain* ter = state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY(), direction);
-        if(ter != nullptr && ter->getTypeId() == state::TerrainTypeId::HOUSE) {
+        state::Terrain* terrain = state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY(), direction);
+        if(terrain != nullptr && terrain->getTypeId() == state::TerrainTypeId::HOUSE) {
             houseTeamId = ((state::House*)state.getBoard().findTerrainOnPosition(state.getBoard().findUnit(idUnit)->getPositionX(), state.getBoard().findUnit(idUnit)->getPositionY(), direction))->getTeamId();
         }
         state.getBoard().moveUnit(idUnit, direction);
