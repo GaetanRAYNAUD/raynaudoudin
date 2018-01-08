@@ -1,15 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
-// Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
-
-void testSFML() {
-    sf::Texture texture;
-}
-
-// Fin test SFML
 
 #include "state.hpp"
 #include "render.hpp"
@@ -21,6 +13,7 @@ void testSFML() {
 #include "thread.hpp"
 #include "play.hpp"
 #include "network.hpp"
+#include "bfw.hpp"
 
 using namespace std;
 using namespace state;
@@ -33,6 +26,7 @@ using namespace deep_ai;
 using namespace thread;
 using namespace play;
 using namespace network;
+using namespace bfw;
 
 void listCommands() {
     cout << "Commande inconnue" << endl;
@@ -53,7 +47,7 @@ void listCommands() {
 int main(int argc, char* argv[]) {
     
     if(argc == 1) {
-        listCommands();
+        //run();
         
     } else if(argc > 1) {
         if (string(argv[1]) == "hello") {
