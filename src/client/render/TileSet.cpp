@@ -2,6 +2,10 @@
 
 namespace render {
 
+    const Tile& TileSet::getTile() const {
+        return *new Tile();
+    }
+
     const Tile& TileSet::getTile(MenuTypeId menu) const {
         return *new Tile();
     }

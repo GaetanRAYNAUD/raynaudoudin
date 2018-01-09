@@ -39,7 +39,7 @@ namespace render {
     /// @param target		(???) 
     /// @param states		(???) 
     void draw (sf::RenderTarget& target, sf::RenderStates states) const;
-    void addText (int x, int y, const std::string& msg, sf::Color color);
+    void addText (int x, int y, const std::string& msg, sf::Color color, int size = 14);
     // Setters and Getters
   };
 

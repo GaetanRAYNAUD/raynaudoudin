@@ -38,7 +38,7 @@ namespace render {
         quads[i * 4 + 3].texCoords = sf::Vector2f(texture.getX(), texture.getY() + texture.getHeight());
     }
 
-    void Surface::addText(int x, int y, const std::string& msg, sf::Color color) {
+    void Surface::addText(int x, int y, const std::string& msg, sf::Color color, int size) {
         sf::Text text;
         
         if (!font.loadFromFile("res/font/calibri.ttf")) {
@@ -49,7 +49,7 @@ namespace render {
         text.setString(msg);
         text.setColor(color);
         text.setStyle(sf::Text::Bold);
-        text.setCharacterSize(14);
+        text.setCharacterSize(size);
         text.setPosition(x, y);
                        
         texts.push_back(text);

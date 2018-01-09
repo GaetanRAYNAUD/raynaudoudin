@@ -12,6 +12,7 @@ namespace render {
   class UnitLayer;
   class StateLayer;
   class DebugLayer;
+  class MenuLayer;
 };
 namespace sf {
   class RenderWindow;
@@ -24,6 +25,7 @@ namespace state {
 #include "UnitLayer.h"
 #include "StateLayer.h"
 #include "DebugLayer.h"
+#include "MenuLayer.h"
 #include "state/Observer.h"
 
 namespace render {
@@ -38,7 +40,9 @@ namespace render {
     UnitLayer unitLayer;
     StateLayer stateLayer;
     DebugLayer debugLayer;
+    MenuLayer menuLayer;
   protected:
+    bool menu     = false;
     int width     = 0;
     int heigh     = 0;
     int shiftWidth;
@@ -50,6 +54,8 @@ namespace render {
     void draw (sf::RenderWindow& window);
     DebugLayer& getDebugLayer ();
     // Setters and Getters
+    bool getMenu() const;
+    void setMenu(bool menu);
     int getWidth() const;
     void setWidth(int width);
     int getHeigh() const;

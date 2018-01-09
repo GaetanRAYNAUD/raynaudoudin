@@ -1,5 +1,5 @@
 #include "StateLayer.h"
-#include "MenuTileSet.h"
+#include "StateTileSet.h"
 #include "state/House.h"
 
 #include <vector>
@@ -7,7 +7,7 @@
 namespace render {
 
     StateLayer::StateLayer(const state::State& state): state(state){
-        tileset = std::make_shared<MenuTileSet>();
+        tileset = std::make_shared<StateTileSet>();
         shiftHeight = 0;
         shiftWidth = 0;
     }

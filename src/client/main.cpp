@@ -13,7 +13,7 @@
 #include "thread.hpp"
 #include "play.hpp"
 #include "network.hpp"
-//#include "bfw.hpp"
+#include "bfw.hpp"
 
 using namespace std;
 using namespace state;
@@ -26,7 +26,7 @@ using namespace deep_ai;
 using namespace thread;
 using namespace play;
 using namespace network;
-//using namespace bfw;
+using namespace bfw;
 
 void listCommands() {
     cout << "Commande inconnue" << endl;
@@ -47,7 +47,7 @@ void listCommands() {
 int main(int argc, char* argv[]) {
     
     if(argc == 1) {
-        //bfw::run();
+        run();
         
     } else if(argc > 1) {
         if (string(argv[1]) == "hello") {
