@@ -23,6 +23,7 @@ namespace bfw {
         
         while (window.isOpen()) {
             sf::Event event;
+            
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
                     window.close();
@@ -32,6 +33,12 @@ namespace bfw {
                     
                 } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                     startMousePos = sf::Mouse::getPosition();
+                }
+            }
+            
+            if(scene.getMenu()) {              
+                if(startMousePos.x >= 620 && startMousePos.x <= 700 && startMousePos.y >= 420 && startMousePos.y <= 450) {
+                    scene.setMenu(false);
                 }
             }
             

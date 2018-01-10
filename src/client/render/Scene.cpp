@@ -3,13 +3,9 @@
 namespace render {
 
     Scene::Scene(const state::State& state) : state(state), terrainLayer(state.getBoard()), unitLayer(state.getBoard()), stateLayer(state), debugLayer(state) {
-        if(menu) {
-            menuLayer.initSurface();
-        } else {
-            terrainLayer.initSurface();
-            unitLayer.initSurface();
-            stateLayer.initSurface();
-        }
+        terrainLayer.initSurface();
+        unitLayer.initSurface();
+        stateLayer.initSurface();
     }
 
     void Scene::draw(sf::RenderWindow& window) {
@@ -29,6 +25,7 @@ namespace render {
     void Scene::stateChanged() {
         if(menu) {
             menuLayer.initSurface();
+            
         } else {
             terrainLayer.initSurface();
             unitLayer.initSurface();
@@ -64,5 +61,10 @@ namespace render {
     void Scene::setMenu(bool menu) {
         this->menu = menu;
     }
+
+    bool Scene::getMenu() const {
+        return menu;
+    }
+
 
 }
