@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
                 name = string(argv[3]);
             }
             
-            network_Test2(port, name);
+            network_Test(port, name);
             
         } else {
             listCommands();
