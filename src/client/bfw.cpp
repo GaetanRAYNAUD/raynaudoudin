@@ -32,17 +32,24 @@ namespace bfw {
                     endMousePos = sf::Mouse::getPosition();
                     
                 } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                    startMousePos = sf::Mouse::getPosition();
+                    startMousePos = sf::Mouse::getPosition(window);
                 }
             }
             
             if(scene.getMenu()) {              
-                if(startMousePos.x >= 620 && startMousePos.x <= 700 && startMousePos.y >= 420 && startMousePos.y <= 450) {
+                if(startMousePos.x >= 550 && startMousePos.x <= 630 && startMousePos.y >= 360 && startMousePos.y <= 400) {
                     scene.setMenu(false);
+                    
+                    engine.addCommand(0, new LoadCommand("res/map.txt"));
+                    engine.update();
                 }
+                
             }
             
             scene.stateChanged();
+            
+            scene.getDebugLayer().printPosMap();        
+            
             scene.draw(window);
             window.display();
         }

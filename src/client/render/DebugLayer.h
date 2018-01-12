@@ -11,7 +11,6 @@ namespace render {
   class Layer;
 }
 
-#include "state/State.h"
 #include "Layer.h"
 
 namespace render {
@@ -20,12 +19,13 @@ namespace render {
   class DebugLayer : public render::Layer {
     // Attributes
   private:
-    state::State state;
+    const state::State& state;
     // Operations
   public:
     DebugLayer (const state::State& state);
     void initSurface ();
     void printPathMap (const std::vector<int>& weights);
+    void printPosMap ();
     // Setters and Getters
   };
 
