@@ -18,6 +18,7 @@ namespace sf {
   class RenderWindow;
 };
 namespace state {
+  class Terrain;
   class Observer;
 }
 
@@ -53,6 +54,7 @@ namespace render {
     void stateChanged ();
     void draw (sf::RenderWindow& window);
     DebugLayer& getDebugLayer ();
+    state::Terrain* getTerrainFromPositionOnWindow (int x, int y);
     // Setters and Getters
     bool getMenu() const;
     void setMenu(bool menu);

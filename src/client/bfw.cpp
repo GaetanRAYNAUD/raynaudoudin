@@ -1,5 +1,6 @@
 #include "bfw.hpp"
 
+using namespace state;
 using namespace render;
 using namespace engine;
 
@@ -29,10 +30,15 @@ namespace bfw {
                     window.close();
                     
                 } else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-                    endMousePos = sf::Mouse::getPosition();
+                    endMousePos = sf::Mouse::getPosition(window);
                     
                 } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                     startMousePos = sf::Mouse::getPosition(window);
+                    
+                    if(!scene.getMenu() && startMousePos.x > 18 && startMousePos.y > 36) {
+                        Terrain* ter = scene.getTerrainFromPositionOnWindow(startMousePos.x, startMousePos.y);
+                        std::cout << ter->getPositionX() << "," << ter->getPositionY() << std::endl;
+                    }
                 }
             }
             
@@ -43,7 +49,6 @@ namespace bfw {
                     engine.addCommand(0, new LoadCommand("res/map.txt"));
                     engine.update();
                 }
-                
             }
             
             scene.stateChanged();

@@ -5,6 +5,7 @@
 
 namespace state {
   class Board;
+  class Terrain;
 };
 namespace render {
   class Layer;
@@ -25,6 +26,7 @@ namespace render {
   public:
     TerrainLayer (const state::Board& board);
     void initSurface ();
+    state::Terrain* getTerrainFromPositionOnWindow (int x, int y);
     // Setters and Getters
   };
 

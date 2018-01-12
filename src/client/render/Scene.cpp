@@ -32,7 +32,10 @@ namespace render {
             stateLayer.initSurface();
         }
     }
-    
+
+    state::Terrain* Scene::getTerrainFromPositionOnWindow(int x, int y) {
+        return terrainLayer.getTerrainFromPositionOnWindow(x, y);
+    }    
     
     DebugLayer& Scene::getDebugLayer() {
         return debugLayer;

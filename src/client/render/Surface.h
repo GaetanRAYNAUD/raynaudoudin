@@ -26,9 +26,10 @@ namespace render {
     // Attributes
   private:
     sf::Texture texture;
-    sf::VertexArray quads;
     std::vector<sf::Text> texts;
     sf::Font font;
+  protected:
+    sf::VertexArray quads;
     // Operations
   public:
     void loadTexture (const std::string& image_file);
@@ -41,6 +42,8 @@ namespace render {
     void draw (sf::RenderTarget& target, sf::RenderStates states) const;
     void addText (int x, int y, const std::string& msg, sf::Color color, int size = 14);
     // Setters and Getters
+    const sf::VertexArray& getQuads() const;
+    void setQuads(const sf::VertexArray& quads);
   };
 
 };

@@ -19,6 +19,10 @@ namespace render {
         quads.resize(count * 4);
     }
 
+    const sf::VertexArray& Surface::getQuads() const {
+        return quads;
+    }
+
     void Surface::loadTexture(const std::string& image_file) {
         if (!texture.loadFromFile(image_file))
             std::cerr << "Impossible de charger la texture : " << image_file << std::endl;
