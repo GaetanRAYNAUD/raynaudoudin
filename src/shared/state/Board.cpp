@@ -114,7 +114,7 @@ namespace state {
         units.erase(units.find(id));
     }
     
-    bool Board::isLeaderNotAlive(TeamId teamId) {
+    bool Board::isLeaderNotAlive(TeamId teamId) const {
         for(auto& u : units) {
             if (u.second->getTypeId() == UnitTypeId::LEADER  && u.second->getTeam() == teamId) {
                 return false;
