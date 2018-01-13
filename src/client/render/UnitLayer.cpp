@@ -33,6 +33,9 @@ namespace render {
             } else if(u.second->getTeam() == state::TeamId::TEAM_2) {
                 surface->addText(posX + tileUnit.getWidth() / 3, posY + tileUnit.getHeight() - 20, std::to_string(u.second.get()->getLife()), sf::Color::Green);
             }
+            
+            surface->addText(posX + tileUnit.getWidth() / 2 - 5, posY + tileUnit.getHeight() - 10, std::to_string(u.second.get()->getSpeed()), sf::Color::Blue);
+            
             i++;
         }
     }

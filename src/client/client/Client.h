@@ -21,11 +21,12 @@ namespace client {
   private:
     state::TeamId teamId;
     engine::Engine& engine;
-    int selectedUnitId;
+    state::Terrain* startingTerrain;
+    state::Terrain* targetTerrain;
     // Operations
   public:
     Client (engine::Engine& engine, state::TeamId teamId);
-    engine::Command* generateCommand (int x, int y);
+    engine::Command* generateCommand ();
     void run ();
     // Setters and Getters
   };

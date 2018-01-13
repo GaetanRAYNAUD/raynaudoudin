@@ -9,7 +9,7 @@ namespace client {
         
     }
 
-    engine::Command* Client::generateCommand(int x, int y) {
+    engine::Command* Client::generateCommand() {
         return nullptr;
     }
 
