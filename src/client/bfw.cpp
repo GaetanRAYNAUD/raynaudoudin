@@ -22,6 +22,38 @@ namespace bfw {
         
         scene.setMenu(true);
         
+        std::vector<std::unique_ptr<sf::VertexArray>> triangles;
+
+        std::unique_ptr<sf::VertexArray> triangle(new sf::VertexArray(sf::TrianglesStrip, 0));
+        
+        triangle->append(sf::Vertex(sf::Vector2f(0, 36 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(18, 0 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(18, 36 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(54, 0 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(54, 36 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(72, 36 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(54, 72 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(18, 36 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(18, 72 + 36), sf::Color::Red));
+        triangle->append(sf::Vertex(sf::Vector2f(0, 36 + 36), sf::Color::Red));
+        
+        triangles.push_back(std::move(triangle));
+        
+        std::unique_ptr<sf::VertexArray> triangle2(new sf::VertexArray(sf::TrianglesStrip, 0));
+        
+        triangle2->append(sf::Vertex(sf::Vector2f(0 + 72 + 36, 36 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(18 + 72 + 36, 0 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(18 + 72 + 36, 36 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(54 + 72 + 36, 0 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(54 + 72 + 36, 36 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(72 + 72 + 36, 36 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(54 + 72 + 36, 72 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(18 + 72 + 36, 36 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(18 + 72 + 36, 72 + 36)));
+        triangle2->append(sf::Vertex(sf::Vector2f(0 + 72 + 36, 36 + 36)));  
+        
+        triangles.push_back(std::move(triangle2));
+        
         while (window.isOpen()) {
             sf::Event event;
             
@@ -56,6 +88,9 @@ namespace bfw {
             scene.getDebugLayer().printPosMap();        
             
             scene.draw(window);
+            for(auto& t : triangles) {
+                window.draw(*(t.get()));     
+            }
             window.display();
         }
     }
