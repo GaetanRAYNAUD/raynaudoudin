@@ -3,4 +3,5 @@
 #define __CLIENT__H
 
 #include "client/NetworkClient.h"
+#include "client/Client.h"
 #endif

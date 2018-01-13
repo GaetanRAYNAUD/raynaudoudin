@@ -2,7 +2,11 @@
 #define BFW_HPP
 
 #include "render.h"
-#include "engine.hpp"
+#include "../shared/engine.h"
+#include "../shared/ai.h"
+#include "client.h"
+
+#include <unistd.h>
 
 namespace bfw {
     

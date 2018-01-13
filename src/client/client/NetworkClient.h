@@ -6,19 +6,20 @@
 #include <memory>
 #include <json/json.h>
 
-namespace engine {
-  class Engine;
-};
 namespace ai {
   class AI;
+};
+namespace engine {
+  class Engine;
+  class Command;
 };
 namespace render {
   class Scene;
 }
 
+#include "ai/AI.h"
 #include "state/TeamId.h"
 #include "engine/Engine.h"
-#include "ai/AI.h"
 #include "render/Scene.h"
 
 namespace client {
@@ -31,9 +32,9 @@ namespace client {
     std::string url;
     int port;
     std::string player;
+    std::unique_ptr<ai::AI> player_ai;
     state::TeamId teamId;
     engine::Engine engine;
-    std::unique_ptr<ai::AI> player_ai;
     int idPlayer;
     // Operations
   public:
