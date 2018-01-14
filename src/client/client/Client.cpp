@@ -44,8 +44,9 @@ namespace client {
                         terrainClickedOn = scene.getTerrainFromPositionOnWindow(startMousePos.x, startMousePos.y);
                     }
                     
-                    if(!scene.getMenu() && startMousePos.x > windowWidth - 80 && startMousePos.y < 36 && engine.getState().getCurrentTeam() == teamId) {
+                    if(!scene.getMenu() && startMousePos.x > windowWidth - 110 && startMousePos.y < 36 && engine.getState().getCurrentTeam() == teamId) {
                         engine.addCommand(1, new engine::EndTurnCommand());
+                        engine.update();
                     }
                 }
             }
@@ -69,7 +70,7 @@ namespace client {
                 scene.getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
             }
             
-            scene.getDebugLayer().getSurface()->addText(windowWidth - 80, 5, "End turn", sf::Color::White, 18);
+            scene.getDebugLayer().getSurface()->addText(windowWidth - 110, 5, "Fin du tour", sf::Color::White, 18);
             
             scene.draw(window);
             window.display();
