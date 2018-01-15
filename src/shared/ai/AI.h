@@ -4,12 +4,12 @@
 
 #include <vector>
 
+namespace state {
+  class State;
+};
 namespace engine {
   class Command;
   class Engine;
-};
-namespace state {
-  class State;
 }
 
 #include "state/TeamId.h"
@@ -24,12 +24,11 @@ namespace ai {
     // Operations
   public:
     virtual ~AI ();
-    virtual engine::Command* run (engine::Engine& engine, state::TeamId player) = 0;
-  protected:
     void listCommands (const state::State& state, std::vector<engine::Command*>& commands);
     void listCommandsMovement (const state::State& state, std::vector<engine::Command*>& commands);
     void listCommandsSpawn (const state::State& state, std::vector<engine::Command*>& commands);
     void listCommandsAttack (const state::State& state, std::vector<engine::Command*>& commands);
+    virtual engine::Command* run (engine::Engine& engine, state::TeamId player) = 0;
     // Setters and Getters
   };
 
