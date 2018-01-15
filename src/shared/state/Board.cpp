@@ -338,6 +338,30 @@ namespace state {
             return nullptr;
         }
     }
+
+    Direction Board::getDirectionFromTerrains(Terrain* startingTerrain, Terrain* targetTerrain) {
+        if(targetTerrain->getPositionY() == startingTerrain->getPositionY() - 2 && targetTerrain->getPositionX() == startingTerrain->getPositionX()) {
+            return Direction::TOP;
+            
+        } else if(targetTerrain->getPositionX() == startingTerrain->getPositionX() + 1 && targetTerrain->getPositionY() == startingTerrain->getPositionY() - 1) {
+            return Direction::TOP_RIGHT;
+            
+        } else if(targetTerrain->getPositionX() == startingTerrain->getPositionX() + 1 && targetTerrain->getPositionY() == startingTerrain->getPositionY() + 1) {
+            return Direction::BOT_RIGHT;
+            
+        } else if(targetTerrain->getPositionY() == startingTerrain->getPositionY() + 2 && targetTerrain->getPositionX() == startingTerrain->getPositionX()) {
+            return Direction::BOT;
+            
+        } else if(targetTerrain->getPositionX() == startingTerrain->getPositionX() - 1 && targetTerrain->getPositionY() == startingTerrain->getPositionY() + 1) {
+            return Direction::BOT_LEFT;
+            
+        } else if(targetTerrain->getPositionX() == startingTerrain->getPositionX() - 1 && targetTerrain->getPositionY() == startingTerrain->getPositionY() - 1) {
+            return Direction::TOP_LEFT;
+        }
+        
+        return Direction::BOT;
+    }
+
         
     void Board::moveUnit(int id, Direction direction) {
         Unit* unit = findUnit(id);
