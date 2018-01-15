@@ -21,8 +21,8 @@ namespace client {
   private:
     state::TeamId teamId;
     engine::Engine& engine;
-    state::Terrain* startingTerrain;
-    state::Terrain* targetTerrain;
+    state::Terrain* startingTerrain     = nullptr;
+    state::Terrain* targetTerrain     = nullptr;
     // Operations
   public:
     Client (engine::Engine& engine, state::TeamId teamId);

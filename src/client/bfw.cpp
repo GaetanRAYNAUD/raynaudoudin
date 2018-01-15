@@ -1,5 +1,6 @@
 #include "bfw.hpp"
 
+using namespace std;
 using namespace state;
 using namespace ai;
 using namespace engine;
@@ -10,24 +11,33 @@ namespace bfw {
     void run() {
         int mapWidth = 22;
         int mapHeight = 8;
+        int timePause = 100;        
         TeamId playerTeamId = TeamId::TEAM_1;
         TeamId aiTeamId = TeamId::TEAM_2;
         Engine engine(mapWidth, mapHeight);  
         HeuristicAI ai = HeuristicAI();
         Client client(engine, playerTeamId);
+        sf::Clock clock;
+        sf::Time time = clock.getElapsedTime();
         
-        client.run();
+        thread threadClient = std::thread(&Client::run, client);  
         
         while(engine.getState().getWinner() == TeamId::INVALIDTEAM) {
             if(engine.getState().getCurrentTeam() == aiTeamId) {
+                if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause) {                
                 engine.addCommand(1, ai.run(engine, aiTeamId));
-                engine.update();
-                engine.addCommand(1, new HandleWinCommand());
-                engine.update();
+                engine.addCommand(2, new HandleWinCommand());
+                
+                time = clock.getElapsedTime();
+                }
             }
+            
+            engine.update();
             
             usleep(15000);
         }
+        
+        threadClient.join();
         
 //        std::vector<std::unique_ptr<sf::VertexArray>> triangles;
 //
