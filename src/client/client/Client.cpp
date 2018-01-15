@@ -71,6 +71,8 @@ namespace client {
             delete  c;
         }
         
+        delete aiToGetAvailableCommands;
+        
         if(commandToReturn == nullptr) {
             commandToReturn = new engine::HandleWinCommand();
         }
@@ -144,7 +146,7 @@ namespace client {
             } else {
                 if(engine.getState().getCurrentTeam() == teamId) {                        
                     if(startingTerrain != nullptr && targetTerrain != nullptr) {
-                        //engine.addCommand(engine.getCurrentCommands().size(), generateCommand());
+                        engine.addCommand(engine.getCurrentCommands().size(), generateCommand());
 
                         startingTerrain = nullptr;
                         targetTerrain = nullptr;
