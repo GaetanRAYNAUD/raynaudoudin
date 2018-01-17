@@ -115,7 +115,7 @@ namespace client {
                     
                     if(!scene.getMenu() && startMousePos.x > 18 && startMousePos.y > 36 && engine.getState().getCurrentTeam() == teamId) {
                         state::Terrain* terrainClickedOn = scene.getTerrainFromPositionOnWindow(startMousePos.x, startMousePos.y);
-                        
+
                         if(startingTerrain == nullptr) {
                             if(engine.getState().getBoard().findUnitOnPosition(terrainClickedOn->getPositionX(), terrainClickedOn->getPositionY()) != nullptr 
                                     && engine.getState().getBoard().findUnitOnPosition(terrainClickedOn->getPositionX(), terrainClickedOn->getPositionY())->getTeam() == teamId) {                            
@@ -170,7 +170,6 @@ namespace client {
             }
             
             scene.getDebugLayer().getSurface()->addText(windowWidth - 110, 5, "Fin du tour", sf::Color::White, 18);
-            
             scene.stateChanged();            
             scene.draw(window);
             window.display();

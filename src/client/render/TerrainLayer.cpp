@@ -1,7 +1,9 @@
 #include "TerrainLayer.h"
 #include "TerrainTileSet.h"
 
-#include <iostream>
+#include <limits>
+#include <complex>
+
 namespace render {
 
     TerrainLayer::TerrainLayer(const state::Board& board) : board(board) {
@@ -34,11 +36,21 @@ namespace render {
 
     state::Terrain* TerrainLayer::getTerrainFromPositionOnWindow(int x, int y) {
         sf::VertexArray vertex = surface->getQuads();
-
+        double minDist = std::numeric_limits<double>::max();
+        int nbTile = -1;
+        
         for(unsigned int i = 0; i < vertex.getVertexCount() - 3; i = i + 4) {
-            if(vertex[i].position.x < x && vertex[i].position.y < y && vertex[i + 2].position.x > x && vertex[i + 2].position.y > y) {
-                return board.getTerrains().at(i / 4)->clone();
+            sf::Vector2f center((vertex[i].position.x + vertex[i + 2].position.x) / 2, (vertex[i].position.y + vertex[i + 2].position.y) / 2);
+            double disti = std::sqrt(std::pow(x - center.x, 2) + std::pow(y - center.y, 2));
+            
+            if(disti < minDist) {
+                minDist = disti;
+                nbTile = i / 4;
             }
+        }
+        
+        if(nbTile != -1) {
+            return board.getTerrains().at(nbTile)->clone();
         }
         
         return nullptr;
