@@ -10,8 +10,10 @@
 
 namespace client {
 
-    Client::Client(engine::Engine& engine, state::TeamId teamId) : teamId(teamId), engine(engine) {
+    Client::Client(engine::Engine& engine, state::TeamId teamId) : engine(engine), scene(engine.getState()), window(sf::VideoMode(windowWidth, windowHeight), "BfW"), teamId(teamId) {
+        window.setFramerateLimit(60);
         
+        scene.setMenu(true);        
     }
 
     engine::Command* Client::generateCommand() {
@@ -87,28 +89,35 @@ namespace client {
         return commandToReturn;
     }
 
+    void Client::displayBoard() {
+        if(engine.getState().getCurrentTeam() == teamId) {                        
+            if(startingTerrain != nullptr && targetTerrain != nullptr) {
+
+                engine.addCommand(engine.getCurrentCommands().size(), generateCommand());
+
+                startingTerrain = nullptr;
+                targetTerrain = nullptr;
+            }
+        }
+    }
+
+    void Client::displayMenu() {
+        if(startMousePos.x >= 550 && startMousePos.x <= 630 && startMousePos.y >= 360 && startMousePos.y <= 400) {
+            scene.setMenu(false);
+
+            engine.addCommand(0, new engine::LoadCommand("res/map.txt"));
+
+        }
+    }
+
+
     void Client::run() {
-        int windowWidth = 1188;
-        int windowHeight = 576;  
-        render::Scene scene(engine.getState());
-        sf::Vector2i startMousePos, endMousePos;
-        sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
-        sf::View view(sf::FloatRect(0, 0, windowWidth, windowHeight));
-        
-        window.setFramerateLimit(60);
-        window.setView(view);
-        
-        scene.setMenu(true);
-        
         while (window.isOpen()) {
             sf::Event event;
             
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
                     window.close();
-                    
-                } else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-                    endMousePos = sf::Mouse::getPosition(window);
                     
                 } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                     startMousePos = sf::Mouse::getPosition(window);
@@ -153,6 +162,7 @@ namespace client {
             } else {
                 if(engine.getState().getCurrentTeam() == teamId) {                        
                     if(startingTerrain != nullptr && targetTerrain != nullptr) {
+                        
                         engine.addCommand(engine.getCurrentCommands().size(), generateCommand());
 
                         startingTerrain = nullptr;
@@ -172,6 +182,7 @@ namespace client {
             scene.getDebugLayer().getSurface()->addText(windowWidth - 110, 5, "Fin du tour", sf::Color::White, 18);
             scene.stateChanged();            
             scene.draw(window);
+            
             window.display();
         }
         

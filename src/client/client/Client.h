@@ -2,12 +2,19 @@
 #ifndef CLIENT__CLIENT__H
 #define CLIENT__CLIENT__H
 
+#include <SFML/Graphics.hpp>
 
 namespace engine {
   class Engine;
+};
+namespace render {
+  class Scene;
+};
+namespace engine {
   class Command;
 }
 
+#include "render/Scene.h"
 #include "state/TeamId.h"
 #include "engine/Command.h"
 #include "engine/Engine.h"
@@ -19,14 +26,22 @@ namespace client {
     // Associations
     // Attributes
   private:
-    state::TeamId teamId;
+    /// 			
+    const int windowWidth     = 1188;
+    const int windowHeight     = 576;
     engine::Engine& engine;
+    render::Scene scene;
+    sf::Vector2i startMousePos;
+    sf::RenderWindow window;
+    state::TeamId teamId;
     state::Terrain* startingTerrain     = nullptr;
     state::Terrain* targetTerrain     = nullptr;
     // Operations
   public:
     Client (engine::Engine& engine, state::TeamId teamId);
     engine::Command* generateCommand ();
+    void displayMenu ();
+    void displayBoard ();
     void run ();
     // Setters and Getters
   };
