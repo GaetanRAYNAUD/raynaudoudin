@@ -26,12 +26,12 @@ namespace bfw {
             if(engine.getState().getCurrentTeam() == aiTeamId) {
                 if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause) {                
                 engine.addCommand(1, ai.run(engine, aiTeamId));
-                engine.addCommand(2, new HandleWinCommand());
                 
                 time = clock.getElapsedTime();
                 }
             }
             
+            engine.addCommand(engine.getCurrentCommands().size(), new HandleWinCommand());            
             engine.update();
             
             usleep(15000);

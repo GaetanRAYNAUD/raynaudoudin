@@ -58,6 +58,9 @@ namespace engine {
             case state::Direction::TOP_LEFT:
                 jsonCommand["Direction"] = "TOP_LEFT";
                 break;
+            default:
+                jsonCommand["Direction"] = "INVALID";
+                break;                
         }
         
         out["Commands"].append(jsonCommand);

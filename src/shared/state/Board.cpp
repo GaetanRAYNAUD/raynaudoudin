@@ -186,6 +186,8 @@ namespace state {
                 return findTerrainOnPosition(positionX - 1, positionY + 1);
             case Direction::TOP_LEFT:
                 return findTerrainOnPosition(positionX - 1, positionY - 1);
+            default:
+                return nullptr;
         }
         
         return nullptr;
@@ -359,7 +361,7 @@ namespace state {
             return Direction::TOP_LEFT;
         }
         
-        return Direction::BOT;
+        return Direction::INVALID;
     }
 
         
@@ -397,6 +399,8 @@ namespace state {
                         unit->setPositionX(unit->getPositionX() - 1);
                         unit->setPositionY(unit->getPositionY() - 1);
                         unit->setSpeed(unit->getSpeed() - findTerrainOnPosition(unit->getPositionX(), unit->getPositionY())->getMovementCost());
+                        break;
+                    default:
                         break;
                 }
             }

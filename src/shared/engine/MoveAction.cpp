@@ -48,6 +48,8 @@ namespace engine {
             case state::Direction::TOP_LEFT:
                 state.getBoard().moveUnit(idUnit, state::Direction::BOT_RIGHT);
                 break;
+            default :
+                break;
         }
         state.getBoard().findUnit(idUnit)->setSpeed(speed);
     }

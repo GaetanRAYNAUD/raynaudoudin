@@ -11,7 +11,8 @@ namespace state {
     BOT_RIGHT     = 2,
     BOT     = 3,
     BOT_LEFT     = 4,
-    TOP_LEFT     = 5
+    TOP_LEFT     = 5,
+    INVALID     = 6
   };
 
 };

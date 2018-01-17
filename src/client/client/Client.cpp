@@ -8,6 +8,7 @@
 #include "engine/MoveCommand.h"
 #include "engine/HandleWinCommand.h"
 
+#include <iostream>
 namespace client {
 
     Client::Client(engine::Engine& engine, state::TeamId teamId) : engine(engine), scene(engine.getState()), window(sf::VideoMode(windowWidth, windowHeight), "BfW"), teamId(teamId) {
@@ -35,8 +36,12 @@ namespace client {
                     || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_TOP) {
                 
                 for(auto& c : commandsSpawn) {
-                    if(((engine::SpawnCommand*)c)->getX() == startingTerrain->getPositionX() && ((engine::SpawnCommand*)c)->getY() == startingTerrain->getPositionY()) {
+                    if(((engine::SpawnCommand*)c)->getX() == startingTerrain->getPositionX() 
+                            && ((engine::SpawnCommand*)c)->getY() == startingTerrain->getPositionY() 
+                            && ((engine::SpawnCommand*)c)->getUnitTypeId() == unitSpawnTypeId) {
+                        
                         commandToReturn = c->clone();
+                        unitSpawnTypeId = state::UnitTypeId::INVALIDUNIT;
                         break;
                     }
                 }
@@ -90,6 +95,43 @@ namespace client {
     }
 
     void Client::displayBoard() {
+        if(startMousePos.x > 18 && startMousePos.y > 36 && engine.getState().getCurrentTeam() == teamId) {
+            state::Terrain* terrainClickedOn = scene.getTerrainFromPositionOnWindow(startMousePos.x, startMousePos.y);
+
+            if(startingTerrain == nullptr) {
+                if(engine.getState().getBoard().findUnitOnPosition(terrainClickedOn->getPositionX(), terrainClickedOn->getPositionY()) != nullptr 
+                        && engine.getState().getBoard().findUnitOnPosition(terrainClickedOn->getPositionX(), terrainClickedOn->getPositionY())->getTeam() == teamId) {                            
+
+                    startingTerrain = terrainClickedOn;
+
+                }
+
+            } else if (startingTerrain->getId() == terrainClickedOn->getId()) {
+                startingTerrain = nullptr;
+                targetTerrain = nullptr;
+
+            } else if (targetTerrain == nullptr) {
+                targetTerrain = terrainClickedOn;
+
+            } else if(targetTerrain->getId() == terrainClickedOn->getId()) {
+                targetTerrain = nullptr;
+            }
+        }
+
+        if (targetTerrain != nullptr && unitSpawnTypeId == state::UnitTypeId::INVALIDUNIT) {
+            if(targetTerrain->getTypeId() == state::TerrainTypeId::WALL_LEFT 
+                    || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_RIGHT 
+                    || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_TOP) {
+
+                mode = 2;
+                return;
+            }
+        }   
+        
+        if(startMousePos.x > windowWidth - 110 && startMousePos.y < 36 && engine.getState().getCurrentTeam() == teamId) {
+            engine.addCommand(1, new engine::EndTurnCommand());
+        }
+            
         if(engine.getState().getCurrentTeam() == teamId) {                        
             if(startingTerrain != nullptr && targetTerrain != nullptr) {
 
@@ -104,16 +146,47 @@ namespace client {
     void Client::displayMenu() {
         if(startMousePos.x >= 550 && startMousePos.x <= 630 && startMousePos.y >= 360 && startMousePos.y <= 400) {
             scene.setMenu(false);
+            mode = 1;
 
             engine.addCommand(0, new engine::LoadCommand("res/map.txt"));
-
+            engine.update();
         }
     }
 
+    void Client::displaySpawn() {
+        int posXSwordman, posYSwordman, posXBowman, posYBowman;
+        
+        posXSwordman = targetTerrain->getPositionX() * 72 - targetTerrain->getPositionX() * 72 / 4;
+        posYSwordman = targetTerrain->getPositionY() * 36 + 10;
+        
+        posXBowman = posXSwordman;
+        posYBowman = posYSwordman + 20;
+        
+        scene.getDebugLayer().getSurface()->addText(posXSwordman, posYSwordman, "Swordman", sf::Color::White, 13);        
+        scene.getDebugLayer().getSurface()->addText(posXBowman, posYBowman, "Bowman", sf::Color::White, 13);
+        
+        if(startMousePos.x > posXSwordman && startMousePos.x < posXSwordman + 72 
+                && startMousePos.y > posYSwordman && startMousePos.y < posYSwordman + 13) {
+            
+            unitSpawnTypeId = state::UnitTypeId::SWORDMAN;
+            mode = 1;
+        }
+        
+        if(startMousePos.x > posXBowman && startMousePos.x < posXBowman + 72 
+                && startMousePos.y > posYBowman && startMousePos.y < posYBowman + 13) {
+            
+            unitSpawnTypeId = state::UnitTypeId::BOWMAN;
+            mode = 1;
+        }
+        
+    }
 
     void Client::run() {
         while (window.isOpen()) {
             sf::Event event;
+            
+            startMousePos.x = -1;
+            startMousePos.y = -1;
             
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
@@ -121,54 +194,21 @@ namespace client {
                     
                 } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                     startMousePos = sf::Mouse::getPosition(window);
-                    
-                    if(!scene.getMenu() && startMousePos.x > 18 && startMousePos.y > 36 && engine.getState().getCurrentTeam() == teamId) {
-                        state::Terrain* terrainClickedOn = scene.getTerrainFromPositionOnWindow(startMousePos.x, startMousePos.y);
-
-                        if(startingTerrain == nullptr) {
-                            if(engine.getState().getBoard().findUnitOnPosition(terrainClickedOn->getPositionX(), terrainClickedOn->getPositionY()) != nullptr 
-                                    && engine.getState().getBoard().findUnitOnPosition(terrainClickedOn->getPositionX(), terrainClickedOn->getPositionY())->getTeam() == teamId) {                            
-                            
-                                startingTerrain = terrainClickedOn;
-                            
-                            }
-                            
-                        } else if (startingTerrain->getId() == terrainClickedOn->getId()) {
-                            startingTerrain = nullptr;
-                            targetTerrain = nullptr;
-                           
-                        } else if (targetTerrain == nullptr) {
-                            targetTerrain = terrainClickedOn;
-                           
-                        } else if(targetTerrain->getId() == terrainClickedOn->getId()) {
-                            targetTerrain = nullptr;
-                        }
-                    }
-                    
-                    if(!scene.getMenu() && startMousePos.x > windowWidth - 110 && startMousePos.y < 36 && engine.getState().getCurrentTeam() == teamId) {
-                        engine.addCommand(1, new engine::EndTurnCommand());
-                    }
                 }
             }
             
-            if(scene.getMenu()) {            
-                if(startMousePos.x >= 550 && startMousePos.x <= 630 && startMousePos.y >= 360 && startMousePos.y <= 400) {
-                    scene.setMenu(false);
+            switch (mode) {
+                case 0: 
+                    displayMenu();
+                    break;
                     
-                    engine.addCommand(0, new engine::LoadCommand("res/map.txt"));
-                    
-                }
+                case 1:
+                    displayBoard();
+                    break;
                 
-            } else {
-                if(engine.getState().getCurrentTeam() == teamId) {                        
-                    if(startingTerrain != nullptr && targetTerrain != nullptr) {
-                        
-                        engine.addCommand(engine.getCurrentCommands().size(), generateCommand());
-
-                        startingTerrain = nullptr;
-                        targetTerrain = nullptr;
-                    }
-                }
+                case 2:
+                    displaySpawn();
+                    break;
             }
 
             if(engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {                

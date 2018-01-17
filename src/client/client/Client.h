@@ -25,6 +25,8 @@ namespace client {
   class Client {
     // Associations
     // Attributes
+  public:
+    state::UnitTypeId unitSpawnTypeId     = state::UnitTypeId::INVALIDUNIT;
   private:
     /// 			
     const int windowWidth     = 1188;
@@ -33,6 +35,7 @@ namespace client {
     render::Scene scene;
     sf::Vector2i startMousePos;
     sf::RenderWindow window;
+    int mode     = 0;
     state::TeamId teamId;
     state::Terrain* startingTerrain     = nullptr;
     state::Terrain* targetTerrain     = nullptr;
@@ -42,6 +45,7 @@ namespace client {
     engine::Command* generateCommand ();
     void displayMenu ();
     void displayBoard ();
+    void displaySpawn ();
     void run ();
     // Setters and Getters
   };

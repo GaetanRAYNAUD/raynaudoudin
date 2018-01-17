@@ -55,7 +55,8 @@ namespace render {
         text.setStyle(sf::Text::Bold);
         text.setCharacterSize(size);
         text.setPosition(x, y);
-                       
+
         texts.push_back(text);
     }
+    
 }
