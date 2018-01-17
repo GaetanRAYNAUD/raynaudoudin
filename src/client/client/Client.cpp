@@ -28,20 +28,26 @@ namespace client {
         aiToGetAvailableCommands->listCommandsSpawn(engine.getState(), commandsSpawn);
         
         if(!commandsSpawn.empty()) {
-            if(targetTerrain->getTypeId() == state::TerrainTypeId::WALL_LEFT || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_RIGHT || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_TOP) {
+            if(targetTerrain->getTypeId() == state::TerrainTypeId::WALL_LEFT 
+                    || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_RIGHT 
+                    || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_TOP) {
+                
                 for(auto& c : commandsSpawn) {
                     if(((engine::SpawnCommand*)c)->getX() == startingTerrain->getPositionX() && ((engine::SpawnCommand*)c)->getY() == startingTerrain->getPositionY()) {
                         commandToReturn = c->clone();
                         break;
                     }
                 }
+                
             }
         }
         
         if(!commandsAttack.empty() && commandToReturn == nullptr) {
             if(targetUnit != nullptr && targetUnit->getTeam() != teamId) {
                 for(auto& c : commandsAttack) {
-                    if(((engine::AttackCommand*)c)->getIdUnitAttacker() == controlledUnit->getId() && ((engine::AttackCommand*)c)->getIdUnitDefender() == targetUnit->getId()) {
+                    if(((engine::AttackCommand*)c)->getIdUnitAttacker() == controlledUnit->getId() 
+                            && ((engine::AttackCommand*)c)->getIdUnitDefender() == targetUnit->getId()) {
+                        
                         commandToReturn = c->clone();
                         break;
                     }
@@ -53,6 +59,7 @@ namespace client {
             for(auto& c : commandsMovement) {
                 if(((engine::MoveCommand*)c)->getIdUnit() == controlledUnit->getId() 
                         && ((engine::MoveCommand*)c)->getDirection() == engine.getState().getBoard().getDirectionFromTerrains(startingTerrain, targetTerrain)) {
+                    
                     commandToReturn = c->clone();
                     break;
                 }
