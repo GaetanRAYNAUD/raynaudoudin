@@ -14,7 +14,7 @@ namespace bfw {
         int timePause = 100;        
         TeamId playerTeamId = TeamId::TEAM_1;
         TeamId aiTeamId = TeamId::TEAM_2;
-        Engine engine(mapWidth, mapHeight);  
+        Engine engine(mapWidth, mapHeight);
         HeuristicAI ai = HeuristicAI();
         Client client(engine, playerTeamId);
         sf::Clock clock;

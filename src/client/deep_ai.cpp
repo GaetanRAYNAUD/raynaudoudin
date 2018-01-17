@@ -13,39 +13,19 @@ namespace deep_ai {
         int windowHeight = 576;
         int mapWidth = 22;
         int mapHeight = 8;
-        Engine* engine = new Engine(mapWidth, mapHeight);  
-        Scene* scene;
-        Command* command;
+        Engine engine(mapWidth, mapHeight);
+        Scene scene(engine.getState());
         std::random_device rand;
-        DeepAI* ai = new DeepAI(rand());
+        DeepAI ai(rand());
         sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "BfW");
-        sf::View view(sf::FloatRect(0, 0, windowWidth, windowHeight));
         
-        window.setFramerateLimit(30);
-        window.setView(view);
+        window.setFramerateLimit(60);
             
-        command = new LoadCommand("res/map.txt");
-        engine->addCommand(1, command);
-        engine->update();
-
-        scene = new Scene(engine->getState());
+        engine.addCommand(0, new engine::LoadCommand("res/map.txt"));
+        engine.update();
+        
         while (window.isOpen()) {
             sf::Event event;
-                   
-            ai->run(*engine, state::TeamId::INVALIDTEAM);
-            if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
-                pause = true;
-            }
-            
-            delete scene;
-            scene = new Scene(engine->getState());
-            
-            if(engine->getState().getWinner() != TeamId::INVALIDTEAM) {
-                pause = true;
-                std::string s = std::to_string(engine->getState().getWinner());
-                std::string winnerMessage = "L equipe " + s + " a gagne !";
-                scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
-            }
             
             while (window.pollEvent(event)) {
                 if(event.type == sf::Event::Closed) {
@@ -55,12 +35,21 @@ namespace deep_ai {
                 }
             }
             
-            scene->draw(window);
+            if(!pause) {
+                ai.run(engine, engine.getState().getCurrentTeam());
+                
+                engine.addCommand(engine.getCurrentCommands().size(), new HandleWinCommand());
+                engine.update();
+            }
+            
+            if(engine.getState().getWinner() != TeamId::INVALIDTEAM) {
+                pause = true;
+                scene.getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, "L equipe " + std::to_string(engine.getState().getWinner()) + " a gagne !", sf::Color::Red, 25);
+            }
+            
+            scene.stateChanged();            
+            scene.draw(window);
             window.display();
         }
-        
-        delete scene;
-        delete engine;
-        delete ai;
     }
 }

@@ -30,6 +30,8 @@ namespace state {
   class Board : public state::Observable {
     // Associations
     // Attributes
+  public:
+    std::map<std::pair<int, int>, std::unique_ptr<Terrain>> terrainsWithPos;
   protected:
     /// 	
     int width;

@@ -20,8 +20,8 @@ namespace ai {
   class AI;
 }
 
-#include "PathMap.h"
 #include "state/TeamId.h"
+#include "PathMap.h"
 #include "AI.h"
 
 namespace ai {
@@ -31,6 +31,7 @@ namespace ai {
     // Associations
     // Attributes
   protected:
+    state::TeamId player;
     PathMap team1PathMap;
     PathMap team2PathMap;
     int maxDepth     = 6;
@@ -47,6 +48,8 @@ namespace ai {
     void initPathMaps (const state::Board& board);
     engine::Command* run (engine::Engine& engine, state::TeamId player);
     // Setters and Getters
+    state::TeamId getPlayer() const;
+    void setPlayer(state::TeamId player);
     const PathMap& getTeam1PathMap() const;
     void setTeam1PathMap(const PathMap& team1PathMap);
     const PathMap& getTeam2PathMap() const;

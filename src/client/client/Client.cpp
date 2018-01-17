@@ -220,7 +220,7 @@ namespace client {
             }
             
             scene.getDebugLayer().getSurface()->addText(windowWidth - 110, 5, "Fin du tour", sf::Color::White, 18);
-            scene.stateChanged();            
+            scene.stateChanged();
             scene.draw(window);
             
             window.display();
