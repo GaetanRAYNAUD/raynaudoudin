@@ -27,24 +27,24 @@ namespace render {
     
     const Tile& UnitTileSet::getTile(const state::Unit& unit) const {
         switch (unit.getRace()) {
-            case RaceTypeId::HUMAN : //Human
+            case RaceTypeId::HUMAN :
                 switch (unit.getTypeId()) {
-                    case UnitTypeId::LEADER :  //Leader
+                    case UnitTypeId::LEADER :
                         return humans.at(UnitTypeId::LEADER);
-                    case UnitTypeId::SWORDMAN :  //Swordman
+                    case UnitTypeId::SWORDMAN :
                         return humans.at(UnitTypeId::SWORDMAN);
-                    case UnitTypeId::BOWMAN :  //Bowman
+                    case UnitTypeId::BOWMAN :
                         return humans.at(UnitTypeId::BOWMAN);
                     default :
                         return humans.at(UnitTypeId::SWORDMAN);
                 }              
-            case RaceTypeId::ORC : //Orc
+            case RaceTypeId::ORC :
                 switch (unit.getTypeId()) {
-                    case UnitTypeId::LEADER :  //Leader
+                    case UnitTypeId::LEADER :
                         return orcs.at(UnitTypeId::LEADER);
-                    case UnitTypeId::SWORDMAN :  //Swordman
+                    case UnitTypeId::SWORDMAN :
                         return orcs.at(UnitTypeId::SWORDMAN);
-                    case UnitTypeId::BOWMAN :  //Bowman
+                    case UnitTypeId::BOWMAN :
                         return orcs.at(UnitTypeId::BOWMAN);
                     default :
                         return orcs.at(UnitTypeId::SWORDMAN);

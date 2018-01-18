@@ -5,7 +5,6 @@ using namespace server;
 
 namespace listenn {
 
-    // Fonction pour gérer les données imporantes en upload (non implanté ici)
     static int post_iterator(void *cls, enum MHD_ValueKind kind, const char *key,
             const char *filename, const char *content_type, const char *transfer_encoding,
             const char *data, uint64_t off, size_t size) {
@@ -13,7 +12,6 @@ namespace listenn {
         return MHD_NO;
     }
 
-    // Détruit les données d'une requête
     static void request_completed (void *cls, struct MHD_Connection *connection, 
            void **con_cls, enum MHD_RequestTerminationCode toe) {
       
@@ -25,15 +23,12 @@ namespace listenn {
       }
     }
 
-    // Gestionnaire principal
     static int main_handler (void *cls, struct MHD_Connection *connection,
             const char *url, const char *method, const char *version,
             const char *upload_data, size_t *upload_data_size, void **ptr) {
         
-        // Données pour une requête (en plusieurs appels à cette fonction)
         Request *request = (Request*)*ptr;
 
-        // Premier appel pour cette requête
         if (!request) { 
             request = new Request();
             
@@ -55,7 +50,6 @@ namespace listenn {
             return MHD_YES;
         }    
 
-        // Cas où il faut récupérer les données envoyés par l'utilisateur
         if (strcmp(method, MHD_HTTP_METHOD_POST) == 0 || strcmp(method, MHD_HTTP_METHOD_PUT) == 0) {
             
             MHD_post_process(request->pp,upload_data,*upload_data_size);
@@ -119,10 +113,8 @@ namespace listenn {
             
             struct MHD_Daemon* server = nullptr;
             
-            server = MHD_start_daemon(// MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG | MHD_USE_POLL,
+            server = MHD_start_daemon(
                     MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG,
-                    // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG | MHD_USE_POLL,
-                    // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG,
                     port,
                     nullptr, nullptr, 
                     &main_handler, (void*) &servicesManager,

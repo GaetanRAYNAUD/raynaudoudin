@@ -98,7 +98,7 @@ namespace heuristic_ai {
                 std::string winnerMessage = "L equipe " + s + " a gagne !";
                 scene->getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, winnerMessage, sf::Color::Red);
             }
-            
+
             scene->draw(window);
             window.display();
         }

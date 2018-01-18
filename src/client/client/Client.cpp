@@ -119,9 +119,10 @@ namespace client {
         }
 
         if (targetTerrain != nullptr && unitSpawnTypeId == state::UnitTypeId::INVALID_UNIT) {
-            if(targetTerrain->getTypeId() == state::TerrainTypeId::WALL_LEFT 
+            if((targetTerrain->getTypeId() == state::TerrainTypeId::WALL_LEFT 
                     || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_RIGHT 
-                    || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_TOP) {
+                    || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_TOP) 
+                    && engine.getState().getBoard().findUnitOnPosition(startingTerrain->getPositionX(), startingTerrain->getPositionY())->getTypeId() == state::UnitTypeId::LEADER) {
 
                 mode = 2;
                 return;

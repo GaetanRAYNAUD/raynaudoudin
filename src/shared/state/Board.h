@@ -65,13 +65,12 @@ namespace state {
     std::vector<int> findIdUnitsAround (int id) const;
     std::vector<Unit*> findUnitsAround (int id);
     Unit* findUnitOnPosition (int positionX, int positionY) const;
-    std::vector<int> findIdTerrainsAround (int id) const;
     std::vector<Terrain*> findTerrainsAround (int id) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY) const;
     Terrain* findTerrainOnPosition (int positionX, int positionY, Direction direction) const;
     std::vector<Direction> directionAvailable (int unitId) const;
     std::vector<Direction> directionAvailable (int x, int y) const;
-    Direction getDirectionFromTerrains (Terrain* startingTerrain, Terrain* targetTerrain);
+    Direction getDirectionFromTerrains (Terrain* startingTerrain, Terrain* targetTerrain) const;
     void moveUnit (int id, Direction direction);
     void claimHouse (TeamId teamId, int x, int y);
     void endTurn (TeamId currentTeam);

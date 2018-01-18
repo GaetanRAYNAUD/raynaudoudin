@@ -90,11 +90,13 @@ namespace ai {
             queue.pop();
 
             directions = board.directionAvailable(point.getX(), point.getY());
+            
             for (auto d : directions) {
                 Point pointTmp = point.transformToPoint(d);
                 
                 if (!getWall(pointTmp)) {
                     pointTmp.setWeight(point.getWeight() + board.findTerrainOnPosition(pointTmp.getX(), pointTmp.getY())->getMovementCost());
+                    
                     if (pointTmp.getWeight() < getWeight(pointTmp)) {     
                         setWeight(pointTmp);
                         queue.push(pointTmp);

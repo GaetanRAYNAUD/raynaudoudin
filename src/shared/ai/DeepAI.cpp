@@ -5,7 +5,7 @@
 namespace ai {
 
     DeepAI::DeepAI(int randomSeed): randgen(randomSeed) {
-        maxLeaves = 5;
+        maxLeaves = 6;
         maxDepth = 4;
     }
     

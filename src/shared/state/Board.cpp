@@ -1,7 +1,3 @@
-#include <fstream>
-#include <iostream>
-#include <unordered_map>
-
 #include "Board.h"
 #include "Default.h"
 #include "House.h"
@@ -12,6 +8,10 @@
 #include "Swordman.h"
 #include "Bowman.h"
 #include "Sword.h"
+#include "Direction.h"
+
+#include <fstream>
+#include <iostream>
 
 namespace state {
     
@@ -42,6 +42,10 @@ namespace state {
             terrains.insert(std::make_pair(t.first, std::shared_ptr<Terrain>(t.second->clone())));
         }
         
+        for(auto& t : other.terrainsWithPos) {
+            terrainsWithPos.insert(std::make_pair(t.first, std::shared_ptr<Terrain>(terrains.at(t.second->getId()))));
+        }
+        
         for(auto& u : other.units) {
             units.insert(std::make_pair(u.first, std::unique_ptr<Unit>(u.second->clone())));
         }
@@ -62,6 +66,10 @@ namespace state {
         for(auto& t : other.terrains) {
             terrains.insert(std::make_pair(t.first, std::shared_ptr<Terrain>(t.second->clone())));
         }
+        
+        for(auto& t : other.terrainsWithPos) {
+            terrainsWithPos.insert(std::make_pair(t.first, std::shared_ptr<Terrain>(terrains.at(t.second->getId()))));
+        }        
         
         for(auto& u : other.units) {
             units.insert(std::make_pair(u.first, std::unique_ptr<Unit>(u.second->clone())));
@@ -162,8 +170,8 @@ namespace state {
     Terrain* Board::findTerrainOnPosition(int positionX, int positionY) const {
         if(positionX < 0 || positionY < 0 || positionX > width || positionY > 2 * height) {
             return nullptr;
+
         } else {
-            
             auto ite = terrainsWithPos.find(std::make_pair(positionX, positionY));
 
             if (ite == terrainsWithPos.cend()) {
@@ -195,64 +203,36 @@ namespace state {
         return nullptr;
     }
     
-    std::vector<int> Board::findIdTerrainsAround(int id) const {
-        std::vector<int> listIdTerrainArround;
+    std::vector<Terrain*> Board::findTerrainsAround(int id) const {
+        std::vector<Terrain*> listTerrainArround;
         Terrain* terrain = findTerrain(id);
         Terrain* terrainAround = nullptr;
         
         terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() - 2);
         if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }
-        terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() - 1);
-        if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }     
-        terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() + 1);
-        if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }
-        terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() + 2);
-        if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }
-        terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() + 1);
-        if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }
-        terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() - 1);
-        if (terrainAround != nullptr) {
-            listIdTerrainArround.push_back(terrainAround->getId());
-        }
-
-        return listIdTerrainArround;
-    }
-    
-    std::vector<Terrain*> Board::findTerrainsAround(int id) const {
-        std::vector<Terrain*> listTerrainArround;
-        Terrain* terrain = findTerrain(id);
-        Terrain* terrainAround = nullptr;
-
-        terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() - 2);
-        if (terrainAround != nullptr) {
             listTerrainArround.push_back(terrainAround);
         }
+        
         terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() - 1);
         if (terrainAround != nullptr) {
             listTerrainArround.push_back(terrainAround);
-        }     
+        }
+        
         terrainAround = findTerrainOnPosition(terrain->getPositionX() + 1, terrain->getPositionY() + 1);
         if (terrainAround != nullptr) {
             listTerrainArround.push_back(terrainAround);
         }
+        
         terrainAround = findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY() + 2);
         if (terrainAround != nullptr) {
             listTerrainArround.push_back(terrainAround);
         }
+        
         terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() + 1);
         if (terrainAround != nullptr) {
             listTerrainArround.push_back(terrainAround);
         }
+        
         terrainAround = findTerrainOnPosition(terrain->getPositionX() - 1, terrain->getPositionY() - 1);
         if (terrainAround != nullptr) {
             listTerrainArround.push_back(terrainAround);
@@ -343,7 +323,7 @@ namespace state {
         }
     }
 
-    Direction Board::getDirectionFromTerrains(Terrain* startingTerrain, Terrain* targetTerrain) {
+    Direction Board::getDirectionFromTerrains(Terrain* startingTerrain, Terrain* targetTerrain) const {
         if(targetTerrain->getPositionY() == startingTerrain->getPositionY() - 2 && targetTerrain->getPositionX() == startingTerrain->getPositionX()) {
             return Direction::TOP;
             
@@ -420,14 +400,19 @@ namespace state {
             if (t->getMovementCost() <= unit->getSpeed()) {
                 if(t->getPositionY() == unit->getPositionY() - 2 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP);
+                    
                 } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionY() == unit->getPositionY() - 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP_RIGHT);
+                    
                 } else if(t->getPositionX() == unit->getPositionX() + 1 && t->getPositionY() == unit->getPositionY() + 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT_RIGHT);
+                    
                 } else if(t->getPositionY() == unit->getPositionY() + 2 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT);
+                    
                 } else if(t->getPositionX() == unit->getPositionX() - 1 && t->getPositionY() == unit->getPositionY() + 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::BOT_LEFT);
+                    
                 } else if(t->getPositionX() == unit->getPositionX() - 1 && t->getPositionY() == unit->getPositionY() - 1 && findUnitOnPosition(t->getPositionX(), t->getPositionY()) == nullptr) {
                     directionAvailable.push_back(Direction::TOP_LEFT);
                 }
@@ -444,19 +429,7 @@ namespace state {
         std::vector<Terrain*> terrainsAround = findTerrainsAround(terrain->getId());
 
         for (Terrain* t : terrainsAround) {
-                if(t->getPositionY() == terrain->getPositionY() - 2) {
-                    directionAvailable.push_back(Direction::TOP);
-                } else if(t->getPositionX() == terrain->getPositionX() + 1 && t->getPositionY() == terrain->getPositionY() - 1) {
-                    directionAvailable.push_back(Direction::TOP_RIGHT);
-                } else if(t->getPositionX() == terrain->getPositionX() + 1 && t->getPositionY() == terrain->getPositionY() + 1) {
-                    directionAvailable.push_back(Direction::BOT_RIGHT);
-                } else if(t->getPositionY() == terrain->getPositionY() + 2) {
-                    directionAvailable.push_back(Direction::BOT);
-                } else if(t->getPositionX() == terrain->getPositionX() - 1 && t->getPositionY() == terrain->getPositionY() + 1) {
-                    directionAvailable.push_back(Direction::BOT_LEFT);
-                } else if(t->getPositionX() == terrain->getPositionX() - 1 && t->getPositionY() == terrain->getPositionY() - 1) {
-                    directionAvailable.push_back(Direction::TOP_LEFT);
-                }
+            directionAvailable.push_back(getDirectionFromTerrains(terrain, t));
         }
         
         terrainsAround.clear();
@@ -517,35 +490,35 @@ namespace state {
             }
             
             switch (terrainsTmp.at(i)) {
-                case 'G' :  //Grass
+                case 'G' :
                     terrainToAdd = new Default(TerrainTypeId::GRASS, 1, posX, posY);
                     break;
 
-                case 'F' :  //Forest
+                case 'F' :
                     terrainToAdd = new Default(TerrainTypeId::FOREST, 2, posX, posY);
                     break;
 
-                case 'W' :  //Water
+                case 'W' :
                     terrainToAdd = new Default(TerrainTypeId::WATER, 5, posX, posY);
                     break;
 
-                case 'H' :  //House
+                case 'H' :
                     terrainToAdd = new House(posX, posY);
                     break;
 
-                case 'C' :  //Castle
+                case 'C' :
                     terrainToAdd = new Castle(posX, posY);
                     break;
 
-                case 'L' :  //Wall left
+                case 'L' :
                     terrainToAdd = new Wall(Orientation::LEFT, posX, posY);
                     break;
 
-                case 'T' :  //Wall top
+                case 'T' :
                     terrainToAdd = new Wall(Orientation::UP, posX, posY);
                     break;
 
-                case 'R' :  //Wall right
+                case 'R' :
                     terrainToAdd = new Wall(Orientation::RIGHT, posX, posY);
                     break;
 
@@ -620,27 +593,30 @@ namespace state {
         
         for(auto& u : units) {
             if(u.second->equals(*other.units.at(u.second->getId())->clone()) == false) {
-                std::cout << "unité différente" << std::endl;
                 return false;
             }
         }
 
         for(auto& t : terrains) {
             if(t.second->equals(*other.terrains.at(t.second->getId())->clone()) == false) {
-                std::cout << "terrain différente" << std::endl;
                 return false;
             }
         }
+        
+        for(auto& t : terrainsWithPos) {
+            if(t.second->equals(*other.terrains.at(t.second->getId())->clone()) == false) {
+                return false;
+            }
+        }        
 
         if(teams.at(TeamId::TEAM_1)->equals(*other.teams.at(TEAM_1)->clone()) == false) {
-                std::cout << "team 1 différente" << std::endl;
             return false;
         }  
         
         if(teams.at(TeamId::TEAM_2)->equals(*other.teams.at(TEAM_2)->clone()) == false) {
-                std::cout << "team 2 différente" << std::endl;
             return false;
-        }          
+        }   
+        
         return true;
     }
 }

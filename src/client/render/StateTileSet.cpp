@@ -12,11 +12,11 @@ namespace render {
     }
 
     int StateTileSet::getCellHeight() const {
-        return menus.at(MenuTypeId::MENU_TOP).getHeight();// A refaire 
+        return menus.at(MenuTypeId::MENU_TOP).getHeight();
     }
     
     int StateTileSet::getCellWidth() const {
-        return menus.at(MenuTypeId::MENU_TOP).getWidth();// A refaire    
+        return menus.at(MenuTypeId::MENU_TOP).getWidth();
     }
     
     const std::string StateTileSet::getImageFile() const {
