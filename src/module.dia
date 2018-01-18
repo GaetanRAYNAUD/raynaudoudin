@@ -6461,7 +6461,7 @@
             <dia:string>#state::UnitTypeId#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#state::UnitTypeId::INVALIDUNIT#</dia:string>
+            <dia:string>#state::UnitTypeId::INVALID_UNIT#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>

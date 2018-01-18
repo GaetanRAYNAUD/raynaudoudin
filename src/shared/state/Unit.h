@@ -29,7 +29,7 @@ namespace state {
     int positionY;
     TeamId team;
     std::map<int, std::unique_ptr<Weapon>> weapons;
-    UnitTypeId typeId     = UnitTypeId::INVALIDUNIT;
+    UnitTypeId typeId     = UnitTypeId::INVALID_UNIT;
     RaceTypeId race     = RaceTypeId::HUMAN;
     // Operations
   public:

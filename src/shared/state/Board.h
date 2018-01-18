@@ -12,14 +12,12 @@ namespace state {
   class Unit;
   class Team;
   class Terrain;
-  class Observable;
 }
 
 #include "Unit.h"
 #include "UnitTypeId.h"
 #include "TeamId.h"
 #include "Direction.h"
-#include "Observable.h"
 #include "Team.h"
 #include "Terrain.h"
 #include "RaceTypeId.h"
@@ -27,17 +25,17 @@ namespace state {
 namespace state {
 
   /// class Board - 
-  class Board : public state::Observable {
+  class Board {
     // Associations
     // Attributes
   public:
-    std::map<std::pair<int, int>, std::unique_ptr<Terrain>> terrainsWithPos;
+    std::map<std::pair<int, int>, std::shared_ptr<Terrain>> terrainsWithPos;
   protected:
     /// 	
     int width;
     int height;
     std::map<TeamId, std::unique_ptr<Team>> teams;
-    std::map<int, std::unique_ptr<Terrain>> terrains;
+    std::map<int, std::shared_ptr<Terrain>> terrains;
     std::map<int, std::unique_ptr<Unit>> units;
     int idTerrain;
     int idUnit;
@@ -46,7 +44,6 @@ namespace state {
     Board (int width = 10, int height = 10);
     Board (const Board& other);
     Board& operator= (const Board& other);
-    ~Board ();
     void addUnit (Unit* unit);
     void addUnit (std::unique_ptr<Unit> unit, int idUnit);
     void createNewUnit (UnitTypeId unitTypeId, TeamId team, int x, int y);
@@ -87,8 +84,8 @@ namespace state {
     void setHeight(int height);
     const std::map<TeamId, std::unique_ptr<Team>>& getTeams() const;
     void setTeams(const std::map<TeamId, std::unique_ptr<Team>>& teams);
-    const std::map<int, std::unique_ptr<Terrain>>& getTerrains() const;
-    void setTerrains(const std::map<int, std::unique_ptr<Terrain>>& terrains);
+    const std::map<int, std::shared_ptr<Terrain>>& getTerrains() const;
+    void setTerrains(const std::map<int, std::shared_ptr<Terrain>>& terrains);
     const std::map<int, std::unique_ptr<Unit>>& getUnits() const;
     void setUnits(const std::map<int, std::unique_ptr<Unit>>& units);
     int getIdTerrain() const;

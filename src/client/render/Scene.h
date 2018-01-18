@@ -19,7 +19,6 @@ namespace sf {
 };
 namespace state {
   class Terrain;
-  class Observer;
 }
 
 #include "TerrainLayer.h"
@@ -27,7 +26,6 @@ namespace state {
 #include "StateLayer.h"
 #include "DebugLayer.h"
 #include "MenuLayer.h"
-#include "state/Observer.h"
 
 namespace render {
 

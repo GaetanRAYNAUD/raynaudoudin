@@ -60,7 +60,7 @@ namespace play {
                 
             }
             
-            if(engine.getState().getWinner() != TeamId::INVALIDTEAM) {
+            if(engine.getState().getWinner() != TeamId::INVALID_TEAM) {
                 pause = true;
                 std::string s = std::to_string(engine.getState().getWinner());
                 std::string winnerMessage = "L equipe " + s + " a gagne !";

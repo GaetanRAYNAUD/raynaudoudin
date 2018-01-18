@@ -37,7 +37,7 @@ namespace server {
             player->teamId = state::TeamId::TEAM_2;
             
         } else {
-            player->teamId = state::TeamId::INVALIDTEAM;
+            player->teamId = state::TeamId::INVALID_TEAM;
         }
         
         players.insert(std::make_pair(id, std::move(player)));        
@@ -82,7 +82,7 @@ namespace server {
             }
         }
 
-        while(engine.getState().getWinner() == state::TeamId::INVALIDTEAM || players.size() < maxPlayer) {
+        while(engine.getState().getWinner() == state::TeamId::INVALID_TEAM || players.size() < maxPlayer) {
             if(players.size() < maxPlayer) {
                 return;
             }

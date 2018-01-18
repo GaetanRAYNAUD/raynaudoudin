@@ -24,7 +24,7 @@ namespace engine {
     int idUnit;
     int speed;
     state::Direction direction;
-    state::TeamId houseTeamId     = state::TeamId::INVALIDTEAM;
+    state::TeamId houseTeamId     = state::TeamId::INVALID_TEAM;
     // Operations
   public:
     MoveAction (int idUnit, state::Direction direction, int speed);

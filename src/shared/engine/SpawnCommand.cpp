@@ -65,8 +65,8 @@ namespace engine {
         jsonCommand["y"] = y;
         
         switch (unitTypeId) {
-            case state::UnitTypeId::INVALIDUNIT:
-                jsonCommand["UnitTypeId"] = "INVALIDUNIT";
+            case state::UnitTypeId::INVALID_UNIT:
+                jsonCommand["UnitTypeId"] = "INVALID_UNIT";
                 break;
             case state::UnitTypeId::LEADER:
                 jsonCommand["UnitTypeId"] = "LEADER";
@@ -97,7 +97,7 @@ namespace engine {
         } else if(in["UnitTypeId"].asString() == "BOWMAN") {
             unitTypeId = state::UnitTypeId::BOWMAN;
         } else {
-            unitTypeId = state::UnitTypeId::INVALIDUNIT;
+            unitTypeId = state::UnitTypeId::INVALID_UNIT;
         }        
         
         return new SpawnCommand(x, y, unitTypeId);

@@ -22,7 +22,7 @@ namespace bfw {
         
         thread threadClient = std::thread(&Client::run, std::ref(client));  
         
-        while(engine.getState().getWinner() == TeamId::INVALIDTEAM) {
+        while(engine.getState().getWinner() == TeamId::INVALID_TEAM) {
             if(engine.getState().getCurrentTeam() == aiTeamId) {
                 if(clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > timePause) {                
                 engine.addCommand(1, ai.run(engine, aiTeamId));

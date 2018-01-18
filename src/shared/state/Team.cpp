@@ -6,7 +6,7 @@ namespace state {
         { UnitTypeId::BOWMAN, 10 },
         { UnitTypeId::SWORDMAN, 15},
         { UnitTypeId::LEADER, -1},
-        { UnitTypeId::INVALIDUNIT, -2}
+        { UnitTypeId::INVALID_UNIT, -2}
     };
     
     Team::Team(TeamId id, RaceTypeId race): id(id), race(race) {

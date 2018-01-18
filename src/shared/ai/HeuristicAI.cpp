@@ -17,7 +17,7 @@ namespace ai {
 
     void HeuristicAI::initPathMaps(const state::Board& board) {
         const std::map<int, std::unique_ptr<state::Unit> >& units = board.getUnits();
-        const std::map<int, std::unique_ptr<state::Terrain> >& terrains = board.getTerrains();
+        const std::map<int, std::shared_ptr<state::Terrain> >& terrains = board.getTerrains();
 
         unitTeam1PathMap.init(board);
         unitTeam2PathMap.init(board);
@@ -49,7 +49,7 @@ namespace ai {
                         houseTeam2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
                         break;
                         
-                    case state::TeamId::INVALIDTEAM:
+                    case state::TeamId::INVALID_TEAM:
                         houseTeam1PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
                         houseTeam2PathMap.addWell(Point(t.second->getPositionX(), t.second->getPositionY()));
                 }
@@ -66,7 +66,7 @@ namespace ai {
     }
     
     engine::Command* HeuristicAI::run(engine::Engine& engine, state::TeamId player) {
-        if(engine.getState().getCurrentTeam() != player || player == state::TeamId::INVALIDTEAM) {
+        if(engine.getState().getCurrentTeam() != player || player == state::TeamId::INVALID_TEAM) {
             return nullptr;
         }
         
@@ -168,7 +168,7 @@ namespace ai {
                 commandToReturn = new engine::EndTurnCommand();
                 break;
             
-            case state::TeamId::INVALIDTEAM:
+            case state::TeamId::INVALID_TEAM:
                 break;
         }
         

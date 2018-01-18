@@ -6,24 +6,22 @@
 namespace state {
   class Board;
   class State;
-  class Observable;
 }
 
 #include "Board.h"
 #include "TeamId.h"
-#include "Observable.h"
 
 namespace state {
 
   /// class State - 
-  class State : public state::Observable {
+  class State {
     // Associations
     // Attributes
   protected:
     Board board;
     int turn     = 0;
     int epoch     = 0;
-    TeamId winner     = TeamId::INVALIDTEAM;
+    TeamId winner     = TeamId::INVALID_TEAM;
     // Operations
   public:
     State (int width, int height);

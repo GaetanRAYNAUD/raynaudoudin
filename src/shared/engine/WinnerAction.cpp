@@ -14,7 +14,7 @@ namespace engine {
 
     void WinnerAction::undo(state::State& state) {
         state.removeEpoch();        
-        state.setWinner(state::TeamId::INVALIDTEAM);
+        state.setWinner(state::TeamId::INVALID_TEAM);
     }
 
 }

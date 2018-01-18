@@ -6,7 +6,7 @@
 namespace state {
 
   enum TeamId {
-    INVALIDTEAM     = 0,
+    INVALID_TEAM     = 0,
     TEAM_1     = 1,
     TEAM_2     = 2
   };

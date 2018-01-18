@@ -62,7 +62,7 @@ namespace server {
                         out["teamId"] = "TEAM_2";
                         
                     } else {
-                        out["teamId"] = "INVALIDTEAM";
+                        out["teamId"] = "INVALID_TEAM";
                     }
 
                     return HttpStatus::CREATED;

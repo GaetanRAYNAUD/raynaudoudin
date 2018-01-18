@@ -41,7 +41,7 @@ namespace client {
                             && ((engine::SpawnCommand*)c)->getUnitTypeId() == unitSpawnTypeId) {
                         
                         commandToReturn = c->clone();
-                        unitSpawnTypeId = state::UnitTypeId::INVALIDUNIT;
+                        unitSpawnTypeId = state::UnitTypeId::INVALID_UNIT;
                         break;
                     }
                 }
@@ -118,7 +118,7 @@ namespace client {
             }
         }
 
-        if (targetTerrain != nullptr && unitSpawnTypeId == state::UnitTypeId::INVALIDUNIT) {
+        if (targetTerrain != nullptr && unitSpawnTypeId == state::UnitTypeId::INVALID_UNIT) {
             if(targetTerrain->getTypeId() == state::TerrainTypeId::WALL_LEFT 
                     || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_RIGHT 
                     || targetTerrain->getTypeId() == state::TerrainTypeId::WALL_TOP) {
@@ -211,7 +211,7 @@ namespace client {
                     break;
             }
 
-            if(engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {                
+            if(engine.getState().getWinner() != state::TeamId::INVALID_TEAM) {                
                 if(engine.getState().getWinner() == teamId) {
                     scene.getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, "Victoire !", sf::Color::Green, 50);
                 } else {
@@ -226,7 +226,7 @@ namespace client {
             window.display();
         }
         
-        if(engine.getState().getWinner() == state::TeamId::INVALIDTEAM) {
+        if(engine.getState().getWinner() == state::TeamId::INVALID_TEAM) {
             if(teamId == state::TeamId::TEAM_1) {
                 engine.getState().setWinner(state::TeamId::TEAM_2);
             } else {

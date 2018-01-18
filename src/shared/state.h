@@ -10,10 +10,6 @@
 #include "state/Weapon.h"
 #include "state/Unit.h"
 #include "state/Direction.h"
-#include "state/EventTypeId.h"
-#include "state/Event.h"
-#include "state/Observer.h"
-#include "state/Observable.h"
 #include "state/TerrainTypeId.h"
 #include "state/Terrain.h"
 #include "state/Board.h"
@@ -28,7 +24,4 @@
 #include "state/Bow.h"
 #include "state/Bowman.h"
 #include "state/State.h"
-#include "state/BoardEvent.h"
-#include "state/StateEventId.h"
-#include "state/StateEvent.h"
 #endif

@@ -10,7 +10,7 @@ namespace ai {
     }
     
     engine::Command* DeepAI::run(engine::Engine& engine, state::TeamId player) {
-        if(engine.getState().getCurrentTeam() != player || player == state::TeamId::INVALIDTEAM) {
+        if(engine.getState().getCurrentTeam() != player || player == state::TeamId::INVALID_TEAM) {
             return nullptr;
         }
         
@@ -36,7 +36,7 @@ namespace ai {
         int leavesCount;
         int rand;
         
-        if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
+        if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALID_TEAM) {
             return;
         }
         depth++;
@@ -78,7 +78,7 @@ namespace ai {
         int leavesCount;
         int rand;
         
-        if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
+        if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALID_TEAM) {
             return getHeuristic(engine.getState());
         }
         depth++;
@@ -115,7 +115,7 @@ namespace ai {
         int leavesCount;
         int rand;
         
-        if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
+        if (depth == maxDepth || engine.getState().getWinner() != state::TeamId::INVALID_TEAM) {
             return getHeuristic(engine.getState());
         }
         depth++;

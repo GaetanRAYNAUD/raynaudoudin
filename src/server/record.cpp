@@ -18,7 +18,7 @@ namespace record {
         engine.addCommand(1, new LoadCommand("res/map.txt"));
         engine.update();
         
-        while(engine.getState().getWinner() == TeamId::INVALIDTEAM) {
+        while(engine.getState().getWinner() == TeamId::INVALID_TEAM) {
             engine.addCommand(1, ai.run(engine, engine.getState().getCurrentTeam()));
             engine.update();
             engine.addCommand(1, new HandleWinCommand());

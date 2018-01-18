@@ -26,7 +26,7 @@ namespace client {
     // Associations
     // Attributes
   public:
-    state::UnitTypeId unitSpawnTypeId     = state::UnitTypeId::INVALIDUNIT;
+    state::UnitTypeId unitSpawnTypeId     = state::UnitTypeId::INVALID_UNIT;
   private:
     /// 			
     const int windowWidth     = 1188;

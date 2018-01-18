@@ -42,7 +42,7 @@ namespace deep_ai {
                 engine.update();
             }
             
-            if(engine.getState().getWinner() != TeamId::INVALIDTEAM) {
+            if(engine.getState().getWinner() != TeamId::INVALID_TEAM) {
                 pause = true;
                 scene.getDebugLayer().getSurface()->addText(windowWidth/2 - 50, windowHeight / 2 - 5, "L equipe " + std::to_string(engine.getState().getWinner()) + " a gagne !", sf::Color::Red, 25);
             }

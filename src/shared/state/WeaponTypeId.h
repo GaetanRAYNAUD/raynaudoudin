@@ -6,7 +6,7 @@
 namespace state {
 
   enum WeaponTypeId {
-    INVALIDWEAPON     = 0,
+    INVALID_WEAPON     = 0,
     SWORD     = 1,
     BOW     = 2
   };

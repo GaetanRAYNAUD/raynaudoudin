@@ -239,7 +239,7 @@ namespace client {
                 time = clock.getElapsedTime();
             }
             
-            if(engine.getState().getWinner() != state::TeamId::INVALIDTEAM) {
+            if(engine.getState().getWinner() != state::TeamId::INVALID_TEAM) {
                 pause = true;                
                 std::string s = std::to_string(engine.getState().getWinner());
                 std::string winnerMessage = "L equipe " + s + " a gagne !";

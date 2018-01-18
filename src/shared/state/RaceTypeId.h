@@ -6,7 +6,7 @@
 namespace state {
 
   enum RaceTypeId {
-    INVALIDRACE     = 0,
+    INVALID_RACE     = 0,
     HUMAN     = 1,
     ORC     = 2
   };

@@ -39,7 +39,7 @@ namespace state {
         }
         
         for(auto& t : other.terrains) {
-            terrains.insert(std::make_pair(t.first, std::unique_ptr<Terrain>(t.second->clone())));
+            terrains.insert(std::make_pair(t.first, std::shared_ptr<Terrain>(t.second->clone())));
         }
         
         for(auto& u : other.units) {
@@ -60,7 +60,7 @@ namespace state {
         }
         
         for(auto& t : other.terrains) {
-            terrains.insert(std::make_pair(t.first, std::unique_ptr<Terrain>(t.second->clone())));
+            terrains.insert(std::make_pair(t.first, std::shared_ptr<Terrain>(t.second->clone())));
         }
         
         for(auto& u : other.units) {
@@ -78,7 +78,7 @@ namespace state {
         terrain->setId(idTerrain);
         
         if(findTerrainOnPosition(terrain->getPositionX(), terrain->getPositionY()) == nullptr) {
-            terrains.insert(std::make_pair(terrain->getId(), std::unique_ptr<Terrain>(terrain)));
+            terrains.insert(std::make_pair(terrain->getId(), std::shared_ptr<Terrain>(terrain)));
         }
         
         idTerrain++;
@@ -170,7 +170,7 @@ namespace state {
                 return nullptr;
             }
 
-            return terrains.at(ite->second->getId()).get();
+            return ite->second.get();
         }
     }
 
@@ -363,7 +363,7 @@ namespace state {
             return Direction::TOP_LEFT;
         }
         
-        return Direction::INVALID;
+        return Direction::INVALID_DIRECTION;
     }
 
         
@@ -469,7 +469,7 @@ namespace state {
         if(findTerrainOnPosition(x, y)->getTypeId() == TerrainTypeId::HOUSE) {
             tmpHouse = (House*)findTerrainOnPosition(x, y);
             if(tmpHouse->getTeamId() != teamId) {
-                if(tmpHouse->getTeamId() != TeamId::INVALIDTEAM) {
+                if(tmpHouse->getTeamId() != TeamId::INVALID_TEAM) {
                     findTeam(tmpHouse->getTeamId())->removeHouse();
                 }
                 
@@ -556,7 +556,7 @@ namespace state {
             
             if(terrainToAdd != nullptr) {               
                 addTerrain(terrainToAdd);
-                terrainsWithPos.insert(std::make_pair(std::make_pair(posX, posY), std::unique_ptr<Terrain>(terrainToAdd->clone())));
+                terrainsWithPos.insert(std::make_pair(std::make_pair(posX, posY), std::shared_ptr<Terrain>(terrains.at(terrainToAdd->getId()))));
             }
         }
     }
@@ -573,7 +573,7 @@ namespace state {
         return teams;
     }
 
-    const std::map<int, std::unique_ptr<Terrain> >& Board::getTerrains() const {
+    const std::map<int, std::shared_ptr<Terrain> >& Board::getTerrains() const {
         return terrains;
     }
 
@@ -643,11 +643,4 @@ namespace state {
         }          
         return true;
     }
-
-    Board::~Board() {
-        teams.clear();
-        terrains.clear();
-        units.clear();
-    }
-
 }

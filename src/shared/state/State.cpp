@@ -32,7 +32,7 @@ namespace state {
                 return TeamId::TEAM_2;
                 break;
             default:
-                return TeamId::INVALIDTEAM;
+                return TeamId::INVALID_TEAM;
         }
     }
 

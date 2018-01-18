@@ -55,7 +55,7 @@ namespace render {
             if(t.second.get()->getTypeId() == state::TerrainTypeId::HOUSE) {
                 tmpHouse = (state::House*)t.second.get();
                 
-                if(tmpHouse->getTeamId() == state::TeamId::INVALIDTEAM) {
+                if(tmpHouse->getTeamId() == state::TeamId::INVALID_TEAM) {
                     continue;
                 } else {
                     nbQuads = nbQuads + 1;

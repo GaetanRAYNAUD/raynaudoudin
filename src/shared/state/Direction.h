@@ -6,13 +6,13 @@
 namespace state {
 
   enum Direction {
-    TOP     = 0,
-    TOP_RIGHT     = 1,
-    BOT_RIGHT     = 2,
-    BOT     = 3,
-    BOT_LEFT     = 4,
-    TOP_LEFT     = 5,
-    INVALID     = 6
+    INVALID_DIRECTION     = 0,
+    TOP     = 1,
+    TOP_RIGHT     = 2,
+    BOT_RIGHT     = 3,
+    BOT     = 4,
+    BOT_LEFT     = 5,
+    TOP_LEFT     = 6
   };
 
 };

@@ -18,7 +18,7 @@ namespace state {
   protected:
     int id     = 0;
     int damage;
-    WeaponTypeId typeId     = WeaponTypeId::INVALIDWEAPON;
+    WeaponTypeId typeId     = WeaponTypeId::INVALID_WEAPON;
     // Operations
   public:
     Weapon ();

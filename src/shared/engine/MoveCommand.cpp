@@ -59,7 +59,7 @@ namespace engine {
                 jsonCommand["Direction"] = "TOP_LEFT";
                 break;
             default:
-                jsonCommand["Direction"] = "INVALID";
+                jsonCommand["Direction"] = "INVALID_DIRECTION";
                 break;                
         }
         

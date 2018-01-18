@@ -6,7 +6,7 @@
 namespace state {
 
   enum UnitTypeId {
-    INVALIDUNIT     = 0,
+    INVALID_UNIT     = 0,
     LEADER     = 1,
     SWORDMAN     = 2,
     BOWMAN     = 3
